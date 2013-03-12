@@ -1,5 +1,4 @@
-/// <reference path="SP.d.ts"/>
-
+///<reference path="SP.d.ts" />
 
 declare module SPClientTemplates {
 
@@ -330,13 +329,13 @@ declare module SPClientTemplates {
 	
 	export interface FieldTemplateOverrides {
         /** Defines templates for rendering the field on a display form. */
-		DisplayForm: FieldInFormCallback;
+		DisplayForm ?: any;
         /** Defines templates for rendering the field on an edit form. */
-		EditForm: FieldInFormCallback;
+		EditForm?: any;
         /** Defines templates for rendering the field on a new form. */
-		NewForm: FieldInFormCallback;
+		NewForm?: any;
         /** Defines templates for rendering the field on a list view. */
-		View: FieldInViewCallback;
+		View?: any;
 	}
 
 	export interface FieldTemplateMap {
@@ -344,37 +343,38 @@ declare module SPClientTemplates {
 	}
 	
     export interface TemplateOverrides {
-        View: any;
-        Body: any;
+        View?: any;
+        Body?: any;
         /** Defines templates for rendering groups (aggregations). */
-        Group: any;
+        Group?: any;
         /** Defines templates for list items rendering. */
-        Item: ItemCallback;
+        Item? : any;
 		/** Defines template for rendering list view header.
 			Can be either string or SingleTemplateCallback */
-        Header: SingleTemplateCallback;
+        Header?: any;
 		/** Defines template for rendering list view footer.
 			Can be either string or SingleTemplateCallback */
-        Footer: SingleTemplateCallback;
+        Footer?: any;
         /** Defines templates for fields rendering. The field is specified by it's internal name. */
         Fields: FieldTemplateMap;
-        /** Array of view styles (SPView.StyleID) for which the templates should be applied. 
-            If not defined, the templates will be applied only to default view style.
-            Value for this property can be number, string or array of strings. */
-        ViewStyle: any;
-        /** Array of list template types (SPList.BaseTemplate) for which the template should be applied. 
-            If not defined, the templates will be applied to all lists.
-            Value for this property can be number, string or array of strings. */
-        ListTemplateType: any;
-        /** Array of base view IDs (SPView.BaseViewID) for which the template should be applied.
-            If not defined, the templates will be applied to all views.
-            Value for this property can be number, string or array of strings.*/
-        BaseViewID: any;
     }
     export interface TemplateOverridesOptions {
         Templates: TemplateOverrides;
-        OnPreRender: any;
-        OnPostRender: any;
+        OnPreRender ?: any;
+        OnPostRender ?: any;
+
+        /** Array of view styles (SPView.StyleID) for which the templates should be applied. 
+            If not defined, the templates will be applied only to default view style.
+            Value for this property can be number, string or array of strings. */
+        ViewStyle ?: any;
+        /** Array of list template types (SPList.BaseTemplate) for which the template should be applied. 
+            If not defined, the templates will be applied to all lists.
+            Value for this property can be number, string or array of strings. */
+        ListTemplateType: number;
+        /** Array of base view IDs (SPView.BaseViewID) for which the template should be applied.
+            If not defined, the templates will be applied to all views.
+            Value for this property can be number, string or array of strings.*/
+        BaseViewID: number;
     }
     export class TemplateManager {
         static RegisterTemplateOverrides(renderCtx: TemplateOverridesOptions): void;
