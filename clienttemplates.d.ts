@@ -329,13 +329,13 @@ declare module SPClientTemplates {
 	
 	export interface FieldTemplateOverrides {
         /** Defines templates for rendering the field on a display form. */
-		DisplayForm ?: any;
+	    DisplayForm?: FieldInFormCallback;
         /** Defines templates for rendering the field on an edit form. */
-		EditForm?: any;
+	    EditForm?: FieldInFormCallback;
         /** Defines templates for rendering the field on a new form. */
-		NewForm?: any;
+	    NewForm?: FieldInFormCallback;
         /** Defines templates for rendering the field on a list view. */
-		View?: any;
+	    View?: FieldInViewCallback;
 	}
 
 	export interface FieldTemplateMap {
@@ -343,18 +343,18 @@ declare module SPClientTemplates {
 	}
 	
     export interface TemplateOverrides {
-        View?: any;
-        Body?: any;
+        View?: ItemCallback;
+        Body?: ItemCallback;
         /** Defines templates for rendering groups (aggregations). */
-        Group?: any;
+        Group?: ItemCallback;
         /** Defines templates for list items rendering. */
-        Item? : any;
+        Item?: ItemCallback;
 		/** Defines template for rendering list view header.
 			Can be either string or SingleTemplateCallback */
-        Header?: any;
+        Header?: ItemCallback;
 		/** Defines template for rendering list view footer.
 			Can be either string or SingleTemplateCallback */
-        Footer?: any;
+        Footer?: ItemCallback;
         /** Defines templates for fields rendering. The field is specified by it's internal name. */
         Fields: FieldTemplateMap;
     }
