@@ -60,313 +60,313 @@ declare module SPClientTemplates {
         PeopleOnly = 0,
         PeopleAndGroups = 1
     }
-	export interface RenderContextFieldInViewSchema {
-		Name: string;
-		DisplayName: string;
-		FieldType: string;
-		/** Either "TRUE" or "FALSE" */
-		Filterable: string;
-		/** Guid of the field */
-		ID: string;
-		Type: string;
-		RealFieldName: string;
-		/** Either "TRUE" or "FALSE" */
-		AllowGridEditing: string;
-		/** Either "TRUE" or "FALSE" */
-		CalloutMenu: string;
-		ClassInfo: string;
-		/** Either "TRUE" or "FALSE" */
-		Explicit: string;
-		/** Either "TRUE" or "FALSE" */
-		GroupField: string;
-		css: string;
-		fieldRenderer: any;
-		FieldTitle: string;
-		/** Either "TRUE" or "FALSE" */
-		ReadOnly: string;
-		/** Either "TRUE" or "FALSE" */
-		GridActiveAndReadOnly: string;
-		ResultType: string;
-	}
-	export interface RenderContextFieldInFormSchema {
-		AllowGridEditing: bool;
-		AllowHyperlink: bool;
-		AppendOnly: bool;
-		Description: string;
-		Direction: string;
-		FieldType: string;
-		Hidden: bool;
-		/** Guid of the field */
-		Id: string;
-		IMEMode: any;
-		Name: string;
-		NumberOfLines: number;
-		ReadOnlyField: bool;
-		Required: bool;
-		RestrictedMode: bool;
-		RichText: bool;
-		RichTextMode: RichTextMode;
-		/** Guid */
-		ScriptEditorAdderId: string;
-		Title: string;
-		Type: string;
-	}
-	export interface RenderContextListSchemaInForm{
-		Field: RenderContextFieldInFormSchema[];
-	}
-	export interface RenderContextListSchema{	
-		/** Either "0" or "1" */
-		DefaultItemOpen: string;
-		Direction: string;
-		Field: RenderContextFieldInViewSchema[];
-		FieldSortParam: string;
-		/** Either "0" or "1" */
-		ForceCheckout: string;
-		HttpVDir: string;
-		/** Either "0" or "1" */
-		InplaceSearchEnabled: string;
-		/** Either "0" or "1" */
-		IsDocLib: string;
-		/** e.g. "1033" */
-		LCID: string;
-		/** Either "0" or "1" */
-		ListRight_AddListItems: string;
-		NoListItem: string;
-		NoListItemHowTo: string;
-		/** Server-relative path to the current page */
-		PagePath: string;
-		/** Either "True" or "False" */
-		RenderSaveAsNewViewButton: string;
-		/** Either "True" or "False" */
-		RenderViewSelectorPivotMenu: string;
-		RootFolderParam: string;
-		SelectedID: string; // number
-		ShowWebPart: string;
-		/** Either "0" or "1" */
-		TabularView: string;
-		Toolbar: string;
-		UIVersion: string; // number
-		Userid: string; // number
-		/** Guid of the view */
-		View: string;
-		/** JSON string */
-		ViewSelectorPivotMenuOptions: string;
-	}
-	export interface RenderContextItem{
-		[fieldInternalName:string]: any;
-	}
-	export interface RenderContextListData{
-		FilterLink: string;
-		FirstRow: number;
-		/** Either "0" or "1" */
-		ForceNoHierarchy: string;
-		HierarchyHasIndention: string;
-		LastRow: number;
-		Row: RenderContextItem[];
-	}
-	export interface RenderContextListDataInForm{
-		Items: RenderContextItem[];
-	}
-	export interface RenderContextGroup {
-		Items: RenderContextItem[];
-	}
+    export interface RenderContextFieldInViewSchema {
+        Name: string;
+        DisplayName: string;
+        FieldType: string;
+        /** Either "TRUE" or "FALSE" */
+        Filterable: string;
+        /** Guid of the field */
+        ID: string;
+        Type: string;
+        RealFieldName: string;
+        /** Either "TRUE" or "FALSE" */
+        AllowGridEditing: string;
+        /** Either "TRUE" or "FALSE" */
+        CalloutMenu: string;
+        ClassInfo: string;
+        /** Either "TRUE" or "FALSE" */
+        Explicit: string;
+        /** Either "TRUE" or "FALSE" */
+        GroupField: string;
+        css: string;
+        fieldRenderer: any;
+        FieldTitle: string;
+        /** Either "TRUE" or "FALSE" */
+        ReadOnly: string;
+        /** Either "TRUE" or "FALSE" */
+        GridActiveAndReadOnly: string;
+        ResultType: string;
+    }
+    export interface RenderContextFieldInFormSchema {
+        AllowGridEditing: bool;
+        AllowHyperlink: bool;
+        AppendOnly: bool;
+        Description: string;
+        Direction: string;
+        FieldType: string;
+        Hidden: bool;
+        /** Guid of the field */
+        Id: string;
+        IMEMode: any;
+        Name: string;
+        NumberOfLines: number;
+        ReadOnlyField: bool;
+        Required: bool;
+        RestrictedMode: bool;
+        RichText: bool;
+        RichTextMode: RichTextMode;
+        /** Guid */
+        ScriptEditorAdderId: string;
+        Title: string;
+        Type: string;
+    }
+    export interface RenderContextListSchemaInForm {
+        Field: RenderContextFieldInFormSchema[];
+    }
+    export interface RenderContextListSchema {
+        /** Either "0" or "1" */
+        DefaultItemOpen: string;
+        Direction: string;
+        Field: RenderContextFieldInViewSchema[];
+        FieldSortParam: string;
+        /** Either "0" or "1" */
+        ForceCheckout: string;
+        HttpVDir: string;
+        /** Either "0" or "1" */
+        InplaceSearchEnabled: string;
+        /** Either "0" or "1" */
+        IsDocLib: string;
+        /** e.g. "1033" */
+        LCID: string;
+        /** Either "0" or "1" */
+        ListRight_AddListItems: string;
+        NoListItem: string;
+        NoListItemHowTo: string;
+        /** Server-relative path to the current page */
+        PagePath: string;
+        /** Either "True" or "False" */
+        RenderSaveAsNewViewButton: string;
+        /** Either "True" or "False" */
+        RenderViewSelectorPivotMenu: string;
+        RootFolderParam: string;
+        SelectedID: string; // number
+        ShowWebPart: string;
+        /** Either "0" or "1" */
+        TabularView: string;
+        Toolbar: string;
+        UIVersion: string; // number
+        Userid: string; // number
+        /** Guid of the view */
+        View: string;
+        /** JSON string */
+        ViewSelectorPivotMenuOptions: string;
+    }
+    export interface RenderContextItem {
+        [fieldInternalName: string]: any;
+    }
+    export interface RenderContextListData {
+        FilterLink: string;
+        FirstRow: number;
+        /** Either "0" or "1" */
+        ForceNoHierarchy: string;
+        HierarchyHasIndention: string;
+        LastRow: number;
+        Row: RenderContextItem[];
+    }
+    export interface RenderContextListDataInForm {
+        Items: RenderContextItem[];
+    }
+    export interface RenderContextGroup {
+        Items: RenderContextItem[];
+    }
 
-	export interface RenderContext {
-		BaseViewID: number;
-		ControlMode: ClientControlMode;
-		CurrentCultureName: string;
-		CurrentLanguage: number;
-		CurrentSelectedItems: any;
-		CurrentUICultureName: string;
-		ListTemplateType: number;
-		OnPostRender: any;
-		OnPreRender: any;
-		onRefreshFailed: any;
-		RenderBody: (renderContext: RenderContext) => string;
-		RenderFieldByName: (renderContext: RenderContext) => string;
-		RenderFields: (renderContext: RenderContext) => string;
-		RenderFooter: (renderContext: RenderContext) => string;
-		RenderGroups: (renderContext: RenderContext) => string;
-		RenderHeader: (renderContext: RenderContext) => string;
-		RenderItems: (renderContext: RenderContext) => string;
-		RenderView: (renderContext: RenderContext) => string;
-		SiteClientTag: string;
-		Templates: TemplateOverrides;
-	}
-	export interface ListViewRenderContext extends RenderContext {
-		AllowCreateFolder: bool;
-		AllowGridMode: bool;
-		BasePermissions: any; // SP.BasePermissions?
-		bInitialRender: bool;
-		CanShareLinkForNewDocument: bool;
-		CascadeDeleteWarningMessage: string;
-		clvp: HTMLElement;
-		ContentTypesEnabled: bool;
-		ctxId: number;
-		ctxType: any;
-		CurrentUserId: number;
-		CurrentUserIsSiteAdmin: bool;
-		dictSel: any;
-		/** Absolute path for the list display form */
-		displayFormUrl: string;
-		/** Absolute path for the list edit form */
-		editFormUrl: string;
-		EnableMinorVersions: bool;
-		ExternalDataList: bool;
-		enteringGridMode: bool;
-		existingServerFilterHash: any;
-		HasRelatedCascadeLists: number;
-		HttpPath: string;
-		HttpRoot: string;
-		ImagesPath: string;
-		inGridFullRender: any;
-		inGridMode: bool;
-		IsAppWeb: bool;
-		IsClientRendering: bool;
-		isForceCheckout: bool;
-		isModerated: bool;
-		isPortalTemplate: any;
-		isWebEditorPreview: number;
-		isVersions: number;
-		isXslView: bool;
-		LastRowIndexSelected: any;
-		LastSelectableRowIdx: any;
-		LastSelectedItemId: any;
-		leavingGridMode: bool;
-		listBaseType: number;
-		ListData: RenderContextListData;
-		ListDataJSONItemsKey: string;
-		/** Guid of the list */
-		listName: string;
-		ListSchema: RenderContextListSchema;
-		listTemplate: string;
-		ListTitle: string;
-		listUrlDir: string;
-		loadingAsyncData: bool;
-		ModerationStatus: number;
-		NavigateForFormsPages: bool;
-		/** Absolute path for the list new form */
-		newFormUrl: string;
-		NewWOPIDocumentEnabled: any;
-		NewWOPIDocumentUrl: any;
-		noGroupCollapse: bool;
-		OfficialFileName: string;
-		OfficialFileNames: string;
-		overrideDeleteConfirmation: string;
-		overrideFilterQstring: string;
-		PortalUrl: string;
-		queryString: any;
-		recursiveView: bool;
-		RecycleBinEnabled: number;
-		RegionalSettingsTimeZoneBias: string;
-		rootFolder: string;
-		rootFolderForDisplay: any;
-		RowFocusTimerID: any;
-		SelectAllCbx: any;
-		SendToLocationName: string;
-		SendToLocationUrl: string;
-		serverUrl: any;
-		SiteTitle: string;
-		StateInitDone: bool;
-		TableCbxFocusHandler: any;
-		TableMouseOverHandler: any;
-		TotalListItems: any;
-		verEnabled: number;
-		/** Guid of the view. */
-		view: string;
-		viewTitle: string;
-		WorkflowAssociated: bool;
-		wpq: string;
-		WriteSecurity: string;
-	}
-	export interface ItemRenderContext extends ListViewRenderContext {
-		CurrentItem: RenderContextItem;
-		CurrentItemIdx: number;
-	}
-	export interface FieldInViewRenderContext extends ItemRenderContext {
-		CurrentFieldSchema: RenderContextFieldInViewSchema;
-		CurrentFieldValue: any;
-		FieldControlsModes: { [fieldInternalName:string]:ClientControlMode; };
-		FormContext: any;
-		FormUniqueId: string;
-	}
-	export interface GroupRenderContext extends ListViewRenderContext {
-		CurrentGroupIdx: number;
-		CurrentGroup: RenderContextGroup;
-		CurrentItems: RenderContextItem[];
-	}
-	export interface ListFormRenderContext extends RenderContext {
-		FieldControlsModes: { [fieldInternalName:string]:ClientControlMode; };
-		FormContext: any;
-		FormUniqueId: string;
-		ListData: RenderContextListDataInForm;
-		ListSchema: RenderContextListSchemaInForm;
-	}
-	export interface FieldInFormRenderContext extends RenderContext {
-		CurrentGroupIdx: number;
-		CurrentGroup: RenderContextGroup;
-		CurrentItems: RenderContextItem[];
-		CurrentFieldSchema: RenderContextFieldInFormSchema;
-		CurrentFieldValue: any;
-	}
-	
-	export interface SingleTemplateCallback {
+    export interface RenderContext {
+        BaseViewID: number;
+        ControlMode: ClientControlMode;
+        CurrentCultureName: string;
+        CurrentLanguage: number;
+        CurrentSelectedItems: any;
+        CurrentUICultureName: string;
+        ListTemplateType: number;
+        OnPostRender: any;
+        OnPreRender: any;
+        onRefreshFailed: any;
+        RenderBody: (renderContext: RenderContext) => string;
+        RenderFieldByName: (renderContext: RenderContext) => string;
+        RenderFields: (renderContext: RenderContext) => string;
+        RenderFooter: (renderContext: RenderContext) => string;
+        RenderGroups: (renderContext: RenderContext) => string;
+        RenderHeader: (renderContext: RenderContext) => string;
+        RenderItems: (renderContext: RenderContext) => string;
+        RenderView: (renderContext: RenderContext) => string;
+        SiteClientTag: string;
+        Templates: TemplateOverrides;
+    }
+    export interface ListViewRenderContext extends RenderContext {
+        AllowCreateFolder: bool;
+        AllowGridMode: bool;
+        BasePermissions: any; // SP.BasePermissions?
+        bInitialRender: bool;
+        CanShareLinkForNewDocument: bool;
+        CascadeDeleteWarningMessage: string;
+        clvp: HTMLElement;
+        ContentTypesEnabled: bool;
+        ctxId: number;
+        ctxType: any;
+        CurrentUserId: number;
+        CurrentUserIsSiteAdmin: bool;
+        dictSel: any;
+        /** Absolute path for the list display form */
+        displayFormUrl: string;
+        /** Absolute path for the list edit form */
+        editFormUrl: string;
+        EnableMinorVersions: bool;
+        ExternalDataList: bool;
+        enteringGridMode: bool;
+        existingServerFilterHash: any;
+        HasRelatedCascadeLists: number;
+        HttpPath: string;
+        HttpRoot: string;
+        ImagesPath: string;
+        inGridFullRender: any;
+        inGridMode: bool;
+        IsAppWeb: bool;
+        IsClientRendering: bool;
+        isForceCheckout: bool;
+        isModerated: bool;
+        isPortalTemplate: any;
+        isWebEditorPreview: number;
+        isVersions: number;
+        isXslView: bool;
+        LastRowIndexSelected: any;
+        LastSelectableRowIdx: any;
+        LastSelectedItemId: any;
+        leavingGridMode: bool;
+        listBaseType: number;
+        ListData: RenderContextListData;
+        ListDataJSONItemsKey: string;
+        /** Guid of the list */
+        listName: string;
+        ListSchema: RenderContextListSchema;
+        listTemplate: string;
+        ListTitle: string;
+        listUrlDir: string;
+        loadingAsyncData: bool;
+        ModerationStatus: number;
+        NavigateForFormsPages: bool;
+        /** Absolute path for the list new form */
+        newFormUrl: string;
+        NewWOPIDocumentEnabled: any;
+        NewWOPIDocumentUrl: any;
+        noGroupCollapse: bool;
+        OfficialFileName: string;
+        OfficialFileNames: string;
+        overrideDeleteConfirmation: string;
+        overrideFilterQstring: string;
+        PortalUrl: string;
+        queryString: any;
+        recursiveView: bool;
+        RecycleBinEnabled: number;
+        RegionalSettingsTimeZoneBias: string;
+        rootFolder: string;
+        rootFolderForDisplay: any;
+        RowFocusTimerID: any;
+        SelectAllCbx: any;
+        SendToLocationName: string;
+        SendToLocationUrl: string;
+        serverUrl: any;
+        SiteTitle: string;
+        StateInitDone: bool;
+        TableCbxFocusHandler: any;
+        TableMouseOverHandler: any;
+        TotalListItems: any;
+        verEnabled: number;
+        /** Guid of the view. */
+        view: string;
+        viewTitle: string;
+        WorkflowAssociated: bool;
+        wpq: string;
+        WriteSecurity: string;
+    }
+    export interface ItemRenderContext extends ListViewRenderContext {
+        CurrentItem: RenderContextItem;
+        CurrentItemIdx: number;
+    }
+    export interface FieldInViewRenderContext extends ItemRenderContext {
+        CurrentFieldSchema: RenderContextFieldInViewSchema;
+        CurrentFieldValue: any;
+        FieldControlsModes: { [fieldInternalName: string]: ClientControlMode; };
+        FormContext: any;
+        FormUniqueId: string;
+    }
+    export interface GroupRenderContext extends ListViewRenderContext {
+        CurrentGroupIdx: number;
+        CurrentGroup: RenderContextGroup;
+        CurrentItems: RenderContextItem[];
+    }
+    export interface ListFormRenderContext extends RenderContext {
+        FieldControlsModes: { [fieldInternalName: string]: ClientControlMode; };
+        FormContext: any;
+        FormUniqueId: string;
+        ListData: RenderContextListDataInForm;
+        ListSchema: RenderContextListSchemaInForm;
+    }
+    export interface FieldInFormRenderContext extends RenderContext {
+        CurrentGroupIdx: number;
+        CurrentGroup: RenderContextGroup;
+        CurrentItems: RenderContextItem[];
+        CurrentFieldSchema: RenderContextFieldInFormSchema;
+        CurrentFieldValue: any;
+    }
+
+    export interface SingleTemplateCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
-	    (renderContext: ListViewRenderContext): string;
-	}
-	export interface ItemCallback {
-		/** Must return null in order to fall back to a more common template or to a system default template */
-		(renderContext: ItemRenderContext): string;
-	}
-	export interface FieldInFormCallback {
-		/** Must return null in order to fall back to a more common template or to a system default template */
-		(renderContext: FieldInFormRenderContext): string;
-	}
-	export interface FieldInViewCallback {
-		/** Must return null in order to fall back to a more common template or to a system default template */
-		(renderContext: FieldInViewRenderContext): string;
-	}
-	
-	export interface FieldTemplateOverrides {
-        /** Defines templates for rendering the field on a display form. */
-	    DisplayForm?: FieldInFormCallback;
-        /** Defines templates for rendering the field on an edit form. */
-	    EditForm?: FieldInFormCallback;
-        /** Defines templates for rendering the field on a new form. */
-	    NewForm?: FieldInFormCallback;
-        /** Defines templates for rendering the field on a list view. */
-	    View?: FieldInViewCallback;
-	}
+        (renderContext: ListViewRenderContext): string;
+    }
+    export interface ItemCallback {
+        /** Must return null in order to fall back to a more common template or to a system default template */
+        (renderContext: ItemRenderContext): string;
+    }
+    export interface FieldInFormCallback {
+        /** Must return null in order to fall back to a more common template or to a system default template */
+        (renderContext: FieldInFormRenderContext): string;
+    }
+    export interface FieldInViewCallback {
+        /** Must return null in order to fall back to a more common template or to a system default template */
+        (renderContext: FieldInViewRenderContext): string;
+    }
 
-	export interface FieldTemplateMap {
-	    [fieldInternalName: string]: FieldTemplateOverrides;
-	}
-	
+    export interface FieldTemplateOverrides {
+        /** Defines templates for rendering the field on a display form. */
+        DisplayForm?: FieldInFormCallback;
+        /** Defines templates for rendering the field on an edit form. */
+        EditForm?: FieldInFormCallback;
+        /** Defines templates for rendering the field on a new form. */
+        NewForm?: FieldInFormCallback;
+        /** Defines templates for rendering the field on a list view. */
+        View?: FieldInViewCallback;
+    }
+
+    export interface FieldTemplateMap {
+        [fieldInternalName: string]: FieldTemplateOverrides;
+    }
+
     export interface TemplateOverrides {
-        View?: ItemCallback;
-        Body?: ItemCallback;
+        View?: SingleTemplateCallback; //TODO: create appropriate callback
+        Body?: SingleTemplateCallback; //TODO: create appropriate callback
         /** Defines templates for rendering groups (aggregations). */
-        Group?: ItemCallback;
+        Group?: SingleTemplateCallback; //TODO: create appropriate callback
         /** Defines templates for list items rendering. */
         Item?: ItemCallback;
-		/** Defines template for rendering list view header.
+        /** Defines template for rendering list view header.
 			Can be either string or SingleTemplateCallback */
-        Header?: ItemCallback;
-		/** Defines template for rendering list view footer.
+        Header?: SingleTemplateCallback;
+        /** Defines template for rendering list view footer.
 			Can be either string or SingleTemplateCallback */
-        Footer?: ItemCallback;
+        Footer?: SingleTemplateCallback;
         /** Defines templates for fields rendering. The field is specified by it's internal name. */
         Fields: FieldTemplateMap;
     }
     export interface TemplateOverridesOptions {
         Templates: TemplateOverrides;
-        OnPreRender ?: any;
-        OnPostRender ?: any;
+        OnPreRender?: any;
+        OnPostRender?: any;
 
         /** Array of view styles (SPView.StyleID) for which the templates should be applied. 
             If not defined, the templates will be applied only to default view style.
             Value for this property can be number, string or array of strings. */
-        ViewStyle ?: any;
+        ViewStyle?: any;
         /** Array of list template types (SPList.BaseTemplate) for which the template should be applied. 
             If not defined, the templates will be applied to all lists.
             Value for this property can be number, string or array of strings. */
@@ -421,7 +421,7 @@ declare module SPClientTemplates {
         static ParseMultiLookupValues(valueStr: string): ClientLookupValue[];
         /** Represents lookup values array in some strange format */
         static BuildLookupValuesAsString(choiceArray: ClientLookupValue[], isMultiLookup: bool, setGroupDesc: bool): string;
-        static ParseURLValue(value: string): ClientUrlValue;        
+        static ParseURLValue(value: string): ClientUrlValue;
         static GetFormContextForCurrentField(context: ListFormRenderContext): any; // returns ClientFormContext from clientforms.js
     }
 

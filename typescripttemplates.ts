@@ -2,10 +2,10 @@
 /// <reference path="clienttemplates.d.ts"/>
 
 /** Lightweight client-side rendering template overrides.*/
-module Csr{
+module Csr {
 
     /** Creates new overrides. Call .register() at the end.*/
-    export function override(listTemplateType: number, baseViewId ? : number):ICsr {
+    export function override(listTemplateType: number, baseViewId?: number): ICsr {
         return new csr(listTemplateType, baseViewId);
     }
 
@@ -85,7 +85,7 @@ module Csr{
 
         /** Registers overrides in client-side templating engine.*/
         register(): void;
-    }    
+    }
 }
 
 SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("typescripttemplates.ts");

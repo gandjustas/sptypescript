@@ -1,8 +1,11 @@
 /// <reference path="MicrosoftAjax.d.ts"/>
 
 declare interface IEnumerator {
+    /** Gets current item in the enumeration. */
     get_current(): any;
+    /** Moves to a next item in the enumeration. */
     moveNext(): bool;
+    /** Resets enumerator. */
     reset(): void;
 }
 
@@ -27,49 +30,84 @@ declare module SP {
         equals(uuid: SP.Guid): bool;
         toSerialized(): string;
     }
+    /** Specifies permissions that are used to define user roles. Represents SPBasePermissions class. */
     export enum PermissionKind {
+        /** Has no permissions on the Web site. Not available through the user interface. */
         emptyMask,
+        /** View items in lists, documents in document libraries, and view Web discussion comments. */
         viewListItems,
+        /** Add items to lists, add documents to document libraries, and add Web discussion comments. */
         addListItems,
+        /** Edit items in lists, edit documents in document libraries, edit Web discussion comments in documents, and customize Web Part Pages in document libraries. */
         editListItems,
+        /** Delete items from a list, documents from a document library, and Web discussion comments in documents. */
         deleteListItems,
+        /** Approve a minor version of a list item or document. */
         approveItems,
+        /** View the source of documents with server-side file handlers. */
         openItems,
+        /** View past versions of a list item or document. */
         viewVersions,
+        /** Delete past versions of a list item or document. */
         deleteVersions,
+        /** Discard or check in a document which is checked out to another user. */
         cancelCheckout,
+        /** Create, change, and delete personal views of lists. */
         managePersonalViews,
+        /** Create and delete lists, add or remove columns in a list, and add or remove public views of a list. */
         manageLists,
+        /** View forms, views, and application pages, and enumerate lists. */
         viewFormPages,
+        /** Make content of a list or document library retrieveable for anonymous users through SharePoint search. The list permissions in the site do not change.  */
         anonymousSearchAccessList,
+        /** Allow users to open a Web site, list, or folder to access items inside that container. */
         open,
+        /** View pages in a Web site. */
         viewPages,
+        /** Add, change, or delete HTML pages or Web Part Pages, and edit the Web site using a SharePoint Foundation?compatible editor. */
         addAndCustomizePages,
+        /** Apply a theme or borders to the entire Web site. */
         applyThemeAndBorder,
+        /** Apply a style sheet (.css file) to the Web site. */
         applyStyleSheets,
+        /** View reports on Web site usage. */
         viewUsageData,
+        /** Create a Web site using Self-Service Site Creation. */
         createSSCSite,
+        /** Create subsites such as team sites, Meeting Workspace sites, and Document Workspace sites.  */
         manageSubwebs,
+        /** Create a group of users that can be used anywhere within the site collection. */
         createGroups,
+        /** Create and change permission levels on the Web site and assign permissions to users and groups. */
         managePermissions,
+        /** Enumerate files and folders in a Web site using Microsoft Office SharePoint Designer 2007 and WebDAV interfaces. */
         browseDirectories,
+        /** View information about users of the Web site. */
         browseUserInfo,
+        /** Add or remove personal Web Parts on a Web Part Page. */
         addDelPrivateWebParts,
+        /** Update Web Parts to display personalized information. */
         updatePersonalWebParts,
+        /** Grant the ability to perform all administration tasks for the Web site as well as manage content. Activate, deactivate, or edit properties of Web site scoped Features through the object model or through the user interface (UI). When granted on the root Web site of a site collection, activate, deactivate, or edit properties of site collection scoped Features through the object model. To browse to the Site Collection Features page and activate or deactivate site collection scoped Features through the UI, you must be a site collection administrator. */
         manageWeb,
+        /** Content of lists and document libraries in the Web site will be retrieveable for anonymous users through SharePoint search if the list or document library has AnonymousSearchAccessList set.  */
         anonymousSearchAccessWebLists,
+        /** Use features that launch client applications; otherwise, users must work on documents locally and upload changes.  */
         useClientIntegration,
+        /** Use SOAP, WebDAV, or Microsoft Office SharePoint Designer 2007 interfaces to access the Web site. */
         useRemoteAPIs,
+        /** Manage alerts for all users of the Web site. */
         manageAlerts,
+        /** Create e-mail alerts. */
         createAlerts,
+        /** Allows a user to change his or her user information, such as adding a picture. */
         editMyUserInfo,
+        /** Enumerate permissions on the Web site, list, folder, document, or list item. */
         enumeratePermissions,
+        /** Has all permissions on the Web site. Not available through the user interface. */
         fullMask,
     }
-}
 
-
-declare module SP {
     export class BaseCollection implements IEnumerable {
         getEnumerator(): IEnumerator;
         get_count(): number;
@@ -198,30 +236,42 @@ declare module SP {
         get_expectedContentType(): string;
         set_expectedContentType(value: string): void;
         post(body: string): void;
-        get(): void;
-        static doPost(url: string, body: string, expectedContentType: string, succeededHandler: (sender: any, args: SP.PageRequestSucceededEventArgs) => void, failedHandler: (sender: any, args: SP.PageRequestFailedEventArgs) => void): void;
-        static doGet(url: string, expectedContentType: string, succeededHandler: (sender: any, args: SP.PageRequestSucceededEventArgs) => void, failedHandler: (sender: any, args: SP.PageRequestFailedEventArgs) => void): void;
-        add_succeeded(value: (sender: any, args: SP.PageRequestSucceededEventArgs) => void): void;
-        remove_succeeded(value: (sender: any, args: SP.PageRequestSucceededEventArgs) => void): void;
-        add_failed(value: (sender: any, args: SP.PageRequestFailedEventArgs) => void): void;
-        remove_failed(value: (sender: any, args: SP.PageRequestFailedEventArgs) => void): void;
+        get (): void;
+        static doPost(url: string, body: string, expectedContentType: string, succeededHandler: (sender: any, args: SP.PageRequestSucceededEventArgs) => void , failedHandler: (sender: any, args: SP.PageRequestFailedEventArgs) => void ): void;
+        static doGet(url: string, expectedContentType: string, succeededHandler: (sender: any, args: SP.PageRequestSucceededEventArgs) => void , failedHandler: (sender: any, args: SP.PageRequestFailedEventArgs) => void ): void;
+        add_succeeded(value: (sender: any, args: SP.PageRequestSucceededEventArgs) => void ): void;
+        remove_succeeded(value: (sender: any, args: SP.PageRequestSucceededEventArgs) => void ): void;
+        add_failed(value: (sender: any, args: SP.PageRequestFailedEventArgs) => void ): void;
+        remove_failed(value: (sender: any, args: SP.PageRequestFailedEventArgs) => void ): void;
         constructor();
     }
     export class ResResources {
         static getString(resourceId: string, args: any[]): string;
     }
+    /** Defines a writer that provides a set of methods to append text in XML format. Use the static SP.XmlWriter.create(sb) Method to create an SP.XmlWriter object with the Sys.StringBuilder object you pass in. */
     export class XmlWriter {
+        /** Creates a new instance of the XmlWriter class with the specified string builder. */
         static create(sb: Sys.StringBuilder): SP.XmlWriter;
+        /** Appends a start element tag with the specified name in XML format to the object?s string builder. */
         writeStartElement(tagName: string): void;
+        /** Appends an element with the specified tag name and value in XML format to the string builder. */
         writeElementString(tagName: string, value: string): void;
+        /** Appends an end element tag in XML format to the object?s string builder. This method appends the end element tag ?/>? if the start element tag is not closed; otherwise, it appends a full end element tag ?</tagName>? to the string builder. */
         writeEndElement(): void;
+        /** Appends an attribute with the specified name and value in XML format to the object?s string builder. */
         writeAttributeString(localName: string, value: string): void;
+        /** This method only appends the name of the attribute. You can append the value of the attribute by calling the SP.XmlWriter.writeString(value) Method, and close the attribute by calling the SP.XmlWriter.writeEndAttribute() Method. */
         writeStartAttribute(localName: string): void;
+        /** Appends an end of an attribute in XML format to the object?s string builder. */
         writeEndAttribute(): void;
+        /** Appends the specified value for an element tag or attribute to the object?s string builder. */
         writeString(value: string): void;
+        /** Appends the specified text to the object?s string builder. */
         writeRaw(xml: string): void;
+        /** This member is reserved for internal use and is not intended to be used directly from your code. */
         close(): void;
     }
+
     export class ClientConstants {
         AddExpandoFieldTypeSuffix: string;
         Actions: string;
@@ -347,6 +397,7 @@ declare module SP {
         fluidApplicationInitParamRequestToken: string;
         fluidApplicationInitParamFormDigestTimeoutSeconds: string;
         fluidApplicationInitParamFormDigest: string;
+
     }
     export class ClientSchemaVersions {
         version14: string;
@@ -404,10 +455,14 @@ declare module SP {
         get_methodReturnObjects(): any;
         constructor();
     }
+    /** Provides a base class for a collection of objects on a remote client. */
     export class ClientObjectCollection extends SP.ClientObject implements IEnumerable {
         get_areItemsAvailable(): bool;
+        /** Gets the data for all of the items in the collection. */
         retrieveItems(): SP.ClientObjectPrototype;
+        /** Returns an enumerator that iterates through the collection. */
         getEnumerator(): IEnumerator;
+        /** Returns number of items in the collection. */
         get_count(): number;
         fromJson(obj: any): void;
     }
@@ -438,10 +493,10 @@ declare module SP {
     export class ClientRequest {
         static get_nextSequenceId(): number;
         get_webRequest(): Sys.Net.WebRequest;
-        add_requestSucceeded(value: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void): void;
-        remove_requestSucceeded(value: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void): void;
-        add_requestFailed(value: (sender: any, args: SP.ClientRequestFailedEventArgs) => void): void;
-        remove_requestFailed(value: (sender: any, args: SP.ClientRequestFailedEventArgs) => void): void;
+        add_requestSucceeded(value: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void ): void;
+        remove_requestSucceeded(value: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void ): void;
+        add_requestFailed(value: (sender: any, args: SP.ClientRequestFailedEventArgs) => void ): void;
+        remove_requestFailed(value: (sender: any, args: SP.ClientRequestFailedEventArgs) => void ): void;
         get_navigateWhenServerRedirect(): bool;
         set_navigateWhenServerRedirect(value: bool): void;
     }
@@ -476,18 +531,18 @@ declare module SP {
         set_webRequestExecutorFactory(value: SP.IWebRequestExecutorFactory): void;
         get_pendingRequest(): SP.ClientRequest;
         get_hasPendingRequest(): bool;
-        add_executingWebRequest(value: (sender: any, args: SP.WebRequestEventArgs) => void): void;
-        remove_executingWebRequest(value: (sender: any, args: SP.WebRequestEventArgs) => void): void;
-        add_requestSucceeded(value: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void): void;
-        remove_requestSucceeded(value: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void): void;
-        add_requestFailed(value: (sender: any, args: SP.ClientRequestFailedEventArgs) => void): void;
-        remove_requestFailed(value: (sender: any, args: SP.ClientRequestFailedEventArgs) => void): void;
-        add_beginningRequest(value: (sender: any, args: SP.ClientRequestEventArgs) => void): void;
-        remove_beginningRequest(value: (sender: any, args: SP.ClientRequestEventArgs) => void): void;
+        add_executingWebRequest(value: (sender: any, args: SP.WebRequestEventArgs) => void ): void;
+        remove_executingWebRequest(value: (sender: any, args: SP.WebRequestEventArgs) => void ): void;
+        add_requestSucceeded(value: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void ): void;
+        remove_requestSucceeded(value: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void ): void;
+        add_requestFailed(value: (sender: any, args: SP.ClientRequestFailedEventArgs) => void ): void;
+        remove_requestFailed(value: (sender: any, args: SP.ClientRequestFailedEventArgs) => void ): void;
+        add_beginningRequest(value: (sender: any, args: SP.ClientRequestEventArgs) => void ): void;
+        remove_beginningRequest(value: (sender: any, args: SP.ClientRequestEventArgs) => void ): void;
         get_requestTimeout(): number;
         set_requestTimeout(value: number): void;
-        executeQueryAsync(succeededCallback: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void, failedCallback: (sender: any, args: SP.ClientRequestFailedEventArgs) => void): void;
-        executeQueryAsync(succeededCallback: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void): void;
+        executeQueryAsync(succeededCallback: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void , failedCallback: (sender: any, args: SP.ClientRequestFailedEventArgs) => void ): void;
+        executeQueryAsync(succeededCallback: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void ): void;
         executeQueryAsync(): void;
         get_staticObjects(): any;
         castTo(obj: SP.ClientObject, type: any): SP.ClientObject;
