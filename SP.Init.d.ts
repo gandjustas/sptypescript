@@ -17,3 +17,21 @@ declare module SP.UI {
         static remove_resized(func: () => void): void;
     }
 }
+
+/** Register function to rerun on partial update in MDS-enabled site.*/
+declare function RegisterModuleInit(scriptFileName: string, initFunc: () => void ): void;
+
+/** Provides access to url and query string parts.*/
+declare class JSRequest {
+    /** Query string parts.*/
+    static QueryString: { [parameter: string]: string; };
+
+    /** initializes class.*/
+    static EnsureSetup(): void;
+
+    /** Current file name (after last '/' in url).*/
+    static FileName: string;
+
+    /** Current file path (before last '/' in url).*/
+    static PathName: string;
+}
