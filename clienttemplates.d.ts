@@ -115,13 +115,25 @@ declare module SPClientTemplates {
         Field: RenderContextFieldInFormSchema[];
     }
     export interface RenderContextListSchema {
+        Aggregate: { [name: string]: string; };
+        /** Either "TRUE" or false (for grouping) */
+        Collapse: string;
         /** Either "0" or "1" */
         DefaultItemOpen: string;
         Direction: string;
+        EffectivePresenceEnabled: any;
+        /** Array of all fields of the list view */
         Field: RenderContextFieldInViewSchema[];
         FieldSortParam: string;
+        Filter: any;
         /** Either "0" or "1" */
         ForceCheckout: string;
+        /** Internal name for the first group by field, if any */
+        group1: string;
+        /** Internal name for the second group by field, if any */
+        group2: string;
+        /** "1" if the view contains "Title" field, otherwise not defined. */
+        HasTitle: string;
         HttpVDir: string;
         /** Either "0" or "1" */
         InplaceSearchEnabled: string;
@@ -135,32 +147,53 @@ declare module SPClientTemplates {
         NoListItemHowTo: string;
         /** Server-relative path to the current page */
         PagePath: string;
+        /** Internal name of the field inside which the hierarchy buttons are displayed */
+        ParentHierarchyDisplayField: string;
+        PresenceAlt: string;
+        /** Represents SPList.RootFolder.Properties. Exists only if SPList.FetchPropertyBagForListView property is set to true. */
+        PropertyBag: { [key:string]:string; };
         /** Either "True" or "False" */
         RenderSaveAsNewViewButton: string;
         /** Either "True" or "False" */
         RenderViewSelectorPivotMenu: string;
+        /** Either "True" or "False" */
+        RenderViewSelectorPivotMenuAsync: string;
         RootFolderParam: string;
         SelectedID: string; // number
         ShowWebPart: string;
+        /** Either "1" or undefined. */
+        StrikeThroughOnCompletedEnabled: string;
         /** Either "0" or "1" */
         TabularView: string;
         Toolbar: string;
         UIVersion: string; // number
         Userid: string; // number
+        UserVanilla: any;
+        UserDispUrl: any;
+        /** Either "1" or "" */
+        UseParentHierarchy: string;
         /** Guid of the view */
         View: string;
         /** JSON string */
         ViewSelectorPivotMenuOptions: string;
+        ViewSelector_ViewParameters: string;
     }
     export interface RenderContextItem {
         [fieldInternalName: string]: any;
     }
     export interface RenderContextListData {
         FilterLink: string;
+        FilterFields: string;
         FirstRow: number;
         /** Either "0" or "1" */
         ForceNoHierarchy: string;
         HierarchyHasIndention: string;
+        /** Link to the previous page (not defined if not available) */
+        PrevHref: string;
+        /** Link to the next page  (not defined if not available) */
+        NextHref: string;
+        SortField: string;
+        SortDir: string;
         LastRow: number;
         Row: RenderContextItem[];
     }
@@ -193,17 +226,18 @@ declare module SPClientTemplates {
         SiteClientTag: string;
         Templates: TemplateOverrides;
     }
+
     export interface ListViewRenderContext extends RenderContext {
         AllowCreateFolder: bool;
         AllowGridMode: bool;
-        BasePermissions: any; // SP.BasePermissions?
+        BasePermissions: { [PermissionName: string]: bool; }; // SP.BasePermissions?
         bInitialRender: bool;
         CanShareLinkForNewDocument: bool;
         CascadeDeleteWarningMessage: string;
-        clvp: HTMLElement;
+        clvp: HTMLElement; // not in View
         ContentTypesEnabled: bool;
         ctxId: number;
-        ctxType: any;
+        ctxType: any; // not in View
         CurrentUserId: number;
         CurrentUserIsSiteAdmin: bool;
         dictSel: any;
@@ -218,8 +252,8 @@ declare module SPClientTemplates {
         HasRelatedCascadeLists: number;
         HttpPath: string;
         HttpRoot: string;
-        ImagesPath: string;
-        inGridFullRender: any;
+        imagesPath: string;
+        inGridFullRender: any; // not in View
         inGridMode: bool;
         IsAppWeb: bool;
         IsClientRendering: bool;
@@ -229,13 +263,13 @@ declare module SPClientTemplates {
         isWebEditorPreview: number;
         isVersions: number;
         isXslView: bool;
-        LastRowIndexSelected: any;
+        LastRowIndexSelected: any; // not in View
         LastSelectableRowIdx: any;
-        LastSelectedItemId: any;
+        LastSelectedItemId: any; // not in View
         leavingGridMode: bool;
         listBaseType: number;
         ListData: RenderContextListData;
-        ListDataJSONItemsKey: string;
+        ListDataJSONItemsKey: string; // ="Row"
         /** Guid of the list */
         listName: string;
         ListSchema: RenderContextListSchema;
@@ -252,11 +286,12 @@ declare module SPClientTemplates {
         noGroupCollapse: bool;
         OfficialFileName: string;
         OfficialFileNames: string;
-        overrideDeleteConfirmation: string;
-        overrideFilterQstring: string;
+        overrideDeleteConfirmation: string; // not in View
+        overrideFilterQstring: string; // not in View
         PortalUrl: string;
         queryString: any;
         recursiveView: bool;
+        /** either 1 or 0 */
         RecycleBinEnabled: number;
         RegionalSettingsTimeZoneBias: string;
         rootFolder: string;
@@ -314,6 +349,10 @@ declare module SPClientTemplates {
         /** Must return null in order to fall back to a more common template or to a system default template */
         (renderContext: ListViewRenderContext): string;
     }
+    export interface GroupCallback {
+        /** Must return null in order to fall back to a more common template or to a system default template */
+        (renderContext: GroupRenderContext): string;
+    }
     export interface ItemCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
         (renderContext: ItemRenderContext): string;
@@ -343,10 +382,10 @@ declare module SPClientTemplates {
     }
 
     export interface TemplateOverrides {
-        View?: SingleTemplateCallback; //TODO: create appropriate callback
-        Body?: SingleTemplateCallback; //TODO: create appropriate callback
+        View?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template
+        Body?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template 
         /** Defines templates for rendering groups (aggregations). */
-        Group?: SingleTemplateCallback; //TODO: create appropriate callback
+        Group?: GroupCallback;
         /** Defines templates for list items rendering. */
         Item?: ItemCallback;
         /** Defines template for rendering list view header.
@@ -359,22 +398,20 @@ declare module SPClientTemplates {
         Fields: FieldTemplateMap;
     }
     export interface TemplateOverridesOptions {
-        Templates: TemplateOverrides;
-        OnPreRender?: any;
-        OnPostRender?: any;
+        /** Template overrides */
+        Templates?: TemplateOverrides;
+        OnPreRender?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template 
+        OnPostRender?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template 
 
-        /** Array of view styles (SPView.StyleID) for which the templates should be applied. 
-            If not defined, the templates will be applied only to default view style.
-            Value for this property can be number, string or array of strings. */
-        ViewStyle?: any;
-        /** Array of list template types (SPList.BaseTemplate) for which the template should be applied. 
-            If not defined, the templates will be applied to all lists.
-            Value for this property can be number, string or array of strings. */
-        ListTemplateType: number;
-        /** Array of base view IDs (SPView.BaseViewID) for which the template should be applied.
-            If not defined, the templates will be applied to all views.
-            Value for this property can be number, string or array of strings.*/
-        BaseViewID: number;
+        /** View style (SPView.StyleID) for which the templates should be applied. 
+            If not defined, the templates will be applied only to default view style. */
+        ViewStyle?: number;
+        /** List template type (SPList.BaseTemplate) for which the template should be applied. 
+            If not defined, the templates will be applied to all lists. */
+        ListTemplateType?: number;
+        /** Base view ID (SPView.BaseViewID) for which the template should be applied.
+            If not defined, the templates will be applied to all views. */
+        BaseViewID?: number;
     }
     export class TemplateManager {
         static RegisterTemplateOverrides(renderCtx: TemplateOverridesOptions): void;
