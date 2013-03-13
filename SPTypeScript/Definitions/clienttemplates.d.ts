@@ -400,8 +400,12 @@ declare module SPClientTemplates {
     export interface TemplateOverridesOptions {
         /** Template overrides */
         Templates?: TemplateOverrides;
-        OnPreRender?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template 
-        OnPostRender?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template 
+
+        /** Ñallbacks called before rendering starts. Can be function (ctx: RenderContext) => void or array of faunctions.*/
+        OnPreRender?: any; 
+
+        /** Ñallbacks called after rendered html inserted into DOM. Can be function (ctx: RenderContext) => void or array of faunctions.*/
+        OnPostRender?: any;
 
         /** View style (SPView.StyleID) for which the templates should be applied. 
             If not defined, the templates will be applied only to default view style. */
