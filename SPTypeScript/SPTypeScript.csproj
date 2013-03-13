@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{94A9010C-9420-41F4-967E-97DFA57839E7}</ProjectGuid>
+    <ProjectGuid>{47065B66-1DF4-4E5D-9D05-A9C4FBE84B65}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SPTypeScript</RootNamespace>
@@ -47,12 +47,16 @@
     <None Include="Extensions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{739dd4d6-6694-4f26-8ed0-833a61ddff80}</SharePointProjectItemId>
     </None>
+    <None Include="Extensions\typescripttemplates.js.map">
+      <DependentUpon>typescripttemplates.ts</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{fbba0cef-9361-4eb5-8a07-5f8da3fa32e1}</SharePointProjectItemId>
     </None>
     <Content Include="Definitions\callout.d.ts" />
     <Content Include="Definitions\clienttemplates.d.ts" />
+    <Content Include="Definitions\jquery.d.ts" />
     <Content Include="Definitions\MicrosoftAjax.d.ts" />
     <Content Include="Definitions\SP.BusinessData.d.ts" />
     <Content Include="Definitions\SP.d.ts" />
@@ -65,16 +69,31 @@
     <Content Include="Definitions\SP.WebParts.d.ts" />
     <Content Include="Definitions\SP.Workflow.d.ts" />
     <Content Include="Extensions\Elements.xml" />
-    <Content Include="Extensions\typescripttemplates.ts" />
+    <Content Include="Extensions\typescripttemplates.js">
+      <DependentUpon>typescripttemplates.ts</DependentUpon>
+    </Content>
+    <Content Include="Extensions\typescripttemplates.min.js">
+      <DependentUpon>typescripttemplates.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="Extensions\typescripttemplates.ts" />
     <Content Include="Pages\Elements.xml" />
     <Content Include="Pages\Default.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Scripts\App.js.map">
+      <DependentUpon>App.ts</DependentUpon>
+    </None>
     <None Include="Scripts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{8418c6b7-70b4-41bf-883a-6c9471b03877}</SharePointProjectItemId>
     </None>
+    <Content Include="Scripts\App.js">
+      <DependentUpon>App.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\App.min.js">
+      <DependentUpon>App.ts</DependentUpon>
+    </Content>
     <Content Include="Scripts\Elements.xml" />
-    <Content Include="Scripts\App.js" />
+    <TypeScriptCompile Include="Scripts\App.ts" />
     <Content Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -122,4 +141,10 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+  <PropertyGroup>
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+    <TypeScriptIncludeComments>false</TypeScriptIncludeComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" />
 </Project>

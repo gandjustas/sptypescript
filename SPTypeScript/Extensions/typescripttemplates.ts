@@ -1,5 +1,5 @@
-﻿/// <reference path="SP.Init.d.ts"/>
-/// <reference path="clienttemplates.d.ts"/>
+﻿/// <reference path="..\Definitions\SP.Init.d.ts"/>
+/// <reference path="..\Definitions\clienttemplates.d.ts"/>
 
 /** Lightweight client-side rendering template overrides.*/
 module Csr {

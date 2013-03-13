@@ -3,5 +3,8 @@
   <Files>
     <ProjectItemFile Source="Elements.xml" Target="Extensions\" Type="ElementManifest" />
     <ProjectItemFile Source="typescripttemplates.ts" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="typescripttemplates.js" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="typescripttemplates.js.map" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="typescripttemplates.min.js" Target="Extensions\" Type="ElementFile" />
   </Files>
 </ProjectItem>
