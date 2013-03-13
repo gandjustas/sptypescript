@@ -73,12 +73,12 @@ module Csr {
         */
         fieldTemplate(field: string, name: string, template: (ctx: SPClientTemplates.RenderContext) => string): ICsr;
 
-        /** Sets pre-render callbacks.
+        /** Sets pre-render callbacks. Callback called before rendering starts.
             @param callbacks pre-render callbacks.
         */
         onPreRender(...callbacks: { (ctx: SPClientTemplates.RenderContext): void; }[]): ICsr;
 
-        /** Sets post-render callbacks.
+        /** Sets post-render callbacks. Callback called after rendered html inserted to DOM.
             @param callbacks post-render callbacks.
         */
         onPostRender(...callbacks: { (ctx: SPClientTemplates.RenderContext): void; }[]): ICsr;
