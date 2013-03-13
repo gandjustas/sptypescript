@@ -28,5 +28,11 @@
             initializing...
         </p>
     </div>
+    <div>
+        <h3>Samples</h3>
+        <ol>
+            <li><a href="../Lists/CustomList/Overridable.aspx">Customizing list view rendering with TypeScript</a></li>
+        </ol>
+    </div>
 
 </asp:Content>

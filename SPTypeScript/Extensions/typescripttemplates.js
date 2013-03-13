@@ -13,6 +13,18 @@ var Csr;
                 }
             };
         }
+        csr.prototype.item = function (template) {
+            this.Templates.Item = template;
+            return this;
+        };
+        csr.prototype.header = function (template) {
+            this.Templates.Header = template;
+            return this;
+        };
+        csr.prototype.footer = function (template) {
+            this.Templates.Footer = template;
+            return this;
+        };
         csr.prototype.template = function (name, template) {
             this.Templates[name] = template;
             return this;

@@ -19,6 +19,24 @@ module Csr {
             this.Templates = { Fields: {} };
         }
 
+        /* tier 1 methods */
+        item(template: any): ICsr {
+            this.Templates.Item = template;
+            return this;
+        }
+
+        header(template: any): ICsr {
+            this.Templates.Header = template;
+            return this;
+        }
+
+        footer(template: any): ICsr {
+            this.Templates.Footer = template;
+            return this;
+        }
+
+
+        /* tier 2 methods */
         template(name: string, template: any): ICsr {
             this.Templates[name] = template;
             return this;
@@ -29,6 +47,7 @@ module Csr {
             return this;
         }
 
+        /* common */
         onPreRender(...callbacks: { (ctx: SPClientTemplates.RenderContext): void; }[]): ICsr {
             this.OnPreRender = callbacks;
             return this;
@@ -42,7 +61,6 @@ module Csr {
         register() {
             SPClientTemplates.TemplateManager.RegisterTemplateOverrides(this);
         }
-
     }
 
     /** Lightweight client-side rendering template overrides.*/
@@ -85,6 +103,36 @@ module Csr {
 
         /** Registers overrides in client-side templating engine.*/
         register(): void;
+
+        /** Override Item rendering template.
+            @param template New item template.
+        */
+        item(template: string): ICsr;
+
+        /** Override Item rendering template.
+            @param template New item template.
+        */
+        item(template: (ctx: SPClientTemplates.ItemRenderContext) => string): ICsr;
+
+        /** Override Header rendering template.
+            @param template New header template.
+        */
+        header(template: string): ICsr;
+
+        /** Override Header rendering template.
+            @param template New header template.
+        */
+        header(template: (ctx: SPClientTemplates.SingleTemplateCallback) => string): ICsr;
+
+        /** Override Footer rendering template.
+            @param template New footer template.
+        */
+        footer(template: string): ICsr;
+
+        /** Override Footer rendering template.
+            @param template New footer template.
+        */
+        footer(template: (ctx: SPClientTemplates.SingleTemplateCallback) => string): ICsr;
     }
 }
 

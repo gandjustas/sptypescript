@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Scripts_CSRListView">
+    <File Path="Scripts_CSRListView\CSRListView.ts" Url="Scripts_CSRListView/CSRListView.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts_CSRListView\CSRListView.js" Url="Scripts_CSRListView/CSRListView.js" ReplaceContent="TRUE" />
+    <File Path="Scripts_CSRListView\CSRListView.js.map" Url="Scripts_CSRListView/CSRListView.js.map" ReplaceContent="TRUE" />
+    <File Path="Scripts_CSRListView\CSRListView.min.js" Url="Scripts_CSRListView/CSRListView.min.js" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

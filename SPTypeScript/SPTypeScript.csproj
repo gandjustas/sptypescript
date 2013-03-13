@@ -50,6 +50,9 @@
     <None Include="Extensions\typescripttemplates.js.map">
       <DependentUpon>typescripttemplates.ts</DependentUpon>
     </None>
+    <None Include="Features\Feature2\Feature2.feature">
+      <FeatureId>{90ab1cb0-3773-4c81-9071-f1f600aef684}</FeatureId>
+    </None>
     <None Include="packages.config" />
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{fbba0cef-9361-4eb5-8a07-5f8da3fa32e1}</SharePointProjectItemId>
@@ -76,16 +79,42 @@
       <DependentUpon>typescripttemplates.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Extensions\typescripttemplates.ts" />
+    <Content Include="Features\Feature2\Feature2.Template.xml">
+      <DependentUpon>Feature2.feature</DependentUpon>
+    </Content>
     <Content Include="Pages\Elements.xml" />
     <Content Include="Pages\Default.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Sample_CSRListView\CustomList\CustomListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{f53232d3-911f-479d-8797-1449555f22c4}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRListView\CustomList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b4f9c375-20e1-480f-a262-38e1c764b7e0}</SharePointProjectItemId>
+    </None>
+    <Content Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.js.map">
+      <DependentUpon>CSRListView.ts</DependentUpon>
+    </Content>
+    <None Include="Sample_CSRListView\Scripts_CSRListView\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{bec1997c-5abd-4824-8eb8-0a3b1226c8c1}</SharePointProjectItemId>
+    </None>
     <None Include="Scripts\App.js.map">
       <DependentUpon>App.ts</DependentUpon>
     </None>
     <None Include="Scripts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{8418c6b7-70b4-41bf-883a-6c9471b03877}</SharePointProjectItemId>
     </None>
+    <Content Include="Sample_CSRListView\CustomList\CustomListInstance\Elements.xml" />
+    <Content Include="Sample_CSRListView\CustomList\Elements.xml" />
+    <Content Include="Sample_CSRListView\CustomList\Schema.xml" />
+    <TypeScriptCompile Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.ts" />
+    <Content Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.js">
+      <DependentUpon>CSRListView.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.min.js">
+      <DependentUpon>CSRListView.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRListView\Scripts_CSRListView\Elements.xml" />
     <Content Include="Scripts\App.js">
       <DependentUpon>App.ts</DependentUpon>
     </Content>
