@@ -337,7 +337,7 @@ declare module SPClientTemplates {
         ListData: RenderContextListDataInForm;
         ListSchema: RenderContextListSchemaInForm;
     }
-    export interface FieldInFormRenderContext extends RenderContext {
+    export interface FieldInFormRenderContext extends ListFormRenderContext {
         CurrentGroupIdx: number;
         CurrentGroup: RenderContextGroup;
         CurrentItems: RenderContextItem[];

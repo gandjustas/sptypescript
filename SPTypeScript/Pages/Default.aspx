@@ -32,6 +32,7 @@
         <h3>Samples</h3>
         <ol>
             <li><a href="../Lists/CustomList/Overridable.aspx">Customizing list view rendering with TypeScript</a></li>
+            <li><a href="../Lists/CustomFieldList">Customizing field rendering with TypeScript</a></li>
         </ol>
     </div>
 

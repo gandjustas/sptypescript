@@ -25,12 +25,38 @@ var Csr;
             this.Templates.Footer = template;
             return this;
         };
-        csr.prototype.template = function (name, template) {
+        csr.prototype.fieldView = function (fieldName, template) {
+            this.Templates.Fields[fieldName] = this.Templates.Fields[fieldName] || {
+            };
+            this.Templates.Fields[fieldName].View = template;
+            return this;
+        };
+        csr.prototype.fieldDisplay = function (fieldName, template) {
+            this.Templates.Fields[fieldName] = this.Templates.Fields[fieldName] || {
+            };
+            this.Templates.Fields[fieldName].DisplayForm = template;
+            return this;
+        };
+        csr.prototype.fieldNew = function (fieldName, template) {
+            this.Templates.Fields[fieldName] = this.Templates.Fields[fieldName] || {
+            };
+            this.Templates.Fields[fieldName].NewForm = template;
+            return this;
+        };
+        csr.prototype.fieldEdit = function (fieldName, template) {
+            this.Templates.Fields[fieldName] = this.Templates.Fields[fieldName] || {
+            };
+            this.Templates.Fields[fieldName].EditForm = template;
+            return this;
+        };
+        csr.prototype.template = function (fieldName, template) {
             this.Templates[name] = template;
             return this;
         };
-        csr.prototype.fieldTemplate = function (field, name, template) {
-            this.Templates.Fields[field][name] = template;
+        csr.prototype.fieldTemplate = function (fieldName, name, template) {
+            this.Templates.Fields[fieldName] = this.Templates.Fields[fieldName] || {
+            };
+            this.Templates.Fields[fieldName][name] = template;
             return this;
         };
         csr.prototype.onPreRender = function () {

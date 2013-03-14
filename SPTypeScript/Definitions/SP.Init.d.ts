@@ -35,3 +35,7 @@ declare class JSRequest {
     /** Current file path (before last '/' in url).*/
     static PathName: string;
 }
+
+declare function STSHtmlEncode(value: string): string;
+
+declare function AddEvtHandler(element: HTMLElement, event:string, func: EventListener): void;

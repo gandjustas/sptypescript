@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Scripts_CSRFields\" Type="ElementManifest" />
+    <ProjectItemFile Source="CSRField.ts" Target="Scripts_CSRFields\" Type="ElementFile" />
+    <ProjectItemFile Source="CSRField.js" Target="Scripts_CSRFields\" Type="ElementFile" />
+    <ProjectItemFile Source="CSRField.js.map" Target="Scripts_CSRFields\" Type="ElementFile" />
+    <ProjectItemFile Source="CSRField.min.js" Target="Scripts_CSRFields\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

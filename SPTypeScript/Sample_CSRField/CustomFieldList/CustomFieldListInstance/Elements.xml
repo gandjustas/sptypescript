@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="CustomFieldList" OnQuickLaunch="TRUE" TemplateType="10000" Url="Lists/CustomFieldList" Description="Мой экземпляр списка">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Title">Row 1</Field>
+          <Field Name="ComplexityField">Simple</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Row 2</Field>
+          <Field Name="ComplexityField">Average</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Row 3</Field>
+          <Field Name="ComplexityField">Complex</Field>
+        </Row>
+      </Rows>
+    </Data>
+  </ListInstance>
+</Elements>

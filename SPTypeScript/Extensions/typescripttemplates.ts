@@ -5,7 +5,7 @@
 module Csr {
 
     /** Creates new overrides. Call .register() at the end.*/
-    export function override(listTemplateType: number, baseViewId?: number): ICsr {
+    export function override(listTemplateType?: number, baseViewId?: number): ICsr {
         return new csr(listTemplateType, baseViewId);
     }
 
@@ -15,7 +15,7 @@ module Csr {
         public OnPreRender: { (ctx: SPClientTemplates.RenderContext): void; }[];
         public OnPostRender: { (ctx: SPClientTemplates.RenderContext): void; }[];
 
-        constructor(public ListTemplateType: number, public BaseViewID?: number) {
+        constructor(public ListTemplateType?: number, public BaseViewID?: number) {
             this.Templates = { Fields: {} };
         }
 
@@ -35,15 +35,39 @@ module Csr {
             return this;
         }
 
+        fieldView(fieldName: string, template: any): ICsr {
+            this.Templates.Fields[fieldName] = this.Templates.Fields[fieldName] || {};
+            this.Templates.Fields[fieldName].View = template;
+            return this;
+        }
+
+        fieldDisplay(fieldName: string, template: any): ICsr {
+            this.Templates.Fields[fieldName] = this.Templates.Fields[fieldName] || {};
+            this.Templates.Fields[fieldName].DisplayForm = template;
+            return this;
+        }
+
+        fieldNew(fieldName: string, template: any): ICsr {
+            this.Templates.Fields[fieldName] = this.Templates.Fields[fieldName] || {};
+            this.Templates.Fields[fieldName].NewForm = template;
+            return this;
+        }
+
+        fieldEdit(fieldName: string, template: any): ICsr {
+            this.Templates.Fields[fieldName] = this.Templates.Fields[fieldName] || {};
+            this.Templates.Fields[fieldName].EditForm = template;
+            return this;
+        }
 
         /* tier 2 methods */
-        template(name: string, template: any): ICsr {
+        template(fieldName: string, template: any): ICsr {
             this.Templates[name] = template;
             return this;
         }
 
-        fieldTemplate(field: string, name: string, template: any): ICsr {
-            this.Templates.Fields[field][name] = template;
+        fieldTemplate(fieldName: string, name: string, template: any): ICsr {
+            this.Templates.Fields[fieldName] = this.Templates.Fields[fieldName] || {};
+            this.Templates.Fields[fieldName][name] = template;
             return this;
         }
 
@@ -133,6 +157,54 @@ module Csr {
             @param template New footer template.
         */
         footer(template: (ctx: SPClientTemplates.SingleTemplateCallback) => string): ICsr;
+
+        /** Override View rendering template for specified field.
+            @param fieldName Internal name of the field.
+            @param template New View template.
+        */
+        fieldView(fieldName: string, template: string): ICsr;
+
+        /** Override View rendering template for specified field.
+            @param fieldName Internal name of the field.
+            @param template New View template.
+        */
+        fieldView(fieldName: string, template: (ctx: SPClientTemplates.FieldInViewRenderContext) => string): ICsr;
+
+        /** Override DisplyForm rendering template for specified field.
+            @param fieldName Internal name of the field.
+            @param template New DisplyForm template.
+        */
+        fieldDisplay(fieldName: string, template: string): ICsr;
+
+        /** Override DisplyForm rendering template.
+            @param fieldName Internal name of the field.
+            @param template New DisplyForm template.
+        */
+        fieldDisplay(fieldName: string, template: (ctx: SPClientTemplates.FieldInFormRenderContext) => string): ICsr;
+
+        /** Override EditForm rendering template for specified field.
+            @param fieldName Internal name of the field.
+            @param template New EditForm template.
+        */
+        fieldEdit(fieldName: string, template: string): ICsr;
+
+        /** Override EditForm rendering template.
+            @param fieldName Internal name of the field.
+            @param template New EditForm template.
+        */
+        fieldEdit(fieldName: string, template: (ctx: SPClientTemplates.FieldInFormRenderContext) => string): ICsr;
+
+        /** Override NewForm rendering template for specified field.
+            @param fieldName Internal name of the field.
+            @param template New NewForm template.
+        */
+        fieldNew(fieldName: string, template: string): ICsr;
+
+        /** Override NewForm rendering template.
+            @param fieldName Internal name of the field.
+            @param template New NewForm template.
+        */
+        fieldNew(fieldName: string, template: (ctx: SPClientTemplates.FieldInFormRenderContext) => string): ICsr;
     }
 }
 

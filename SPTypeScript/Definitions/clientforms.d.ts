@@ -1,0 +1,1 @@
+function SPFormControl_AppendValidationErrorMessage(nodeId:string, errorResult): void;
