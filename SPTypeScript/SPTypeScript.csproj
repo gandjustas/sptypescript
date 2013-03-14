@@ -64,13 +64,13 @@
     <Content Include="Definitions\SP.BusinessData.d.ts" />
     <Content Include="Definitions\SP.d.ts" />
     <Content Include="Definitions\SP.Init.d.ts" />
-    <Content Include="Definitions\SP.Runtime.d.ts" />
     <Content Include="Definitions\SP.Sharing.d.ts" />
     <Content Include="Definitions\SP.UI.ApplicationPages.d.ts" />
     <Content Include="Definitions\SP.UI.d.ts" />
     <Content Include="Definitions\SP.Utilities.d.ts" />
     <Content Include="Definitions\SP.WebParts.d.ts" />
     <Content Include="Definitions\SP.Workflow.d.ts" />
+    <Content Include="Definitions\SP.WorkflowServices.d.ts" />
     <Content Include="Extensions\Elements.xml" />
     <Content Include="Extensions\typescripttemplates.js">
       <DependentUpon>typescripttemplates.ts</DependentUpon>

@@ -1,0 +1,5 @@
+syntax: glob
+*.suo
+*.csproj.user
+*.js.map
+obj/*
