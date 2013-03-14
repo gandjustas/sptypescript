@@ -5,6 +5,8 @@ $(document).ready(function () {
     context = SP.ClientContext.get_current();
     web = context.get_web();
     getUserName();
+    JSRequest.EnsureSetup();
+    window.localStorage['AppWebUrl'] = decodeURIComponent(JSRequest.QueryString['SPAppWebUrl']);
 });
 function getUserName() {
     user = web.get_currentUser();

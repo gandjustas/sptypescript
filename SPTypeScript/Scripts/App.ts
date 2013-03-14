@@ -1,4 +1,5 @@
-﻿/// <reference path="..\Definitions\SP.d.ts"/>
+﻿/// <reference path="..\Definitions\SP.Init.d.ts"/>
+/// <reference path="..\Definitions\SP.d.ts"/>
 /// <reference path="..\Definitions\jquery.d.ts"/>
 
 var context: SP.ClientContext;
@@ -11,6 +12,9 @@ $(document).ready(function () {
     web = context.get_web();
 
     getUserName();
+
+    JSRequest.EnsureSetup();
+    window.localStorage['AppWebUrl'] = decodeURIComponent(JSRequest.QueryString['SPAppWebUrl']);
 });
 
 // Эта функция подготавливает, загружает и затем выполняет запрос SharePoint для получения сведений о текущих пользователях

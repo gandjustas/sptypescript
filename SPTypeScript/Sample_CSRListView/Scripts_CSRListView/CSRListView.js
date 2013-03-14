@@ -23,9 +23,9 @@
     }
     SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
+        SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+            RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_CSRListView/CSRListView.js"), init);
+        }, "sp.js");
     }, "clienttemplates.js");
-    SP.SOD.executeOrDelayUntilScriptLoaded(function () {
-        RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_CSRListView/CSRListView.js"), init);
-    }, "sp.js");
 })();
 //@ sourceMappingURL=CSRListView.js.map

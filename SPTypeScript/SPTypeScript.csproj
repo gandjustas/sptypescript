@@ -87,6 +87,15 @@
     <Content Include="Pages\Default.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Sample_CSRConditionalFormatting\ConditionalFormattingTasksList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3d7caf3c-c8fc-49a7-b77f-77df4042be9c}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.js.map">
+      <DependentUpon>ConditionalFormatting.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a0bc9222-7a6f-4ac4-851f-dd4b731d3228}</SharePointProjectItemId>
+    </None>
     <None Include="Sample_CSRField\CustomFieldList\CustomFieldListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{32bfcecd-b8ac-4de0-8191-36befc4a6465}</SharePointProjectItemId>
     </None>
@@ -105,6 +114,15 @@
     <None Include="Sample_CSRListView\CustomList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b4f9c375-20e1-480f-a262-38e1c764b7e0}</SharePointProjectItemId>
     </None>
+    <Content Include="Sample_CSRConditionalFormatting\ConditionalFormattingTasksList\Elements.xml" />
+    <TypeScriptCompile Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.ts" />
+    <Content Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.js">
+      <DependentUpon>ConditionalFormatting.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.min.js">
+      <DependentUpon>ConditionalFormatting.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\Elements.xml" />
     <Content Include="Sample_CSRField\CustomFieldList\CustomFieldListInstance\Elements.xml" />
     <Content Include="Sample_CSRField\CustomFieldList\Elements.xml" />
     <Content Include="Sample_CSRField\CustomFieldList\Schema.xml" />

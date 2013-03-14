@@ -151,7 +151,7 @@ declare module SPClientTemplates {
         ParentHierarchyDisplayField: string;
         PresenceAlt: string;
         /** Represents SPList.RootFolder.Properties. Exists only if SPList.FetchPropertyBagForListView property is set to true. */
-        PropertyBag: { [key:string]:string; };
+        PropertyBag: { [key: string]: string; };
         /** Either "True" or "False" */
         RenderSaveAsNewViewButton: string;
         /** Either "True" or "False" */
@@ -402,7 +402,7 @@ declare module SPClientTemplates {
         Templates?: TemplateOverrides;
 
         /** Ñallbacks called before rendering starts. Can be function (ctx: RenderContext) => void or array of faunctions.*/
-        OnPreRender?: any; 
+        OnPreRender?: any;
 
         /** Ñallbacks called after rendered html inserted into DOM. Can be function (ctx: RenderContext) => void or array of faunctions.*/
         OnPostRender?: any;
@@ -467,3 +467,7 @@ declare module SPClientTemplates {
     }
 
 }
+
+declare function GenerateIID(renderCtx: SPClientTemplates.ItemRenderContext): string;
+declare function GenerateIIDForListItem(renderCtx: SPClientTemplates.ListViewRenderContext, listItem: SPClientTemplates.RenderContextItem): string;
+

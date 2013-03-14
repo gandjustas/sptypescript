@@ -151,10 +151,12 @@
 
     SP.SOD.executeOrDelayUntilScriptLoaded(() => {
         SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
+
+        //Enable script with MDS
+        SP.SOD.executeOrDelayUntilScriptLoaded(() => {
+            RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_CSRFields/CSRField.js"), init);
+        }, "sp.js");
+
     }, "clienttemplates.js");
 
-    //Enable script with MDS
-    SP.SOD.executeOrDelayUntilScriptLoaded(() => {
-        RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_CSRFields/CSRField.js"), init);
-    }, "sp.js");
 })();

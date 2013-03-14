@@ -33,6 +33,7 @@
         <ol>
             <li><a href="../Lists/CustomList/Overridable.aspx">Customizing list view rendering with TypeScript</a></li>
             <li><a href="../Lists/CustomFieldList">Customizing field rendering with TypeScript</a></li>
+            <li><a href="../Lists/ConditionalFormattingTasksList">Conditional formatting with TypeScript</a></li>
         </ol>
     </div>
 

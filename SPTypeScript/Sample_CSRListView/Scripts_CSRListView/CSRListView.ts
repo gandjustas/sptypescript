@@ -43,11 +43,11 @@
 
     SP.SOD.executeOrDelayUntilScriptLoaded(() => {
         SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
-    }, "clienttemplates.js");
 
-    //Enable script with MDS
-    SP.SOD.executeOrDelayUntilScriptLoaded(() => {
-        RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_CSRListView/CSRListView.js"), init);
-    }, "sp.js");
+        //Enable script with MDS
+        SP.SOD.executeOrDelayUntilScriptLoaded(() => {
+            RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_CSRListView/CSRListView.js"), init);
+        }, "sp.js");
+    }, "clienttemplates.js");
 
 })();
