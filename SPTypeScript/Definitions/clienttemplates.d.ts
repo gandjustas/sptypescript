@@ -217,44 +217,73 @@ declare module SPClientTemplates {
         ListSchema: ListSchema_InForm;
     }
 
-
+    export interface FieldSchema_InView_LookupField extends FieldSchema_InView {
+        /** Either "TRUE" or "FALSE" */
+        AllowMultipleValues: string;
+        /** Target lookup list display form URL, including PageType and List attributes. */
+        DispFormUrl: string;
+        /** Either "TRUE" or "FALSE" */
+        HasPrefix: string;
+    }
+    export interface FieldSchema_InView_UserField extends FieldSchema_InView {
+        /** Either "TRUE" or "FALSE" */
+        AllowMultipleValues: string;
+        /** Either "TRUE" or "FALSE" */
+        ImnHeader: string;
+        /** Either "TRUE" or "FALSE" */
+        HasPrefix: string;
+        /** Either "1" or "0" */
+        HasUserLink: string;
+        /** Either "1" or "0" */
+        DefaultRender: string;
+    }
     /** Represents field schema in a list view. */
     export interface FieldSchema_InView {
-        Name: string;
-        DisplayName: string;
-        FieldType: string;
-        /** Either "TRUE" or "FALSE" */
-        Filterable: string;
-        /** Guid of the field */
-        ID: string;
-        Type: string;
-        RealFieldName: string;
         /** Either "TRUE" or "FALSE" */
         AllowGridEditing: string;
         /** Either "TRUE" or "FALSE" */
         CalloutMenu: string;
-        ClassInfo: string;
+        ClassInfo: string; // e.g. "Menu"
+        css: string;
+        DisplayName: string;
         /** Either "TRUE" or "FALSE" */
         Explicit: string;
-        /** Either "TRUE" or "FALSE" */
-        GroupField: string;
-        css: string;
         fieldRenderer: any;
         FieldTitle: string;
-        /** Either "TRUE" or "FALSE" */
-        ReadOnly: string;
+        /** Represents SPField.TypeAsString, e.g. "Computed", "UserMulti", etc. */
+        FieldType: string;
+        /** Indicates whether the field can be filtered. Either "TRUE" or "FALSE" */
+        Filterable: string;
+        /** Set to "TRUE" for fields that comply to the following Xpath query:
+            ViewFields/FieldRef[@Explicit='TRUE'] | Query/GroupBy/FieldRef[not(@Name=ViewFields/FieldRef/@Name)] */
+        GroupField: string;
         /** Either "TRUE" or "FALSE" */
         GridActiveAndReadOnly: string;
+        /** Guid of the field */
+        ID: string;
+        /** Specifies if the field contains list item menu.
+            Corresponds to ViewFields/FieldRef/@ListItemMenu attribute. Either "TRUE" or "FALSE" and might be missing. */
+        listItemMenu: string;
+        Name: string;
+        RealFieldName: string;
+        /** Either "TRUE" or "FALSE" */
+        ReadOnly: string;
         ResultType: string;
+        /** Indicates whether the field can be sorted. Either "TRUE" or "FALSE" */
+        Sortable: string;
+        Type: string;
     }
     export interface ListSchema_InView {
+        /** Key-value object that represents all aggregations defined for the view.
+            Key specifies the field internal name, and value specifies the type of the aggregation. */
         Aggregate: { [name: string]: string; };
         /** Either "TRUE" or false (for grouping) */
         Collapse: string;
-        /** Either "0" or "1" */
+        /** Specifies whether to open items in a client application ("1") or in browser ("0"). */
         DefaultItemOpen: string;
         Direction: string;
-        EffectivePresenceEnabled: any;
+        /** Either "0" or "1" */
+        EffectivePresenceEnabled: string;
         /** If in grid mode (context.inGridMode == true), cast to FieldSchema_InForm[], otherwise cast to FieldSchema_InView[] */
         Field: any[];
         FieldSortParam: string;
@@ -291,6 +320,7 @@ declare module SPClientTemplates {
         RenderViewSelectorPivotMenu: string;
         /** Either "True" or "False" */
         RenderViewSelectorPivotMenuAsync: string;
+        /** Query string parameters that specify GUID of the current view and the current root folder */
         RootFolderParam: string;
         SelectedID: string; // number
         ShowWebPart: string;
@@ -302,13 +332,15 @@ declare module SPClientTemplates {
         UIVersion: string; // number
         Userid: string; // number
         UserVanilla: any;
-        UserDispUrl: any;
+        /** Server relative path to "/_layouts/userdisp.aspx" in the current web */
+        UserDispUrl: string;
         /** Either "1" or "" */
         UseParentHierarchy: string;
         /** Guid of the view */
         View: string;
         /** JSON string */
         ViewSelectorPivotMenuOptions: string;
+        /** Query string parameters that specify current root folder (RootFolder) and folder content type id (FolderCTID) */
         ViewSelector_ViewParameters: string;
     }
     export interface ListData_InView {
@@ -355,6 +387,7 @@ declare module SPClientTemplates {
         enteringGridMode: bool;
         existingServerFilterHash: any;
         HasRelatedCascadeLists: number;
+        heroId: string; // e.g. "idHomePageNewItem"
         HttpPath: string;
         HttpRoot: string;
         imagesPath: string;
