@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Scripts_WorkflowServices">
+    <File Path="Scripts_WorkflowServices\WorkflowServices.js" Url="Scripts_WorkflowServices/WorkflowServices.js" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

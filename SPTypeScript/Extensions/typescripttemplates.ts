@@ -118,12 +118,12 @@ module Csr {
         /** Sets pre-render callbacks. Callback called before rendering starts.
             @param callbacks pre-render callbacks.
         */
-        onPreRender(...callbacks: { (ctx: SPClientTemplates.RenderContext): void; }[]): ICsr;
+        onPreRender(...callbacks: { (ctx: SPClientTemplates.ListViewRenderContext): void; }[]): ICsr;
 
         /** Sets post-render callbacks. Callback called after rendered html inserted to DOM.
             @param callbacks post-render callbacks.
         */
-        onPostRender(...callbacks: { (ctx: SPClientTemplates.RenderContext): void; }[]): ICsr;
+        onPostRender(...callbacks: { (ctx: SPClientTemplates.ListViewRenderContext): void; }[]): ICsr;
 
         /** Registers overrides in client-side templating engine.*/
         register(): void;

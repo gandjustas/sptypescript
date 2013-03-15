@@ -1,12 +1,11 @@
 ///<reference path="../../definitions/SP.d.ts" />
 ///<reference path="../../definitions/SP.Init.d.ts" />
-///<reference path="../../definitions/clienttemplates.d.ts" />
 ///<reference path="../../extensions/typescripttemplates.ts" />
 
 (function () {
     function init() {
         Csr.override(171, 1)
-           .onPostRender((ctx: SPClientTemplates.ListViewRenderContext) => {
+           .onPostRender((ctx) => {
                for (var i = 0; i < ctx.ListData.Row.length; i++) {
                    var listItem = ctx.ListData.Row[i];
                    var percentComplete = parseFloat(listItem['PercentComplete.']);

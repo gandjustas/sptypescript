@@ -95,21 +95,49 @@ declare module SP.WorkflowServices {
         get_childItemType(): any;
     }
 
-    // TODO: comments, types
+    /** Manages workflow definitions and workflow activity authoring. */
     export class WorkflowDeploymentService extends SP.ClientObject {
         constructor(context: SP.ClientRuntimeContext, objectPath: SP.ObjectPathStaticProperty);
-        getDesignerActions(web: SP.Web): any;
-        getActivitySignatures(lastChanged): any;
+        /** Returns an XML representation of a list of valid Workflow Manager Client 1.0 actions for the specified web (WorkflowInfo element). */
+        getDesignerActions(web: SP.Web): SP.StringResult;
+        /** Returns an XML representation of a collection of XAML class signatures for workflow definitions.
+            @param lastChanges Date time value representing the latest changes; class signatures older than this time are excluded from the result set.  */
+        getActivitySignatures(lastChanged: string): SP.ClientResult;
+        /** Saves a SharePoint workflow definition to the workflow store.  */
         saveDefinition(definition: WorkflowDefinition): SP.GuidResult;
+        /** Validates the specified activity against workflow definitions in the workflow store.  */
         validateActivity(activityXaml: string): SP.StringResult;
+        /** Publishes a workflow definition to the workflow store.  */
         publishDefinition(definitionId: string): void;
+        /** Marks a workflow definition as deprecated. Currently running workflow instances are allowed to complete, but new instances of the workflow definition are prevented from starting.  */
         deprecateDefinition(definitionId: string): void;
+        /** Deletes a workflow definition.
+            @param definitionId The guid identifier of the workflow definition.  */
         deleteDefinition(definitionId: string): void;
+        /** Retrieves workflow definitions from the workflow store that match the tags. */
         enumerateDefinitions(publishedOnly: bool): WorkflowDefinitionCollection;
-        getDefinition(definitionId): WorkflowDefinition;
-        saveCollateral(workflowDefinitionId: string, leafFileName, fileContent): void;
-        deleteCollateral(workflowDefinitionId, leafFileName): void;
-        getCollateralUri(workflowDefinitionId, leafFileName): SP.StringResult;
+        /** Retrieves a specified workflow definition from the workflow store.
+            @param definitionId The guid identifier of the workflow definition.  */
+        getDefinition(definitionId: string): WorkflowDefinition;
+        /** Saves the collateral file of a workflow definition.
+            @param workflowDefinitionId The guid identifier of the workflow definition.*/
+        saveCollateral(workflowDefinitionId: string, leafFileName: string, fileContent): void;
+        /** Deletes the URL of a workflow definition's collateral file.
+            @param workflowDefinitionId The guid identifier of the workflow definition.  */
+        deleteCollateral(workflowDefinitionId: string, leafFileName: string): void;
+        /** Retrieves the URL of the collateral file of the workflow definition.
+            @param workflowDefinitionId The guid identifier of the workflow definition.
+            @param leafFileName The leaf name of the collateral file. */
+        getCollateralUri(workflowDefinitionId: string, leafFileName: string): SP.StringResult;
+        /** Packages a single workflow definition into a SharePoint solution package (.wsp file) and saves the package to the Site Assets library.
+            Returns the URL of the package file in the Site Asset library.
+            Remarks:
+            1. This method does not activate the package.
+            2. If a package with the same name already exists in the Site Assets library, the method adds an integer suffix in braces to the file name, e.g. packageDefaultFilename{2}.wsp
+            @param definitionId The guid identifier of the workflow definition.
+            @param packageDefaultFilename The default filename to choose for the new package.
+            @param packageTitle The title of the package.
+            @param packageDescription The description of the package. */
         packageDefinition(definitionId, packageDefaultFilename, packageTitle, packageDescription): SP.StringResult;
     }
 
@@ -126,7 +154,7 @@ declare module SP.WorkflowServices {
         /** Specifies properties of this workflow instance */
         get_properties(): { [name: string]: string; };
         /** Returns runtime status of the workflow instance */
-        get_status(): any;
+        get_status(): WorkflowStatus;
         /** Specifies the custom status set by workflow authors. */
         get_userStatus(): string;
         /** Specifies the custom status set by workflow authors. */
@@ -146,31 +174,51 @@ declare module SP.WorkflowServices {
         get_childItemType(): any;
     }
 
-    // TODO: comments, types
+    /** Reads the SharePoint workflow instances from the external workflow host and manages the instance execution. */
     export class WorkflowInstanceService extends SP.ClientObject {
-        startWorkflow(subscription: WorkflowSubscription, payload): SP.GuidResult;
-        startWorkflowOnListItem(subscription: WorkflowSubscription, itemId, payload): SP.GuidResult;
-        getInstance(instanceId): WorkflowInstance;
+        /** Starts a Workflow Manager Client 1.0 instance specified by the subscription and passes the supplied parameters.
+            Returns GUID of the instance object.
+            @param payload Object that contains name-value pairs of parameter names and values to pass into the workflow instance. */
+        startWorkflow(subscription: WorkflowSubscription, payload: { [name: string]: any; }): SP.GuidResult;
+        /** Starts a Workflow Manager Client 1.0 instance specified by the subscription and passes the supplied parameters.
+            Returns GUID of the instance object.
+            @param subscription The subscription associated with the workflow instance.
+            @param itemId The integer id of the list item on which to start the workflow instance.
+            @param payload Object that contains name-value pairs of parameter names and values to pass into the workflow instance. */
+        startWorkflowOnListItem(subscription: WorkflowSubscription, itemId: number, payload: { [name: string]: any; }): SP.GuidResult;
+        /** Gets workflow instance specified by the provided instance GUID */
+        getInstance(instanceId: string): WorkflowInstance;
+        /** Gets a workflow instance collection comprising the 100 most recent workflow instances started by a specified subscription.  */
         enumerate(parentSubscription: WorkflowSubscription): WorkflowInstanceCollection;
-        enumerateWithOffset(parentSubscription: WorkflowSubscription, offset): WorkflowInstanceCollection;
-        enumerateInstancesForListItem(listId, itemId): WorkflowInstanceCollection;
-        enumerateInstancesForListItemWithOffset(listId, itemId, offset): WorkflowInstanceCollection;
+        /** Gets a workflow instance collection comprising 100 workflow instances starting at the specified offset.  */
+        enumerateWithOffset(parentSubscription: WorkflowSubscription, offset: number): WorkflowInstanceCollection;
+        /** Gets the list of instances for the specified list item. */
+        enumerateInstancesForListItem(listId: string, itemId: number): WorkflowInstanceCollection;
+        /** Gets the list of instances for the specified list item. */
+        enumerateInstancesForListItemWithOffset(listId: string, itemId: number, offset: number): WorkflowInstanceCollection;
+        /** Gets the list of instances for the current site. */
         enumerateInstancesForSite(): WorkflowInstanceCollection;
-        enumerateInstancesForSiteWithOffset(offset): WorkflowInstanceCollection;
+        /** Gets the list of instances for the current site. */
+        enumerateInstancesForSiteWithOffset(offset: number): WorkflowInstanceCollection;
+        /** Retrieves a count of all the instances of the specified WorkflowSubscription. */
         countInstances(parentSubscription: WorkflowSubscription): SP.IntResult;
-        countInstancesWithStatus(parentSubscription: WorkflowSubscription, status): SP.IntResult;
+        /** Retrieves a count of the instances of the specified WorkflowSubscription that have a specified status. */
+        countInstancesWithStatus(parentSubscription: WorkflowSubscription, status: WorkflowStatus): SP.IntResult;
+        /** Sends a cancel message to the specified workflow instance and permits the instance to execute a cancellation scope. */
         cancelWorkflow(instance: WorkflowInstance): void;
+        /** Terminate a workflow instance forcefully by deleting it from memory. The instance is not allowed to execute a cancellation scope */
         terminateWorkflow(instance: WorkflowInstance): void;
         suspendWorkflow(instance: WorkflowInstance): void;
         resumeWorkflow(instance: WorkflowInstance): void;
-        publishCustomEvent(instance: WorkflowInstance, eventName, payload): void;
+        /** Sends a custom event to a running workflow with the event payload. */
+        publishCustomEvent(instance: WorkflowInstance, eventName: string, payload: string): void;
         getDebugInfo(instance: WorkflowInstance): SP.StringResult;
     }
 
     /** Describes the workflow host configuration states and provides service objects that interact with the workflow */
-    export class WorkflowServiceManager extends SP.ClientObject {
+    export class WorkflowServicesManager extends SP.ClientObject {
         constructor(context: SP.ClientRuntimeContext, web: SP.Web);
-        static newObject(context: SP.ClientRuntimeContext, web: SP.Web): WorkflowServiceManager;
+        static newObject(context: SP.ClientRuntimeContext, web: SP.Web): WorkflowServicesManager;
         /** The current application identifier.*/
         get_appId(): string;
         /** Indicates whether this workflow service is actively connected to a workflow host. */
@@ -185,26 +233,47 @@ declare module SP.WorkflowServices {
         initPropertiesFromJson(parentNode: any): void;
     }
 
-    // TODO: comments, types
+    /** Base class representing subscriptions for the external workflow host. */
     export class WorkflowSubscription extends SP.ClientObject {
+        /** Gets the unique ID of the workflow definition to activate. */
         get_definitionId();
+        /** Sets the unique ID of the workflow definition to activate. */
         set_definitionId(value);
-        get_enabled();
-        set_enabled(value);
-        get_eventSourceId();
-        set_eventSourceId(value);
-        get_eventTypes();
-        set_eventTypes(value);
-        get_id();
-        set_id(value);
-        get_manualStartBypassesActivationLimit();
-        set_manualStartBypassesActivationLimit(value);
+        /** Gets a boolean value that specifies if the workflow subscription is enabled.
+            When disabled, new instances of the subscription cannot be started, but existing instances will continue to run.  */
+        get_enabled(): bool;
+        /** Sets a boolean value that enables or disables the workflow subscription.
+            When disabled, new instances of the subscription cannot be started, but existing instances will continue to run.  */
+        set_enabled(value: bool): bool;
+        /** Gets the logical source instance name of the event. (GUID) */
+        get_eventSourceId(): string;
+        /** Sets the logical source instance name of the event. (GUID) */
+        set_eventSourceId(value: string): string;
+        /** Gets or sets the list of event types for which the subscription is listening.
+            For SharePoint events, these will map to a value in the SPEventReceiverType enumeration. */
+        get_eventTypes(): string[];
+        /** Gets or sets the list of event types for which the subscription is listening.
+            For SharePoint events, these will map to a value in the SPEventReceiverType enumeration. */
+        set_eventTypes(value: string[]): string[];
+        /** Unique identifier (GUID) of the workflow subscription */
+        get_id(): string;
+        /** Unique identifier (GUID) of the workflow subscription */
+        set_id(value: string): string;
+        /** Boolean value that specifies whether multiple workflow instances can be started manually on the same list item at the same time. This property can be used for list workflows only.  */
+        get_manualStartBypassesActivationLimit(): bool;
+        /** Boolean value that specifies whether multiple workflow instances can be started manually on the same list item at the same time. This property can be used for list workflows only.  */
+        set_manualStartBypassesActivationLimit(value: bool): bool;
+        /** Gets the name of the workflow subscription for the specified event source.  */
         get_name();
+        /** Sets the name of the workflow subscription for the specified event source.  */
         set_name(value);
+        /** Gets the properties and values to pass to the workflow definition when the subscription is matched. */
         get_propertyDefinitions();
-        get_statusFieldName();
-        set_statusFieldName(value);
-        /** This method adds a key-value pair (propertyName, value) to the workflow subscription object’s property bag.  */
+        /** Gets the name of the workflow status field on the specified list.  */
+        get_statusFieldName(): string;
+        /** Gets or sets the name of the workflow status field on the specified list.  */
+        set_statusFieldName(value: string): string;
+        /** Sets the name-value pairs for workflow definition initiation parameters that are stored in the PropertyDefinitions property  */
         setProperty(propertyName: string, value: string): void;
         /** This method is internal and is not intended to be used in your code. */
         initPropertiesFromJson(parentNode: any): void;

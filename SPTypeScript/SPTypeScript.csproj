@@ -140,6 +140,12 @@
     <None Include="Sample_CSRListView\Scripts_CSRListView\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{bec1997c-5abd-4824-8eb8-0a3b1226c8c1}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_WorkflowServices\Pages_WorkflowServices\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{182090a7-10f1-4f3e-a3ac-f6efa96eea55}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_WorkflowServices\Scripts_WorkflowServices\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
+    </None>
     <None Include="Scripts\App.js.map">
       <DependentUpon>App.ts</DependentUpon>
     </None>
@@ -156,7 +162,16 @@
     <Content Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.min.js">
       <DependentUpon>CSRListView.ts</DependentUpon>
     </Content>
-    <Content Include="Sample_CSRListView\Scripts_CSRListView\Elements.xml" />
+    <Content Include="Sample_CSRListView\Scripts_CSRListView\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Sample_WorkflowServices\Pages_WorkflowServices\Default.aspx" />
+    <Content Include="Sample_WorkflowServices\Pages_WorkflowServices\Elements.xml" />
+    <Content Include="Sample_WorkflowServices\Scripts_WorkflowServices\Elements.xml" />
+    <TypeScriptCompile Include="Sample_WorkflowServices\Scripts_WorkflowServices\WorkflowServices.ts" />
+    <Content Include="Sample_WorkflowServices\Scripts_WorkflowServices\WorkflowServices.js">
+      <DependentUpon>WorkflowServices.ts</DependentUpon>
+    </Content>
     <Content Include="Scripts\App.js">
       <DependentUpon>App.ts</DependentUpon>
     </Content>
@@ -205,7 +220,9 @@
       <SubType>Designer</SubType>
     </AppManifestFile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0'">11.0</VisualStudioVersion>
@@ -213,7 +230,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup>
-    <TypeScriptTarget>ES3</TypeScriptTarget>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptIncludeComments>false</TypeScriptIncludeComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
   </PropertyGroup>
