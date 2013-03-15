@@ -1,9 +1,9 @@
-var Csr;
-(function (Csr) {
+var CSR;
+(function (CSR) {
     function override(listTemplateType, baseViewId) {
         return new csr(listTemplateType, baseViewId);
     }
-    Csr.override = override;
+    CSR.override = override;
     var csr = (function () {
         function csr(ListTemplateType, BaseViewID) {
             this.ListTemplateType = ListTemplateType;
@@ -80,6 +80,6 @@ var Csr;
         };
         return csr;
     })();    
-})(Csr || (Csr = {}));
+})(CSR || (CSR = {}));
 SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("typescripttemplates.ts");
 //@ sourceMappingURL=typescripttemplates.js.map

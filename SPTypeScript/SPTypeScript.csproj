@@ -146,6 +146,9 @@
     <None Include="Sample_WorkflowServices\Scripts_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_WorkflowServices\Scripts_WorkflowServices\WorkflowServices.js.map">
+      <DependentUpon>WorkflowServices.ts</DependentUpon>
+    </None>
     <None Include="Scripts\App.js.map">
       <DependentUpon>App.ts</DependentUpon>
     </None>
@@ -170,6 +173,9 @@
     <Content Include="Sample_WorkflowServices\Scripts_WorkflowServices\Elements.xml" />
     <TypeScriptCompile Include="Sample_WorkflowServices\Scripts_WorkflowServices\WorkflowServices.ts" />
     <Content Include="Sample_WorkflowServices\Scripts_WorkflowServices\WorkflowServices.js">
+      <DependentUpon>WorkflowServices.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_WorkflowServices\Scripts_WorkflowServices\WorkflowServices.min.js">
       <DependentUpon>WorkflowServices.ts</DependentUpon>
     </Content>
     <Content Include="Scripts\App.js">

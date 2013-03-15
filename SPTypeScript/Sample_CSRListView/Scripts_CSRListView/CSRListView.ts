@@ -5,7 +5,7 @@
 
 (function () {
     function init() {
-        Csr.override(10057, 2)
+        CSR.override(10057, 2)
            .onPreRender((ctx: SPClientTemplates.ListViewRenderContext) => {
                // Override the default title with user input
                ctx.ListTitle = prompt("Type a title", ctx.ListTitle);

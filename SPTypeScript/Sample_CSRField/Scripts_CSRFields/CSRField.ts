@@ -8,7 +8,7 @@
 (function () {
     function init() {
         var complexityFieldName = "ComplexityField";
-        return Csr.override()
+        return CSR.override()
                   .fieldView(complexityFieldName, SPFieldComplexity_View)
                   .fieldDisplay(complexityFieldName, SPFieldComplexity_Display)
                   .fieldEdit(complexityFieldName, SPFieldComplexity_Edit)

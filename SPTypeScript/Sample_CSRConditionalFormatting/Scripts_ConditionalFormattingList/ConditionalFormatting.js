@@ -1,6 +1,6 @@
 (function () {
     function init() {
-        Csr.override(171, 1).onPostRender(function (ctx) {
+        CSR.override(171, 1).onPostRender(function (ctx) {
             for(var i = 0; i < ctx.ListData.Row.length; i++) {
                 var listItem = ctx.ListData.Row[i];
                 var percentComplete = parseFloat(listItem['PercentComplete.']);

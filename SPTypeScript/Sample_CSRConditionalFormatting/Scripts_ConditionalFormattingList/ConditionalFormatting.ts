@@ -4,7 +4,7 @@
 
 (function () {
     function init() {
-        Csr.override(171, 1)
+        CSR.override(171, 1)
            .onPostRender((ctx) => {
                for (var i = 0; i < ctx.ListData.Row.length; i++) {
                    var listItem = ctx.ListData.Row[i];

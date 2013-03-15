@@ -1,7 +1,7 @@
 (function () {
     function init() {
         var complexityFieldName = "ComplexityField";
-        return Csr.override().fieldView(complexityFieldName, SPFieldComplexity_View).fieldDisplay(complexityFieldName, SPFieldComplexity_Display).fieldEdit(complexityFieldName, SPFieldComplexity_Edit).fieldNew(complexityFieldName, SPFieldComplexity_Edit).register();
+        return CSR.override().fieldView(complexityFieldName, SPFieldComplexity_View).fieldDisplay(complexityFieldName, SPFieldComplexity_Display).fieldEdit(complexityFieldName, SPFieldComplexity_Edit).fieldNew(complexityFieldName, SPFieldComplexity_Edit).register();
     }
     var map = {
         "default": {

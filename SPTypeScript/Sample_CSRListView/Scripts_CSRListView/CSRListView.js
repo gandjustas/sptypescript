@@ -1,6 +1,6 @@
 (function () {
     function init() {
-        Csr.override(10057, 2).onPreRender(function (ctx) {
+        CSR.override(10057, 2).onPreRender(function (ctx) {
             ctx.ListTitle = prompt("Type a title", ctx.ListTitle);
         }).header("<b><#=ctx.ListTitle#></b>" + "<hr><ul id='unorderedlist'>").item(function (ctx) {
             return "<li>" + ctx.CurrentItem['Title'] + "</li>";
