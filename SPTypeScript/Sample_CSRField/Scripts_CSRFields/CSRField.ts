@@ -26,7 +26,7 @@
     };
 
 
-    function SPFieldComplexity_View(ctx: SPClientTemplates.FieldInViewRenderContext) {
+    function SPFieldComplexity_View(ctx: SPClientTemplates.RenderContext_FieldInView) {
         var complexity = ctx.CurrentItem[ctx.CurrentFieldSchema.Name];
         var pair = map[complexity.trim().toLowerCase()] || map["default"];
         return "<span style='background-color : " + pair.color + "' >&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;" + complexity + " Per Person Days: " + pair.days;
@@ -37,7 +37,7 @@
         return "<span style='background-color : " + pair.color + "' >&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;" + complexity + " Effort: " + pair.days;
     }
     ///Overriding the Display Form 
-    function SPFieldComplexity_Display(rCtx: SPClientTemplates.FieldInFormRenderContext) {
+    function SPFieldComplexity_Display(rCtx: SPClientTemplates.RenderContext_FieldInForm) {
         if (rCtx == null)
             return '';
         var _myData = SPClientTemplates.Utility.GetFormContextForCurrentField(rCtx);

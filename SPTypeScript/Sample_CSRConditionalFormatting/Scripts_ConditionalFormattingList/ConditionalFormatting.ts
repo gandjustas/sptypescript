@@ -5,7 +5,7 @@
 (function () {
     function init() {
         CSR.override(171, 1)
-           .onPostRender((ctx) => {
+           .onPostRender((ctx: SPClientTemplates.RenderContext_InView) => {
                for (var i = 0; i < ctx.ListData.Row.length; i++) {
                    var listItem = ctx.ListData.Row[i];
                    var percentComplete = parseFloat(listItem['PercentComplete.']);

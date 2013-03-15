@@ -6,7 +6,7 @@
 (function () {
     function init() {
         CSR.override(10057, 2)
-           .onPreRender((ctx: SPClientTemplates.ListViewRenderContext) => {
+           .onPreRender((ctx: SPClientTemplates.RenderContext_InView) => {
                // Override the default title with user input
                ctx.ListTitle = prompt("Type a title", ctx.ListTitle);
            })
@@ -20,7 +20,7 @@
 
     // The postRenderHandler handles the 
     // OnPostRender event
-    function postRenderHandler(ctx: SPClientTemplates.ListViewRenderContext) {
+    function postRenderHandler(ctx: SPClientTemplates.RenderContext_InView) {
 
         // You can manipulate the DOM
         // in the postRender event

@@ -118,12 +118,12 @@ module CSR {
         /** Sets pre-render callbacks. Callback called before rendering starts.
             @param callbacks pre-render callbacks.
         */
-        onPreRender(...callbacks: { (ctx: SPClientTemplates.ListViewRenderContext): void; }[]): ICSR;
+        onPreRender(...callbacks: { (ctx: SPClientTemplates.RenderContext): void; }[]): ICSR;
 
         /** Sets post-render callbacks. Callback called after rendered html inserted to DOM.
             @param callbacks post-render callbacks.
         */
-        onPostRender(...callbacks: { (ctx: SPClientTemplates.ListViewRenderContext): void; }[]): ICSR;
+        onPostRender(...callbacks: { (ctx: SPClientTemplates.RenderContext): void; }[]): ICSR;
 
         /** Registers overrides in client-side templating engine.*/
         register(): void;
@@ -136,7 +136,7 @@ module CSR {
         /** Override Item rendering template.
             @param template New item template.
         */
-        item(template: (ctx: SPClientTemplates.ItemRenderContext) => string): ICSR;
+        item(template: (ctx: SPClientTemplates.RenderContext_ItemInView) => string): ICSR;
 
         /** Override Header rendering template.
             @param template New header template.
@@ -146,7 +146,7 @@ module CSR {
         /** Override Header rendering template.
             @param template New header template.
         */
-        header(template: (ctx: SPClientTemplates.SingleTemplateCallback) => string): ICSR;
+        header(template: (ctx: SPClientTemplates.RenderContext) => string): ICSR;
 
         /** Override Footer rendering template.
             @param template New footer template.
@@ -156,7 +156,7 @@ module CSR {
         /** Override Footer rendering template.
             @param template New footer template.
         */
-        footer(template: (ctx: SPClientTemplates.SingleTemplateCallback) => string): ICSR;
+        footer(template: (ctx: SPClientTemplates.RenderContext) => string): ICSR;
 
         /** Override View rendering template for specified field.
             @param fieldName Internal name of the field.
@@ -168,7 +168,7 @@ module CSR {
             @param fieldName Internal name of the field.
             @param template New View template.
         */
-        fieldView(fieldName: string, template: (ctx: SPClientTemplates.FieldInViewRenderContext) => string): ICSR;
+        fieldView(fieldName: string, template: (ctx: SPClientTemplates.RenderContext_FieldInView) => string): ICSR;
 
         /** Override DisplyForm rendering template for specified field.
             @param fieldName Internal name of the field.
@@ -180,7 +180,7 @@ module CSR {
             @param fieldName Internal name of the field.
             @param template New DisplyForm template.
         */
-        fieldDisplay(fieldName: string, template: (ctx: SPClientTemplates.FieldInFormRenderContext) => string): ICSR;
+        fieldDisplay(fieldName: string, template: (ctx: SPClientTemplates.RenderContext_FieldInForm) => string): ICSR;
 
         /** Override EditForm rendering template for specified field.
             @param fieldName Internal name of the field.
@@ -192,7 +192,7 @@ module CSR {
             @param fieldName Internal name of the field.
             @param template New EditForm template.
         */
-        fieldEdit(fieldName: string, template: (ctx: SPClientTemplates.FieldInFormRenderContext) => string): ICSR;
+        fieldEdit(fieldName: string, template: (ctx: SPClientTemplates.RenderContext_FieldInForm) => string): ICSR;
 
         /** Override NewForm rendering template for specified field.
             @param fieldName Internal name of the field.
@@ -204,7 +204,7 @@ module CSR {
             @param fieldName Internal name of the field.
             @param template New NewForm template.
         */
-        fieldNew(fieldName: string, template: (ctx: SPClientTemplates.FieldInFormRenderContext) => string): ICSR;
+        fieldNew(fieldName: string, template: (ctx: SPClientTemplates.RenderContext_FieldInForm) => string): ICSR;
     }
 }
 

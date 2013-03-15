@@ -44,6 +44,10 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Extensions\CSOMPromise.ts" />
+    <Content Include="Extensions\CSOMPromise.js">
+      <DependentUpon>CSOMPromise.ts</DependentUpon>
+    </Content>
     <Content Include="Pages\Account.html" />
     <Content Include="Pages\BasicTasksJSOM.html" />
     <Content Include="Pages\Contact.html" />

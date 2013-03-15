@@ -60,7 +60,166 @@ declare module SPClientTemplates {
         PeopleOnly = 0,
         PeopleAndGroups = 1
     }
-    export interface RenderContextFieldInViewSchema {
+
+    /** Represents schema for a Choice field in list form or in list view in grid mode */
+    export interface FieldSchema_InForm_Choice extends FieldSchema_InForm {
+        /** List of choices for this field. */
+        Choices: string[];
+        /** Display format for the choice field */
+        FormatType: ChoiceFormatType;
+    }
+    /** Represents schema for a Lookup field in list form or in list view in grid mode */
+    export interface FieldSchema_InForm_Lookup extends FieldSchema_InForm {
+        /** Specifies if the field allows multiple values */
+        AllowMultipleValues: bool;
+        /** Returns base url for a list display form, e.g. "http://portal/web/_layouts/15/listform.aspx?PageType=4"
+            You must add "ListId" (Guid of the list) and "ID" (integer Id of the item) parameters in order to use this Url */
+        BaseDisplayFormUrl: string;
+        /** Indicates if the field is a dependent lookup */
+        DependentLookup: bool;
+        /** Indicates wherever the lookup list is throttled (contains more items than value of the "List Throttle Limit" setting). */
+        Throttled: bool;
+        /** Returns string representation of a number that represents the current value for the "List Throttle Limit" web application setting.
+            Only appears if Throttled property is true, i.e. the target lookup list is throttled. */
+        MaxQueryResult: string;
+        /** List of choices for this field.
+            For a lookup field, contains array of possible values pulled from the target lookup list. */
+        Choices: string[];
+        /** Number of choices. Appears only for Lookup field. */
+        ChoiceCount: number;
+    }
+    /** Represents schema for a DateTime field in list form or in list view in grid mode */
+    export interface FieldSchema_InForm_DateTime extends FieldSchema_InForm {
+        /** Type of calendar to use */
+        CalendarType: DateTimeCalendarType;
+        /** Display format for DateTime field. */
+        DisplayFormat: DateTimeDisplayFormat;
+        /** Indicates wherever current user regional settings specify to display week numbers in day or week views of a calendar.
+            Only appears for DateTime fields. */
+        ShowWeekNumber: bool;
+        TimeSeparator: string;
+        TimeZoneDifference: string;
+        FirstDayOfWeek: number;
+        FirstWeekOfYear: number;
+        HijriAdjustment: number;
+        WorkWeek: string;
+        LocaleId: string;
+        LanguageId: string;
+        MinJDay: number;
+        MaxJDay: number;
+        HoursMode24: bool;
+        HoursOptions: string[];
+    }
+    /** Represents schema for a DateTime field in list form or in list view in grid mode */
+    export interface FieldSchema_InForm_Geolocation extends FieldSchema_InForm {
+        BingMapsKey: string;
+        IsBingMapBlockedInCurrentRegion: bool;
+    }
+    /** Represents schema for a Choice field in list form or in list view in grid mode */
+    export interface FieldSchema_InForm_MultiChoice extends FieldSchema_InForm {
+        /** List of choices for this field. */
+        MultiChoices: string[];
+        /** Indicates wherever fill-in choice is allowed */
+        FillInChoice: bool;
+    }
+    /** Represents schema for a Choice field in list form or in list view in grid mode */
+    export interface FieldSchema_InForm_MultiLineText extends FieldSchema_InForm {
+        /** Specifies whether rich text formatting can be used in the field */
+        RichText: bool;
+        /** Changes are appended to the existing text. */
+        AppendOnly: bool;
+        /** Rich text mode for the field */
+        RichTextMode: RichTextMode;
+        /** Number of lines configured to display */
+        NumberOfLines: number;
+        /** A boolean value that specifies whether hyperlinks can be used in this fields. */
+        AllowHyperlink: bool;
+        /** WebPartAdderId for the ScriptEditorWebPart */
+        ScriptEditorAdderId: string;
+    }
+    /** Represents schema for a Number field in list form or in list view in grid mode */
+    export interface FieldSchema_InForm_Number extends FieldSchema_InForm {
+        ShowAsPercentage: bool;
+    }
+    /** Represents schema for a Number field in list form or in list view in grid mode */
+    export interface FieldSchema_InForm_Text extends FieldSchema_InForm {
+        MaxLength: number;
+    }
+    /** Represents schema for a Number field in list form or in list view in grid mode */
+    export interface FieldSchema_InForm_Url extends FieldSchema_InForm {
+        DisplayFormat: UrlFormatType;
+    }
+    /** Represents schema for a Number field in list form or in list view in grid mode */
+    export interface FieldSchema_InForm_User extends FieldSchema_InForm {
+        Presence: bool;
+        WithPicture: bool;
+        DefaultRender: bool;
+        WithPictureDetail: bool;
+        /** Server relative Url for ~site/_layouts/listform.aspx */
+        ListFormUrl: string;
+        /** Server relative Url for ~site/_layouts/userdisp.aspx */
+        UserDisplayUrl: string;
+        EntitySeparator: string;
+        PictureOnly: bool;
+        PictureSize: string;
+    }
+    /** Represents field schema in Grid mode and on list forms.
+        Consider casting objects of this type to more specific field types, e.g. FieldSchemaInForm_Lookup */
+    export interface FieldSchema_InForm {
+        /** Specifies if the field can be edited while list view is in the Grid mode */
+        AllowGridEditing: bool;
+        /** Description for this field. */
+        Description: string;
+        /** Direction of the reading order for the field. */
+        Direction: string;
+        /** String representation of the field type, e.g. "Lookup". Same as SPField.TypeAsString */
+        FieldType: string;
+        /** Indicates whether the field is hidden */
+        Hidden: bool;
+        /** Guid of the field */
+        Id: string;
+        /** Specifies Input Method Editor (IME) mode bias to use for the field.
+            The IME enables conversion of keystrokes between languages when one writing system has more characters than can be encoded for the given keyboard. */
+        IMEMode: any;
+        /** Internal name of the field */
+        Name: string;
+        /** Specifies if the field is read only */
+        ReadOnlyField: bool;
+        /** Specifies wherever field requires values */
+        Required: bool;
+        RestrictedMode: bool;
+        /** Title of the field */
+        Title: string;
+        /** For OOTB fields, returns the type of field. For "UserMulti" returns "User", for "LookupMulti" returns "Lookup".
+            For custom field types, returns base type of the field. */
+        Type: string;
+        /** If SPFarm.Local.UseMinWidthForHtmlPicker is true, UseMinWidth will be set to true. Undefined in other cases. */
+        UseMinWidth: bool;
+    }
+    export interface ListSchema_InForm {
+        Field: FieldSchema_InForm[];
+    }
+    export interface ListData_InForm {
+        Items: Item[];
+    }
+    export interface RenderContext_FieldInForm extends RenderContext_Form {
+        CurrentGroupIdx: number;
+        CurrentGroup: Group;
+        CurrentItems: Item[];
+        CurrentFieldSchema: FieldSchema_InForm;
+        CurrentFieldValue: any;
+    }
+    export interface RenderContext_Form extends RenderContext {
+        FieldControlsModes: { [fieldInternalName: string]: ClientControlMode; };
+        FormContext: any;
+        FormUniqueId: string;
+        ListData: ListData_InForm;
+        ListSchema: ListSchema_InForm;
+    }
+
+
+    /** Represents field schema in a list view. */
+    export interface FieldSchema_InView {
         Name: string;
         DisplayName: string;
         FieldType: string;
@@ -88,33 +247,7 @@ declare module SPClientTemplates {
         GridActiveAndReadOnly: string;
         ResultType: string;
     }
-    export interface RenderContextFieldInFormSchema {
-        AllowGridEditing: bool;
-        AllowHyperlink: bool;
-        AppendOnly: bool;
-        Description: string;
-        Direction: string;
-        FieldType: string;
-        Hidden: bool;
-        /** Guid of the field */
-        Id: string;
-        IMEMode: any;
-        Name: string;
-        NumberOfLines: number;
-        ReadOnlyField: bool;
-        Required: bool;
-        RestrictedMode: bool;
-        RichText: bool;
-        RichTextMode: RichTextMode;
-        /** Guid */
-        ScriptEditorAdderId: string;
-        Title: string;
-        Type: string;
-    }
-    export interface RenderContextListSchemaInForm {
-        Field: RenderContextFieldInFormSchema[];
-    }
-    export interface RenderContextListSchema {
+    export interface ListSchema_InView {
         Aggregate: { [name: string]: string; };
         /** Either "TRUE" or false (for grouping) */
         Collapse: string;
@@ -122,8 +255,8 @@ declare module SPClientTemplates {
         DefaultItemOpen: string;
         Direction: string;
         EffectivePresenceEnabled: any;
-        /** Array of all fields of the list view */
-        Field: RenderContextFieldInViewSchema[];
+        /** If in grid mode (context.inGridMode == true), cast to FieldSchema_InForm[], otherwise cast to FieldSchema_InView[] */
+        Field: any[];
         FieldSortParam: string;
         Filter: any;
         /** Either "0" or "1" */
@@ -178,10 +311,7 @@ declare module SPClientTemplates {
         ViewSelectorPivotMenuOptions: string;
         ViewSelector_ViewParameters: string;
     }
-    export interface RenderContextItem {
-        [fieldInternalName: string]: any;
-    }
-    export interface RenderContextListData {
+    export interface ListData_InView {
         FilterLink: string;
         FilterFields: string;
         FirstRow: number;
@@ -195,39 +325,14 @@ declare module SPClientTemplates {
         SortField: string;
         SortDir: string;
         LastRow: number;
-        Row: RenderContextItem[];
+        Row: Item[];
     }
-    export interface RenderContextListDataInForm {
-        Items: RenderContextItem[];
+    export interface RenderContext_GroupInView extends RenderContext_InView {
+        CurrentGroupIdx: number;
+        CurrentGroup: Group;
+        CurrentItems: Item[];
     }
-    export interface RenderContextGroup {
-        Items: RenderContextItem[];
-    }
-
-    export interface RenderContext {
-        BaseViewID: number;
-        ControlMode: ClientControlMode;
-        CurrentCultureName: string;
-        CurrentLanguage: number;
-        CurrentSelectedItems: any;
-        CurrentUICultureName: string;
-        ListTemplateType: number;
-        OnPostRender: any;
-        OnPreRender: any;
-        onRefreshFailed: any;
-        RenderBody: (renderContext: RenderContext) => string;
-        RenderFieldByName: (renderContext: RenderContext) => string;
-        RenderFields: (renderContext: RenderContext) => string;
-        RenderFooter: (renderContext: RenderContext) => string;
-        RenderGroups: (renderContext: RenderContext) => string;
-        RenderHeader: (renderContext: RenderContext) => string;
-        RenderItems: (renderContext: RenderContext) => string;
-        RenderView: (renderContext: RenderContext) => string;
-        SiteClientTag: string;
-        Templates: TemplateOverrides;
-    }
-
-    export interface ListViewRenderContext extends RenderContext {
+    export interface RenderContext_InView extends RenderContext {
         AllowCreateFolder: bool;
         AllowGridMode: bool;
         BasePermissions: { [PermissionName: string]: bool; }; // SP.BasePermissions?
@@ -268,11 +373,11 @@ declare module SPClientTemplates {
         LastSelectedItemId: any; // not in View
         leavingGridMode: bool;
         listBaseType: number;
-        ListData: RenderContextListData;
+        ListData: ListData_InView;
         ListDataJSONItemsKey: string; // ="Row"
         /** Guid of the list */
         listName: string;
-        ListSchema: RenderContextListSchema;
+        ListSchema: ListSchema_InView;
         listTemplate: string;
         ListTitle: string;
         listUrlDir: string;
@@ -314,56 +419,68 @@ declare module SPClientTemplates {
         wpq: string;
         WriteSecurity: string;
     }
-    export interface ItemRenderContext extends ListViewRenderContext {
-        CurrentItem: RenderContextItem;
+    export interface RenderContext_ItemInView extends RenderContext_InView {
+        CurrentItem: Item;
         CurrentItemIdx: number;
     }
-    export interface FieldInViewRenderContext extends ItemRenderContext {
-        CurrentFieldSchema: RenderContextFieldInViewSchema;
+    export interface RenderContext_FieldInView extends RenderContext_ItemInView {
+        /** If in grid mode (context.inGridMode == true), cast to FieldSchema_InForm, otherwise cast to FieldSchema_InView */
+        CurrentFieldSchema: any;
         CurrentFieldValue: any;
         FieldControlsModes: { [fieldInternalName: string]: ClientControlMode; };
         FormContext: any;
         FormUniqueId: string;
     }
-    export interface GroupRenderContext extends ListViewRenderContext {
-        CurrentGroupIdx: number;
-        CurrentGroup: RenderContextGroup;
-        CurrentItems: RenderContextItem[];
+
+    export interface Item {
+        [fieldInternalName: string]: any;
     }
-    export interface ListFormRenderContext extends RenderContext {
-        FieldControlsModes: { [fieldInternalName: string]: ClientControlMode; };
-        FormContext: any;
-        FormUniqueId: string;
-        ListData: RenderContextListDataInForm;
-        ListSchema: RenderContextListSchemaInForm;
+    export interface Group {
+        Items: Item[];
     }
-    export interface FieldInFormRenderContext extends ListFormRenderContext {
-        CurrentGroupIdx: number;
-        CurrentGroup: RenderContextGroup;
-        CurrentItems: RenderContextItem[];
-        CurrentFieldSchema: RenderContextFieldInFormSchema;
-        CurrentFieldValue: any;
+
+    export interface RenderContext {
+        BaseViewID: number;
+        ControlMode: ClientControlMode;
+        CurrentCultureName: string;
+        CurrentLanguage: number;
+        CurrentSelectedItems: any;
+        CurrentUICultureName: string;
+        ListTemplateType: number;
+        OnPostRender: any;
+        OnPreRender: any;
+        onRefreshFailed: any;
+        RenderBody: (renderContext: RenderContext) => string;
+        RenderFieldByName: (renderContext: RenderContext) => string;
+        RenderFields: (renderContext: RenderContext) => string;
+        RenderFooter: (renderContext: RenderContext) => string;
+        RenderGroups: (renderContext: RenderContext) => string;
+        RenderHeader: (renderContext: RenderContext) => string;
+        RenderItems: (renderContext: RenderContext) => string;
+        RenderView: (renderContext: RenderContext) => string;
+        SiteClientTag: string;
+        Templates: TemplateOverrides;
     }
 
     export interface SingleTemplateCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
-        (renderContext: ListViewRenderContext): string;
+        (renderContext: RenderContext_InView): string;
     }
     export interface GroupCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
-        (renderContext: GroupRenderContext): string;
+        (renderContext: RenderContext_GroupInView): string;
     }
     export interface ItemCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
-        (renderContext: ItemRenderContext): string;
+        (renderContext: RenderContext_ItemInView): string;
     }
     export interface FieldInFormCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
-        (renderContext: FieldInFormRenderContext): string;
+        (renderContext: RenderContext_FieldInForm): string;
     }
     export interface FieldInViewCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
-        (renderContext: FieldInViewRenderContext): string;
+        (renderContext: RenderContext_FieldInView): string;
     }
 
     export interface FieldTemplateOverrides {
@@ -401,10 +518,10 @@ declare module SPClientTemplates {
         /** Template overrides */
         Templates?: TemplateOverrides;
 
-        /** Ñallbacks called before rendering starts. Can be function (ctx: RenderContext) => void or array of faunctions.*/
+        /** Ñallbacks called before rendering starts. Can be function (ctx: RenderContext) => void or array of functions.*/
         OnPreRender?: any;
 
-        /** Ñallbacks called after rendered html inserted into DOM. Can be function (ctx: RenderContext) => void or array of faunctions.*/
+        /** Ñallbacks called after rendered html inserted into DOM. Can be function (ctx: RenderContext) => void or array of functions.*/
         OnPostRender?: any;
 
         /** View style (SPView.StyleID) for which the templates should be applied. 
@@ -463,11 +580,11 @@ declare module SPClientTemplates {
         /** Represents lookup values array in some strange format */
         static BuildLookupValuesAsString(choiceArray: ClientLookupValue[], isMultiLookup: bool, setGroupDesc: bool): string;
         static ParseURLValue(value: string): ClientUrlValue;
-        static GetFormContextForCurrentField(context: ListFormRenderContext): any; // returns ClientFormContext from clientforms.js
+        static GetFormContextForCurrentField(context: RenderContext_Form): any; // returns ClientFormContext from clientforms.js
     }
 
 }
 
-declare function GenerateIID(renderCtx: SPClientTemplates.ItemRenderContext): string;
-declare function GenerateIIDForListItem(renderCtx: SPClientTemplates.ListViewRenderContext, listItem: SPClientTemplates.RenderContextItem): string;
+declare function GenerateIID(renderCtx: SPClientTemplates.RenderContext_ItemInView): string;
+declare function GenerateIIDForListItem(renderCtx: SPClientTemplates.RenderContext_InView, listItem: SPClientTemplates.Item): string;
 

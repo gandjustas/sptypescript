@@ -4,5 +4,7 @@
     <File Path="Extensions\typescripttemplates.js" Url="Extensions/typescripttemplates.js" />
     <File Path="Extensions\typescripttemplates.js.map" Url="Extensions/typescripttemplates.js.map" />
     <File Path="Extensions\typescripttemplates.min.js" Url="Extensions/typescripttemplates.min.js" />
+    <File Path="Extensions\CSOMPromise.ts" Url="Extensions/CSOMPromise.ts" />
+    <File Path="Extensions\CSOMPromise.js" Url="Extensions/CSOMPromise.js" />
   </Module>
 </Elements>
