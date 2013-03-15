@@ -553,7 +553,7 @@ declare module SP {
         parseObjectFromJsonString(json: string, skipTypeFixup: bool): any;
         load(clientObject: SP.ClientObject): void;
         loadQuery(clientObjectCollection: SP.ClientObjectCollection, exp: string): any;
-        load(clientObject: SP.ClientObject, exps: string[]): void;
+        load(clientObject: SP.ClientObject, ...exps: string[]): void;
         loadQuery(clientObjectCollection: SP.ClientObjectCollection): any;
         get_serverSchemaVersion(): string;
         get_serverLibraryVersion(): string;

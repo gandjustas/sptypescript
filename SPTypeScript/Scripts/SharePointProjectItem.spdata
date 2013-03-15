@@ -9,5 +9,11 @@
     <ProjectItemFile Source="App.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="App.js.map" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="App.min.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="AppUIEvents.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="ChromeLoader.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="BasicTasksJSOM.ts" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="BasicTasksJSOM.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="BasicTasksJSOM.js.map" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="BasicTasksJSOM.min.js" Target="Scripts\" Type="ElementFile" />
   </Files>
 </ProjectItem>

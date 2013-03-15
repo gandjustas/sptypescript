@@ -44,6 +44,24 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Pages\Account.html" />
+    <Content Include="Pages\BasicTasksJSOM.html" />
+    <Content Include="Pages\Contact.html" />
+    <Content Include="Pages\Help.html" />
+    <Content Include="Scripts\AppUIEvents.js" />
+    <Content Include="Scripts\BasicTasksJSOM.js">
+      <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\BasicTasksJSOM.min.js">
+      <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\ChromeLoader.js" />
+    <TypeScriptCompile Include="Scripts\BasicTasksJSOM.ts" />
+    <Content Include="Shared Documents\Elements.xml" />
+    <Content Include="Shared Documents\TextFile1.txt" />
+    <None Include="Announcements\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{cf975992-f191-4bab-a103-ee84b785dad5}</SharePointProjectItemId>
+    </None>
     <None Include="Extensions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{739dd4d6-6694-4f26-8ed0-833a61ddff80}</SharePointProjectItemId>
     </None>
@@ -57,6 +75,7 @@
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{fbba0cef-9361-4eb5-8a07-5f8da3fa32e1}</SharePointProjectItemId>
     </None>
+    <Content Include="Announcements\Elements.xml" />
     <Content Include="Definitions\callout.d.ts" />
     <Content Include="Definitions\clientforms.d.ts" />
     <Content Include="Definitions\clienttemplates.d.ts" />
@@ -79,6 +98,12 @@
     <Content Include="Extensions\typescripttemplates.min.js">
       <DependentUpon>typescripttemplates.ts</DependentUpon>
     </Content>
+    <None Include="Scripts\BasicTasksJSOM.js.map">
+      <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
+    </None>
+    <None Include="Shared Documents\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e9d51327-79bf-406c-b4e7-3817e23781c6}</SharePointProjectItemId>
+    </None>
     <TypeScriptCompile Include="Extensions\typescripttemplates.ts" />
     <Content Include="Features\Feature2\Feature2.Template.xml">
       <DependentUpon>Feature2.feature</DependentUpon>

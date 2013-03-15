@@ -8,5 +8,11 @@
     <File Path="Scripts\App.js" Url="Scripts/App.js" />
     <File Path="Scripts\App.js.map" Url="Scripts/App.js.map" />
     <File Path="Scripts\App.min.js" Url="Scripts/App.min.js" />
+    <File Path="Scripts\AppUIEvents.js" Url="Scripts/AppUIEvents.js" />
+    <File Path="Scripts\ChromeLoader.js" Url="Scripts/ChromeLoader.js" />
+    <File Path="Scripts\BasicTasksJSOM.ts" Url="Scripts/BasicTasksJSOM.ts" />
+    <File Path="Scripts\BasicTasksJSOM.js" Url="Scripts/BasicTasksJSOM.js" />
+    <File Path="Scripts\BasicTasksJSOM.js.map" Url="Scripts/BasicTasksJSOM.js.map" />
+    <File Path="Scripts\BasicTasksJSOM.min.js" Url="Scripts/BasicTasksJSOM.min.js" />
   </Module>
 </Elements>

@@ -6,7 +6,10 @@ $(document).ready(function () {
     web = context.get_web();
     getUserName();
     JSRequest.EnsureSetup();
-    window.localStorage['AppWebUrl'] = decodeURIComponent(JSRequest.QueryString['SPAppWebUrl']);
+    var url = JSRequest.QueryString['SPAppWebUrl'];
+    if(url) {
+        window.localStorage['AppWebUrl'] = decodeURIComponent(url);
+    }
 });
 function getUserName() {
     user = web.get_currentUser();

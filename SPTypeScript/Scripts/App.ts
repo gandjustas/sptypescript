@@ -14,7 +14,10 @@ $(document).ready(function () {
     getUserName();
 
     JSRequest.EnsureSetup();
-    window.localStorage['AppWebUrl'] = decodeURIComponent(JSRequest.QueryString['SPAppWebUrl']);
+    var url = JSRequest.QueryString['SPAppWebUrl'];
+    if (url) {
+        window.localStorage['AppWebUrl'] = decodeURIComponent(url);
+    }
 });
 
 // Эта функция подготавливает, загружает и затем выполняет запрос SharePoint для получения сведений о текущих пользователях

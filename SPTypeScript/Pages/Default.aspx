@@ -20,6 +20,7 @@
         <h3>Typescript Definitions for SharePoint Samples</h3>
         <p>All these samples were created using Typescript. Examine project source code for details.</p>
         <ol>
+            <li><a href="javascript:document.location = 'BasicTasksJSOM.html?'+document.URL.split('?')[1]">JSOM: Basic tasks in SharePoint using JSOM with TypeScript</a></li>
             <li><a href="../Lists/CustomList/Overridable.aspx">Client Side Rendering: Custom list view</a></li>
             <li><a href="../Lists/CustomFieldList">Client Side Rendering: Complexity field</a></li>
             <li><a href="../Lists/ConditionalFormattingTasksList">Client Side Rendering: Conditional formatting</a></li>
