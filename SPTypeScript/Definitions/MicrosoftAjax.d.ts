@@ -1,3 +1,4 @@
+
 declare module Sys {
     export class EventArgs {
         static Empty: Sys.EventArgs;
@@ -22,7 +23,10 @@ declare module Sys {
     }
     declare module UI {
         export class Control { }
-        export class DomEvent { }
+        export class DomEvent {
+            static addHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void );
+            static removeHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void );
+        }
     }
     declare module Net {
         export class WebRequest { }
@@ -33,3 +37,7 @@ declare module Sys {
     }
 
 }
+
+declare var $get: { (id: string): HTMLElement; };
+declare var $addHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void ): void; };
+declare var $removeHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void ): void; };

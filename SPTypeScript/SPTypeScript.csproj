@@ -125,16 +125,16 @@
     <None Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a0bc9222-7a6f-4ac4-851f-dd4b731d3228}</SharePointProjectItemId>
     </None>
-    <None Include="Sample_CSRField\CustomFieldList\CustomFieldListInstance\SharePointProjectItem.spdata">
+    <None Include="Sample_CSRComplexityField\CustomFieldList\CustomFieldListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{32bfcecd-b8ac-4de0-8191-36befc4a6465}</SharePointProjectItemId>
     </None>
-    <None Include="Sample_CSRField\CustomFieldList\SharePointProjectItem.spdata">
+    <None Include="Sample_CSRComplexityField\CustomFieldList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{082e378d-45ce-472d-99cd-080d1d7797ec}</SharePointProjectItemId>
     </None>
-    <None Include="Sample_CSRField\Scripts_CSRFields\CSRField.js.map">
+    <None Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\CSRField.js.map">
       <DependentUpon>CSRField.ts</DependentUpon>
     </None>
-    <None Include="Sample_CSRField\Scripts_CSRFields\SharePointProjectItem.spdata">
+    <None Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{01cf65cc-a0b9-4386-933a-8984f447152e}</SharePointProjectItemId>
     </None>
     <None Include="Sample_CSRListView\CustomList\CustomListInstance\SharePointProjectItem.spdata">
@@ -152,17 +152,17 @@
       <DependentUpon>ConditionalFormatting.ts</DependentUpon>
     </Content>
     <Content Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\Elements.xml" />
-    <Content Include="Sample_CSRField\CustomFieldList\CustomFieldListInstance\Elements.xml" />
-    <Content Include="Sample_CSRField\CustomFieldList\Elements.xml" />
-    <Content Include="Sample_CSRField\CustomFieldList\Schema.xml" />
-    <TypeScriptCompile Include="Sample_CSRField\Scripts_CSRFields\CSRField.ts" />
-    <Content Include="Sample_CSRField\Scripts_CSRFields\CSRField.js">
+    <Content Include="Sample_CSRComplexityField\CustomFieldList\CustomFieldListInstance\Elements.xml" />
+    <Content Include="Sample_CSRComplexityField\CustomFieldList\Elements.xml" />
+    <Content Include="Sample_CSRComplexityField\CustomFieldList\Schema.xml" />
+    <TypeScriptCompile Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\CSRField.ts" />
+    <Content Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\CSRField.js">
       <DependentUpon>CSRField.ts</DependentUpon>
     </Content>
-    <Content Include="Sample_CSRField\Scripts_CSRFields\CSRField.min.js">
+    <Content Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\CSRField.min.js">
       <DependentUpon>CSRField.ts</DependentUpon>
     </Content>
-    <Content Include="Sample_CSRField\Scripts_CSRFields\Elements.xml" />
+    <Content Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\Elements.xml" />
     <Content Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.js.map">
       <DependentUpon>CSRListView.ts</DependentUpon>
     </Content>
@@ -265,7 +265,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup>
-    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptTarget>ES3</TypeScriptTarget>
     <TypeScriptIncludeComments>false</TypeScriptIncludeComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
   </PropertyGroup>
