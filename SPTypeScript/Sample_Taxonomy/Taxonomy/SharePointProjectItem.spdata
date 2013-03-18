@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Taxonomy\" Type="ElementManifest" />
+    <ProjectItemFile Source="Default.aspx" Target="Taxonomy\" Type="ElementFile" />
+    <ProjectItemFile Source="App.ts" Target="Taxonomy\" Type="ElementFile" />
+    <ProjectItemFile Source="App.js" Target="Taxonomy\" Type="ElementFile" />
+    <ProjectItemFile Source="App.js.map" Target="Taxonomy\" Type="ElementFile" />
+    <ProjectItemFile Source="App.min.js" Target="Taxonomy\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

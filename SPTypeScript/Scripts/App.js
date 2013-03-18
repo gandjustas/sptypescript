@@ -1,25 +1,27 @@
-var context;
-var web;
-var user;
-$(document).ready(function () {
-    context = SP.ClientContext.get_current();
-    web = context.get_web();
-    getUserName();
-    JSRequest.EnsureSetup();
-    var url = JSRequest.QueryString['SPAppWebUrl'];
-    if(url) {
-        window.localStorage['AppWebUrl'] = decodeURIComponent(url);
+(function () {
+    var context;
+    var web;
+    var user;
+    $(document).ready(function () {
+        context = SP.ClientContext.get_current();
+        web = context.get_web();
+        getUserName();
+        JSRequest.EnsureSetup();
+        var url = JSRequest.QueryString['SPAppWebUrl'];
+        if(url) {
+            window.localStorage['AppWebUrl'] = decodeURIComponent(url);
+        }
+    });
+    function getUserName() {
+        user = web.get_currentUser();
+        context.load(user);
+        context.executeQueryAsync(onGetUserNameSuccess, onGetUserNameFail);
     }
-});
-function getUserName() {
-    user = web.get_currentUser();
-    context.load(user);
-    context.executeQueryAsync(onGetUserNameSuccess, onGetUserNameFail);
-}
-function onGetUserNameSuccess() {
-    $('#message').text('Hello ' + user.get_title());
-}
-function onGetUserNameFail(sender, args) {
-    alert('Failed to get user name. Error:' + args.get_message());
-}
+    function onGetUserNameSuccess() {
+        $('#message').text('Hello ' + user.get_title());
+    }
+    function onGetUserNameFail(sender, args) {
+        alert('Failed to get user name. Error:' + args.get_message());
+    }
+})();
 //@ sourceMappingURL=App.js.map

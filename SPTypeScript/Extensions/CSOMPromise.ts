@@ -1,4 +1,5 @@
 /// <reference path="../Definitions/jQuery.d.ts" />
+/// <reference path="../Definitions/SP.Init.d.ts" />
 /// <reference path="../Definitions/SP.d.ts" />
 
 module SP {
@@ -17,6 +18,15 @@ module SP {
             return deferred.promise();
         }
 
+        constructor(serverRelativeUrlOrFullUrl: string) {
+            super(serverRelativeUrlOrFullUrl);
+        }
+
+        static get_current(): ClientContextPromise {
+            return new ClientContextPromise(_spPageContextInfo.siteServerRelativeUrl);
+        }
+
     }
 
 }
+SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("CSOMPromise.ts");

@@ -50,6 +50,12 @@
     <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
       <DependentUpon>Search.ts</DependentUpon>
     </None>
+    <None Include="Sample_Taxonomy\Taxonomy\App.js.map">
+      <DependentUpon>App.ts</DependentUpon>
+    </None>
+    <None Include="Sample_Taxonomy\Taxonomy\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{48120791-7cb1-4731-838f-0d0f92d35498}</SharePointProjectItemId>
+    </None>
     <None Include="SharePointProjectItem.spdata">
       <SharePointProjectItemId>{bdc98434-f9b7-46f7-ba2b-3af15e495ee4}</SharePointProjectItemId>
     </None>
@@ -58,6 +64,7 @@
     <Content Include="Definitions\SP.Search.d.ts" />
     <Content Include="Definitions\SP.Social.d.ts" />
     <Content Include="Definitions\SP.UserProfiles.d.ts" />
+    <Content Include="Definitions\SP.Taxonomy.d.ts" />
     <Content Include="Extensions\CSOMPromise.js">
       <DependentUpon>CSOMPromise.ts</DependentUpon>
     </Content>
@@ -77,6 +84,15 @@
     <Content Include="Sample_SearchCSOM\SearchCSOM\Search.min.js">
       <DependentUpon>Search.ts</DependentUpon>
     </Content>
+    <TypeScriptCompile Include="Sample_Taxonomy\Taxonomy\App.ts" />
+    <Content Include="Sample_Taxonomy\Taxonomy\App.js">
+      <DependentUpon>App.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_Taxonomy\Taxonomy\App.min.js">
+      <DependentUpon>App.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_Taxonomy\Taxonomy\Default.aspx" />
+    <Content Include="Sample_Taxonomy\Taxonomy\Elements.xml" />
     <Content Include="Scripts\AppUIEvents.js" />
     <Content Include="Scripts\BasicTasksJSOM.js">
       <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
