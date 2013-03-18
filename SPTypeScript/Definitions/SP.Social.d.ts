@@ -543,16 +543,88 @@ declare module SP {
             set_updateStatusText(value: bool): bool;
         }
 
+        /** Provides additional information about server-generated posts.
+            This type can only be specified in a server-to-server call. */
         export class SocialPostDefinitionData extends SP.ClientValueObject {
+            get_items(): SocialPostDefinitionDataItem[];
+            set_items(value: SocialPostDefinitionDataItem[]): SocialPostDefinitionDataItem[];
+            get_name(): string;
+            set_name(value: string): string;
         }
 
+        /** Specifies an item to be inserted in a post by replacing a token in the post definition.
+            This type can only be specified in a server-to-server call. */
         export class SocialPostDefinitionDataItem extends SP.ClientValueObject {
+            /** Specifies the name of the user.
+                This property is only used if the ItemType property specifies that the item is a User. */
+            get_accountName(): string;
+            /** Specifies the name of the user.
+                This property is only used if the ItemType property specifies that the item is a User. */
+            set_accountName(value: string): string;
+            /** Specifies whether the item being formatted is a text element, a user, a document, a site, a tag, or a link. */
+            get_itemType(): SocialPostDefinitionDataItemType;
+            /** Specifies whether the item being formatted is a text element, a user, a document, a site, a tag, or a link. */
+            set_itemType(value: SocialPostDefinitionDataItemType): SocialPostDefinitionDataItemType;
+            /** Specifies the post definition token to be replaced by the item */
+            get_placeholderName(): string;
+            /** Specifies the post definition token to be replaced by the item */
+            set_placeholderName(value: string): string;
+            /** Specifies the GUID that identifies the tag.
+                This property is only used if the ItemType property specifies that the item is a Tag. */
+            get_tagGuid(): string;
+            /** Specifies the GUID that identifies the tag.
+                This property is only used if the ItemType property specifies that the item is a Tag. */
+            set_tagGuid(value: string): string;
+            /** Specifies the text that is substituted for the placeholder */
+            get_text(): string;
+            /** Specifies the text that is substituted for the placeholder */
+            set_text(value: string): string;
+            /** Specifies the URI of the document, site, or link. 
+                This property is only available if the ItemType property specifies that the item is a Document, Link, or Site. */
+            get_uri(): string;
+            /** Specifies the URI of the document, site, or link. 
+                This property is only available if the ItemType property specifies that the item is a Document, Link, or Site. */
+            set_uri(value: string): string;
         }
 
+        /** Specifies a reference to a post in another thread.
+            The referenced post can be a post with a tag, a post that is liked, a post that mentions a user, or a post that is a reply. */
         export class SocialPostReference extends SP.ClientValueObject {
+            /** Provides a digest of the thread containing the referenced post */
+            get_digest(): SocialThread;
+            get_post(): SocialPost;
+            /** Specifies the unique identifier of the thread containing the referenced post. */
+            get_threadId(): string;
+            /** Specifies the current owner of the thread as an index into the SocialThreadActors array. */
+            get_threadOwnerIndex(): number;
         }
 
+        /** Specifies a thread that is stored on the server.
+            The thread contains a root post and zero or more reply posts. */
         export class SocialThread extends SP.ClientValueObject {
+            /** Specifies the users who have created a post in the returned thread and also contains any users, documents, sites, and tags that are referenced in any of the posts in the returned thread. */
+            get_actors(): SocialActor[];
+            /** Specifies attributes of the thread, such as whether the current user can reply or lock the thread and whether the thread is a digest of a thread on the server, whether the number of replies has reached the maximum, and whether the thread is locked. */
+            get_attributes(): SocialThreadAttributes;
+            /** Specifies the unique identification of the thread. */
+            get_id(): string;
+            /** Specifies the thread owner as an index into the Actors array.
+                Typically, the thread owner is the user who created the root post, but the thread owner can be any user included in the Actors array. */
+            get_ownerIndex(): number;
+            /** Specifies a URI that is a permanent reference to the thread, if such a permanent reference is available.  */
+            get_permalink(): string;
+            /** Specifies a reference to a post in another thread.
+                The PostReference property is available only if the ThreadType has a value of ReplyReference, LikeReference, MentionReference, or TagReference.  */
+            get_postReference(): SocialPostReference;
+            /** Returns an array of zero or more reply posts.
+                The server can return a subset of the reply posts that are stored on the server. */
+            get_replies(): SocialPost[];
+            get_rootPost(): SocialPost;
+            /** Provides information about conditions that were encountered retrieving the thread that did not prevent the operation from completing. */
+            get_status(): SocialStatusCode;
+            /** Specifies if the thread is a normal thread created by one or more CreatePost calls or a reference post generated by the server when a user replies to a post, likes a post, or creates a post with a tag or mention */
+            get_threadType(): SocialThreadType;
+            get_totalReplyCount(): number;
         }
 
     }
