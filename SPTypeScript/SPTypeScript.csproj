@@ -55,6 +55,8 @@
     </None>
     <TypeScriptCompile Include="Extensions\CSOMPromise.ts" />
     <Content Include="Definitions\SP.Search.d.ts" />
+    <Content Include="Definitions\SP.Social.d.ts" />
+    <Content Include="Definitions\SP.UserProfiles.d.ts" />
     <Content Include="Extensions\CSOMPromise.js">
       <DependentUpon>CSOMPromise.ts</DependentUpon>
     </Content>
