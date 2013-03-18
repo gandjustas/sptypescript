@@ -180,12 +180,141 @@ declare module Microsoft.SharePoint.Client.Search {
             exportPopularQueries: (web: SP.Web, sourceId: SP.Guid) => SP.JsonObjectResult;
         };
 
-        export class StringCollection extends SP.ClientObjectCollection { };
-        export class QueryPersonalizationData extends SP.ClientObject { };
-        export class QuerySuggestionResults extends SP.ClientValueObject { };
-        export class KeywordQueryProperties extends SP.ClientObject { };
-        export class ReorderingRuleCollection extends SP.ClientObjectCollection { };
-        export class SortCollection extends SP.ClientObjectCollection { };
+
+        export class StringCollection extends SP.ClientObjectCollection {
+            constructor(context: SP.ClientContext);
+            itemAt: (index: number) => string;
+            get_item: (index: number) => string;
+            get_childItemType: () => Object;
+            add: (property: string) => void;
+            clear: () => void;
+        };
+
+        export class QueryPersonalizationData extends SP.ClientObject {
+            //It's really empty;
+        };
+
+        export class QuerySuggestionResults extends SP.ClientValueObject {
+            get_peopleNames: () => string[];
+            set_peopleNames: (value: string[]) => void;
+
+            get_personalResults: () => PersonalResultSuggestion[];
+            set_personalResults: (value: PersonalResultSuggestion[]) => void;
+
+            get_queries: () => QuerySuggestionQuery[];
+            set_queries: (value: QuerySuggestionQuery[]) => void;
+        };
+
+        export class PersonalResultSuggestion extends SP.ClientValueObject {
+            get_highlightedTitle: () => string;
+            set_highlightedTitle: (value: string) => void;
+
+            get_isBestBet: () => bool;
+            set_isBestBet: (value: bool) => void;
+
+            get_title: () => string;
+            set_title: (value: string) => void;
+
+            get_url: () => string;
+            set_url: (value: string) => void;
+        };
+
+        export class QuerySuggestionQuery extends SP.ClientValueObject {
+            get_isPersonal: () => bool;
+            set_isPersonal: (value: bool) => void;
+
+            get_query: () => string;
+            set_query: (value: string) => void;
+        };
+
+        export class KeywordQueryProperties extends SP.ClientObject {
+            get_item: (key: string) => any;
+            set_item: (key: string, value: any) => void;
+            setQueryPropertyValue: (name: string) => QueryPropertyValue;
+            getQueryPropertyValue: (name: string, value: QueryPropertyValue) => void;
+        };
+
+        export enum QueryPropertyValueType {
+            none = 0,
+            stringType = 1,
+            int32TYpe = 2,
+            booleanType = 3,
+            stringArrayType = 4,
+            unSupportedType = 5
+        };
+
+        export class QueryPropertyValue extends SP.ClientValueObject {
+            get_boolVal: () => bool;
+            set_boolVal: (value: bool) => bool;
+
+            get_intVal: () => number;
+            set_intVal: (value: number) => number;
+            get_queryPropertyValueTypeIndex: () => number;
+            set_queryPropertyValueTypeIndex: (value: number) => void;
+            get_strArray: () => string[];
+            set_strArray: (value: string[]) => string[];
+            get_strVal: () => string;
+            set_strVal: (value: string) => string;
+        };
+
+        export class QueryUtility {
+            static create: (name: string, val: any) => QueryPropertyValue;
+            static getQueryPropertyValueType: (val: QueryPropertyValue) => QueryPropertyValueType;
+            static queryPropertyValueToObject: (val: QueryPropertyValue) => any;
+        }
+        export class ReorderingRuleCollection extends SP.ClientObjectCollection {
+            itemAt: (index: number) => ReorderingRule;
+            get_item: (index: number) => ReorderingRule;
+            get_childItemType: () => Object;
+            add: (property: ReorderingRule) => void;
+            clear: () => void;
+        };
+
+        export enum ReorderingRuleMatchType {
+            resultContainsKeyword = 0,
+            titleContainsKeyword = 1,
+            titleMatchesKeyword = 2,
+            urlStartsWith = 3,
+            urlExactlyMatches = 4,
+            contentTypeIs = 5,
+            fileExtensionMatches = 6,
+            resultHasTag = 7,
+            manualCondition = 8
+        };
+
+        export class ReorderingRule extends SP.ClientValueObject {
+            get_boost: () => number;
+            set_boost: (value: number) => void;
+
+            get_matchType: () => ReorderingRuleMatchType;
+            set_matchType: (value: ReorderingRuleMatchType) => void;
+
+            get_matchValue: () => string;
+            set_matchValue: (value: string) => void;
+        };
+
+        export class SortCollection extends SP.ClientObjectCollection {
+            itemAt: (index: number) => Sort;
+            get_item: (index: number) => Sort;
+            get_childItemType: () => Object;
+            add: (property: Sort) => void;
+            clear: () => void;
+        };
+
+        enum SortDirection {
+            ascending = 0,
+            descending = 1,
+            fqlFormula = 2
+        };
+        export class Sort extends SP.ClientValueObject {
+            get_direction: () => SortDirection;
+            set_direction: (value: SortDirection) => void;
+
+            get_property: () => string;
+            set_property: (value: string) => void;
+        };
+
+
         export class ResultTableCollection extends SP.ClientValueObjectCollection {
             get_item: (index: number) => ResultTable;
 
@@ -202,35 +331,225 @@ declare module Microsoft.SharePoint.Client.Search {
 
             get_triggeredRules: () => SP.Guid[];
 
-            get_typeId: () => string;
-
-            get_childItemsName: () => string;
-
             initPropertiesFromJson: (parentNode: any) => void;
 
         };
 
         export class ResultTable extends SP.ClientValueObject {
             get_groupTemplateId: () => string;
+
             get_itemTemplateId: () => string;
+
             get_properties: () => { [key: string]: any; };
+
             get_queryId: () => string;
+
             get_queryRuleId: () => string;
+
             get_resultRows: () => { [key: string]: any; }[];
+
             get_resultTitle: () => string;
+
             get_resultTitleUrl: () => string;
+
             get_rowCount: () => number;
+
             get_tableType: () => string;
+
             get_totalRows: () => number;
+
             get_totalRowsIncludingDuplicates: () => number;
-            get_typeId: () => string;
+
             initPropertiesFromJson: (parentNode: any) => void;
         };
 
+        export class RankingLabeling extends SP.ClientObject {
+            constructor(context: SP.ClientContext);
+            getJudgementsForQuery: (query: string) => SP.JsonObjectResult;
+            addJudgment: (userQuery: string, url: string, labelId: number) => void;
+            normalizeResultUrl: (url: string) => SP.JsonObjectResult;
+        };
 
+        export class PopularQuery extends SP.ClientValueObject {
+            get_clickCount: () => number;
+            set_clickCount: (value: number) => void;
+
+            get_LCID: () => number;
+            set_LCID: (value: number) => void;
+
+            get_queryCount: () => number;
+            set_queryCount: (value: number) => void;
+
+            get_queryText: () => string;
+            set_queryText: (value: string) => void;
+        }
+
+        export class QueryPropertyNames {
+            static blockDedupeMode: string; // 'BlockDedupeMode';
+            static bypassResultTypes: string; // 'BypassResultTypes';
+            static clientType: string; // 'ClientType';
+            static culture: string; // 'Culture';
+            static desiredSnippetLength: string; // 'DesiredSnippetLength';
+            static enableInterleaving: string; // 'EnableInterleaving';
+            static enableNicknames: string; // 'EnableNicknames';
+            static enableOrderingHitHighlightedProperty: string; // 'EnableOrderingHitHighlightedProperty';
+            static enablePhonetic: string; // 'EnablePhonetic';
+            static enableQueryRules: string; // 'EnableQueryRules';
+            static enableStemming: string; // 'EnableStemming';
+            static generateBlockRankLog: string; // 'GenerateBlockRankLog';
+            static hitHighlightedMultivaluePropertyLimit: string; // 'HitHighlightedMultivaluePropertyLimit';
+            static ignoreSafeQueryPropertiesTemplateUrl: string; // 'IgnoreSafeQueryPropertiesTemplateUrl';
+            static impressionID: string; // 'ImpressionID';
+            static maxSnippetLength: string; // 'MaxSnippetLength';
+            static processBestBets: string; // 'ProcessBestBets';
+            static processPersonalFavorites: string; // 'ProcessPersonalFavorites';
+            static queryTag: string; // 'QueryTag';
+            static queryTemplate: string; // 'QueryTemplate';
+            static queryTemplateParameters: string; // 'QueryTemplateParameters';
+            static queryText: string; // 'QueryText';
+            static rankingModelId: string; // 'RankingModelId';
+            static resultsUrl: string; // 'ResultsUrl';
+            static rowLimit: string; // 'RowLimit';
+            static rowsPerPage: string; // 'RowsPerPage';
+            static safeQueryPropertiesTemplateUrl: string; // 'SafeQueryPropertiesTemplateUrl';
+            static showPeopleNameSuggestions: string; // 'ShowPeopleNameSuggestions';
+            static sourceId: string; // 'SourceId';
+            static startRow: string; // 'StartRow';
+            static summaryLength: string; // 'SummaryLength';
+            static timeout: string; // 'Timeout';
+            static totalRowsExactMinimum: string; // 'TotalRowsExactMinimum';
+            static trimDuplicates: string; // 'TrimDuplicates';
+            static uiLanguage: string; // 'UILanguage';
+        };
+
+        export class QueryObjectPropertyNames {
+            static hitHighlightedProperties: string; // = 'HitHighlightedProperties';
+            static personalizationData: string; // = 'PersonalizationData';
+        };
+
+        export class KeywordQueryPropertyNames {
+            static collapseSpecification: string; // 'CollapseSpecification';
+            static enableSorting: string; // 'EnableSorting';
+            static hiddenConstraints: string; // 'HiddenConstraints';
+            static refiners: string; // 'Refiners';
+            static trimDuplicatesIncludeId: string; // 'TrimDuplicatesIncludeId';
+        };
+
+        export class KeywordQueryObjectPropertyNames {
+            static properties: string; // 'Properties';
+            static refinementFilters: string; // 'RefinementFilters';
+            static reorderingRules: string; // 'ReorderingRules';
+            static selectProperties: string; // 'SelectProperties';
+            static sortList: string; // 'SortList';
+        };
     }
 
     module WebControls {
-        export class ControlMessage { }
+        export class ControlMessage extends SP.ClientValueObject {
+            get_code: () => number;
+
+            get_correlationID: () => string;
+
+            get_encodeDetails: () => bool;
+
+            get_header: () => string;
+
+            get_level: () => MessageLevel;
+
+            get_messageDetails: () => string;
+
+            get_messageDetailsForViewers: () => string;
+
+            get_serverTypeId: () => string;
+
+            get_showForViewerUsers: () => bool;
+
+            get_showInEditModeOnly: () => bool;
+
+            get_stackTrace: () => string;
+
+            get_type: () => string;
+        }
+
+        export enum MessageLevel {
+            information = 0,
+            warning = 1,
+            error = 2
+        }
+    }
+
+    module Administration {
+        export class DocumentCrawlLog extends SP.ClientObject {
+            constructor(context: SP.ClientContext, site: SP.Site);
+            getCrawledUrls: (getCountOnly: bool,
+                maxRows: { High: number; Low: number; },
+                queryString: string,
+                isLike: bool,
+                contentSourceID: number,
+                errorLevel: number,
+                errorID: number,
+                startDateTime: Date,
+                endDateTime: Date) => SP.JsonObjectResult;
+        };
+
+        export class SearchObjectOwner extends SP.ClientObject {
+            constructor(context: SP.ClientContext, lowestCurrentLevelToUse: SearchObjectLevel);
+        };
+
+        export enum SearchObjectLevel {
+            spWeb = 0,
+            spSite = 1,
+            spSiteSubscription = 2,
+            ssa = 3
+        };
+    }
+
+    module Portability {
+        export class SearchConfigurationPortability extends SP.ClientObject {
+            constructor(context: SP.ClientContext);
+            get_importWarnings: () => string;
+
+            exportSearchConfiguration: (owningScope: Administration.SearchObjectOwner) => SP.JsonObjectResult;
+
+            importSearchConfiguration: (owningScope: Administration.SearchObjectOwner, searchConfiguration: string) => void;
+
+            deleteSearchConfiguration: (owningScope: Administration.SearchObjectOwner, searchConfiguration: string) => void;
+        }
+
+        export class SearchConfigurationPortabilityPropertyNames {
+            static importWarnings: string;// = 'ImportWarnings'
+        }
+    }
+
+    /**Located in sp.search.apps.js*/
+    module Analytics {
+        export class AnalyticsItemData extends SP.ClientObject {
+            get_lastProcessingTime: () => Date;
+
+            get_totalHits: () => number;
+
+            get_totalUniqueUsers: () => number;
+
+            getHitCountForDay: (day: Date) => number;
+
+            getUniqueUsersCountForDay: (day: Date) => number;
+
+            getHitCountForMonth: (day: Date) => number;
+
+            getUniqueUsersCountForMonth: (day: Date) => number;
+        }
+
+        export class UsageAnalytics extends SP.ClientObject {
+            getAnalyticsItemData: (eventType: number, listItem: SP.ListItem) => AnalyticsItemData;
+
+            getAnalyticsItemDataForApplicationEventType: (appEventType: SP.Guid, listItem: SP.ListItem) => AnalyticsItemData;
+
+            deleteStandardEventUsageData: (eventType: number) => void;
+
+            deleteCustomEventUsageData: (appEventTypeId: SP.Guid) => void;
+        }
+
+
+
     }
 }
