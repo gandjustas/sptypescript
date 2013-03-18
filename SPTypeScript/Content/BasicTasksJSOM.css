@@ -1,0 +1,32 @@
+﻿﻿body  
+{ 
+    overflow : visible; 
+} 
+.operation-panel 
+{ 
+    padding : 5px; 
+    margin-bottom : 10px; 
+} 
+.code-content 
+{ 
+    display : none; 
+    font-family : Consolas; 
+    top : -3px; 
+    clear : both; 
+    border-color : #e5e5e5; 
+    border-width : 1px; 
+    border-style : solid; 
+    position : relative; 
+    padding : 5px; 
+    margin : 10px; 
+} 
+.result-panel 
+{ 
+    display : none; 
+    border-color : #e5e5e5; 
+    border-width : 1px; 
+    border-style : solid; 
+    position : relative; 
+    padding : 5px; 
+    margin : 10px; 
+}

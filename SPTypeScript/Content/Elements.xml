@@ -2,5 +2,6 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Module Name="Content">
     <File Path="Content\App.css" Url="Content/App.css" />
+    <File Path="Content\BasicTasksJSOM.css" Url="Content/BasicTasksJSOM.css" />
   </Module>
 </Elements>

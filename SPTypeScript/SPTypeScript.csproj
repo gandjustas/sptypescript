@@ -54,6 +54,7 @@
       <SharePointProjectItemId>{bdc98434-f9b7-46f7-ba2b-3af15e495ee4}</SharePointProjectItemId>
     </None>
     <TypeScriptCompile Include="Extensions\CSOMPromise.ts" />
+    <Content Include="Content\BasicTasksJSOM.css" />
     <Content Include="Definitions\SP.Search.d.ts" />
     <Content Include="Definitions\SP.Social.d.ts" />
     <Content Include="Definitions\SP.UserProfiles.d.ts" />
