@@ -44,14 +44,36 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Extensions\CSOMPromise.js.map">
+      <DependentUpon>CSOMPromise.ts</DependentUpon>
+    </None>
+    <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
+      <DependentUpon>Search.ts</DependentUpon>
+    </None>
+    <None Include="SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{bdc98434-f9b7-46f7-ba2b-3af15e495ee4}</SharePointProjectItemId>
+    </None>
     <TypeScriptCompile Include="Extensions\CSOMPromise.ts" />
+    <Content Include="Definitions\SP.Search.d.ts" />
     <Content Include="Extensions\CSOMPromise.js">
+      <DependentUpon>CSOMPromise.ts</DependentUpon>
+    </Content>
+    <Content Include="Extensions\CSOMPromise.min.js">
       <DependentUpon>CSOMPromise.ts</DependentUpon>
     </Content>
     <Content Include="Pages\Account.html" />
     <Content Include="Pages\BasicTasksJSOM.html" />
     <Content Include="Pages\Contact.html" />
     <Content Include="Pages\Help.html" />
+    <Content Include="Sample_SearchCSOM\SearchCSOM\Elements.xml" />
+    <Content Include="Sample_SearchCSOM\SearchCSOM\Search.aspx" />
+    <TypeScriptCompile Include="Sample_SearchCSOM\SearchCSOM\Search.ts" />
+    <Content Include="Sample_SearchCSOM\SearchCSOM\Search.js">
+      <DependentUpon>Search.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_SearchCSOM\SearchCSOM\Search.min.js">
+      <DependentUpon>Search.ts</DependentUpon>
+    </Content>
     <Content Include="Scripts\AppUIEvents.js" />
     <Content Include="Scripts\BasicTasksJSOM.js">
       <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
@@ -102,6 +124,9 @@
     <Content Include="Extensions\typescripttemplates.min.js">
       <DependentUpon>typescripttemplates.ts</DependentUpon>
     </Content>
+    <None Include="Sample_SearchCSOM\SearchCSOM\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{87e47fe2-7d8d-43ad-a94c-536d900afc6a}</SharePointProjectItemId>
+    </None>
     <None Include="Scripts\BasicTasksJSOM.js.map">
       <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
     </None>
@@ -258,6 +283,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0'">11.0</VisualStudioVersion>

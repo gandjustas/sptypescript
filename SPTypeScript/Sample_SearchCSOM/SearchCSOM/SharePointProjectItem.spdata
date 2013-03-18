@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="SearchCSOM\" Type="ElementManifest" />
+    <ProjectItemFile Source="Search.aspx" Target="SearchCSOM\" Type="ElementFile" />
+    <ProjectItemFile Source="Search.ts" Target="SearchCSOM\" Type="ElementFile" />
+    <ProjectItemFile Source="Search.js" Target="SearchCSOM\" Type="ElementFile" />
+    <ProjectItemFile Source="Search.min.js" Target="SearchCSOM\" Type="ElementFile" />
+    <ProjectItemFile Source="Search.js.map" Target="SearchCSOM\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

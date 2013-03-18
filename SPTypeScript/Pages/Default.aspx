@@ -25,6 +25,7 @@
             <li><a href="../Lists/CustomFieldList">Client Side Rendering: Complexity field</a></li>
             <li><a href="../Lists/ConditionalFormattingTasksList">Client Side Rendering: Conditional formatting</a></li>
             <li><a href="../Pages_WorkflowServices">Workflow Services: Retrieve list of available workflow actions</a></li>
+            <li><a href="javascript:document.location = '../SearchCSOM/Search.aspx?'+document.URL.split('?')[1]">Search: Using search CSOM  with TypeScript</a></li>
         </ol>
     </div>
 

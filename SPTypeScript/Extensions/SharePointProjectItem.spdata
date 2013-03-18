@@ -8,5 +8,7 @@
     <ProjectItemFile Source="typescripttemplates.min.js" Target="Extensions\" Type="ElementFile" />
     <ProjectItemFile Source="CSOMPromise.ts" Target="Extensions\" Type="ElementFile" />
     <ProjectItemFile Source="CSOMPromise.js" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="CSOMPromise.min.js" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="CSOMPromise.js.map" Target="Extensions\" Type="ElementFile" />
   </Files>
 </ProjectItem>

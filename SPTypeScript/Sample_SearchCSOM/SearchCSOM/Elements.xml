@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="SearchCSOM">
+    <File Path="SearchCSOM\Search.aspx" Url="SearchCSOM/Search.aspx" ReplaceContent="TRUE" />
+    <File Path="SearchCSOM\Search.ts" Url="SearchCSOM/Search.ts" ReplaceContent="TRUE" />
+    <File Path="SearchCSOM\Search.js" Url="SearchCSOM/Search.js" ReplaceContent="TRUE" />
+    <File Path="SearchCSOM\Search.min.js" Url="SearchCSOM/Search.min.js" ReplaceContent="TRUE" />
+    <File Path="SearchCSOM\Search.js.map" Url="SearchCSOM/Search.js.map" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

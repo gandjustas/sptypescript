@@ -6,5 +6,7 @@
     <File Path="Extensions\typescripttemplates.min.js" Url="Extensions/typescripttemplates.min.js" />
     <File Path="Extensions\CSOMPromise.ts" Url="Extensions/CSOMPromise.ts" />
     <File Path="Extensions\CSOMPromise.js" Url="Extensions/CSOMPromise.js" />
+    <File Path="Extensions\CSOMPromise.min.js" Url="Extensions/CSOMPromise.min.js" ReplaceContent="TRUE" />
+    <File Path="Extensions\CSOMPromise.js.map" Url="Extensions/CSOMPromise.js.map" ReplaceContent="TRUE" />
   </Module>
 </Elements>
