@@ -1,13 +1,14 @@
 $(function () {
-    var e = SP.SOD.executeOrDelayUntilScriptLoaded(showToolbar, "sp.js");
+    var e = SP.SOD.executeOrDelayUntilScriptLoaded(showToolbar, "sp.search.js");
 });
 function showToolbar() {
     $("#toolbarDiv").show();
-    $("#toolbarDiv button").click(function (e) {
+    $("#toolbarDiv input[type=button]").click(function (e) {
         executeQuery($('#queryTerms').val());
     });
 }
 function executeQuery(queryTerms) {
+    var Search = Microsoft.SharePoint.Client.Search.Query;
     var Results = {
         element: '',
         url: '',
@@ -16,31 +17,32 @@ function executeQuery(queryTerms) {
             Results.url = _spPageContextInfo.webAbsoluteUrl + "/_api/search/query?querytext='" + queryTerms + "'";
         },
         load: function () {
-            $.ajax({
-                url: Results.url,
-                method: "GET",
-                headers: {
-                    "accept": "application/json;odata=verbose"
-                },
-                success: Results.onSuccess,
-                error: Results.onError
+            var _this = this;
+            var ctx = SP.ClientContext.get_current();
+            var query = new Search.KeywordQuery(ctx);
+            query.set_queryText(queryTerms);
+            var executor = new Search.SearchExecutor(ctx);
+            var result = executor.executeQuery(query);
+            ctx.executeQueryAsync(function () {
+                var tableCollection = new Search.ResultTableCollection();
+                tableCollection.initPropertiesFromJson(result.get_value());
+                var rows = tableCollection.get_item(0).get_resultRows();
+                Results.element.html(_this.createHtml(rows));
+            }, function (sender, args) {
+                alert(args.get_message());
             });
         },
-        onSuccess: function (data) {
-            var results = data.d.query.PrimaryQueryResult.RelevantResults.Table.Rows.results;
+        createHtml: function (rows) {
             var html = "<table>";
-            for(var i = 0; i < results.length; i++) {
+            for(var i = 0; i < rows.length; i++) {
                 html += "<tr><td>";
-                html += results[i].Cells.results[3].Value;
+                html += rows[i]['Title'];
                 html += "</td><td>";
-                html += results[i].Cells.results[6].Value;
+                html += rows[i]['Path'];
                 html += "</td><tr>";
             }
             html += "</table>";
-            Results.element.html(html);
-        },
-        onError: function (err) {
-            alert(JSON.stringify(err));
+            return html;
         }
     };
     Results.init($('#resultsDiv'));
