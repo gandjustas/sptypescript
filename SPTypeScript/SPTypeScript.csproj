@@ -47,20 +47,35 @@
     <None Include="Extensions\CSOMPromise.js.map">
       <DependentUpon>CSOMPromise.ts</DependentUpon>
     </None>
+    <None Include="Sample_BasicCSOMActions\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{36cba84f-cd3b-408d-b7a4-fc2b2c8972e5}</SharePointProjectItemId>
+    </None>
     <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
       <DependentUpon>Search.ts</DependentUpon>
     </None>
-    <None Include="Sample_Taxonomy\Taxonomy\App.js.map">
-      <DependentUpon>App.ts</DependentUpon>
+    <None Include="Sample_UserProfiles\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{11708b77-3db1-4de7-96e5-75df4d64b4c0}</SharePointProjectItemId>
     </None>
-    <None Include="Sample_Taxonomy\Taxonomy\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{48120791-7cb1-4731-838f-0d0f92d35498}</SharePointProjectItemId>
+    <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
+    </None>
+    <Content Include="Sample_WorkflowServices\Default.aspx" />
+    <Content Include="Sample_WorkflowServices\Elements.xml" />
+    <TypeScriptCompile Include="Sample_WorkflowServices\WorkflowServices.ts" />
+    <Content Include="Sample_WorkflowServices\WorkflowServices.js">
+      <DependentUpon>WorkflowServices.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_WorkflowServices\WorkflowServices.min.js">
+      <DependentUpon>WorkflowServices.ts</DependentUpon>
+    </Content>
+    <None Include="Sample_WorkflowServices\WorkflowServices.js.map">
+      <DependentUpon>WorkflowServices.ts</DependentUpon>
     </None>
     <None Include="SharePointProjectItem.spdata">
       <SharePointProjectItemId>{bdc98434-f9b7-46f7-ba2b-3af15e495ee4}</SharePointProjectItemId>
     </None>
     <TypeScriptCompile Include="Extensions\CSOMPromise.ts" />
-    <Content Include="Content\BasicTasksJSOM.css" />
+    <Content Include="Sample_BasicCSOMActions\BasicTasksJSOM.css" />
     <Content Include="Definitions\SP.Search.d.ts" />
     <Content Include="Definitions\SP.Social.d.ts" />
     <Content Include="Definitions\SP.UserProfiles.d.ts" />
@@ -71,10 +86,17 @@
     <Content Include="Extensions\CSOMPromise.min.js">
       <DependentUpon>CSOMPromise.ts</DependentUpon>
     </Content>
-    <Content Include="Pages\Account.html" />
-    <Content Include="Pages\BasicTasksJSOM.html" />
-    <Content Include="Pages\Contact.html" />
-    <Content Include="Pages\Help.html" />
+    <Content Include="Sample_BasicCSOMActions\Account.html" />
+    <Content Include="Sample_BasicCSOMActions\BasicTasksJSOM.html" />
+    <Content Include="Sample_BasicCSOMActions\Contact.html" />
+    <Content Include="Sample_BasicCSOMActions\Help.html" />
+    <Content Include="Sample_BasicCSOMActions\Elements.xml" />
+    <None Include="Sample_Taxonomy\Taxonomy\App.js.map">
+      <DependentUpon>App.ts</DependentUpon>
+    </None>
+    <None Include="Sample_Taxonomy\Taxonomy\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{48120791-7cb1-4731-838f-0d0f92d35498}</SharePointProjectItemId>
+    </None>
     <Content Include="Sample_SearchCSOM\SearchCSOM\Elements.xml" />
     <Content Include="Sample_SearchCSOM\SearchCSOM\Search.aspx" />
     <TypeScriptCompile Include="Sample_SearchCSOM\SearchCSOM\Search.ts" />
@@ -83,6 +105,16 @@
     </Content>
     <Content Include="Sample_SearchCSOM\SearchCSOM\Search.min.js">
       <DependentUpon>Search.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_UserProfiles\Default.aspx" />
+    <Content Include="Sample_UserProfiles\Elements.xml" />
+    <TypeScriptCompile Include="Sample_UserProfiles\UserProfiles.ts" />
+    <Content Include="Sample_UserProfiles\UserProfiles.js">
+      <DependentUpon>UserProfiles.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_BasicCSOMActions\AppUIEvents.js" />
+    <Content Include="Sample_BasicCSOMActions\BasicTasksJSOM.js">
+      <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Sample_Taxonomy\Taxonomy\App.ts" />
     <Content Include="Sample_Taxonomy\Taxonomy\App.js">
@@ -93,18 +125,14 @@
     </Content>
     <Content Include="Sample_Taxonomy\Taxonomy\Default.aspx" />
     <Content Include="Sample_Taxonomy\Taxonomy\Elements.xml" />
-    <Content Include="Scripts\AppUIEvents.js" />
-    <Content Include="Scripts\BasicTasksJSOM.js">
+    <Content Include="Sample_BasicCSOMActions\BasicTasksJSOM.min.js">
       <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
     </Content>
-    <Content Include="Scripts\BasicTasksJSOM.min.js">
-      <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\ChromeLoader.js" />
-    <TypeScriptCompile Include="Scripts\BasicTasksJSOM.ts" />
-    <Content Include="Shared Documents\Elements.xml" />
-    <Content Include="Shared Documents\TextFile1.txt" />
-    <None Include="Announcements\SharePointProjectItem.spdata">
+    <Content Include="Sample_BasicCSOMActions\ChromeLoader.js" />
+    <TypeScriptCompile Include="Sample_BasicCSOMActions\BasicTasksJSOM.ts" />
+    <Content Include="Sample_BasicCSOMActions\Shared Documents\Elements.xml" />
+    <Content Include="Sample_BasicCSOMActions\Shared Documents\TextFile1.txt" />
+    <None Include="Sample_BasicCSOMActions\Announcements\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{cf975992-f191-4bab-a103-ee84b785dad5}</SharePointProjectItemId>
     </None>
     <None Include="Extensions\SharePointProjectItem.spdata">
@@ -113,14 +141,11 @@
     <None Include="Extensions\typescripttemplates.js.map">
       <DependentUpon>typescripttemplates.ts</DependentUpon>
     </None>
-    <None Include="Features\Feature2\Feature2.feature">
-      <FeatureId>{90ab1cb0-3773-4c81-9071-f1f600aef684}</FeatureId>
-    </None>
     <None Include="packages.config" />
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{fbba0cef-9361-4eb5-8a07-5f8da3fa32e1}</SharePointProjectItemId>
     </None>
-    <Content Include="Announcements\Elements.xml" />
+    <Content Include="Sample_BasicCSOMActions\Announcements\Elements.xml" />
     <Content Include="Definitions\callout.d.ts" />
     <Content Include="Definitions\clientforms.d.ts" />
     <Content Include="Definitions\clienttemplates.d.ts" />
@@ -146,16 +171,13 @@
     <None Include="Sample_SearchCSOM\SearchCSOM\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{87e47fe2-7d8d-43ad-a94c-536d900afc6a}</SharePointProjectItemId>
     </None>
-    <None Include="Scripts\BasicTasksJSOM.js.map">
+    <None Include="Sample_BasicCSOMActions\BasicTasksJSOM.js.map">
       <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
     </None>
-    <None Include="Shared Documents\SharePointProjectItem.spdata">
+    <None Include="Sample_BasicCSOMActions\Shared Documents\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e9d51327-79bf-406c-b4e7-3817e23781c6}</SharePointProjectItemId>
     </None>
     <TypeScriptCompile Include="Extensions\typescripttemplates.ts" />
-    <Content Include="Features\Feature2\Feature2.Template.xml">
-      <DependentUpon>Feature2.feature</DependentUpon>
-    </Content>
     <Content Include="Pages\Elements.xml" />
     <Content Include="Pages\Default.aspx" />
   </ItemGroup>
@@ -175,10 +197,10 @@
     <None Include="Sample_CSRComplexityField\CustomFieldList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{082e378d-45ce-472d-99cd-080d1d7797ec}</SharePointProjectItemId>
     </None>
-    <None Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\CSRField.js.map">
+    <None Include="Sample_CSRComplexityField\CSRField.js.map">
       <DependentUpon>CSRField.ts</DependentUpon>
     </None>
-    <None Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\SharePointProjectItem.spdata">
+    <None Include="Sample_CSRComplexityField\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{01cf65cc-a0b9-4386-933a-8984f447152e}</SharePointProjectItemId>
     </None>
     <None Include="Sample_CSRListView\CustomList\CustomListInstance\SharePointProjectItem.spdata">
@@ -199,34 +221,19 @@
     <Content Include="Sample_CSRComplexityField\CustomFieldList\CustomFieldListInstance\Elements.xml" />
     <Content Include="Sample_CSRComplexityField\CustomFieldList\Elements.xml" />
     <Content Include="Sample_CSRComplexityField\CustomFieldList\Schema.xml" />
-    <TypeScriptCompile Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\CSRField.ts" />
-    <Content Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\CSRField.js">
+    <TypeScriptCompile Include="Sample_CSRComplexityField\CSRField.ts" />
+    <Content Include="Sample_CSRComplexityField\CSRField.js">
       <DependentUpon>CSRField.ts</DependentUpon>
     </Content>
-    <Content Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\CSRField.min.js">
+    <Content Include="Sample_CSRComplexityField\CSRField.min.js">
       <DependentUpon>CSRField.ts</DependentUpon>
     </Content>
-    <Content Include="Sample_CSRComplexityField\Scripts_CSRComplexityField\Elements.xml" />
+    <Content Include="Sample_CSRComplexityField\Elements.xml" />
     <Content Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.js.map">
       <DependentUpon>CSRListView.ts</DependentUpon>
     </Content>
     <None Include="Sample_CSRListView\Scripts_CSRListView\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{bec1997c-5abd-4824-8eb8-0a3b1226c8c1}</SharePointProjectItemId>
-    </None>
-    <None Include="Sample_WorkflowServices\Pages_WorkflowServices\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{182090a7-10f1-4f3e-a3ac-f6efa96eea55}</SharePointProjectItemId>
-    </None>
-    <None Include="Sample_WorkflowServices\Scripts_WorkflowServices\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
-    </None>
-    <None Include="Sample_WorkflowServices\Scripts_WorkflowServices\WorkflowServices.js.map">
-      <DependentUpon>WorkflowServices.ts</DependentUpon>
-    </None>
-    <None Include="Scripts\App.js.map">
-      <DependentUpon>App.ts</DependentUpon>
-    </None>
-    <None Include="Scripts\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{8418c6b7-70b4-41bf-883a-6c9471b03877}</SharePointProjectItemId>
     </None>
     <Content Include="Sample_CSRListView\CustomList\CustomListInstance\Elements.xml" />
     <Content Include="Sample_CSRListView\CustomList\Elements.xml" />
@@ -241,35 +248,6 @@
     <Content Include="Sample_CSRListView\Scripts_CSRListView\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Sample_WorkflowServices\Pages_WorkflowServices\Default.aspx" />
-    <Content Include="Sample_WorkflowServices\Pages_WorkflowServices\Elements.xml" />
-    <Content Include="Sample_WorkflowServices\Scripts_WorkflowServices\Elements.xml" />
-    <TypeScriptCompile Include="Sample_WorkflowServices\Scripts_WorkflowServices\WorkflowServices.ts" />
-    <Content Include="Sample_WorkflowServices\Scripts_WorkflowServices\WorkflowServices.js">
-      <DependentUpon>WorkflowServices.ts</DependentUpon>
-    </Content>
-    <Content Include="Sample_WorkflowServices\Scripts_WorkflowServices\WorkflowServices.min.js">
-      <DependentUpon>WorkflowServices.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\App.js">
-      <DependentUpon>App.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\App.min.js">
-      <DependentUpon>App.ts</DependentUpon>
-    </Content>
-    <Content Include="Scripts\Elements.xml" />
-    <TypeScriptCompile Include="Scripts\App.ts" />
-    <Content Include="Scripts\jquery-1.7.1.intellisense.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
-    <Content Include="Scripts\_references.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{0d06fa23-0ec1-4764-a805-bf7de423cec5}</SharePointProjectItemId>
-    </None>
-    <Content Include="Content\Elements.xml" />
-    <Content Include="Content\App.css" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\AppIcon.png">
@@ -287,11 +265,11 @@
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
-    <None Include="Features\Feature1\Feature1.feature">
+    <None Include="Features\MainFeature\MainFeature.feature">
       <FeatureId>{fc901982-e06d-46b9-8def-8f59642464ec}</FeatureId>
     </None>
-    <None Include="Features\Feature1\Feature1.Template.xml">
-      <DependentUpon>Feature1.feature</DependentUpon>
+    <None Include="Features\MainFeature\MainFeature.Template.xml">
+      <DependentUpon>MainFeature.feature</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

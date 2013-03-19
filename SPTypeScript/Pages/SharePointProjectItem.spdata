@@ -3,9 +3,5 @@
   <Files>
     <ProjectItemFile Source="Elements.xml" Target="Pages\" Type="ElementManifest" />
     <ProjectItemFile Source="Default.aspx" Target="Pages\" Type="ElementFile" />
-    <ProjectItemFile Source="Account.html" Target="Pages\" Type="ElementFile" />
-    <ProjectItemFile Source="BasicTasksJSOM.html" Target="Pages\" Type="ElementFile" />
-    <ProjectItemFile Source="Contact.html" Target="Pages\" Type="ElementFile" />
-    <ProjectItemFile Source="Help.html" Target="Pages\" Type="ElementFile" />
   </Files>
 </ProjectItem>

@@ -9,7 +9,7 @@
     <SharePoint:ScriptLink Name="sp.search.js" runat="server" OnDemand="false" LoadAfterUI="true"
         Localizable="false" />
     <link rel="Stylesheet" type="text/css" href="../Content/App.css" />
-    <script type="text/javascript" src="../Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="../SearchCSOM/Search.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderMain" runat="server">

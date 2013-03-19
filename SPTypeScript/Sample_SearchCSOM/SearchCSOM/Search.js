@@ -6,6 +6,11 @@ function showToolbar() {
     $("#toolbarDiv input[type=button]").click(function (e) {
         executeQuery($('#queryTerms').val());
     });
+    $("#toolbarDiv input[type=text]").keypress(function (e) {
+        if(e.keyCode == 13) {
+            executeQuery($('#queryTerms').val());
+        }
+    });
 }
 function executeQuery(queryTerms) {
     var Search = Microsoft.SharePoint.Client.Search.Query;

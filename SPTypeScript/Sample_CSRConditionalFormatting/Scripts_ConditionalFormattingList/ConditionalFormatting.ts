@@ -24,11 +24,7 @@
     };
 
 
-    //AppWebUrl is written on default page
-    var webUrl = window.localStorage['AppWebUrl'];
-    var targetListUrl = webUrl + '/Lists/ConditionalFormattingTasksList';
-
-    if (document.location.href.indexOf(targetListUrl) == 0) {
+    if (document.location.href.indexOf('/Lists/ConditionalFormattingTasksList') > 0) {
         SP.SOD.executeOrDelayUntilScriptLoaded(() => {
             SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
 

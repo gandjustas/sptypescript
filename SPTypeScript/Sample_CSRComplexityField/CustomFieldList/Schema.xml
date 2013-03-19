@@ -19,7 +19,7 @@
 
       
       
-    <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" DisplayName="$Resources:core,Title;" Required="TRUE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" /><Field Name="ComplexityField" ID="{62d8bdcc-56f7-4e86-b546-cb126dfba42c}" DisplayName="Complexity Field" Type="Choice" Required="TRUE" JSLink="~site/Scripts_CSRFields/CSRField.js|~site/Extensions/typescripttemplates.js">
+    <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" DisplayName="$Resources:core,Title;" Required="TRUE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" /><Field Name="ComplexityField" ID="{62d8bdcc-56f7-4e86-b546-cb126dfba42c}" DisplayName="Complexity Field" Type="Choice" Required="TRUE" JSLink="~site/Sample_CSRComplexityField/CSRField.js|~site/Extensions/typescripttemplates.js">
         <CHOICES>
           
           

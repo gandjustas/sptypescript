@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Sample_WorkflowServices">
+    <File Path="Sample_WorkflowServices\WorkflowServices.js" Url="Sample_WorkflowServices/WorkflowServices.js" ReplaceContent="TRUE" />
+    <File Path="Sample_WorkflowServices\Default.aspx" Url="Sample_WorkflowServices/Default.aspx" />
+  </Module>
+</Elements>

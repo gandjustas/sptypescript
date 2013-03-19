@@ -16,9 +16,7 @@
         }).register();
     }
     ;
-    var webUrl = window.localStorage['AppWebUrl'];
-    var targetListUrl = webUrl + '/Lists/ConditionalFormattingTasksList';
-    if(document.location.href.indexOf(targetListUrl) == 0) {
+    if(document.location.href.indexOf('/Lists/ConditionalFormattingTasksList') > 0) {
         SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
             SP.SOD.executeOrDelayUntilScriptLoaded(function () {

@@ -8,7 +8,7 @@
 >
   <Properties>
     <Title>SPTypeScript</Title>
-    <StartPage>~appWebUrl/Pages/Default.aspx?{StandardTokens}</StartPage>
+    <StartPage>~appWebUrl/Pages/Default.aspx?{StandardTokens}&amp;SPHostTitle={HostTitle}</StartPage>
   </Properties>
 
   <AppPrincipal>
@@ -16,6 +16,7 @@
   </AppPrincipal>
   <AppPermissionRequests>
     <AppPermissionRequest Scope="http://sharepoint/search" Right="QueryAsUserIgnoreAppPrincipal" />
+    <AppPermissionRequest Scope="http://sharepoint/social/tenant" Right="Read" />
     <AppPermissionRequest Scope="http://sharepoint/taxonomy" Right="Write" />
   </AppPermissionRequests>
 </App>

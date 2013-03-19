@@ -14,7 +14,7 @@
 
     <SharePoint:ScriptLink ID="ScriptLink2" runat="server" Name="sp.taxonomy.js" LoadAfterUI="true" OnDemand="false" />
 
-    <script type="text/javascript" src="../Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="../extensions/CSOMPromise.js"></script>
     <!-- Add your JavaScript to the following file -->
     <script type="text/javascript" src="App.js"></script>

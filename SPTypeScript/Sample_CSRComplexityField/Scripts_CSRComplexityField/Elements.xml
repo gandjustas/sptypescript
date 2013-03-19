@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <Module Name="Scripts_CSRComplexityField">
-    <File Path="Scripts_CSRComplexityField\CSRField.ts" Url="Scripts_CSRComplexityField/CSRField.ts" />
-    <File Path="Scripts_CSRComplexityField\CSRField.js" Url="Scripts_CSRComplexityField/CSRField.js" />
-    <File Path="Scripts_CSRComplexityField\CSRField.js.map" Url="Scripts_CSRComplexityField/CSRField.js.map" />
-    <File Path="Scripts_CSRComplexityField\CSRField.min.js" Url="Scripts_CSRComplexityField/CSRField.min.js" />
-  </Module>
-</Elements>

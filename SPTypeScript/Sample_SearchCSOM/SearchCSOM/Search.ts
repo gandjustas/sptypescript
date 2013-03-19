@@ -14,6 +14,10 @@ function showToolbar() {
     $("#toolbarDiv input[type=button]").click(e => {
         executeQuery($('#queryTerms').val());
     });
+    $("#toolbarDiv input[type=text]").keypress(e => {
+        if (e.keyCode == 13)
+            executeQuery($('#queryTerms').val());
+    });
 }
 
 function executeQuery(queryTerms) {
