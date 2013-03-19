@@ -5,5 +5,7 @@
     <ProjectItemFile Source="Default.aspx" Target="Sample_UserProfiles\" Type="ElementFile" />
     <ProjectItemFile Source="UserProfiles.ts" Target="Sample_UserProfiles\" Type="ElementFile" />
     <ProjectItemFile Source="UserProfiles.js" Target="Sample_UserProfiles\" Type="ElementFile" />
+    <ProjectItemFile Source="UserProfiles.min.js" Target="Sample_UserProfiles\" Type="ElementFile" />
+    <ProjectItemFile Source="UserProfiles.js.map" Target="Sample_UserProfiles\" Type="ElementFile" />
   </Files>
 </ProjectItem>

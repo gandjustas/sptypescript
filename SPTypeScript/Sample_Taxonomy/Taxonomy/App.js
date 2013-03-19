@@ -6,7 +6,7 @@
     var termStore;
     var groups;
     $(document).ready(function () {
-        context = SP.ClientContext.get_current();
+        context = SP.ClientContextPromise.get_current();
         site = context.get_site();
         web = context.get_web();
         $('#listExisting').click(function () {
@@ -53,30 +53,29 @@
         }
         var currentGroup = groups.getById(groupID);
         context.load(currentGroup);
-        context.executeQueryAsync(function () {
-            var termSets = currentGroup.get_termSets();
+        var termSets;
+        context.executeQueryPromise().then(function () {
+            termSets = currentGroup.get_termSets();
             context.load(termSets);
-            context.executeQueryAsync(function () {
-                var termSetEnum = termSets.getEnumerator();
-                while(termSetEnum.moveNext()) {
-                    (function () {
-                        var currentTermSet = termSetEnum.get_current();
-                        var termSetName = document.createElement("div");
-                        termSetName.appendChild(document.createTextNode(" + " + currentTermSet.get_name()));
-                        termSetName.setAttribute("style", "float:none;cursor:pointer;");
-                        var termSetID = currentTermSet.get_id();
-                        termSetName.setAttribute("id", termSetID.toString());
-                        $(termSetName).click(function () {
-                            return showTerms(event, groupID, termSetID);
-                        });
-                        parentDiv.appendChild(termSetName);
-                    })();
-                }
-            }, function () {
-                parentDiv.appendChild(document.createTextNode("An error occurred in loading the term sets for this group"));
-            });
-        }, function () {
-            parentDiv.appendChild(document.createTextNode("An error occurred in loading the term sets for this group"));
+            return context.executeQueryPromise();
+        }).then(function () {
+            var termSetEnum = termSets.getEnumerator();
+            while(termSetEnum.moveNext()) {
+                (function () {
+                    var currentTermSet = termSetEnum.get_current();
+                    var termSetName = document.createElement("div");
+                    termSetName.appendChild(document.createTextNode(" + " + currentTermSet.get_name()));
+                    termSetName.setAttribute("style", "float:none;cursor:pointer;");
+                    var termSetID = currentTermSet.get_id();
+                    termSetName.setAttribute("id", termSetID.toString());
+                    $(termSetName).click(function () {
+                        return showTerms(event, groupID, termSetID);
+                    });
+                    parentDiv.appendChild(termSetName);
+                })();
+            }
+        }).fail(function () {
+            return parentDiv.appendChild(document.createTextNode("An error occurred in loading the term sets for this group"));
         });
     }
     function showTerms(event, groupID, termSetID) {
@@ -86,36 +85,33 @@
             parentDiv.removeChild(parentDiv.lastChild);
         }
         var currentGroup = groups.getById(groupID);
+        var termSets;
+        var currentTermSet;
+        var terms;
         context.load(currentGroup);
-        context.executeQueryAsync(function () {
-            var termSets = currentGroup.get_termSets();
+        context.executeQueryPromise().then(function () {
+            termSets = currentGroup.get_termSets();
             context.load(termSets);
-            context.executeQueryAsync(function () {
-                var currentTermSet = termSets.getById(termSetID);
-                context.load(currentTermSet);
-                context.executeQueryAsync(function () {
-                    var terms = currentTermSet.get_terms();
-                    context.load(terms);
-                    context.executeQueryAsync(function () {
-                        var termsEnum = terms.getEnumerator();
-                        while(termsEnum.moveNext()) {
-                            var currentTerm = termsEnum.get_current();
-                            var term = document.createElement("div");
-                            term.appendChild(document.createTextNode("    - " + currentTerm.get_name()));
-                            term.setAttribute("style", "float:none;margin-left:10px;");
-                            parentDiv.appendChild(term);
-                        }
-                    }, function () {
-                        parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set"));
-                    });
-                }, function () {
-                    parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set"));
-                });
-            }, function () {
-                parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set"));
-            });
-        }, function () {
-            parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set"));
+            return context.executeQueryPromise();
+        }).then(function () {
+            currentTermSet = termSets.getById(termSetID);
+            context.load(currentTermSet);
+            return context.executeQueryPromise();
+        }).then(function () {
+            terms = currentTermSet.get_terms();
+            context.load(terms);
+            return context.executeQueryPromise();
+        }).then(function () {
+            var termsEnum = terms.getEnumerator();
+            while(termsEnum.moveNext()) {
+                var currentTerm = termsEnum.get_current();
+                var term = document.createElement("div");
+                term.appendChild(document.createTextNode("    - " + currentTerm.get_name()));
+                term.setAttribute("style", "float:none;margin-left:10px;");
+                parentDiv.appendChild(term);
+            }
+        }).fail(function () {
+            return parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set"));
         });
     }
     function onFailRetrieveGroups(sender, args) {

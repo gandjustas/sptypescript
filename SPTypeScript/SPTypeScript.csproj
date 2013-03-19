@@ -60,6 +60,9 @@
     <None Include="Sample_UserProfiles\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{11708b77-3db1-4de7-96e5-75df4d64b4c0}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_UserProfiles\UserProfiles.js.map">
+      <DependentUpon>UserProfiles.ts</DependentUpon>
+    </None>
     <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
     </None>
@@ -67,6 +70,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SharePoint.d.tt</DependentUpon>
+    </Content>
+    <Content Include="Sample_UserProfiles\UserProfiles.min.js">
+      <DependentUpon>UserProfiles.ts</DependentUpon>
     </Content>
     <Content Include="Sample_WorkflowServices\Default.aspx" />
     <Content Include="Sample_WorkflowServices\Elements.xml" />
@@ -136,7 +142,6 @@
     <Content Include="Sample_BasicCSOMActions\ChromeLoader.js" />
     <TypeScriptCompile Include="Sample_BasicCSOMActions\BasicTasksJSOM.ts" />
     <Content Include="Sample_BasicCSOMActions\Shared Documents\Elements.xml" />
-    <Content Include="Sample_BasicCSOMActions\Shared Documents\TextFile1.txt" />
     <None Include="Sample_BasicCSOMActions\Announcements\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{cf975992-f191-4bab-a103-ee84b785dad5}</SharePointProjectItemId>
     </None>

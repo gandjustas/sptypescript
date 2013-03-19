@@ -2,7 +2,7 @@
 ///<reference path="../../definitions/jquery.d.ts" />
 ///<reference path="../../extensions/CSOMPromise.ts" />
 (function () {
-    var context: SP.ClientContext;
+    var context: SP.ClientContextPromise;
     var web: SP.Web;
     var site: SP.Site;
     var session: SP.Taxonomy.TaxonomySession;
@@ -13,7 +13,7 @@
     // which is needed to use the SharePoint object model.
     // It also wires up the click handlers for the two HTML buttons in Default.aspx.
     $(document).ready(function () {
-        context = SP.ClientContext.get_current();
+        context = SP.ClientContextPromise.get_current();
         site = context.get_site();
         web = context.get_web();
         $('#listExisting').click(function () { listGroups(); });
@@ -89,19 +89,20 @@
         // We need to load and populate the matching group first, or the
         // term sets that it contains will be inaccessible to our code.
         context.load(currentGroup);
-        context.executeQueryAsync(
-            function () {
-
-                // The group is now available becuase this is the 
-                // success callback. So now we'll load and populate the
-                // term set collection. We have to do this before we can 
-                // iterate through the collection, so we can do this
-                // with the following nested executeQueryAsync method call.
-                var termSets = currentGroup.get_termSets();
-                context.load(termSets);
-                context.executeQueryAsync(
-                function () {
-
+        var termSets: SP.Taxonomy.TermSetCollection;
+        context.executeQueryPromise()
+               .then(
+                    () => {
+                        // The group is now available becuase this is the 
+                        // success callback. So now we'll load and populate the
+                        // term set collection. We have to do this before we can 
+                        // iterate through the collection, so we can do this
+                        // with the following nested executeQueryAsync method call.
+                       termSets = currentGroup.get_termSets();
+                       context.load(termSets);
+                       return context.executeQueryPromise()
+                    })
+               .then(() => {
                     // The term sets are now available becuase this is the 
                     // success callback. So now we'll iterate through the collection
                     // and create the clickable div. Also note how we create a 
@@ -126,18 +127,8 @@
                         })();
                     }
 
-                },
-                function () {
-                    //Failure to load term set
-                    parentDiv.appendChild(document.createTextNode("An error occurred in loading the term sets for this group"));
-                });
-
-            },
-             function () {
-                 //Failure to load current group
-                 parentDiv.appendChild(document.createTextNode("An error occurred in loading the term sets for this group"));
-             });
-
+                })
+             .fail(() => parentDiv.appendChild(document.createTextNode("An error occurred in loading the term sets for this group")));
     }
 
 
@@ -164,74 +155,45 @@
         // We need to load and populate the matching group first, or the
         // term sets that it contains will be inaccessible to our code.
         var currentGroup = groups.getById(groupID);
+        var termSets:SP.Taxonomy.TermSetCollection;
+        var currentTermSet:SP.Taxonomy.TermSet;
+        var terms:SP.Taxonomy.TermCollection;
+
         context.load(currentGroup);
-        context.executeQueryAsync(
-
-            // The group is now available becuase this is the 
-            // success callback. So now we'll load and populate the
-            // term set collection. We have to do this before we can 
-            // iterate through the collection, so we can do this
-            // with the following nested executeQueryAsync method call.
-            function () {
-                var termSets = currentGroup.get_termSets();
-                context.load(termSets);
-                context.executeQueryAsync(
-                function () {
-
-                    // The term sets are now available becuase this is the 
-                    // success callback. So now we'll iterate through the collection
-                    // and get a reference to the specific term set that was represented 
-                    // by the clicked div.
-                    var currentTermSet = termSets.getById(termSetID); 
-
-                    // We need to load and populate the term set, so that we can 
-                    // access the terms in it.
+        context
+            .executeQueryPromise()
+            .then(() => {
+                    // The group is now available becuase this is the 
+                    // success callback. So now we'll load and populate the
+                    // term set collection. We have to do this before we can 
+                    // iterate through the collection, so we can do this
+                    // with the following nested executeQueryAsync method call.
+                    termSets = currentGroup.get_termSets();
+                    context.load(termSets);
+                    return context.executeQueryPromise();
+                })
+            .then(() => {
+                    currentTermSet = termSets.getById(termSetID); 
                     context.load(currentTermSet);
-                    context.executeQueryAsync(
-                        function () {
+                    return context.executeQueryPromise();
+                })
+            .then(() => {
+                    terms = currentTermSet.get_terms();
+                    context.load(terms);
+                    return context.executeQueryPromise();
+                })
+            .then(() => { 
+                    var termsEnum = terms.getEnumerator();
+                    while (termsEnum.moveNext()) {
+                        var currentTerm = <SP.Taxonomy.Term>termsEnum.get_current();
 
-                            // Now we have access to the term set because this is the 
-                            // success callback, so we can now create and populate a collection
-                            // object to hold the actual terms.
-                            // Note that we need to do one final load and populate before we
-                            // can iterate over the collection object.
-                            var terms = currentTermSet.get_terms();
-                            context.load(terms);
-                            context.executeQueryAsync(
-                                function () {
-
-                                    // Now we can iterate over the terms because this is the 
-                                    // success callback. So we'll build an indented list of terms
-                                    var termsEnum = terms.getEnumerator();
-                                    while (termsEnum.moveNext()) {
-                                        var currentTerm = <SP.Taxonomy.Term>termsEnum.get_current();
-
-                                        var term = document.createElement("div");
-                                        term.appendChild(document.createTextNode("    - " + currentTerm.get_name()));
-                                        term.setAttribute("style", "float:none;margin-left:10px;");
-                                        parentDiv.appendChild(term);
-                                    }
-                                },
-                                function () {
-                                    //Failure to load terms
-                                    parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set"));
-                                });
-                        },
-                        function () {
-                            //Failure to load the current term set
-                            parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set"));
-                        });
-                },
-                function () {
-                    //Failure to load term sets
-                    parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set"));
-                });
-
-            },
-             function () {
-                 //Failure to load current group
-                 parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set"));
-             });
+                        var term = document.createElement("div");
+                        term.appendChild(document.createTextNode("    - " + currentTerm.get_name()));
+                        term.setAttribute("style", "float:none;margin-left:10px;");
+                        parentDiv.appendChild(term);
+                    }
+                })
+            .fail(() => parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set")));       
     }
 
     // Runs when the executeQueryAsync method in the onListTaxonomySession function has failed.

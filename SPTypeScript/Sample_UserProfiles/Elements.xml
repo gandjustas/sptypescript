@@ -4,5 +4,7 @@
     <File Path="Sample_UserProfiles\Default.aspx" Url="Sample_UserProfiles/Default.aspx" />
     <File Path="Sample_UserProfiles\UserProfiles.ts" Url="Sample_UserProfiles/UserProfiles.ts" />
     <File Path="Sample_UserProfiles\UserProfiles.js" Url="Sample_UserProfiles/UserProfiles.js" />
+    <File Path="Sample_UserProfiles\UserProfiles.min.js" Url="Sample_UserProfiles/UserProfiles.min.js" />
+    <File Path="Sample_UserProfiles\UserProfiles.js.map" Url="Sample_UserProfiles/UserProfiles.js.map" />
   </Module>
 </Elements>
