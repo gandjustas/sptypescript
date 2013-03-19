@@ -6,6 +6,28 @@ declare module SP {
             exactMatch = 1
         };
 
+        export enum ChangeItemType {
+            unknown = 0,
+            term = 1,
+            termSet = 2,
+            group = 3,
+            termStore = 4,
+            site = 5
+        };
+
+        export enum ChangeOperationType {
+            unknown = 0,
+            add = 1,
+            edit = 2,
+            deleteObject = 3,
+            move = 4,
+            copy = 5,
+            pathChange = 6,
+            merge = 7,
+            importObject = 8,
+            restore = 9
+        };
+
 
         export class TaxonomySession extends SP.ClientObject {
             static getTaxonomySession(context: SP.ClientContext): TaxonomySession;
@@ -167,7 +189,7 @@ declare module SP {
             getTerms(labelMatchInformation: LabelMatchInformation): TermCollection;
             getTermsWithCustomProperty(customPropertyName: string, trimUnavailable: bool): TermCollection;
             getTermsWithCustomProperty(customPropertyMatchInformation: CustomPropertyMatchInformation): TermCollection;
-            move(targetGroup: TermGroup):void;
+            move(targetGroup: TermGroup): void;
         }
 
         export class TermCollection extends SP.ClientObjectCollection {
@@ -208,17 +230,17 @@ declare module SP {
 
             getTerms(pagingLimit: number): TermCollection;
             getTerms(
-                    termLabel: string,
-                    lcid:number,
-                    defaultLabelOnly: bool,
-                    stringMatchOption: StringMatchOption,
-                    resultCollectionSize:number,
-                    trimUnavailable: bool): TermCollection;
+                termLabel: string,
+                lcid: number,
+                defaultLabelOnly: bool,
+                stringMatchOption: StringMatchOption,
+                resultCollectionSize: number,
+                trimUnavailable: bool): TermCollection;
 
             merge(termToMerge: Term): void;
             move(newParnt: TermSetItem): void;
             reassignSourceTerm(reusedTerm: Term): void;
-            setDescription(description:string, lcid:number):void;
+            setDescription(description: string, lcid: number): void;
             setLocalCustomProperty(name: string, value: string): void;
             getIsDescendantOf(ancestorTerm: Term): SP.BooleanResult;
             getPath(lcid: number): SP.StringResult;
@@ -243,21 +265,147 @@ declare module SP {
         }
 
         export class LabelMatchInformation extends SP.ClientObject {
+            constructor(context: SP.ClientContext);
+            get_defaultLabelOnly(): bool;
+            set_defaultLabelOnly(value: bool): void;
+            get_excludeKeyword(): bool;
+            set_excludeKeyword(value: bool): void;
+            get_lcid(): number;
+            set_lcid(value: number): void;
+            get_resultCollectionSize(): number;
+            set_resultCollectionSize(value: number): void;
+            get_stringMatchOption(): StringMatchOption;
+            set_stringMatchOption(value: StringMatchOption): void;
+            get_termLabel(): string;
+            set_termLabel(value: string): void;
+            get_trimDeprecated(): bool;
+            set_trimDeprecated(value: bool): void;
+            get_trimUnavailable(): bool;
+            set_trimUnavailable(value: bool): void;
         }
 
         export class CustomPropertyMatchInformation extends SP.ClientObject {
+            constructor(context: SP.ClientContext);
+            get_customPropertyName(): string;
+            set_customPropertyName(value: string): void;
+            get_customPropertyValue(): string;
+            set_customPropertyValue(value: string): void;
+            get_resultCollectionSize(): number;
+            set_resultCollectionSize(value: number): void;
+            get_stringMatchOption(): StringMatchOption;
+            set_stringMatchOption(value: StringMatchOption): void;
+            get_trimUnavailable(): bool;
+            set_trimUnavailable(value: bool): void;
         }
 
         export class ChangeInformation extends SP.ClientObject {
+            constructor(context: SP.ClientContext);
+            get_itemType(): ChangeItemType;
+            set_itemType(value: ChangeItemType): void;
+            get_operationType(): ChangeOperationType;
+            set_operationType(value: ChangeOperationType): void;
+            get_startTime(): Date;
+            set_startTime(value: Date): void;
+            get_withinTimeSpan(): number;
+            set_withinTimeSpan(value: number): void;
         }
 
         export class ChangedItemCollection extends SP.ClientObjectCollection {
+            itemAt(index: number): ChangedItem;
+            get_item(index: number): ChangedItem;
+        }
+
+        export class ChangedItem extends SP.ClientObject {
+            get_changedBy(): string;
+            get_changedTime(): Date;
+            get_id(): SP.Guid;
+            get_itemType(): ChangeItemType;
+            get_operation(): ChangeOperationType;
+        }
+
+        export class ChangedSite extends ChangedItem {
+            get_siteId(): SP.Guid;
+            get_termId(): SP.Guid;
+            get_termSetId(): SP.Guid;
+        }
+
+        export class ChangedGroup extends ChangedItem {
+        }
+
+        export class ChangedTerm extends ChangedItem {
+            get_changedCustomProperties(): string[];
+            get_changedLocalCustomProperties(): string[];
+            get_groupId(): SP.Guid;
+            get_lcidsForChangedDescriptions(): number[];
+            get_lcidsForChangedLabels(): number[];
+            get_termSetId(): SP.Guid;
+        }
+
+        export class ChangedTermSet extends ChangedItem {
+            get_fromGroupId(): SP.Guid;
+            get_groupId(): SP.Guid;
+        }
+        export class ChangedTermStore extends ChangedItem {
+            get_changedLanguage(): number;
+            get_isDefaultLanguageChanged(): bool;
+            get_isFullFarmRestore(): bool;
         }
 
         export class TaxonomyField extends SP.FieldLookup {
+            constructor(context: SP.ClientContext, fields: SP.FieldCollection, filedName: string);
+            get_anchorId(): SP.Guid;
+            set_anchorId(value: SP.Guid): void;
+            get_createValuesInEditForm(): bool;
+            set_createValuesInEditForm(value: bool): void;
+            get_isAnchorValid(): bool;
+            get_isKeyword(): bool;
+            set_isKeyword(value: bool): void;
+            get_isPathRendered(): bool;
+            set_isPathRendered(value: bool): void;
+            get_isTermSetValid(): bool;
+            get_open(): bool;
+            set_open(value: bool): void;
+            get_sspId(): SP.Guid;
+            set_sspId(value: SP.Guid): void;
+            get_targetTemplate(): string;
+            set_targetTemplate(value: string): void;
+            get_termSetId(): SP.Guid;
+            set_termSetId(value: SP.Guid): void;
+            get_textField(): SP.Guid;
+            get_userCreated(): SP.Guid;
+            set_userCreated(value: SP.Guid): void;
+
+            getFieldValueAsText(value: TaxonomyFieldValue): SP.StringResult;
+            getFieldValueAsTaxonomyFieldValue(value: string): TaxonomyFieldValue;
+            getFieldValueAsTaxonomyFieldValueCollection(value: string): TaxonomyFieldValueCollection;
+            setFieldValueByTerm(listItem: SP.ListItem, term: Term, lcid: number): void;
+            setFieldValueByTermCollection(listItem: SP.ListItem, terms: TermCollection, lcid: number): void;
+            setFieldValueByCollection(listItem: SP.ListItem, terms: Term[], lcid: number): void;
+            setFieldValueByValue(listItem: SP.ListItem, taxValue: TaxonomyFieldValue): void;
+            setFieldValueByValueCollection(listItem: SP.ListItem, taxValueCollection: TaxonomyFieldValueCollection): void;
+            getFieldValueAsHtml(value: TaxonomyFieldValue): SP.StringResult;
+            getValidatedString(value: TaxonomyFieldValue): SP.StringResult;
+
+        }
+
+        export class TaxonomyFieldValueCollection extends SP.ClientObjectCollection {
+            constructor(context: SP.ClientContext, fieldValue: string, creatingField: SP.Field);
+            itemAt(index: number): TaxonomyFieldValue;
+            get_item(index: number): TaxonomyFieldValue;
+            populateFromLabelGuidPairs(text: string): void;
+        }
+
+        export class TaxonomyFieldValue extends SP.ClientValueObject {
+            get_label(): string;
+            set_label(value: string): void;
+            get_termGuid(): SP.Guid;
+            set_termGuid(value: SP.Guid): void;
+            get_wssId(): SP.Guid;
+            set_wssId(value: SP.Guid): void;
         }
 
         export class MobileTaxonomyField extends SP.ClientObject {
+            get_readOnly(): bool;
         }
     }
 }
