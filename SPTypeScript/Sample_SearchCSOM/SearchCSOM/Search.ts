@@ -1,6 +1,4 @@
-///<reference path="../../definitions/SP.Init.d.ts" />
-///<reference path="../../definitions/SP.d.ts" />
-///<reference path="../../definitions/SP.Search.d.ts" />
+///<reference path="../../Definitions/SharePoint.d.ts" />
 ///<reference path="../../definitions/jquery.d.ts" />
 
 
@@ -15,8 +13,10 @@ function showToolbar() {
         executeQuery($('#queryTerms').val());
     });
     $("#toolbarDiv input[type=text]").keypress(e => {
-        if (e.keyCode == 13)
+        if (e.keyCode == 13) {
             executeQuery($('#queryTerms').val());
+            e.preventDefault();
+        }
     });
 }
 

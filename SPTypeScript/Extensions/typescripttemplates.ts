@@ -1,5 +1,4 @@
-﻿/// <reference path="..\Definitions\SP.Init.d.ts"/>
-/// <reference path="..\Definitions\clienttemplates.d.ts"/>
+﻿///<reference path="../Definitions/SharePoint.d.ts" />
 
 /** Lightweight client-side rendering template overrides.*/
 module CSR {

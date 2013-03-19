@@ -11,13 +11,6 @@ declare module SP {
     }
 }
 
-declare module SP.UI {
-    export class Workspace {
-        static add_resized(func: () => void): void;
-        static remove_resized(func: () => void): void;
-    }
-}
-
 /** Register function to rerun on partial update in MDS-enabled site.*/
 declare function RegisterModuleInit(scriptFileName: string, initFunc: () => void ): void;
 

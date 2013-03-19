@@ -1,8 +1,4 @@
-///<reference path="../definitions/MicrosoftAjax.d.ts" />
-///<reference path="../definitions/SP.d.ts" />
-///<reference path="../definitions/SP.Init.d.ts" />
-///<reference path="../definitions/clienttemplates.d.ts" />
-///<reference path="../definitions/clientforms.d.ts" />
+///<reference path="../Definitions/SharePoint.d.ts" />
 ///<reference path="../extensions/typescripttemplates.ts" />
 
 (function () {

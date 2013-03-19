@@ -1,6 +1,4 @@
-﻿/// <reference path="..\Definitions\MicrosoftAjax.d.ts"/>
-/// <reference path="..\Definitions\SP.Init.d.ts"/>
-/// <reference path="..\Definitions\SP.d.ts"/>
+﻿///<reference path="../Definitions/SharePoint.d.ts" />
 
 // Website tasks
 function retrieveWebsite(resultpanel:HTMLElement) {

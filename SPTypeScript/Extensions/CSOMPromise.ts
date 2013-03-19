@@ -1,6 +1,5 @@
 /// <reference path="../Definitions/jQuery.d.ts" />
-/// <reference path="../Definitions/SP.Init.d.ts" />
-/// <reference path="../Definitions/SP.d.ts" />
+/// <reference path="../Definitions/SharePoint.d.ts" />
 
 module SP {
 

@@ -32,3 +32,11 @@
     </div>
 
 </asp:Content>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server">
+    Taxonomy
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">
+    Taxonomy
+</asp:Content>

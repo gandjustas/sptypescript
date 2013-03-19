@@ -1,7 +1,4 @@
-///<reference path="../Definitions/MicrosoftAjax.d.ts" />
-///<reference path="../Definitions/SP.d.ts" />
-///<reference path="../Definitions/SP.Init.d.ts" />
-///<reference path="../Definitions/SP.UserProfiles.d.ts" />
+///<reference path="../Definitions/SharePoint.d.ts" />
 
 SP.SOD.executeOrDelayUntilScriptLoaded(() => {
     var context = SP.ClientContext.get_current();

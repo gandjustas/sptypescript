@@ -1,6 +1,4 @@
-///<reference path="../../definitions/SP.Init.d.ts" />
-///<reference path="../../definitions/SP.d.ts" />
-///<reference path="../../definitions/SP.Taxonomy.d.ts" />
+///<reference path="../../Definitions/SharePoint.d.ts" />
 ///<reference path="../../definitions/jquery.d.ts" />
 ///<reference path="../../extensions/CSOMPromise.ts" />
 (function () {

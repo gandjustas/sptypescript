@@ -9,6 +9,7 @@ function showToolbar() {
     $("#toolbarDiv input[type=text]").keypress(function (e) {
         if(e.keyCode == 13) {
             executeQuery($('#queryTerms').val());
+            e.preventDefault();
         }
     });
 }

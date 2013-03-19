@@ -19,3 +19,11 @@
     </div>
     <div id="resultsDiv"></div>
 </asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server">
+    Search
+</asp:Content>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">
+    Search
+</asp:Content>
