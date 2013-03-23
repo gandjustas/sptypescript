@@ -59,7 +59,7 @@
     }
     ;
     function GetDisplayHtml(complexity) {
-        var pair = map[complexity] || map["default"];
+        var pair = map[complexity] || map["Default"];
         return "<span style='background-color : " + pair.color + "' >&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;" + complexity + " Effort: " + pair.days;
     }
     function GetEditHtml(ctx, dropDownId, messageId) {
