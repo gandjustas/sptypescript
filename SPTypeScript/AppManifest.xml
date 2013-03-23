@@ -18,5 +18,6 @@
     <AppPermissionRequest Scope="http://sharepoint/search" Right="QueryAsUserIgnoreAppPrincipal" />
     <AppPermissionRequest Scope="http://sharepoint/social/tenant" Right="Read" />
     <AppPermissionRequest Scope="http://sharepoint/taxonomy" Right="Write" />
+    <AppPermissionRequest Scope="http://sharepoint/content/tenant" Right="Write" />
   </AppPermissionRequests>
 </App>

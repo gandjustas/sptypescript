@@ -18,6 +18,7 @@
             <li><a href="../Sample_WorkflowServices">Workflow Services: Retrieve list of available workflow actions</a></li>
             <li><a href="javascript:document.location = '../SearchCSOM/Search.aspx?'+document.URL.split('?')[1]">Search: Using search CSOM  with TypeScript</a></li>
             <li><a href="../Sample_UserProfiles">User Profiles: Retrieve properties for current user</a></li>
+            <li><a href="javascript:document.location = '../Sample_Social?' + document.URL.split('?')[1]">Social: Determine if the current user follows a site and follow it, if not yet</a></li>
         </ol>
     </div>
 

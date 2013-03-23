@@ -57,6 +57,9 @@
     <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
       <DependentUpon>Search.ts</DependentUpon>
     </None>
+    <None Include="Sample_Social\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a5e6d115-1d70-4fc2-a237-5e9fa521413f}</SharePointProjectItemId>
+    </None>
     <None Include="Sample_UserProfiles\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{11708b77-3db1-4de7-96e5-75df4d64b4c0}</SharePointProjectItemId>
     </None>
@@ -70,6 +73,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SharePoint.d.tt</DependentUpon>
+    </Content>
+    <Content Include="Sample_Social\Default.aspx" />
+    <Content Include="Sample_Social\Elements.xml" />
+    <TypeScriptCompile Include="Sample_Social\Social.ts" />
+    <Content Include="Sample_Social\Social.js">
+      <DependentUpon>Social.ts</DependentUpon>
     </Content>
     <Content Include="Sample_UserProfiles\UserProfiles.min.js">
       <DependentUpon>UserProfiles.ts</DependentUpon>

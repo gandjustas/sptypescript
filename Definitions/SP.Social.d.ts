@@ -65,13 +65,13 @@ declare module SP {
             everyone = 4
         }
 
-
-        export enum SocialFollowResult {
-            ok = 0,
-            alreadyFollowing = 1,
-            limitReached = 2,
-            internalError = 3
-        }
+        // For some reasons this enum doesn't exist
+        //export enum SocialFollowResult {
+        //    ok = 0,
+        //    alreadyFollowing = 1,
+        //    limitReached = 2,
+        //    internalError = 3
+        //}
 
         /** Provides information about the feed.
             This type provides information about whether the feed on the server contains additional threads that were not returned. */
@@ -456,7 +456,11 @@ declare module SP {
             /** URI to a site  that lists the current user's followed sites. */
             get_followedSitesUri(): string;
             /** Adds the specified actor to the current user's list of followed items.
-                Returns SocialFollowResult value wrapped into SP.IntResult object */
+                Returns one of the following values, wrapped into the SP.IntResult object:
+                0 = ok, 
+                1 = alreadyFollowing, 
+                2 = limitReached, 
+                3 = internalError */
             follow(actor: SocialActorInfo): SP.IntResult;
             stopFollowing(actor: SocialActorInfo): SP.BooleanResult;
             isFollowed(actor: SocialActorInfo): SP.BooleanResult;
