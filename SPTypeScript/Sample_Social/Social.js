@@ -11,7 +11,7 @@ SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         } else {
             var followResult = followingManager.follow(info);
             context.executeQueryAsync(function (sender, args) {
-                if(followResult.get_value() == SP.Social.SocialFollowResult.ok) {
+                if(followResult.get_value() == 0) {
                     $get("results").innerHTML = "Now you're following the app host site! Check it on your profile page.";
                 } else {
                     $get("results").innerHTML = "You failed to follow the app host site due to some mysterious error.";

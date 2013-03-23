@@ -1,5 +1,7 @@
 ///<reference path="../Definitions/SharePoint.d.ts" />
 
+// App permissions required for this example to work: Tenant Write
+
 SP.SOD.executeOrDelayUntilScriptLoaded(() => {
     var context = SP.ClientContext.get_current();
     var followingManager = new SP.Social.SocialFollowingManager(context);
@@ -14,7 +16,7 @@ SP.SOD.executeOrDelayUntilScriptLoaded(() => {
         else {
             var followResult = followingManager.follow(info);
             context.executeQueryAsync((sender, args) => {
-                if (<SP.Social.SocialFollowResult>followResult.get_value() == SP.Social.SocialFollowResult.ok)
+                if (followResult.get_value() == 0)
                     $get("results").innerHTML = "Now you're following the app host site! Check it on your profile page.";
                 else
                     $get("results").innerHTML = "You failed to follow the app host site due to some mysterious error.";
