@@ -65,6 +65,14 @@ declare module SP {
             everyone = 4
         }
 
+
+        export enum SocialFollowResult {
+            ok = 0,
+            alreadyFollowing = 1,
+            limitReached = 2,
+            internalError = 3
+        }
+
         /** Provides information about the feed.
             This type provides information about whether the feed on the server contains additional threads that were not returned. */
         export enum SocialFeedAttributes {
@@ -442,6 +450,7 @@ declare module SP {
         /** Provides properties and methods for managing a user's list of followed actors.
             Actors can be users, documents, sites, and tags. */
         export class SocialFollowingManager extends SP.ClientObject {
+            constructor(context: SP.ClientRuntimeContext);
             /** URI to a site  that lists the current user's followed documents. */
             get_followedDocumentsUri(): string;
             /** URI to a site  that lists the current user's followed sites. */

@@ -60,3 +60,6 @@ declare class _spPageContextInfo {
 declare function STSHtmlEncode(value: string): string;
 
 declare function AddEvtHandler(element: HTMLElement, event:string, func: EventListener): void;
+
+/** Gets query string parameter */
+declare function GetUrlKeyValue(key: string): string;
