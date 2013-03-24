@@ -1,7 +1,7 @@
 ///<reference path="../../Definitions/SharePoint.d.ts" />
 ///<reference path="../../extensions/typescripttemplates.ts" />
 
-(function () {
+module _ {
     function init() {
         CSR.override(10057, 2)
            .onPreRender((ctx: SPClientTemplates.RenderContext_InView) => {
@@ -48,4 +48,4 @@
         }, "sp.js");
     }, "clienttemplates.js");
 
-})();
+};

@@ -1,4 +1,5 @@
-(function () {
+var _;
+(function (_) {
     function init() {
         var complexityFieldName = "ComplexityField";
         return CSR.override().fieldView(complexityFieldName, SPFieldComplexity_View).fieldDisplay(complexityFieldName, SPFieldComplexity_Display).fieldEdit(complexityFieldName, SPFieldComplexity_Edit).fieldNew(complexityFieldName, SPFieldComplexity_Edit).register();
@@ -81,5 +82,5 @@
             RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Sample_CSRComplexityField/CSRField.js"), init);
         }, "sp.js");
     }, "clienttemplates.js");
-})();
+})(_ || (_ = {}));
 //@ sourceMappingURL=CSRField.js.map

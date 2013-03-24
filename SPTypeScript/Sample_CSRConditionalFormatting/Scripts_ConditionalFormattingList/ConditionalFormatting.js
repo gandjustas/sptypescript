@@ -1,4 +1,5 @@
-(function () {
+var _;
+(function (_) {
     function init() {
         CSR.override(171, 1).onPostRender(function (ctx) {
             for(var i = 0; i < ctx.ListData.Row.length; i++) {
@@ -24,5 +25,6 @@
             }, "sp.js");
         }, "clienttemplates.js");
     }
-})();
+})(_ || (_ = {}));
+;
 //@ sourceMappingURL=ConditionalFormatting.js.map

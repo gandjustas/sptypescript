@@ -5,5 +5,7 @@
     <ProjectItemFile Source="Default.aspx" Target="Sample_Social\" Type="ElementFile" />
     <ProjectItemFile Source="Social.ts" Target="Sample_Social\" Type="ElementFile" />
     <ProjectItemFile Source="Social.js" Target="Sample_Social\" Type="ElementFile" />
+    <ProjectItemFile Source="Social.min.js" Target="Sample_Social\" Type="ElementFile" />
+    <ProjectItemFile Source="Social.js.map" Target="Sample_Social\" Type="ElementFile" />
   </Files>
 </ProjectItem>

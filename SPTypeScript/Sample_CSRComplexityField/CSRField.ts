@@ -1,7 +1,7 @@
 ///<reference path="../Definitions/SharePoint.d.ts" />
 ///<reference path="../extensions/typescripttemplates.ts" />
 
-(function () {
+module _ {
     function init() {
         var complexityFieldName = "ComplexityField";
         return CSR.override()
@@ -90,4 +90,4 @@
 
     }, "clienttemplates.js");
 
-})();
+}

@@ -1,7 +1,7 @@
 ///<reference path="../../Definitions/SharePoint.d.ts" />
 ///<reference path="../../definitions/jquery.d.ts" />
 ///<reference path="../../extensions/CSOMPromise.ts" />
-(function () {
+module _ {
     var context: SP.ClientContextPromise;
     var web: SP.Web;
     var site: SP.Site;
@@ -276,4 +276,4 @@
         $('#report').append("Failed to get session. Error: " + args.get_message());
     }
 
-})();
+};

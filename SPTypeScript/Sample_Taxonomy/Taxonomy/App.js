@@ -1,4 +1,5 @@
-(function () {
+var _;
+(function (_) {
     var context;
     var web;
     var site;
@@ -157,5 +158,6 @@
         $('#report').children().remove();
         $('#report').append("Failed to get session. Error: " + args.get_message());
     }
-})();
+})(_ || (_ = {}));
+;
 //@ sourceMappingURL=App.js.map

@@ -1,7 +1,7 @@
 ///<reference path="../../Definitions/SharePoint.d.ts" />
 ///<reference path="../../extensions/typescripttemplates.ts" />
 
-(function () {
+module _ {
     function init() {
         CSR.override(171, 1)
            .onPostRender((ctx: SPClientTemplates.RenderContext_InView) => {
@@ -33,4 +33,4 @@
             }, "sp.js");
         }, "clienttemplates.js");
     }
-})();
+};

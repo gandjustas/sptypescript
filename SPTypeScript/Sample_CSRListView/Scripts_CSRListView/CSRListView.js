@@ -1,4 +1,5 @@
-(function () {
+var _;
+(function (_) {
     function init() {
         CSR.override(10057, 2).onPreRender(function (ctx) {
             ctx.ListTitle = prompt("Type a title", ctx.ListTitle);
@@ -27,5 +28,6 @@
             RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_CSRListView/CSRListView.js"), init);
         }, "sp.js");
     }, "clienttemplates.js");
-})();
+})(_ || (_ = {}));
+;
 //@ sourceMappingURL=CSRListView.js.map
