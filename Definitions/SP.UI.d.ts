@@ -96,7 +96,31 @@ declare module SP {
             (dialogResult: DialogResult, returnValue: any): void;
         }
         /** Options for dialog creation */
-        export class DialogOptions {
+        export interface IDialogOptions {
+            /** url of the page which is shown in the modal dialog. You should use either html or url attribute, but not both. */
+            url?: string;
+            /** specifies if close button should be shown on the dialog */
+            showClose?: bool;
+            /** specifies if maximize button should be shown on the dialog */
+            allowMaximize?: bool;
+            /** callback that is called after dialog is closed */
+            dialogReturnValueCallback?: DialogReturnValueCallback;
+            /** automatically determine size of the dialog based on its contents. */
+            autoSize?: bool;
+            /** minimum width of the dialog when using autoSize option */
+            autoSizeStartWidth?: number;
+            /** include padding for adding a scrollbar */
+            includeScrollBarPadding?: bool;
+            /** width of the dialog. if not specified, will be determined automatically based on the contents of the dialog */
+            width?: number;
+            /** height of the dialog. if not specified, will be determined automatically based on the contents of the dialog */
+            height?: number;
+            /** html element which will be used as contents of the dialog. You should use either html or url attribute, but not both. */
+            html?: HTMLElement;
+            /** custom arguments to be passed to the dialog */
+            args?: any;
+        }
+        export class DialogOptions implements IDialogOptions {
             /** url of the page which is shown in the modal dialog. You should use either html or url attribute, but not both. */
             url: string;
             /** specifies if close button should be shown on the dialog */
@@ -116,7 +140,7 @@ declare module SP {
             /** height of the dialog. if not specified, will be determined automatically based on the contents of the dialog */
             height: number;
             /** html element which will be used as contents of the dialog. You should use either html or url attribute, but not both. */
-            html: Node;
+            html: HTMLElement;
             /** custom arguments to be passed to the dialog */
             args: any;
         }
@@ -142,14 +166,14 @@ declare module SP {
         /** Represents a modal dialog */
         export class ModalDialog extends SP.UI.Dialog {
             /** Displays a modal dialog defined by the specified options. */
-            static showModalDialog(options: SP.UI.DialogOptions): SP.UI.ModalDialog;
+            static showModalDialog(options: SP.UI.IDialogOptions): SP.UI.ModalDialog;
             /** Should be called from an existing dialog. */
             static commonModalDialogClose(dialogResult: SP.UI.DialogResult, returnValue: any): void;
             /** Shows a modal dialog, specified by url, callback, args, and options. Internally, uses SP.UI.ModalDialog.showModalDialog.
                 @param url overrides options.url
                 @param callback overrides options.dialogResultValueCallback
                 @param args overrides options.args */
-            static commonModalDialogOpen(url: string, options: SP.UI.DialogOptions, callback: SP.UI.DialogReturnValueCallback, args: any): void;
+            static commonModalDialogOpen(url: string, options: SP.UI.IDialogOptions, callback: SP.UI.DialogReturnValueCallback, args: any): void;
             /** Refresh the page if specified dialogResult equals to SP.UI.DialogResult.OK */
             static RefreshPage(dialogResult: SP.UI.DialogResult): void;
             /** Show page specified by the url in a modal dialog. If the dialog returns SP.UI.DialogResult.OK, the page is refreshed. */

@@ -115,5 +115,55 @@ declare module SP {
             writeToXml(writer: SP.XmlWriter, serializationContext: SP.SerializationContext): void;
             constructor();
         }
+        export class DateUtility {
+            static isLeapYear(year: number): bool;
+            static dateToJulianDay(year: number, month: number, day: number): number;
+            static julianDayToDate(julianDay: number): SP.DateTimeUtil.SimpleDate;
+            static daysInMonth(year: number, month: number): number;
+        }
+        export class HttpUtility {
+            /** Official version of STSHtmlEncode. Calls it internally. */
+            static htmlEncode(stringToEncode: string): string;
+            static urlPathEncode(stringToEncode: string): string;
+            static urlKeyValueEncode(keyOrValueToEncode: string): string;
+            static ecmaScriptStringLiteralEncode(scriptLiteralToEncode: string): string;
+            static navigateTo(url: string): void;
+            /** Appends correct "Source" parameter to the specified url, and then navigates to this url.
+                "Source" parameter is recognized in many places in SharePoint, usually to determine "Cancel" behavior. */
+            static appendSourceAndNavigateTo(url: string): void;
+            static escapeXmlText(stringToEscape: string): string;
+            static navigateHttpFolder(urlSrc: string, frameTarget: string): void;
+        }
+        export class UrlBuilder {
+            constructor(path: string);
+            static urlCombine(path1: string, path2: string): string;
+            static replaceOrAddQueryString(url: string, key: string, value: string): string;
+            static removeQueryString(url: string, key: string): string;
+            combinePath(path: string): void;
+            addKeyValueQueryString(key: string, value: string): void;
+            /** Returns the resulting url */
+            get_url(): string;
+            /** Same as get_url() */
+            toString(): string;
+        }
+    }
+    
+    export module DateTimeUtil {
+        export class SimpleDate {
+            construction(year: number, month: number, day: number, era: number);
+            get_year(): number;
+            set_year(value: number): void;
+            get_month(): number;
+            set_month(value: number): void;
+            get_day(): number;
+            set_day(value: number): void;
+            get_era(): number;
+            set_era(value: number): void;
+            static dateEquals(date1: SimpleDate, date2: SimpleDate): bool;
+            static dateLessEqual(date1: SimpleDate, date2: SimpleDate): bool;
+            static dateGreaterEqual(date1: SimpleDate, date2: SimpleDate): bool;
+            static dateLess(date1: SimpleDate, date2: SimpleDate): bool;
+            static dateGreater(date1: SimpleDate, date2: SimpleDate): bool;
+        }
     }
 }

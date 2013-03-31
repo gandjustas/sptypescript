@@ -49,7 +49,7 @@ var CSR;
             this.Templates.Fields[fieldName].EditForm = template;
             return this;
         };
-        csr.prototype.template = function (fieldName, template) {
+        csr.prototype.template = function (name, template) {
             this.Templates[name] = template;
             return this;
         };

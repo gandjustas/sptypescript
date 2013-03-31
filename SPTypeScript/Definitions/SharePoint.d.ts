@@ -5865,7 +5865,31 @@ declare module SP {
             (dialogResult: DialogResult, returnValue: any): void;
         }
         /** Options for dialog creation */
-        export class DialogOptions {
+        export interface IDialogOptions {
+            /** url of the page which is shown in the modal dialog. You should use either html or url attribute, but not both. */
+            url?: string;
+            /** specifies if close button should be shown on the dialog */
+            showClose?: bool;
+            /** specifies if maximize button should be shown on the dialog */
+            allowMaximize?: bool;
+            /** callback that is called after dialog is closed */
+            dialogReturnValueCallback?: DialogReturnValueCallback;
+            /** automatically determine size of the dialog based on its contents. */
+            autoSize?: bool;
+            /** minimum width of the dialog when using autoSize option */
+            autoSizeStartWidth?: number;
+            /** include padding for adding a scrollbar */
+            includeScrollBarPadding?: bool;
+            /** width of the dialog. if not specified, will be determined automatically based on the contents of the dialog */
+            width?: number;
+            /** height of the dialog. if not specified, will be determined automatically based on the contents of the dialog */
+            height?: number;
+            /** html element which will be used as contents of the dialog. You should use either html or url attribute, but not both. */
+            html?: HTMLElement;
+            /** custom arguments to be passed to the dialog */
+            args?: any;
+        }
+        export class DialogOptions implements IDialogOptions {
             /** url of the page which is shown in the modal dialog. You should use either html or url attribute, but not both. */
             url: string;
             /** specifies if close button should be shown on the dialog */
@@ -5885,7 +5909,7 @@ declare module SP {
             /** height of the dialog. if not specified, will be determined automatically based on the contents of the dialog */
             height: number;
             /** html element which will be used as contents of the dialog. You should use either html or url attribute, but not both. */
-            html: Node;
+            html: HTMLElement;
             /** custom arguments to be passed to the dialog */
             args: any;
         }
@@ -5911,14 +5935,14 @@ declare module SP {
         /** Represents a modal dialog */
         export class ModalDialog extends SP.UI.Dialog {
             /** Displays a modal dialog defined by the specified options. */
-            static showModalDialog(options: SP.UI.DialogOptions): SP.UI.ModalDialog;
+            static showModalDialog(options: SP.UI.IDialogOptions): SP.UI.ModalDialog;
             /** Should be called from an existing dialog. */
             static commonModalDialogClose(dialogResult: SP.UI.DialogResult, returnValue: any): void;
             /** Shows a modal dialog, specified by url, callback, args, and options. Internally, uses SP.UI.ModalDialog.showModalDialog.
                 @param url overrides options.url
                 @param callback overrides options.dialogResultValueCallback
                 @param args overrides options.args */
-            static commonModalDialogOpen(url: string, options: SP.UI.DialogOptions, callback: SP.UI.DialogReturnValueCallback, args: any): void;
+            static commonModalDialogOpen(url: string, options: SP.UI.IDialogOptions, callback: SP.UI.DialogReturnValueCallback, args: any): void;
             /** Refresh the page if specified dialogResult equals to SP.UI.DialogResult.OK */
             static RefreshPage(dialogResult: SP.UI.DialogResult): void;
             /** Show page specified by the url in a modal dialog. If the dialog returns SP.UI.DialogResult.OK, the page is refreshed. */
@@ -6479,6 +6503,56 @@ declare module SP {
             get_typeId(): string;
             writeToXml(writer: SP.XmlWriter, serializationContext: SP.SerializationContext): void;
             constructor();
+        }
+        export class DateUtility {
+            static isLeapYear(year: number): bool;
+            static dateToJulianDay(year: number, month: number, day: number): number;
+            static julianDayToDate(julianDay: number): SP.DateTimeUtil.SimpleDate;
+            static daysInMonth(year: number, month: number): number;
+        }
+        export class HttpUtility {
+            /** Official version of STSHtmlEncode. Calls it internally. */
+            static htmlEncode(stringToEncode: string): string;
+            static urlPathEncode(stringToEncode: string): string;
+            static urlKeyValueEncode(keyOrValueToEncode: string): string;
+            static ecmaScriptStringLiteralEncode(scriptLiteralToEncode: string): string;
+            static navigateTo(url: string): void;
+            /** Appends correct "Source" parameter to the specified url, and then navigates to this url.
+                "Source" parameter is recognized in many places in SharePoint, usually to determine "Cancel" behavior. */
+            static appendSourceAndNavigateTo(url: string): void;
+            static escapeXmlText(stringToEscape: string): string;
+            static navigateHttpFolder(urlSrc: string, frameTarget: string): void;
+        }
+        export class UrlBuilder {
+            constructor(path: string);
+            static urlCombine(path1: string, path2: string): string;
+            static replaceOrAddQueryString(url: string, key: string, value: string): string;
+            static removeQueryString(url: string, key: string): string;
+            combinePath(path: string): void;
+            addKeyValueQueryString(key: string, value: string): void;
+            /** Returns the resulting url */
+            get_url(): string;
+            /** Same as get_url() */
+            toString(): string;
+        }
+    }
+    
+    export module DateTimeUtil {
+        export class SimpleDate {
+            construction(year: number, month: number, day: number, era: number);
+            get_year(): number;
+            set_year(value: number): void;
+            get_month(): number;
+            set_month(value: number): void;
+            get_day(): number;
+            set_day(value: number): void;
+            get_era(): number;
+            set_era(value: number): void;
+            static dateEquals(date1: SimpleDate, date2: SimpleDate): bool;
+            static dateLessEqual(date1: SimpleDate, date2: SimpleDate): bool;
+            static dateGreaterEqual(date1: SimpleDate, date2: SimpleDate): bool;
+            static dateLess(date1: SimpleDate, date2: SimpleDate): bool;
+            static dateGreater(date1: SimpleDate, date2: SimpleDate): bool;
         }
     }
 }
