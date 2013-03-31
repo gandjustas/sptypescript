@@ -59,7 +59,7 @@ module CSR {
         }
 
         /* tier 2 methods */
-        template(fieldName: string, template: any): ICSR {
+        template(name: string, template: any): ICSR {
             this.Templates[name] = template;
             return this;
         }
