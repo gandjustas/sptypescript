@@ -54,18 +54,6 @@
     <None Include="Sample_BasicCSOMActions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{36cba84f-cd3b-408d-b7a4-fc2b2c8972e5}</SharePointProjectItemId>
     </None>
-    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingList\CustomFieldRenderingListInstance\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{223ca1df-f9f0-42df-9751-097a71de62f1}</SharePointProjectItemId>
-    </None>
-    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingList\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{71f7900c-48f0-4d2a-9039-1e6fdccabfdf}</SharePointProjectItemId>
-    </None>
-    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js.map">
-      <DependentUpon>fieldsamples.visafield.ts</DependentUpon>
-    </None>
-    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{a5e80f8f-0691-4f76-883a-531c4a2f1ba4}</SharePointProjectItemId>
-    </None>
     <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
       <DependentUpon>Search.ts</DependentUpon>
     </None>
@@ -88,19 +76,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SharePoint.d.tt</DependentUpon>
-    </Content>
-    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\CustomFieldRenderingListInstance\Elements.xml" />
-    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\Elements.xml" />
-    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\Schema.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\Elements.xml" />
-    <TypeScriptCompile Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.ts" />
-    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js">
-      <DependentUpon>fieldsamples.visafield.ts</DependentUpon>
-    </Content>
-    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js">
-      <DependentUpon>fieldsamples.visafield.ts</DependentUpon>
     </Content>
     <Content Include="Sample_Social\Default.aspx" />
     <Content Include="Sample_Social\Elements.xml" />
