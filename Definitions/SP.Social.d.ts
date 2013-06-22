@@ -5,64 +5,64 @@ declare module SP {
     export module Social {
         /** Identifies an actor as a user, document, site, or tag. */
         export enum SocialActorType {
-            user = 0,
-            document = 1,
-            site = 2,
-            tag = 3
+            user,
+            document,
+            site,
+            tag
         }
         /** Specifies one or more actor types in a query to the server. */
         export enum SocialActorTypes {
-            none = 0,
-            users = 1,
-            documents = 2,
-            sites = 4,
-            tags = 8,
+            none,
+            users,
+            documents,
+            sites,
+            tags,
             /** The set excludes documents and sites that do not have feeds. */
-            excludeContentWithoutFeeds = 268435456,
-            all = 15
+            excludeContentWithoutFeeds,
+            all
         }
         /** Specifies whether the action is to navigate to the attachment or to perform some action dependent on the context in which the attachment is presented to the user. */
         export enum SocialAttachmentActionKind {
             /** This value specifies that the action is to navigate to the attachment. */
-            navigate = 0,
+            navigate,
             /** This value specifies that the action is dependent on the context that the attachment is displayed to the user. */
-            adHocAction = 1
+            adHocAction
         }
 
         export enum SocialAttachmentKind {
-            image = 0,
-            video = 1,
-            document = 2
+            image,
+            video,
+            document
         }
 
         /** Specifies whether the item being inserted is a user, document, site, tag, or link. */
         export enum SocialDataItemType {
-            user = 0,
-            document = 1,
-            site = 2,
-            tag = 3,
-            link = 4
+            user,
+            document,
+            site,
+            tag,
+            link
         }
 
         /** Specifies whether the overlay is a link or one or more actors. */
         export enum SocialDataOverlayType {
-            link = 0,
-            actors = 1
+            link,
+            actors
         }
 
         /** Specifies whether the sort order is by creation time or modification time. */
         export enum SocialFeedSortOrder {
-            byModifiedTime = 0,
-            byCreatedTime = 1
+            byModifiedTime,
+            byCreatedTime
         }
 
         /** Identifies the kind of post to be retrieved.  */
         export enum SocialFeedType {
-            personal = 0,
-            news = 1,
-            timeline = 2,
-            likes = 3,
-            everyone = 4
+            personal,
+            news,
+            timeline,
+            likes,
+            everyone
         }
 
         // For some reasons this enum doesn't exist
@@ -76,83 +76,83 @@ declare module SP {
         /** Provides information about the feed.
             This type provides information about whether the feed on the server contains additional threads that were not returned. */
         export enum SocialFeedAttributes {
-            none = 0,
-            moreThreadsAvailable = 1
+            none,
+            moreThreadsAvailable
         }
 
         /** Specifies attributes of the post, such as whether the current user can like or delete the post. */
         export enum SocialPostAttributes {
-            none = 0,
-            canLike = 1,
-            canDelete = 2,
-            useAuthorImage = 4,
-            useSmallImage = 8,
-            canFollowUp = 16
+            none,
+            canLike,
+            canDelete,
+            useAuthorImage,
+            useSmallImage,
+            canFollowUp
         }
 
         /** Defines the type of item being specified in the SocialPostDefinitionDataItem.
             This type is only available in server-to-server calls. */
         export enum SocialPostDefinitionDataItemType {
-            text = 0,
-            user = 1,
-            document = 2,
-            site = 3,
-            tag = 4,
-            link = 5
+            text,
+            user,
+            document,
+            site,
+            tag,
+            link
         }
 
         export enum SocialPostType {
-            root = 0,
-            reply = 1
+            root,
+            reply
         }
 
         /** Specifies a status or error code. */
         export enum SocialStatusCode {
-            OK = 0,
+            OK,
             /** This value specifies that an invalid request was encountered. */
-            invalidRequest = 1,
+            invalidRequest,
             /** This value specifies that access was denied to the current user. */
-            accessDenied = 2,
-            itemNotFound = 3,
+            accessDenied,
+            itemNotFound,
             /** This value specifies that an invalid operation was attempted. */
-            invalidOperation = 4,
+            invalidOperation,
             /** This value specifies that the item was not changed by the operation. */
-            itemNotModified = 5,
-            internalError = 6,
+            itemNotModified,
+            internalError,
             /** This value specifies that there was an error reading the cache. */
-            cacheReadError = 7,
+            cacheReadError,
             /** This value specifies that there was an error updating the cache. */
-            cacheUpdateError = 8,
-            personalSiteNotFound = 9,
-            failedToCreatePersonalSite = 10,
-            notAuthorizedToCreatePersonalSite = 11,
-            cannotCreatePersonalSite = 12,
+            cacheUpdateError,
+            personalSiteNotFound,
+            failedToCreatePersonalSite,
+            notAuthorizedToCreatePersonalSite,
+            cannotCreatePersonalSite,
             /** This value specifies that a server limit was reached. */
-            limitReached = 13,
+            limitReached,
             /** This value specifies that the operation failed because there was an error handling an attachment. */
-            attachmentError = 14,
+            attachmentError,
             /** This value specifies that the operation completed with recoverable errors and that the returned data is incomplete. */
-            partialData = 15,
+            partialData,
             /** This value specifies that the operation failed because a required server feature was disabled by administrative action. */
-            featureDisabled = 16
+            featureDisabled
         }
 
         /** Specifies properties of the thread. */
         export enum SocialThreadAttributes {
-            none = 0,
-            isDigest = 1,
-            canReply = 2,
-            canLock = 4,
-            isLocked = 8,
-            replyLimitReached = 16
+            none,
+            isDigest,
+            canReply,
+            canLock,
+            isLocked,
+            replyLimitReached
         }
 
         export enum SocialThreadType {
-            normal = 0,
-            likeReference = 1,
-            replyReference = 2,
-            mentionReference = 3,
-            tagReference = 4
+            normal,
+            likeReference,
+            replyReference,
+            mentionReference,
+            tagReference
         }
 
         /** Contains information about an actor retrieved from server. An actor is a user, document, site, or tag. */

@@ -6,6 +6,7 @@ var _;
     var session;
     var termStore;
     var groups;
+
     $(document).ready(function () {
         context = SP.ClientContextPromise.get_current();
         site = context.get_site();
@@ -17,6 +18,7 @@ var _;
             createTerms();
         });
     });
+
     function listGroups() {
         session = SP.Taxonomy.TaxonomySession.getTaxonomySession(context);
         termStore = session.getDefaultSiteCollectionTermStore();
@@ -24,15 +26,19 @@ var _;
         context.load(termStore);
         context.executeQueryAsync(onListTaxonomySession, onFailListTaxonomySession);
     }
+
     function onListTaxonomySession() {
         groups = termStore.get_groups();
         context.load(groups);
         context.executeQueryAsync(onRetrieveGroups, onFailRetrieveGroups);
     }
+
     function onRetrieveGroups() {
         $('#report').children().remove();
+
         var groupEnum = groups.getEnumerator();
-        while(groupEnum.moveNext()) {
+
+        while (groupEnum.moveNext()) {
             (function () {
                 var currentGroup = groupEnum.get_current();
                 var groupName = document.createElement("div");
@@ -47,12 +53,15 @@ var _;
             })();
         }
     }
+
     function showTermSets(groupID) {
         var parentDiv = document.getElementById(groupID.toString());
-        while(parentDiv.childNodes.length > 1) {
+        while (parentDiv.childNodes.length > 1) {
             parentDiv.removeChild(parentDiv.lastChild);
         }
+
         var currentGroup = groups.getById(groupID);
+
         context.load(currentGroup);
         var termSets;
         context.executeQueryPromise().then(function () {
@@ -61,7 +70,7 @@ var _;
             return context.executeQueryPromise();
         }).then(function () {
             var termSetEnum = termSets.getEnumerator();
-            while(termSetEnum.moveNext()) {
+            while (termSetEnum.moveNext()) {
                 (function () {
                     var currentTermSet = termSetEnum.get_current();
                     var termSetName = document.createElement("div");
@@ -79,16 +88,20 @@ var _;
             return parentDiv.appendChild(document.createTextNode("An error occurred in loading the term sets for this group"));
         });
     }
+
     function showTerms(event, groupID, termSetID) {
         event.cancelBubble = true;
+
         var parentDiv = document.getElementById(termSetID.toString());
-        while(parentDiv.childNodes.length > 1) {
+        while (parentDiv.childNodes.length > 1) {
             parentDiv.removeChild(parentDiv.lastChild);
         }
+
         var currentGroup = groups.getById(groupID);
         var termSets;
         var currentTermSet;
         var terms;
+
         context.load(currentGroup);
         context.executeQueryPromise().then(function () {
             termSets = currentGroup.get_termSets();
@@ -104,8 +117,9 @@ var _;
             return context.executeQueryPromise();
         }).then(function () {
             var termsEnum = terms.getEnumerator();
-            while(termsEnum.moveNext()) {
+            while (termsEnum.moveNext()) {
                 var currentTerm = termsEnum.get_current();
+
                 var term = document.createElement("div");
                 term.appendChild(document.createTextNode("    - " + currentTerm.get_name()));
                 term.setAttribute("style", "float:none;margin-left:10px;");
@@ -115,14 +129,17 @@ var _;
             return parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set"));
         });
     }
+
     function onFailRetrieveGroups(sender, args) {
         $('#report').children().remove();
         $('#report').append("Failed to retrieve groups. Error:" + args.get_message());
     }
+
     function onFailListTaxonomySession(sender, args) {
         $('#report').children().remove();
         $('#report').append("Failed to get session. Error: " + args.get_message());
     }
+
     function createTerms() {
         session = SP.Taxonomy.TaxonomySession.getTaxonomySession(context);
         termStore = session.getDefaultSiteCollectionTermStore();
@@ -130,6 +147,7 @@ var _;
         context.load(termStore);
         context.executeQueryAsync(onGetTaxonomySession, onFailTaxonomySession);
     }
+
     function onGetTaxonomySession() {
         var guidGroupValue = SP.Guid.newGuid();
         var guidTermSetValue = SP.Guid.newGuid();
@@ -137,23 +155,31 @@ var _;
         var guidTerm2 = SP.Guid.newGuid();
         var guidTerm3 = SP.Guid.newGuid();
         var guidTerm4 = SP.Guid.newGuid();
+
         var myGroup = termStore.createGroup("CustomTerms", guidGroupValue);
+
         var myTermSet = myGroup.createTermSet("Privacy", guidTermSetValue, 1033);
+
         myTermSet.createTerm("Top Secret", 1033, guidTerm1);
         myTermSet.createTerm("Company Confidential", 1033, guidTerm2);
         myTermSet.createTerm("Partners Only", 1033, guidTerm3);
         myTermSet.createTerm("Public", 1033, guidTerm4);
+
         groups = termStore.get_groups();
         context.load(groups);
+
         context.executeQueryAsync(onAddTerms, onFailAddTerms);
     }
+
     function onAddTerms() {
         listGroups();
     }
+
     function onFailAddTerms(sender, args) {
         $('#report').children().remove();
         $('#report').append("Failed to add terms. Error: " + args.get_message());
     }
+
     function onFailTaxonomySession(sender, args) {
         $('#report').children().remove();
         $('#report').append("Failed to get session. Error: " + args.get_message());

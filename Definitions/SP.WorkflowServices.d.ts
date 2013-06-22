@@ -3,15 +3,15 @@
 declare module SP.WorkflowServices {
 
     export enum WorkflowStatus {
-        notStarted = 0,
-        started = 1,
-        suspended = 2,
-        canceling = 3,
-        canceled = 4,
-        terminated = 5,
-        completed = 6,
-        notSpecified = 7,
-        invalid = 8
+        notStarted,
+        started,
+        suspended,
+        canceling,
+        canceled,
+        terminated,
+        completed,
+        notSpecified,
+        invalid
     }
 
     // TODO: comments, types

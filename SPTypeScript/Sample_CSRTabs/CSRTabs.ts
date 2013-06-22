@@ -1,3 +1,4 @@
+///<reference path="../Definitions/jquery.d.ts" />
 ///<reference path="../Definitions/SharePoint.d.ts" />
 
 module CSRTabs {
@@ -6,7 +7,7 @@ module CSRTabs {
         var options: SPClientTemplates.TemplateOverridesOptions;
         options = { Templates: {} };
         options.OnPreRender = OnPreRender;
-        options.Templates.Item = <any>RenderFields;
+        options.Templates.Item = RenderFields;
         options.OnPostRender = OnPostRender;
         SPClientTemplates.TemplateManager.RegisterTemplateOverrides(options);
     }

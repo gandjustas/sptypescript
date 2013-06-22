@@ -70,12 +70,10 @@
     <None Include="Sample_CustomFieldRendering\CustomFieldRenderingList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{230160de-7c37-47c0-885e-641b8b27b019}</SharePointProjectItemId>
     </None>
-    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.js.map" />
     <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js.map" />
     <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{75124c56-69cb-479f-896e-b00d60008b41}</SharePointProjectItemId>
     </None>
-    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\_fieldsamples.visafield.js.map" />
     <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
       <DependentUpon>Search.ts</DependentUpon>
     </None>
@@ -114,7 +112,6 @@
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.ts" />
-    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\_fieldsamples.visafield.js" />
     <Content Include="Sample_Social\Default.aspx" />
     <Content Include="Sample_Social\Elements.xml" />
     <TypeScriptCompile Include="Sample_Social\Social.ts" />

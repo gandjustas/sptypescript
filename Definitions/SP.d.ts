@@ -1953,10 +1953,10 @@ declare module SP {
     }
     /** Represents display mode for a control or form */
     export enum ControlMode {
-        invalid = 0,
-        displayMode = 1,
-        editMode = 2,
-        newMode = 3
+        invalid,
+        displayMode,
+        editMode,
+        newMode
     }
     /** Represents a list on a SharePoint Web site. */
     export class List extends SP.SecurableObject {

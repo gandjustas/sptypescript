@@ -8,22 +8,27 @@ var _;
         }).footer('</ul>').onPostRender(postRenderHandler).register();
     }
     ;
+
     function postRenderHandler(ctx) {
         var ulObj;
         var i, j;
+
         ulObj = document.getElementById("unorderedlist");
-        for(i = 1; i < ulObj.children.length; i++) {
+
+        for (i = 1; i < ulObj.children.length; i++) {
             var x = ulObj.children[i];
-            for(j = 1; j < ulObj.children.length; j++) {
+            for (j = 1; j < ulObj.children.length; j++) {
                 var y = ulObj.children[j];
-                if(x.innerText < y.innerText) {
+                if (x.innerText < y.innerText) {
                     ulObj.insertBefore(y, x);
                 }
             }
         }
     }
+
     SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
+
         SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_CSRListView/CSRListView.js"), init);
         }, "sp.js");

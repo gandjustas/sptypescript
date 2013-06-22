@@ -6,17 +6,17 @@ declare module SP {
         /** Specifies types of changes made in the user profile store. */
         export enum ChangeTypes {
             /** No change was made */
-            none = 0,
+            none,
             /** An object was added */
-            add = 1,
+            add,
             /** An object was modified */
-            modify = 2,
+            modify,
             /** An object was removed */
-            remove = 4,
+            remove,
             /** The metadata of an object was modified */
-            metadata = 8,
+            metadata,
             /** Multiple operations were performed on an object */
-            all = 15
+            all
         }
 
         export class HashTag extends ClientValueObject {
@@ -31,21 +31,21 @@ declare module SP {
 
         /** Specifies types of user-related objects that can be changed in the user profile store. */
         export enum ObjectTypes {
-            none = 0,
-            singleValueProperty = 1,
-            multiValueProperty = 2,
-            anniversary = 4,
-            dlMembership = 8,
-            siteMembership = 16,
-            quickLink = 32,
-            colleague = 64,
-            personalizationSite = 128,
-            userProfile = 256,
-            webLog = 512,
-            custom = 1024,
-            organizationProfile = 2048,
-            organizationMembership = 4096,
-            all = 8191
+            none,
+            singleValueProperty,
+            multiValueProperty,
+            anniversary,
+            dlMembership,
+            siteMembership,
+            quickLink,
+            colleague,
+            personalizationSite,
+            userProfile,
+            webLog,
+            custom,
+            organizationProfile,
+            organizationMembership,
+            all
         }
 
         /** Provides methods for operations related to people.
@@ -98,42 +98,42 @@ declare module SP {
 
         /** Specifies the capabilities of a personal site. */
         export enum PersonalSiteCapabilities {
-            none = 0,
-            profile = 1,
-            social = 2,
-            storage = 4,
-            myTasksDashboard = 8,
-            education = 16,
-            guest = 32
+            none,
+            profile,
+            social,
+            storage,
+            myTasksDashboard,
+            education,
+            guest
         }
 
         /** Specifies an exception or status code for the state of a personal site instantiation. */
         export enum PersonalSiteInstantiationState {
-            uninitialized = 0,
-            enqueued = 1,
-            created = 2,
-            deleted = 3,
-            permissionsGeneralFailure = 4096,
-            permissionsUPANotGranted = 4097,
-            permissionsUserNotLicensed = 4098,
-            permissionsSelfServiceSiteCreationDisabled = 4099,
-            permissionsNoMySitesInPeopleLight = 4100,
-            permissionsEmptyHostUrl = 4101,
-            permissionsHostFailedToInitializePersonalSiteContext = 4102,
-            errorGeneralFailure = 8192,
-            errorManagedPathDoesNotExist = 8193,
-            errorLanguageNotInstalled = 8194,
-            errorPartialCreate = 8195,
-            errorPersonalSiteAlreadyExists = 8196,
-            errorRootSiteNotPresent = 8197,
-            errorSelfServiceSiteCreateCallFailed = 8198
+            uninitialized,
+            enqueued,
+            created,
+            deleted,
+            permissionsGeneralFailure,
+            permissionsUPANotGranted,
+            permissionsUserNotLicensed,
+            permissionsSelfServiceSiteCreationDisabled,
+            permissionsNoMySitesInPeopleLight,
+            permissionsEmptyHostUrl,
+            permissionsHostFailedToInitializePersonalSiteContext,
+            errorGeneralFailure,
+            errorManagedPathDoesNotExist,
+            errorLanguageNotInstalled,
+            errorPartialCreate,
+            errorPersonalSiteAlreadyExists,
+            errorRootSiteNotPresent,
+            errorSelfServiceSiteCreateCallFailed
         }
 
         export enum SocialDataStoreExceptionCode {
-            socialListNotFound = 0,
-            personalSiteNotFound = 1,
-            cannotCreatePersonalSite = 2,
-            noSocialFeatures = 3
+            socialListNotFound,
+            personalSiteNotFound,
+            cannotCreatePersonalSite,
+            noSocialFeatures
         }
 
         /** Represents user properties. */
@@ -348,38 +348,38 @@ declare module SP {
         }
 
         export enum FollowedItemType {
-            unknown = 0,
-            document = 1,
-            site = 2,
-            all = 3
+            unknown,
+            document,
+            site,
+            all
         }
 
         export enum FollowedContentExceptionType {
-            itemAlreadyExists = 3,
-            itemDoesNotExist = 4,
-            invalidQueryString = 5,
-            invalidSubtypeValue = 6,
-            unsupportedItemType = 7,
-            followLimitReached = 8,
-            untrustedSource = 9,
-            unsupportedSite = 10,
-            internalError = 11
+            itemAlreadyExists,
+            itemDoesNotExist,
+            invalidQueryString,
+            invalidSubtypeValue,
+            unsupportedItemType,
+            followLimitReached,
+            untrustedSource,
+            unsupportedSite,
+            internalError
         }
 
         export enum FollowedContentQueryOptions {
-            unset = 0,
-            sites = 1,
-            documents = 2,
-            hidden = 4,
-            nonFeed = 8,
-            defaultOptions = 15,
-            all = 255
+            unset,
+            sites,
+            documents,
+            hidden,
+            nonFeed,
+            defaultOptions,
+            all
         }
 
         export enum FollowedStatus {
-            followed = 0,
-            notFollowed = 1,
-            notFollowable = 2
+            followed,
+            notFollowed,
+            notFollowable
         }
 
 
@@ -399,15 +399,15 @@ declare module SP {
 
         export enum FollowResultType {
             /** Result is unknown */
-            unknown = 0,
+            unknown,
             /** The request succeeded and the item is being followed. */
-            followed = 1,
+            followed,
             /** The item was already being followed by the current user so there is no change in status. */
-            refollowed = 2,
+            refollowed,
             /** The request encountered the maximum follow limit. */
-            hitFollowLimit = 3,
+            hitFollowLimit,
             /** The request failed. */
-            failed = 4
+            failed
         }
 
         /** Represents a set of user profile properties for a specified user. */

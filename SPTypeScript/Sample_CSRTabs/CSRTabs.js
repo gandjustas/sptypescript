@@ -47,7 +47,7 @@ var CSRTabs;
             this.fields = fields;
         }
         Tab.prototype.renderHeader = function () {
-            return '<li><a href="#' + this.name + '">Tab ' + this.title + '</a></li>';
+            return '<li><a href="#' + this.name + '">' + this.title + '</a></li>';
         };
         Tab.prototype.renderContent = function (context) {
             var resultHtml = '';

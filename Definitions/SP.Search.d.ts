@@ -235,12 +235,12 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         export enum QueryPropertyValueType {
-            none = 0,
-            stringType = 1,
-            int32TYpe = 2,
-            booleanType = 3,
-            stringArrayType = 4,
-            unSupportedType = 5
+            none,
+            stringType,
+            int32TYpe,
+            booleanType,
+            stringArrayType,
+            unSupportedType
         }
 
         export class QueryPropertyValue extends SP.ClientValueObject {
@@ -271,15 +271,15 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         export enum ReorderingRuleMatchType {
-            resultContainsKeyword = 0,
-            titleContainsKeyword = 1,
-            titleMatchesKeyword = 2,
-            urlStartsWith = 3,
-            urlExactlyMatches = 4,
-            contentTypeIs = 5,
-            fileExtensionMatches = 6,
-            resultHasTag = 7,
-            manualCondition = 8
+            resultContainsKeyword,
+            titleContainsKeyword,
+            titleMatchesKeyword,
+            urlStartsWith,
+            urlExactlyMatches,
+            contentTypeIs,
+            fileExtensionMatches,
+            resultHasTag,
+            manualCondition
         }
 
         export class ReorderingRule extends SP.ClientValueObject {
@@ -302,9 +302,9 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         enum SortDirection {
-            ascending = 0,
-            descending = 1,
-            fqlFormula = 2
+            ascending,
+            descending,
+            fqlFormula
         }
         export class Sort extends SP.ClientValueObject {
             get_direction: () => SortDirection;
@@ -472,9 +472,9 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         export enum MessageLevel {
-            information = 0,
-            warning = 1,
-            error = 2
+            information,
+            warning,
+            error
         }
     }
 
@@ -497,10 +497,10 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         export enum SearchObjectLevel {
-            spWeb = 0,
-            spSite = 1,
-            spSiteSubscription = 2,
-            ssa = 3
+            spWeb,
+            spSite,
+            spSiteSubscription,
+            ssa
         }
     }
 

@@ -7,7 +7,6 @@
 <#@ output extension=".ts" #>
 
 <#= GetFileContents(@"callout.d.ts") #>
-<#= GetFileContents(@"clientforms.d.ts") #>
 <#= GetFileContents(@"clienttemplates.d.ts") #>
 <#= GetFileContents(@"MicrosoftAjax.d.ts") #>
 <#= GetFileContents(@"SP.d.ts") #>

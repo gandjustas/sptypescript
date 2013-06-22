@@ -2,30 +2,30 @@
 declare module SP {
     module Taxonomy {
         export enum StringMatchOption {
-            startsWith = 0,
-            exactMatch = 1
+            startsWith,
+            exactMatch
         }
 
         export enum ChangeItemType {
-            unknown = 0,
-            term = 1,
-            termSet = 2,
-            group = 3,
-            termStore = 4,
-            site = 5
+            unknown,
+            term,
+            termSet,
+            group,
+            termStore,
+            site
         }
 
         export enum ChangeOperationType {
-            unknown = 0,
-            add = 1,
-            edit = 2,
-            deleteObject = 3,
-            move = 4,
-            copy = 5,
-            pathChange = 6,
-            merge = 7,
-            importObject = 8,
-            restore = 9
+            unknown,
+            add,
+            edit,
+            deleteObject,
+            move,
+            copy,
+            pathChange,
+            merge,
+            importObject,
+            restore
         }
 
 

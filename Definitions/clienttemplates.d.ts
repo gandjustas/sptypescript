@@ -3,62 +3,62 @@
 declare module SPClientTemplates {
 
     export enum FileSystemObjectType {
-        Invalid = -1,
-        File = 0,
-        Folder = 1,
-        Web = 2
+        Invalid,
+        File,
+        Folder,
+        Web
     }
     export enum ChoiceFormatType {
-        Dropdown = 0,
-        Radio = 1
+        Dropdown,
+        Radio
     }
 
     export enum ClientControlMode {
-        Invalid = 0,
-        DisplayForm = 1,
-        EditForm = 2,
-        NewForm = 3,
-        View = 4
+        Invalid,
+        DisplayForm,
+        EditForm,
+        NewForm,
+        View
     }
 
     export enum RichTextMode {
-        Compatible = 0,
-        FullHtml = 1,
-        HtmlAsXml = 2,
-        ThemeHtml = 3
+        Compatible,
+        FullHtml,
+        HtmlAsXml,
+        ThemeHtml
     }
     export enum UrlFormatType {
-        Hyperlink = 0,
-        Image = 1
+        Hyperlink,
+        Image
     }
 
     export enum DateTimeDisplayFormat {
-        DateOnly = 0,
-        DateTime = 1,
-        TimeOnly = 2
+        DateOnly,
+        DateTime,
+        TimeOnly
     }
 
     export enum DateTimeCalendarType {
-        None = 0,
-        Gregorian = 1,
-        Japan = 3,
-        Taiwan = 4,
-        Korea = 5,
-        Hijri = 6,
-        Thai = 7,
-        Hebrew = 8,
-        GregorianMEFrench = 9,
-        GregorianArabic = 10,
-        GregorianXLITEnglish = 11,
-        GregorianXLITFrench = 12,
-        KoreaJapanLunar = 14,
-        ChineseLunar = 15,
-        SakaEra = 16,
-        UmAlQura = 23
+        None,
+        Gregorian,
+        Japan,
+        Taiwan,
+        Korea,
+        Hijri,
+        Thai,
+        Hebrew,
+        GregorianMEFrench,
+        GregorianArabic,
+        GregorianXLITEnglish,
+        GregorianXLITFrench,
+        KoreaJapanLunar,
+        ChineseLunar,
+        SakaEra,
+        UmAlQura
     }
     export enum UserSelectionMode {
-        PeopleOnly = 0,
-        PeopleAndGroups = 1
+        PeopleOnly,
+        PeopleAndGroups
     }
 
     /** Represents schema for a Choice field in list form or in list view in grid mode */
@@ -508,7 +508,7 @@ declare module SPClientTemplates {
     }
     export interface ItemCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
-        (renderContext: RenderContext_ItemInView): string;
+        (renderContext: RenderContext): string;
     }
     export interface FieldInFormCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
@@ -548,7 +548,7 @@ declare module SPClientTemplates {
             Can be either string or SingleTemplateCallback */
         Footer?: SingleTemplateCallback;
         /** Defines templates for fields rendering. The field is specified by it's internal name. */
-        Fields: FieldTemplateMap;
+        Fields?: FieldTemplateMap;
     }
     export interface TemplateOverridesOptions {
         /** Template overrides */
@@ -660,6 +660,7 @@ declare function GenerateIID(renderCtx: SPClientTemplates.RenderContext_ItemInVi
 declare function GenerateIIDForListItem(renderCtx: SPClientTemplates.RenderContext_InView, listItem: SPClientTemplates.Item): string;
 
 declare function SPFormControl_AppendValidationErrorMessage(nodeId: string, errorResult: any): void;
+declare function CoreRender(template: any, context: any): string;
 
 declare module SPClientForms {
     module ClientValidation {

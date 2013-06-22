@@ -85,11 +85,11 @@ declare module SP {
         /** Result of a modal dialog execution */
         export enum DialogResult {
             /** Do not use this */
-            invalid = -1,
+            invalid,
             /** User closed dialog, cancelling the action */
-            cancel = 0,
+            cancel,
             /** Dialog actions completed successfully */
-            OK = 1
+            OK
         }
         /** Callback which processes dialog result value after dialog is closed */
         export interface DialogReturnValueCallback {

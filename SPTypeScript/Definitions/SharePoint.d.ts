@@ -180,69 +180,66 @@ declare class CalloutManager {
     static isAtLeastOneCalloutOn(): bool;
 }
 
-declare function SPFormControl_AppendValidationErrorMessage(nodeId: string, errorResult): void;
-declare function CoreRender(template:any, context:any): string;
-
 
 declare module SPClientTemplates {
 
     export enum FileSystemObjectType {
-        Invalid = -1,
-        File = 0,
-        Folder = 1,
-        Web = 2
+        Invalid,
+        File,
+        Folder,
+        Web
     }
     export enum ChoiceFormatType {
-        Dropdown = 0,
-        Radio = 1
+        Dropdown,
+        Radio
     }
 
     export enum ClientControlMode {
-        Invalid = 0,
-        DisplayForm = 1,
-        EditForm = 2,
-        NewForm = 3,
-        View = 4
+        Invalid,
+        DisplayForm,
+        EditForm,
+        NewForm,
+        View
     }
 
     export enum RichTextMode {
-        Compatible = 0,
-        FullHtml = 1,
-        HtmlAsXml = 2,
-        ThemeHtml = 3
+        Compatible,
+        FullHtml,
+        HtmlAsXml,
+        ThemeHtml
     }
     export enum UrlFormatType {
-        Hyperlink = 0,
-        Image = 1
+        Hyperlink,
+        Image
     }
 
     export enum DateTimeDisplayFormat {
-        DateOnly = 0,
-        DateTime = 1,
-        TimeOnly = 2
+        DateOnly,
+        DateTime,
+        TimeOnly
     }
 
     export enum DateTimeCalendarType {
-        None = 0,
-        Gregorian = 1,
-        Japan = 3,
-        Taiwan = 4,
-        Korea = 5,
-        Hijri = 6,
-        Thai = 7,
-        Hebrew = 8,
-        GregorianMEFrench = 9,
-        GregorianArabic = 10,
-        GregorianXLITEnglish = 11,
-        GregorianXLITFrench = 12,
-        KoreaJapanLunar = 14,
-        ChineseLunar = 15,
-        SakaEra = 16,
-        UmAlQura = 23
+        None,
+        Gregorian,
+        Japan,
+        Taiwan,
+        Korea,
+        Hijri,
+        Thai,
+        Hebrew,
+        GregorianMEFrench,
+        GregorianArabic,
+        GregorianXLITEnglish,
+        GregorianXLITFrench,
+        KoreaJapanLunar,
+        ChineseLunar,
+        SakaEra,
+        UmAlQura
     }
     export enum UserSelectionMode {
-        PeopleOnly = 0,
-        PeopleAndGroups = 1
+        PeopleOnly,
+        PeopleAndGroups
     }
 
     /** Represents schema for a Choice field in list form or in list view in grid mode */
@@ -396,12 +393,13 @@ declare module SPClientTemplates {
     export interface RenderContext_Form extends RenderContext {
         CurrentItem: Item;
         FieldControlsModes: { [fieldInternalName: string]: ClientControlMode; };
-        FormContext: any;
-        /** Unique prefix for the list form webpart, e.g. "WPQ1" */
+        FormContext: ClientFormContext;
         FormUniqueId: string;
         ListData: ListData_InForm;
         ListSchema: ListSchema_InForm;
     }
+
+
 
     export interface FieldSchema_InView_LookupField extends FieldSchema_InView {
         /** Either "TRUE" or "FALSE" */
@@ -691,7 +689,7 @@ declare module SPClientTemplates {
     }
     export interface ItemCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
-        (renderContext: RenderContext_ItemInView): string;
+        (renderContext: RenderContext): string;
     }
     export interface FieldInFormCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
@@ -725,10 +723,10 @@ declare module SPClientTemplates {
         /** Defines templates for list items rendering. */
         Item?: ItemCallback;
         /** Defines template for rendering list view header.
-			Can be either string or SingleTemplateCallback */
+            Can be either string or SingleTemplateCallback */
         Header?: SingleTemplateCallback;
         /** Defines template for rendering list view footer.
-			Can be either string or SingleTemplateCallback */
+            Can be either string or SingleTemplateCallback */
         Footer?: SingleTemplateCallback;
         /** Defines templates for fields rendering. The field is specified by it's internal name. */
         Fields?: FieldTemplateMap;
@@ -799,13 +797,71 @@ declare module SPClientTemplates {
         /** Represents lookup values array in some strange format */
         static BuildLookupValuesAsString(choiceArray: ClientLookupValue[], isMultiLookup: bool, setGroupDesc: bool): string;
         static ParseURLValue(value: string): ClientUrlValue;
-        static GetFormContextForCurrentField(context: RenderContext_Form): any; // returns ClientFormContext from clientforms.js
+        static GetFormContextForCurrentField(context: RenderContext_Form): ClientFormContext;
+    }
+
+    export class ClientFormContext {
+        fieldValue: any;
+        fieldSchema: SPClientTemplates.FieldSchema_InForm;
+        fieldName: string;
+        controlMode: number;
+        webAttributes: {
+            AllowScriptableWebParts: bool;
+            CurrentUserId: number;
+            EffectivePresenceEnabled: bool;
+            LCID: string;
+            PermissionCustomizePages: bool;
+            WebUrl: string;
+        };
+        itemAttributes: {
+            ExternalListItem: boolean;
+            FsObjType: number;
+            Id: number;
+            Url: string;
+        };
+        listAttributes: {
+            BaseType: number;
+            DefaultItemOpen: number;
+            Direction: string;
+            EnableVesioning: bool;
+            Id: string;
+        };
+        registerInitCallback(fieldname: string, callback: () => void ): void;
+        registerFocusCallback(fieldname: string, callback: () => void ): void;
+        registerValidationErrorCallback(fieldname: string, callback: (error: any) => void ): void;
+        registerGetValueCallback(fieldname: string, callback: () => any): void;
+        updateControlValue(fieldname: string, value: any): void;
+        registerClientValidator(fieldname: string, validator: SPClientForms.ClientValidation.ValidatorSet): void;
+        registerHasValueChangedCallback(fieldname: string, callback: (eventArg?: any) => void );
     }
 
 }
 
 declare function GenerateIID(renderCtx: SPClientTemplates.RenderContext_ItemInView): string;
 declare function GenerateIIDForListItem(renderCtx: SPClientTemplates.RenderContext_InView, listItem: SPClientTemplates.Item): string;
+
+declare function SPFormControl_AppendValidationErrorMessage(nodeId: string, errorResult: any): void;
+declare function CoreRender(template: any, context: any): string;
+
+declare module SPClientForms {
+    module ClientValidation {
+        export class ValidationResult {
+            constructor(hasErrors: bool, errorMsg: string);
+        }
+
+        export class ValidatorSet {
+            public RegisterValidator(validator: IValidator);
+        }
+
+        export interface IValidator {
+            Validate(value: any): ValidationResult;
+        }
+
+        export class RequiredValidator implements IValidator {
+            Validate(value: any): ValidationResult;
+        }
+    }
+}
 
 
 
@@ -2802,10 +2858,10 @@ declare module SP {
     }
     /** Represents display mode for a control or form */
     export enum ControlMode {
-        invalid = 0,
-        displayMode = 1,
-        editMode = 2,
-        newMode = 3
+        invalid,
+        displayMode,
+        editMode,
+        newMode
     }
     /** Represents a list on a SharePoint Web site. */
     export class List extends SP.SecurableObject {
@@ -4529,12 +4585,12 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         export enum QueryPropertyValueType {
-            none = 0,
-            stringType = 1,
-            int32TYpe = 2,
-            booleanType = 3,
-            stringArrayType = 4,
-            unSupportedType = 5
+            none,
+            stringType,
+            int32TYpe,
+            booleanType,
+            stringArrayType,
+            unSupportedType
         }
 
         export class QueryPropertyValue extends SP.ClientValueObject {
@@ -4565,15 +4621,15 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         export enum ReorderingRuleMatchType {
-            resultContainsKeyword = 0,
-            titleContainsKeyword = 1,
-            titleMatchesKeyword = 2,
-            urlStartsWith = 3,
-            urlExactlyMatches = 4,
-            contentTypeIs = 5,
-            fileExtensionMatches = 6,
-            resultHasTag = 7,
-            manualCondition = 8
+            resultContainsKeyword,
+            titleContainsKeyword,
+            titleMatchesKeyword,
+            urlStartsWith,
+            urlExactlyMatches,
+            contentTypeIs,
+            fileExtensionMatches,
+            resultHasTag,
+            manualCondition
         }
 
         export class ReorderingRule extends SP.ClientValueObject {
@@ -4596,9 +4652,9 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         enum SortDirection {
-            ascending = 0,
-            descending = 1,
-            fqlFormula = 2
+            ascending,
+            descending,
+            fqlFormula
         }
         export class Sort extends SP.ClientValueObject {
             get_direction: () => SortDirection;
@@ -4766,9 +4822,9 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         export enum MessageLevel {
-            information = 0,
-            warning = 1,
-            error = 2
+            information,
+            warning,
+            error
         }
     }
 
@@ -4791,10 +4847,10 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         export enum SearchObjectLevel {
-            spWeb = 0,
-            spSite = 1,
-            spSiteSubscription = 2,
-            ssa = 3
+            spWeb,
+            spSite,
+            spSiteSubscription,
+            ssa
         }
     }
 
@@ -5144,64 +5200,64 @@ declare module SP {
     export module Social {
         /** Identifies an actor as a user, document, site, or tag. */
         export enum SocialActorType {
-            user = 0,
-            document = 1,
-            site = 2,
-            tag = 3
+            user,
+            document,
+            site,
+            tag
         }
         /** Specifies one or more actor types in a query to the server. */
         export enum SocialActorTypes {
-            none = 0,
-            users = 1,
-            documents = 2,
-            sites = 4,
-            tags = 8,
+            none,
+            users,
+            documents,
+            sites,
+            tags,
             /** The set excludes documents and sites that do not have feeds. */
-            excludeContentWithoutFeeds = 268435456,
-            all = 15
+            excludeContentWithoutFeeds,
+            all
         }
         /** Specifies whether the action is to navigate to the attachment or to perform some action dependent on the context in which the attachment is presented to the user. */
         export enum SocialAttachmentActionKind {
             /** This value specifies that the action is to navigate to the attachment. */
-            navigate = 0,
+            navigate,
             /** This value specifies that the action is dependent on the context that the attachment is displayed to the user. */
-            adHocAction = 1
+            adHocAction
         }
 
         export enum SocialAttachmentKind {
-            image = 0,
-            video = 1,
-            document = 2
+            image,
+            video,
+            document
         }
 
         /** Specifies whether the item being inserted is a user, document, site, tag, or link. */
         export enum SocialDataItemType {
-            user = 0,
-            document = 1,
-            site = 2,
-            tag = 3,
-            link = 4
+            user,
+            document,
+            site,
+            tag,
+            link
         }
 
         /** Specifies whether the overlay is a link or one or more actors. */
         export enum SocialDataOverlayType {
-            link = 0,
-            actors = 1
+            link,
+            actors
         }
 
         /** Specifies whether the sort order is by creation time or modification time. */
         export enum SocialFeedSortOrder {
-            byModifiedTime = 0,
-            byCreatedTime = 1
+            byModifiedTime,
+            byCreatedTime
         }
 
         /** Identifies the kind of post to be retrieved.  */
         export enum SocialFeedType {
-            personal = 0,
-            news = 1,
-            timeline = 2,
-            likes = 3,
-            everyone = 4
+            personal,
+            news,
+            timeline,
+            likes,
+            everyone
         }
 
         // For some reasons this enum doesn't exist
@@ -5215,83 +5271,83 @@ declare module SP {
         /** Provides information about the feed.
             This type provides information about whether the feed on the server contains additional threads that were not returned. */
         export enum SocialFeedAttributes {
-            none = 0,
-            moreThreadsAvailable = 1
+            none,
+            moreThreadsAvailable
         }
 
         /** Specifies attributes of the post, such as whether the current user can like or delete the post. */
         export enum SocialPostAttributes {
-            none = 0,
-            canLike = 1,
-            canDelete = 2,
-            useAuthorImage = 4,
-            useSmallImage = 8,
-            canFollowUp = 16
+            none,
+            canLike,
+            canDelete,
+            useAuthorImage,
+            useSmallImage,
+            canFollowUp
         }
 
         /** Defines the type of item being specified in the SocialPostDefinitionDataItem.
             This type is only available in server-to-server calls. */
         export enum SocialPostDefinitionDataItemType {
-            text = 0,
-            user = 1,
-            document = 2,
-            site = 3,
-            tag = 4,
-            link = 5
+            text,
+            user,
+            document,
+            site,
+            tag,
+            link
         }
 
         export enum SocialPostType {
-            root = 0,
-            reply = 1
+            root,
+            reply
         }
 
         /** Specifies a status or error code. */
         export enum SocialStatusCode {
-            OK = 0,
+            OK,
             /** This value specifies that an invalid request was encountered. */
-            invalidRequest = 1,
+            invalidRequest,
             /** This value specifies that access was denied to the current user. */
-            accessDenied = 2,
-            itemNotFound = 3,
+            accessDenied,
+            itemNotFound,
             /** This value specifies that an invalid operation was attempted. */
-            invalidOperation = 4,
+            invalidOperation,
             /** This value specifies that the item was not changed by the operation. */
-            itemNotModified = 5,
-            internalError = 6,
+            itemNotModified,
+            internalError,
             /** This value specifies that there was an error reading the cache. */
-            cacheReadError = 7,
+            cacheReadError,
             /** This value specifies that there was an error updating the cache. */
-            cacheUpdateError = 8,
-            personalSiteNotFound = 9,
-            failedToCreatePersonalSite = 10,
-            notAuthorizedToCreatePersonalSite = 11,
-            cannotCreatePersonalSite = 12,
+            cacheUpdateError,
+            personalSiteNotFound,
+            failedToCreatePersonalSite,
+            notAuthorizedToCreatePersonalSite,
+            cannotCreatePersonalSite,
             /** This value specifies that a server limit was reached. */
-            limitReached = 13,
+            limitReached,
             /** This value specifies that the operation failed because there was an error handling an attachment. */
-            attachmentError = 14,
+            attachmentError,
             /** This value specifies that the operation completed with recoverable errors and that the returned data is incomplete. */
-            partialData = 15,
+            partialData,
             /** This value specifies that the operation failed because a required server feature was disabled by administrative action. */
-            featureDisabled = 16
+            featureDisabled
         }
 
         /** Specifies properties of the thread. */
         export enum SocialThreadAttributes {
-            none = 0,
-            isDigest = 1,
-            canReply = 2,
-            canLock = 4,
-            isLocked = 8,
-            replyLimitReached = 16
+            none,
+            isDigest,
+            canReply,
+            canLock,
+            isLocked,
+            replyLimitReached
         }
 
         export enum SocialThreadType {
-            normal = 0,
-            likeReference = 1,
-            replyReference = 2,
-            mentionReference = 3,
-            tagReference = 4
+            normal,
+            likeReference,
+            replyReference,
+            mentionReference,
+            tagReference
         }
 
         /** Contains information about an actor retrieved from server. An actor is a user, document, site, or tag. */
@@ -5785,30 +5841,30 @@ declare module SP {
 declare module SP {
     module Taxonomy {
         export enum StringMatchOption {
-            startsWith = 0,
-            exactMatch = 1
+            startsWith,
+            exactMatch
         }
 
         export enum ChangeItemType {
-            unknown = 0,
-            term = 1,
-            termSet = 2,
-            group = 3,
-            termStore = 4,
-            site = 5
+            unknown,
+            term,
+            termSet,
+            group,
+            termStore,
+            site
         }
 
         export enum ChangeOperationType {
-            unknown = 0,
-            add = 1,
-            edit = 2,
-            deleteObject = 3,
-            move = 4,
-            copy = 5,
-            pathChange = 6,
-            merge = 7,
-            importObject = 8,
-            restore = 9
+            unknown,
+            add,
+            edit,
+            deleteObject,
+            move,
+            copy,
+            pathChange,
+            merge,
+            importObject,
+            restore
         }
 
 
@@ -6412,11 +6468,11 @@ declare module SP {
         /** Result of a modal dialog execution */
         export enum DialogResult {
             /** Do not use this */
-            invalid = -1,
+            invalid,
             /** User closed dialog, cancelling the action */
-            cancel = 0,
+            cancel,
             /** Dialog actions completed successfully */
-            OK = 1
+            OK
         }
         /** Callback which processes dialog result value after dialog is closed */
         export interface DialogReturnValueCallback {
@@ -6526,17 +6582,17 @@ declare module SP {
         /** Specifies types of changes made in the user profile store. */
         export enum ChangeTypes {
             /** No change was made */
-            none = 0,
+            none,
             /** An object was added */
-            add = 1,
+            add,
             /** An object was modified */
-            modify = 2,
+            modify,
             /** An object was removed */
-            remove = 4,
+            remove,
             /** The metadata of an object was modified */
-            metadata = 8,
+            metadata,
             /** Multiple operations were performed on an object */
-            all = 15
+            all
         }
 
         export class HashTag extends ClientValueObject {
@@ -6551,21 +6607,21 @@ declare module SP {
 
         /** Specifies types of user-related objects that can be changed in the user profile store. */
         export enum ObjectTypes {
-            none = 0,
-            singleValueProperty = 1,
-            multiValueProperty = 2,
-            anniversary = 4,
-            dlMembership = 8,
-            siteMembership = 16,
-            quickLink = 32,
-            colleague = 64,
-            personalizationSite = 128,
-            userProfile = 256,
-            webLog = 512,
-            custom = 1024,
-            organizationProfile = 2048,
-            organizationMembership = 4096,
-            all = 8191
+            none,
+            singleValueProperty,
+            multiValueProperty,
+            anniversary,
+            dlMembership,
+            siteMembership,
+            quickLink,
+            colleague,
+            personalizationSite,
+            userProfile,
+            webLog,
+            custom,
+            organizationProfile,
+            organizationMembership,
+            all
         }
 
         /** Provides methods for operations related to people.
@@ -6618,42 +6674,42 @@ declare module SP {
 
         /** Specifies the capabilities of a personal site. */
         export enum PersonalSiteCapabilities {
-            none = 0,
-            profile = 1,
-            social = 2,
-            storage = 4,
-            myTasksDashboard = 8,
-            education = 16,
-            guest = 32
+            none,
+            profile,
+            social,
+            storage,
+            myTasksDashboard,
+            education,
+            guest
         }
 
         /** Specifies an exception or status code for the state of a personal site instantiation. */
         export enum PersonalSiteInstantiationState {
-            uninitialized = 0,
-            enqueued = 1,
-            created = 2,
-            deleted = 3,
-            permissionsGeneralFailure = 4096,
-            permissionsUPANotGranted = 4097,
-            permissionsUserNotLicensed = 4098,
-            permissionsSelfServiceSiteCreationDisabled = 4099,
-            permissionsNoMySitesInPeopleLight = 4100,
-            permissionsEmptyHostUrl = 4101,
-            permissionsHostFailedToInitializePersonalSiteContext = 4102,
-            errorGeneralFailure = 8192,
-            errorManagedPathDoesNotExist = 8193,
-            errorLanguageNotInstalled = 8194,
-            errorPartialCreate = 8195,
-            errorPersonalSiteAlreadyExists = 8196,
-            errorRootSiteNotPresent = 8197,
-            errorSelfServiceSiteCreateCallFailed = 8198
+            uninitialized,
+            enqueued,
+            created,
+            deleted,
+            permissionsGeneralFailure,
+            permissionsUPANotGranted,
+            permissionsUserNotLicensed,
+            permissionsSelfServiceSiteCreationDisabled,
+            permissionsNoMySitesInPeopleLight,
+            permissionsEmptyHostUrl,
+            permissionsHostFailedToInitializePersonalSiteContext,
+            errorGeneralFailure,
+            errorManagedPathDoesNotExist,
+            errorLanguageNotInstalled,
+            errorPartialCreate,
+            errorPersonalSiteAlreadyExists,
+            errorRootSiteNotPresent,
+            errorSelfServiceSiteCreateCallFailed
         }
 
         export enum SocialDataStoreExceptionCode {
-            socialListNotFound = 0,
-            personalSiteNotFound = 1,
-            cannotCreatePersonalSite = 2,
-            noSocialFeatures = 3
+            socialListNotFound,
+            personalSiteNotFound,
+            cannotCreatePersonalSite,
+            noSocialFeatures
         }
 
         /** Represents user properties. */
@@ -6868,38 +6924,38 @@ declare module SP {
         }
 
         export enum FollowedItemType {
-            unknown = 0,
-            document = 1,
-            site = 2,
-            all = 3
+            unknown,
+            document,
+            site,
+            all
         }
 
         export enum FollowedContentExceptionType {
-            itemAlreadyExists = 3,
-            itemDoesNotExist = 4,
-            invalidQueryString = 5,
-            invalidSubtypeValue = 6,
-            unsupportedItemType = 7,
-            followLimitReached = 8,
-            untrustedSource = 9,
-            unsupportedSite = 10,
-            internalError = 11
+            itemAlreadyExists,
+            itemDoesNotExist,
+            invalidQueryString,
+            invalidSubtypeValue,
+            unsupportedItemType,
+            followLimitReached,
+            untrustedSource,
+            unsupportedSite,
+            internalError
         }
 
         export enum FollowedContentQueryOptions {
-            unset = 0,
-            sites = 1,
-            documents = 2,
-            hidden = 4,
-            nonFeed = 8,
-            defaultOptions = 15,
-            all = 255
+            unset,
+            sites,
+            documents,
+            hidden,
+            nonFeed,
+            defaultOptions,
+            all
         }
 
         export enum FollowedStatus {
-            followed = 0,
-            notFollowed = 1,
-            notFollowable = 2
+            followed,
+            notFollowed,
+            notFollowable
         }
 
 
@@ -6919,15 +6975,15 @@ declare module SP {
 
         export enum FollowResultType {
             /** Result is unknown */
-            unknown = 0,
+            unknown,
             /** The request succeeded and the item is being followed. */
-            followed = 1,
+            followed,
             /** The item was already being followed by the current user so there is no change in status. */
-            refollowed = 2,
+            refollowed,
             /** The request encountered the maximum follow limit. */
-            hitFollowLimit = 3,
+            hitFollowLimit,
             /** The request failed. */
-            failed = 4
+            failed
         }
 
         /** Represents a set of user profile properties for a specified user. */
@@ -7255,15 +7311,15 @@ declare module SP {
 declare module SP.WorkflowServices {
 
     export enum WorkflowStatus {
-        notStarted = 0,
-        started = 1,
-        suspended = 2,
-        canceling = 3,
-        canceled = 4,
-        terminated = 5,
-        completed = 6,
-        notSpecified = 7,
-        invalid = 8
+        notStarted,
+        started,
+        suspended,
+        canceling,
+        canceled,
+        terminated,
+        completed,
+        notSpecified,
+        invalid
     }
 
     // TODO: comments, types
