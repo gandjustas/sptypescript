@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="CustomFieldRenderingModule\" Type="ElementManifest" />
+    <ProjectItemFile Source="fieldsamples.visafield.ts" Target="CustomFieldRenderingModule\" Type="ElementFile" />
+    <ProjectItemFile Source="fieldsamples.visafield.js" Target="CustomFieldRenderingModule\" Type="ElementFile" />
+    <ProjectItemFile Source="fieldsamples.visafield.js.map" Target="CustomFieldRenderingModule\" Type="ElementFile" />
+    <ProjectItemFile Source="fieldsamples.visafield.min.js" Target="CustomFieldRenderingModule\" Type="ElementFile" />
+  </Files>
+</ProjectItem>
