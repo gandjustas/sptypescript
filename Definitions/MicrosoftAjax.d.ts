@@ -21,18 +21,18 @@ declare module Sys {
         initialize(): void;
         updated(): void;
     }
-    declare module UI {
+    module UI {
         export class Control { }
         export class DomEvent {
             static addHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void );
             static removeHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void );
         }
     }
-    declare module Net {
+    module Net {
         export class WebRequest { }
         export class WebRequestExecutor { }
     }
-    declare interface IDisposable {
+    interface IDisposable {
         dispose(): void;
     }
 

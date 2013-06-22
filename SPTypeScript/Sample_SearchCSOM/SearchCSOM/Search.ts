@@ -1,5 +1,5 @@
-///<reference path="../../Definitions/SharePoint.d.ts" />
 ///<reference path="../../definitions/jquery.d.ts" />
+///<reference path="../../Definitions/SharePoint.d.ts" />
 
 
 
@@ -18,7 +18,7 @@ $(() => {
     function executeQuery(queryTerms) {
 
         var Results = {
-            element: '',
+            element: $(''),
             url: '',
 
             init: function (element) {
@@ -58,7 +58,7 @@ $(() => {
                     html += rows[i]['Title'];
                     html += "</td><td>"
                     html += rows[i]['Path'];
-                    html += "</td><tr>";
+                    html += "</td></tr>";
                 }
 
                 html += "</table>";

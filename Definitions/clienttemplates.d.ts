@@ -30,13 +30,13 @@ declare module SPClientTemplates {
     export enum UrlFormatType {
         Hyperlink = 0,
         Image = 1
-    };
+    }
 
     export enum DateTimeDisplayFormat {
         DateOnly = 0,
         DateTime = 1,
         TimeOnly = 2
-    };
+    }
 
     export enum DateTimeCalendarType {
         None = 0,
@@ -55,7 +55,7 @@ declare module SPClientTemplates {
         ChineseLunar = 15,
         SakaEra = 16,
         UmAlQura = 23
-    };
+    }
     export enum UserSelectionMode {
         PeopleOnly = 0,
         PeopleAndGroups = 1
@@ -210,6 +210,7 @@ declare module SPClientTemplates {
         CurrentFieldValue: any;
     }
     export interface RenderContext_Form extends RenderContext {
+        CurrentItem: Item;
         FieldControlsModes: { [fieldInternalName: string]: ClientControlMode; };
         FormContext: any;
         FormUniqueId: string;
@@ -484,7 +485,7 @@ declare module SPClientTemplates {
         OnPreRender: any;
         onRefreshFailed: any;
         RenderBody: (renderContext: RenderContext) => string;
-        RenderFieldByName: (renderContext: RenderContext) => string;
+        RenderFieldByName: (renderContext: RenderContext, fieldName: string) => string;
         RenderFields: (renderContext: RenderContext) => string;
         RenderFooter: (renderContext: RenderContext) => string;
         RenderGroups: (renderContext: RenderContext) => string;
