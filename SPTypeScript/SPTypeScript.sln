@@ -6,7 +6,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions", "{B7240F17-25E7-49EF-BFA3-ED82AD272AEE}"
 	ProjectSection(SolutionItems) = preProject
 		..\Definitions\callout.d.ts = ..\Definitions\callout.d.ts
-		..\Definitions\clientforms.d.ts = ..\Definitions\clientforms.d.ts
 		..\Definitions\clienttemplates.d.ts = ..\Definitions\clienttemplates.d.ts
 		..\Definitions\MicrosoftAjax.d.ts = ..\Definitions\MicrosoftAjax.d.ts
 		..\Definitions\SP.BusinessData.d.ts = ..\Definitions\SP.BusinessData.d.ts
@@ -26,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions"
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(MercurialSourceControlSolutionProperties) = preSolution
+		SolutionIsControlled = True
+		SolutionBindings = <Solution Location In Database>
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -40,9 +43,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MercurialSourceControlSolutionProperties) = preSolution
-		SolutionIsControlled = True
-		SolutionBindings = <Solution Location In Database>
 	EndGlobalSection
 EndGlobal

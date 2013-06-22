@@ -4,14 +4,15 @@ $(function () {
         executeQuery($('#queryTerms').val());
     });
     $("#toolbarDiv input[type=text]").keypress(function (e) {
-        if(e.keyCode == 13) {
+        if (e.keyCode == 13) {
             executeQuery($('#queryTerms').val());
             e.preventDefault();
         }
     });
+
     function executeQuery(queryTerms) {
         var Results = {
-            element: '',
+            element: $(''),
             url: '',
             init: function (element) {
                 Results.element = element;
@@ -29,6 +30,7 @@ $(function () {
                     ctx.executeQueryAsync(function () {
                         var tableCollection = new Search.ResultTableCollection();
                         tableCollection.initPropertiesFromJson(result.get_value());
+
                         var rows = tableCollection.get_item(0).get_resultRows();
                         Results.element.html(_this.createHtml(rows));
                     }, function (sender, args) {
@@ -38,17 +40,20 @@ $(function () {
             },
             createHtml: function (rows) {
                 var html = "<table>";
-                for(var i = 0; i < rows.length; i++) {
+
+                for (var i = 0; i < rows.length; i++) {
                     html += "<tr><td>";
                     html += rows[i]['Title'];
                     html += "</td><td>";
                     html += rows[i]['Path'];
-                    html += "</td><tr>";
+                    html += "</td></tr>";
                 }
+
                 html += "</table>";
                 return html;
             }
         };
+
         Results.init($('#resultsDiv'));
         Results.load();
     }

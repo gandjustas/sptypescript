@@ -4,13 +4,13 @@
 /// <reference path="SP.WebParts.d.ts"/>
 /// <reference path="MicrosoftAjax.d.ts"/>
 
-declare interface IEnumerator {
+interface IEnumerator {
     get_current(): any;
     moveNext(): bool;
     reset(): void;
 }
 
-declare interface IEnumerable {
+interface IEnumerable {
     getEnumerator(): IEnumerator;
 }
 

@@ -1,10 +1,10 @@
 /// <reference path="SP.d.ts"/>
 declare module SP {
-    declare module Taxonomy {
+    module Taxonomy {
         export enum StringMatchOption {
             startsWith = 0,
             exactMatch = 1
-        };
+        }
 
         export enum ChangeItemType {
             unknown = 0,
@@ -13,7 +13,7 @@ declare module SP {
             group = 3,
             termStore = 4,
             site = 5
-        };
+        }
 
         export enum ChangeOperationType {
             unknown = 0,
@@ -26,7 +26,7 @@ declare module SP {
             merge = 7,
             importObject = 8,
             restore = 9
-        };
+        }
 
 
         export class TaxonomySession extends SP.ClientObject {
@@ -141,7 +141,7 @@ declare module SP {
             exportObject(): SP.StringResult;
             getChanges(changeInformation: ChangeInformation): ChangedItemCollection;
             getTermSetsWithCustomProperty(customPropertyMatchInformation: CustomPropertyMatchInformation): TermSetCollection;
-        };
+        }
 
         export class TermSetItem extends TaxonomyItem {
             get_customProperties(): { [key: string]: string; };

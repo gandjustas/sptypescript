@@ -1,7 +1,7 @@
 /// <reference path="SP.d.ts"/>
 
 declare module Microsoft.SharePoint.Client.Search {
-    declare module Query {
+    module Query {
 
         /**Contains information common to all types of search queries.*/
         export class Query extends SP.ClientObject {
@@ -178,7 +178,7 @@ declare module Microsoft.SharePoint.Client.Search {
                 immediacyTitle: string,
                 immediacyUrl: string) => void;
             exportPopularQueries: (web: SP.Web, sourceId: SP.Guid) => SP.JsonObjectResult;
-        };
+        }
 
 
         export class StringCollection extends SP.ClientObjectCollection {
@@ -188,11 +188,11 @@ declare module Microsoft.SharePoint.Client.Search {
             get_childItemType: () => Object;
             add: (property: string) => void;
             clear: () => void;
-        };
+        }
 
         export class QueryPersonalizationData extends SP.ClientObject {
             //It's really empty;
-        };
+        }
 
         export class QuerySuggestionResults extends SP.ClientValueObject {
             get_peopleNames: () => string[];
@@ -203,7 +203,7 @@ declare module Microsoft.SharePoint.Client.Search {
 
             get_queries: () => QuerySuggestionQuery[];
             set_queries: (value: QuerySuggestionQuery[]) => void;
-        };
+        }
 
         export class PersonalResultSuggestion extends SP.ClientValueObject {
             get_highlightedTitle: () => string;
@@ -217,7 +217,7 @@ declare module Microsoft.SharePoint.Client.Search {
 
             get_url: () => string;
             set_url: (value: string) => void;
-        };
+        }
 
         export class QuerySuggestionQuery extends SP.ClientValueObject {
             get_isPersonal: () => bool;
@@ -225,14 +225,14 @@ declare module Microsoft.SharePoint.Client.Search {
 
             get_query: () => string;
             set_query: (value: string) => void;
-        };
+        }
 
         export class KeywordQueryProperties extends SP.ClientObject {
             get_item: (key: string) => any;
             set_item: (key: string, value: any) => void;
             setQueryPropertyValue: (name: string) => QueryPropertyValue;
             getQueryPropertyValue: (name: string, value: QueryPropertyValue) => void;
-        };
+        }
 
         export enum QueryPropertyValueType {
             none = 0,
@@ -241,7 +241,7 @@ declare module Microsoft.SharePoint.Client.Search {
             booleanType = 3,
             stringArrayType = 4,
             unSupportedType = 5
-        };
+        }
 
         export class QueryPropertyValue extends SP.ClientValueObject {
             get_boolVal: () => bool;
@@ -255,7 +255,7 @@ declare module Microsoft.SharePoint.Client.Search {
             set_strArray: (value: string[]) => string[];
             get_strVal: () => string;
             set_strVal: (value: string) => string;
-        };
+        }
 
         export class QueryUtility {
             static create: (name: string, val: any) => QueryPropertyValue;
@@ -268,7 +268,7 @@ declare module Microsoft.SharePoint.Client.Search {
             get_childItemType: () => Object;
             add: (property: ReorderingRule) => void;
             clear: () => void;
-        };
+        }
 
         export enum ReorderingRuleMatchType {
             resultContainsKeyword = 0,
@@ -280,7 +280,7 @@ declare module Microsoft.SharePoint.Client.Search {
             fileExtensionMatches = 6,
             resultHasTag = 7,
             manualCondition = 8
-        };
+        }
 
         export class ReorderingRule extends SP.ClientValueObject {
             get_boost: () => number;
@@ -291,7 +291,7 @@ declare module Microsoft.SharePoint.Client.Search {
 
             get_matchValue: () => string;
             set_matchValue: (value: string) => void;
-        };
+        }
 
         export class SortCollection extends SP.ClientObjectCollection {
             itemAt: (index: number) => Sort;
@@ -299,20 +299,20 @@ declare module Microsoft.SharePoint.Client.Search {
             get_childItemType: () => Object;
             add: (property: Sort) => void;
             clear: () => void;
-        };
+        }
 
         enum SortDirection {
             ascending = 0,
             descending = 1,
             fqlFormula = 2
-        };
+        }
         export class Sort extends SP.ClientValueObject {
             get_direction: () => SortDirection;
             set_direction: (value: SortDirection) => void;
 
             get_property: () => string;
             set_property: (value: string) => void;
-        };
+        }
 
 
         export class ResultTableCollection extends SP.ClientValueObjectCollection {
@@ -333,7 +333,7 @@ declare module Microsoft.SharePoint.Client.Search {
 
             initPropertiesFromJson: (parentNode: any) => void;
 
-        };
+        }
 
         export class ResultTable extends SP.ClientValueObject {
             get_groupTemplateId: () => string;
@@ -361,14 +361,14 @@ declare module Microsoft.SharePoint.Client.Search {
             get_totalRowsIncludingDuplicates: () => number;
 
             initPropertiesFromJson: (parentNode: any) => void;
-        };
+        }
 
         export class RankingLabeling extends SP.ClientObject {
             constructor(context: SP.ClientContext);
             getJudgementsForQuery: (query: string) => SP.JsonObjectResult;
             addJudgment: (userQuery: string, url: string, labelId: number) => void;
             normalizeResultUrl: (url: string) => SP.JsonObjectResult;
-        };
+        }
 
         export class PopularQuery extends SP.ClientValueObject {
             get_clickCount: () => number;
@@ -420,12 +420,12 @@ declare module Microsoft.SharePoint.Client.Search {
             static totalRowsExactMinimum: string; // 'TotalRowsExactMinimum';
             static trimDuplicates: string; // 'TrimDuplicates';
             static uiLanguage: string; // 'UILanguage';
-        };
+        }
 
         export class QueryObjectPropertyNames {
             static hitHighlightedProperties: string; // = 'HitHighlightedProperties';
             static personalizationData: string; // = 'PersonalizationData';
-        };
+        }
 
         export class KeywordQueryPropertyNames {
             static collapseSpecification: string; // 'CollapseSpecification';
@@ -433,7 +433,7 @@ declare module Microsoft.SharePoint.Client.Search {
             static hiddenConstraints: string; // 'HiddenConstraints';
             static refiners: string; // 'Refiners';
             static trimDuplicatesIncludeId: string; // 'TrimDuplicatesIncludeId';
-        };
+        }
 
         export class KeywordQueryObjectPropertyNames {
             static properties: string; // 'Properties';
@@ -441,7 +441,7 @@ declare module Microsoft.SharePoint.Client.Search {
             static reorderingRules: string; // 'ReorderingRules';
             static selectProperties: string; // 'SelectProperties';
             static sortList: string; // 'SortList';
-        };
+        }
     }
 
     module WebControls {
@@ -490,18 +490,18 @@ declare module Microsoft.SharePoint.Client.Search {
                 errorID: number,
                 startDateTime: Date,
                 endDateTime: Date) => SP.JsonObjectResult;
-        };
+        }
 
         export class SearchObjectOwner extends SP.ClientObject {
             constructor(context: SP.ClientContext, lowestCurrentLevelToUse: SearchObjectLevel);
-        };
+        }
 
         export enum SearchObjectLevel {
             spWeb = 0,
             spSite = 1,
             spSiteSubscription = 2,
             ssa = 3
-        };
+        }
     }
 
     module Portability {

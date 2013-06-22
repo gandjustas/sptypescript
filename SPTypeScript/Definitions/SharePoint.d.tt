@@ -11,6 +11,7 @@
 <#= GetFileContents(@"clienttemplates.d.ts") #>
 <#= GetFileContents(@"MicrosoftAjax.d.ts") #>
 <#= GetFileContents(@"SP.d.ts") #>
+<#= GetFileContents(@"SP.Search.d.ts") #>
 <#= GetFileContents(@"SP.BusinessData.d.ts") #>
 <#= GetFileContents(@"SP.Init.d.ts") #>
 <#= GetFileContents(@"SP.Sharing.d.ts") #>

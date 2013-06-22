@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="ListWithTabsForm" OnQuickLaunch="FALSE" TemplateType="10001" Url="Lists/ListWithTabsForm" Description="List with tabs form"></ListInstance>
+</Elements>

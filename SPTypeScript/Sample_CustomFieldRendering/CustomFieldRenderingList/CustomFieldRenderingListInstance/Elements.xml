@@ -1,4 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <ListInstance Title="CustomFieldRenderingList" OnQuickLaunch="TRUE" TemplateType="10001" Url="Lists/CustomFieldRenderingList" Description="Мой экземпляр списка"></ListInstance>
-</Elements>
