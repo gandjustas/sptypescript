@@ -211,11 +211,13 @@ declare module SPClientTemplates {
     }
     export interface RenderContext_Form extends RenderContext {
         FieldControlsModes: { [fieldInternalName: string]: ClientControlMode; };
-        FormContext: any;
+        FormContext: ClientFormContext;
         FormUniqueId: string;
         ListData: ListData_InForm;
         ListSchema: ListSchema_InForm;
     }
+
+
 
     export interface FieldSchema_InView_LookupField extends FieldSchema_InView {
         /** Either "TRUE" or "FALSE" */
@@ -539,10 +541,10 @@ declare module SPClientTemplates {
         /** Defines templates for list items rendering. */
         Item?: ItemCallback;
         /** Defines template for rendering list view header.
-			Can be either string or SingleTemplateCallback */
+            Can be either string or SingleTemplateCallback */
         Header?: SingleTemplateCallback;
         /** Defines template for rendering list view footer.
-			Can be either string or SingleTemplateCallback */
+            Can be either string or SingleTemplateCallback */
         Footer?: SingleTemplateCallback;
         /** Defines templates for fields rendering. The field is specified by it's internal name. */
         Fields: FieldTemplateMap;
@@ -613,11 +615,68 @@ declare module SPClientTemplates {
         /** Represents lookup values array in some strange format */
         static BuildLookupValuesAsString(choiceArray: ClientLookupValue[], isMultiLookup: bool, setGroupDesc: bool): string;
         static ParseURLValue(value: string): ClientUrlValue;
-        static GetFormContextForCurrentField(context: RenderContext_Form): any; // returns ClientFormContext from clientforms.js
+        static GetFormContextForCurrentField(context: RenderContext_Form): ClientFormContext;
+    }
+
+    export class ClientFormContext {
+        fieldValue: any;
+        fieldSchema: SPClientTemplates.FieldSchema_InForm;
+        fieldName: string;
+        controlMode: number;
+        webAttributes: {
+            AllowScriptableWebParts: bool;
+            CurrentUserId: number;
+            EffectivePresenceEnabled: bool;
+            LCID: string;
+            PermissionCustomizePages: bool;
+            WebUrl: string;
+        };
+        itemAttributes: {
+            ExternalListItem: boolean;
+            FsObjType: number;
+            Id: number;
+            Url: string;
+        };
+        listAttributes: {
+            BaseType: number;
+            DefaultItemOpen: number;
+            Direction: string;
+            EnableVesioning: bool;
+            Id: string;
+        };
+        registerInitCallback(fieldname: string, callback: () => void ): void;
+        registerFocusCallback(fieldname: string, callback: () => void ): void;
+        registerValidationErrorCallback(fieldname: string, callback: (error: any) => void ): void;
+        registerGetValueCallback(fieldname: string, callback: () => any): void;
+        updateControlValue(fieldname: string, value: any): void;
+        registerClientValidator(fieldname: string, validator: SPClientForms.ClientValidation.ValidatorSet): void;
+        registerHasValueChangedCallback(fieldname: string, callback: (eventArg?: any) => void );
     }
 
 }
 
 declare function GenerateIID(renderCtx: SPClientTemplates.RenderContext_ItemInView): string;
 declare function GenerateIIDForListItem(renderCtx: SPClientTemplates.RenderContext_InView, listItem: SPClientTemplates.Item): string;
+
+declare function SPFormControl_AppendValidationErrorMessage(nodeId: string, errorResult: any): void;
+
+declare module SPClientForms {
+    module ClientValidation {
+        export class ValidationResult {
+            constructor(hasErrors: bool, errorMsg: string);
+        }
+
+        export class ValidatorSet {
+            public RegisterValidator(validator: IValidator);
+        }
+
+        export interface IValidator {
+            Validate(value: any): ValidationResult;
+        }
+
+        export class RequiredValidator implements IValidator {
+            Validate(value: any): ValidationResult;
+        }
+    }
+}
 
