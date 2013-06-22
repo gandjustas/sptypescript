@@ -7,6 +7,4 @@
     <File Path="Scripts_ConditionalFormattingList\ConditionalFormatting.min.js" Url="Scripts_ConditionalFormattingList/ConditionalFormatting.min.js" ReplaceContent="TRUE" />
   </Module>
 
-  <CustomAction Location="ScriptLink" ScriptSrc="~site/Extensions/TypeScriptTemplates.js"   Sequence="100"/>
-  <CustomAction Location="ScriptLink" ScriptSrc="~site/Scripts_ConditionalFormattingList/ConditionalFormatting.js"  Sequence="101"/>
 </Elements>

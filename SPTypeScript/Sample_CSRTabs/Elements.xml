@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Sample_CSRTabs">
+    <File Path="Sample_CSRTabs\CSRTabs.ts" Url="Sample_CSRTabs/CSRTabs.ts" ReplaceContent="TRUE" />
+    <File Path="Sample_CSRTabs\CSRTabs.js" Url="Sample_CSRTabs/CSRTabs.js" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

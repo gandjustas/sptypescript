@@ -15,6 +15,7 @@
             <li><a href="../Lists/CustomList/Overridable.aspx">Client Side Rendering: Custom list view</a></li>
             <li><a href="../Lists/CustomFieldList">Client Side Rendering: Complexity field</a></li>
             <li><a href="../Lists/ConditionalFormattingTasksList">Client Side Rendering: Conditional formatting</a></li>
+            <li><a href="../Lists/ListWithTabsForm/NewForm.aspx">Client Side Rendering: Form with tabs</a></li>
             <li><a href="../Sample_WorkflowServices">Workflow Services: Retrieve list of available workflow actions</a></li>
             <li><a href="javascript:document.location = '../SearchCSOM/Search.aspx?'+document.URL.split('?')[1]">Search: Using search CSOM  with TypeScript</a></li>
             <li><a href="../Sample_UserProfiles">User Profiles: Retrieve properties for current user</a></li>

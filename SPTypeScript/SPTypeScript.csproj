@@ -23,6 +23,7 @@
     <SccLocalPath>&lt;Local Binding Root of Project&gt;</SccLocalPath>
     <SccAuxPath>&lt;Source Control Database&gt;</SccAuxPath>
     <SccProvider>Mercurial Source Control Package</SccProvider>
+    <ActivePublishProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +55,15 @@
     <None Include="Sample_BasicCSOMActions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{36cba84f-cd3b-408d-b7a4-fc2b2c8972e5}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_CSRTabs\ListWithTabsForm\ListWithTabsFormInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4a84f489-2b42-42e5-ad91-3dae9196b4b2}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRTabs\ListWithTabsForm\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e83fcfef-ee4e-4568-9358-6d09aaff0ad5}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRTabs\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{708e4402-b009-46a6-aee0-410c63c9a573}</SharePointProjectItemId>
+    </None>
     <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
       <DependentUpon>Search.ts</DependentUpon>
     </None>
@@ -72,11 +82,19 @@
     <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
     </None>
+    <TypeScriptCompile Include="Sample_CSRTabs\CSRTabs.ts" />
     <Content Include="Definitions\SharePoint.d.ts">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SharePoint.d.tt</DependentUpon>
     </Content>
+    <Content Include="Sample_CSRTabs\CSRTabs.js">
+      <DependentUpon>CSRTabs.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRTabs\Elements.xml" />
+    <Content Include="Sample_CSRTabs\ListWithTabsForm\Elements.xml" />
+    <Content Include="Sample_CSRTabs\ListWithTabsForm\ListWithTabsFormInstance\Elements.xml" />
+    <Content Include="Sample_CSRTabs\ListWithTabsForm\Schema.xml" />
     <Content Include="Sample_Social\Default.aspx" />
     <Content Include="Sample_Social\Elements.xml" />
     <TypeScriptCompile Include="Sample_Social\Social.ts" />
@@ -291,7 +309,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0'">11.0</VisualStudioVersion>
