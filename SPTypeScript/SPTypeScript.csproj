@@ -64,6 +64,18 @@
     <None Include="Sample_CSRTabs\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{708e4402-b009-46a6-aee0-410c63c9a573}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingList\CustomFieldRenderingListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5b238187-3fc1-4816-a9f0-ed8acd2cae8a}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{230160de-7c37-47c0-885e-641b8b27b019}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.js.map" />
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js.map" />
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{75124c56-69cb-479f-896e-b00d60008b41}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\_fieldsamples.visafield.js.map" />
     <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
       <DependentUpon>Search.ts</DependentUpon>
     </None>
@@ -95,6 +107,14 @@
     <Content Include="Sample_CSRTabs\ListWithTabsForm\Elements.xml" />
     <Content Include="Sample_CSRTabs\ListWithTabsForm\ListWithTabsFormInstance\Elements.xml" />
     <Content Include="Sample_CSRTabs\ListWithTabsForm\Schema.xml" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\CustomFieldRenderingListInstance\Elements.xml" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\Elements.xml" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\Schema.xml" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\Elements.xml" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.ts" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\_fieldsamples.visafield.js" />
     <Content Include="Sample_Social\Default.aspx" />
     <Content Include="Sample_Social\Elements.xml" />
     <TypeScriptCompile Include="Sample_Social\Social.ts" />
