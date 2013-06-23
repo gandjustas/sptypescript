@@ -1,35 +1,41 @@
 ///<reference path="../Definitions/jquery.d.ts" />
 ///<reference path="../Definitions/SharePoint.d.ts" />
+///<reference path="../Definitions/jquery.d.ts" />
+///<reference path="../Definitions/jqueryui.d.ts" />
+
+declare var Strings: any;
+declare module SP {
+    export var Ribbon: any;
+}
 
 module CSRTabs {
 
     export function init() {
         var options: SPClientTemplates.TemplateOverridesOptions;
         options = { Templates: {} };
-        options.OnPreRender = OnPreRender;
         options.Templates.Item = RenderFields;
         options.OnPostRender = OnPostRender;
         SPClientTemplates.TemplateManager.RegisterTemplateOverrides(options);
     }
 
-    // At the time of writing, there was a bug in CSR.
-    // Even having rendering mode set to CSRCustomLayout, field titles were still rendered by server.
-    // Here I hide those artifacts
-    function OnPreRender(ctx: SPClientTemplates.RenderContext_Form) {
-        var serverRenderArtifacts = <HTMLElement>$get("WebPart" + ctx.FormUniqueId).children[0];
-        serverRenderArtifacts.style.display = 'none';
-    }
-
-
     class TabCollection {
         constructor(fields: SPClientTemplates.FieldSchema_InForm[]) {
             this.tabs = [];
-            for (var i = 0; i < (fields.length / 5); i++)
+            var fieldsForTabs = [];
+            for (var i = 0; i < fields.length; i++)
+            {
+                if (fields[i].Name != "Modified" && fields[i].Name != "Editor"
+                    && fields[i].Name != "Created" && fields[i].Name != "Author")
+                {
+                    fieldsForTabs.push(fields[i]);
+                }
+            }
+            for (var i = 0; i < (fieldsForTabs.length / 5); i++)
             {
                 this.tabs.push(new Tab(
                     "tab" + (i + 1).toString(),
                     "Tab " + (i + 1).toString(),
-                    fields.slice(i * 5, (i + 1) * 5 - 1)
+                    fieldsForTabs.slice(i * 5, (i + 1) * 5)
                     ));
             }
         }
@@ -63,7 +69,7 @@ module CSRTabs {
         title: string;
         fields: SPClientTemplates.FieldSchema_InForm[];
         renderHeader() {
-            return '<li><a href="#' + this.name + '">' + this.title + '</a></li>';
+            return (<any>String).format('<li><a href="#{0}">{1}</a></li>', this.name, this.title);
         }
         renderContent(context: SPClientTemplates.RenderContext_Form) {
             var resultHtml: string = '';
@@ -81,32 +87,32 @@ module CSRTabs {
 
         var tabs = new TabCollection(context.ListSchema.Field);
 
-        var resultHtml = '<div id="tabbedForm">';
+        var resultHtml = '';
+        resultHtml += '<div id="tabbedForm">';
         resultHtml += tabs.renderHeaders();
         resultHtml += tabs.renderContents(context);
-        resultHtml += '</div>'
+        resultHtml += '</div>';
 
         return resultHtml;
     }
 
     function RenderFieldRow(context: SPClientTemplates.RenderContext_Form, field: SPClientTemplates.FieldSchema_InForm) {
 
-        var resultHtml = '';
-        resultHtml += '<tr>';
+        var resultHtml = '<tr>';
         resultHtml += '<td width="113" class="ms-formlabel" nowrap="true" valign="top"><h3 class="ms-standardheader"><nobr>';
         resultHtml += field.Title;
-        if (field.Required)
+        if (field.Required && context.FieldControlModes[field.Name] != SPClientTemplates.ClientControlMode.DisplayForm)
         {
-            resultHtml += '<span title="This is a required field." class="ms-accentText"> *</span>';
+            resultHtml += (<any>String).format('<span title="{0}" class="ms-accentText"> *</span>', Strings.STS.L_RequiredField_Tooltip);
         }
         resultHtml += '</nobr></h3></td>';
-        resultHtml += '<td width="350" class="ms-formbody" valign="top">' + context.RenderFieldByName(context, field.Name) + '</td>';
+        resultHtml += (<any>String).format('<td width="350" class="ms-formbody" valign="top">{0}</td>', context.RenderFieldByName(context, field.Name));
         resultHtml += '</tr>';
         return resultHtml;
     }
 
     function OnPostRender(ctx: SPClientTemplates.RenderContext_Form) {
-        (<any>$("#tabbedForm")).tabs();
+        $("#tabbedForm").tabs();
     }
 
 };

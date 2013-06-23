@@ -3,23 +3,23 @@ var CSRTabs;
     function init() {
         var options;
         options = { Templates: {} };
-        options.OnPreRender = OnPreRender;
         options.Templates.Item = RenderFields;
         options.OnPostRender = OnPostRender;
         SPClientTemplates.TemplateManager.RegisterTemplateOverrides(options);
     }
     CSRTabs.init = init;
 
-    function OnPreRender(ctx) {
-        var serverRenderArtifacts = $get("WebPart" + ctx.FormUniqueId).children[0];
-        serverRenderArtifacts.style.display = 'none';
-    }
-
     var TabCollection = (function () {
         function TabCollection(fields) {
             this.tabs = [];
-            for (var i = 0; i < (fields.length / 5); i++) {
-                this.tabs.push(new Tab("tab" + (i + 1).toString(), "Tab " + (i + 1).toString(), fields.slice(i * 5, (i + 1) * 5 - 1)));
+            var fieldsForTabs = [];
+            for (var i = 0; i < fields.length; i++) {
+                if (fields[i].Name != "Modified" && fields[i].Name != "Editor" && fields[i].Name != "Created" && fields[i].Name != "Author") {
+                    fieldsForTabs.push(fields[i]);
+                }
+            }
+            for (var i = 0; i < (fieldsForTabs.length / 5); i++) {
+                this.tabs.push(new Tab("tab" + (i + 1).toString(), "Tab " + (i + 1).toString(), fieldsForTabs.slice(i * 5, (i + 1) * 5)));
             }
         }
         TabCollection.prototype.renderHeaders = function () {
@@ -47,7 +47,7 @@ var CSRTabs;
             this.fields = fields;
         }
         Tab.prototype.renderHeader = function () {
-            return '<li><a href="#' + this.name + '">' + this.title + '</a></li>';
+            return (String).format('<li><a href="#{0}">{1}</a></li>', this.name, this.title);
         };
         Tab.prototype.renderContent = function (context) {
             var resultHtml = '';
@@ -65,7 +65,8 @@ var CSRTabs;
     function RenderFields(context) {
         var tabs = new TabCollection(context.ListSchema.Field);
 
-        var resultHtml = '<div id="tabbedForm">';
+        var resultHtml = '';
+        resultHtml += '<div id="tabbedForm">';
         resultHtml += tabs.renderHeaders();
         resultHtml += tabs.renderContents(context);
         resultHtml += '</div>';
@@ -74,21 +75,20 @@ var CSRTabs;
     }
 
     function RenderFieldRow(context, field) {
-        var resultHtml = '';
-        resultHtml += '<tr>';
+        var resultHtml = '<tr>';
         resultHtml += '<td width="113" class="ms-formlabel" nowrap="true" valign="top"><h3 class="ms-standardheader"><nobr>';
         resultHtml += field.Title;
-        if (field.Required) {
-            resultHtml += '<span title="This is a required field." class="ms-accentText"> *</span>';
+        if (field.Required && context.FieldControlModes[field.Name] != SPClientTemplates.ClientControlMode.DisplayForm) {
+            resultHtml += (String).format('<span title="{0}" class="ms-accentText"> *</span>', Strings.STS.L_RequiredField_Tooltip);
         }
         resultHtml += '</nobr></h3></td>';
-        resultHtml += '<td width="350" class="ms-formbody" valign="top">' + context.RenderFieldByName(context, field.Name) + '</td>';
+        resultHtml += (String).format('<td width="350" class="ms-formbody" valign="top">{0}</td>', context.RenderFieldByName(context, field.Name));
         resultHtml += '</tr>';
         return resultHtml;
     }
 
     function OnPostRender(ctx) {
-        ($("#tabbedForm")).tabs();
+        $("#tabbedForm").tabs();
     }
 })(CSRTabs || (CSRTabs = {}));
 ;

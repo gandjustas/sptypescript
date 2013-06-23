@@ -3,5 +3,9 @@
   <Files>
     <ProjectItemFile Source="Elements.xml" Target="ListWithTabsForm\" Type="ElementManifest" />
     <ProjectItemFile Source="Schema.xml" Target="ListWithTabsForm\" Type="ElementFile" />
+    <ProjectItemFile Source="Form.aspx" Target="ListWithTabsForm\" Type="ElementFile" />
   </Files>
+  <ExtensionData>
+    <ExtensionDataItem Key="Microsoft.VisualStudio.SharePoint.ListSettings.ListFieldsContentTypeID" Value="0x0100be77f54331ec47d7b1d8bf291bd9aabb" />
+  </ExtensionData>
 </ProjectItem>

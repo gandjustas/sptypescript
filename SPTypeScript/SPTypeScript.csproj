@@ -103,8 +103,11 @@
     </Content>
     <Content Include="Sample_CSRTabs\Elements.xml" />
     <Content Include="Sample_CSRTabs\ListWithTabsForm\Elements.xml" />
+    <Content Include="Sample_CSRTabs\ListWithTabsForm\Form.aspx" />
     <Content Include="Sample_CSRTabs\ListWithTabsForm\ListWithTabsFormInstance\Elements.xml" />
-    <Content Include="Sample_CSRTabs\ListWithTabsForm\Schema.xml" />
+    <Content Include="Sample_CSRTabs\ListWithTabsForm\Schema.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\CustomFieldRenderingListInstance\Elements.xml" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\Elements.xml" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\Schema.xml" />

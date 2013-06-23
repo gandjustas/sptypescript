@@ -3,7 +3,7 @@
     <!-- Do not change the value of the Name attribute below. If it does not match the folder name of the List project item, an error will occur when the project is run. -->
     <ListTemplate
         Name="ListWithTabsForm"
-        Type="10001"
+        Type="10002"
         BaseType="0"
         OnQuickLaunch="TRUE"
         SecurityBits="11"
@@ -11,4 +11,7 @@
         DisplayName="ListWithTabsForm"
         Description="My List Definition"
         Image="/_layouts/15/images/itcontct.png"/>
+  <Module Name="ListWithTabsForm">
+    <File Path="ListWithTabsForm\Form.aspx" Url="ListWithTabsForm/Form.aspx" ReplaceContent="TRUE" />
+  </Module>
 </Elements>

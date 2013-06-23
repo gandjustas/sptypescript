@@ -2185,6 +2185,8 @@ declare module SP {
         getByTitle(title: string): SP.List;
         /** Returns the list with the specified list identifier. */
         getById(id: SP.Guid): SP.List;
+        /** Returns the list with the specified list identifier. */
+        getById(id: string): SP.List;
         /** Creates a new list or a document library. */
         add(parameters: SP.ListCreationInformation): SP.List;
         /** Gets a list that is the default location for wiki pages. */

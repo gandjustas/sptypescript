@@ -211,7 +211,7 @@ declare module SPClientTemplates {
     }
     export interface RenderContext_Form extends RenderContext {
         CurrentItem: Item;
-        FieldControlsModes: { [fieldInternalName: string]: ClientControlMode; };
+        FieldControlModes: { [fieldInternalName: string]: ClientControlMode; };
         FormContext: ClientFormContext;
         FormUniqueId: string;
         ListData: ListData_InForm;
