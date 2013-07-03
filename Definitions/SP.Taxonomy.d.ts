@@ -62,7 +62,7 @@ declare module SP {
             getDefaultSiteCollectionTermStore(): TermStore;
         }
 
-        export class TermStoreCollection extends SP.ClientObjectCollection {
+        export class TermStoreCollection extends SP.ClientObjectCollection<TermStore> {
             itemAt(index: number): TermStore;
             get_item(index: number): TermStore;
             getById(id: SP.Guid): TermStore;
@@ -124,7 +124,7 @@ declare module SP {
             deleteObject(): void;
         }
 
-        export class TermGroupCollection extends SP.ClientObjectCollection {
+        export class TermGroupCollection extends SP.ClientObjectCollection<TermGroup> {
             itemAt(index: number): TermGroup;
             get_item(index: number): TermGroup;
             getById(id: SP.Guid): TermGroup;
@@ -161,7 +161,7 @@ declare module SP {
             setCustomProperty(name: string, value: string): void;
         }
 
-        export class TermSetCollection extends SP.ClientObjectCollection {
+        export class TermSetCollection extends SP.ClientObjectCollection<TermSet> {
             itemAt(index: number): TermSet;
             get_item(index: number): TermSet;
             getById(id: SP.Guid): TermSet;
@@ -192,7 +192,7 @@ declare module SP {
             move(targetGroup: TermGroup): void;
         }
 
-        export class TermCollection extends SP.ClientObjectCollection {
+        export class TermCollection extends SP.ClientObjectCollection<Term> {
             itemAt(index: number): Term;
             get_item(index: number): Term;
             getById(id: SP.Guid): Term;
@@ -247,7 +247,7 @@ declare module SP {
         }
 
 
-        export class LabelCollection extends SP.ClientObjectCollection {
+        export class LabelCollection extends SP.ClientObjectCollection<Label> {
             itemAt(index: number): Label;
             get_item(index: number): Label;
             getByValue(name: string): Label;
@@ -310,7 +310,7 @@ declare module SP {
             set_withinTimeSpan(value: number): void;
         }
 
-        export class ChangedItemCollection extends SP.ClientObjectCollection {
+        export class ChangedItemCollection extends SP.ClientObjectCollection<ChangedItem> {
             itemAt(index: number): ChangedItem;
             get_item(index: number): ChangedItem;
         }
@@ -388,7 +388,7 @@ declare module SP {
 
         }
 
-        export class TaxonomyFieldValueCollection extends SP.ClientObjectCollection {
+        export class TaxonomyFieldValueCollection extends SP.ClientObjectCollection<TaxonomyFieldValue> {
             constructor(context: SP.ClientContext, fieldValue: string, creatingField: SP.Field);
             itemAt(index: number): TaxonomyFieldValue;
             get_item(index: number): TaxonomyFieldValue;

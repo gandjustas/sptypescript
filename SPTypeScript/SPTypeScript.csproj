@@ -55,6 +55,9 @@
     <None Include="Sample_BasicCSOMActions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{36cba84f-cd3b-408d-b7a4-fc2b2c8972e5}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_CSRTabs\CSRTabs.js.map">
+      <DependentUpon>CSRTabs.ts</DependentUpon>
+    </None>
     <None Include="Sample_CSRTabs\ListWithTabsForm\ListWithTabsFormInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4a84f489-2b42-42e5-ad91-3dae9196b4b2}</SharePointProjectItemId>
     </None>
@@ -99,6 +102,9 @@
       <DependentUpon>SharePoint.d.tt</DependentUpon>
     </Content>
     <Content Include="Sample_CSRTabs\CSRTabs.js">
+      <DependentUpon>CSRTabs.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRTabs\CSRTabs.min.js">
       <DependentUpon>CSRTabs.ts</DependentUpon>
     </Content>
     <Content Include="Sample_CSRTabs\Elements.xml" />
@@ -194,7 +200,9 @@
     </Content>
     <Content Include="Sample_BasicCSOMActions\ChromeLoader.js" />
     <TypeScriptCompile Include="Sample_BasicCSOMActions\BasicTasksJSOM.ts" />
-    <Content Include="Sample_BasicCSOMActions\Shared Documents\Elements.xml" />
+    <Content Include="Sample_BasicCSOMActions\Shared Documents\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Sample_BasicCSOMActions\Announcements\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{cf975992-f191-4bab-a103-ee84b785dad5}</SharePointProjectItemId>
     </None>

@@ -33,7 +33,7 @@ declare module SP {
             update(): void;
             deleteObject(): void;
         }
-        export class WorkflowAssociationCollection extends SP.ClientObjectCollection {
+        export class WorkflowAssociationCollection extends SP.ClientObjectCollection<WorkflowAssociation> {
             itemAt(index: number): SP.Workflow.WorkflowAssociation;
             get_item(index: number): SP.Workflow.WorkflowAssociation;
             getById(associationId: SP.Guid): SP.Workflow.WorkflowAssociation;
@@ -68,7 +68,7 @@ declare module SP {
             get_name(): string;
             get_permissionsManual(): SP.BasePermissions;
         }
-        export class WorkflowTemplateCollection extends SP.ClientObjectCollection {
+        export class WorkflowTemplateCollection extends SP.ClientObjectCollection<WorkflowTemplate> {
             itemAt(index: number): SP.Workflow.WorkflowTemplate;
             get_item(index: number): SP.Workflow.WorkflowTemplate;
             getById(templateId: SP.Guid): SP.Workflow.WorkflowTemplate;

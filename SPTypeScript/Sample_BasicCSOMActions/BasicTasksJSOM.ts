@@ -84,7 +84,7 @@ function readAllProps(resultpanel: HTMLElement) {
         
         var listInfo = "";
         while (listEnumerator.moveNext()) {
-            var oList = <SP.List>listEnumerator.get_current();
+            var oList = listEnumerator.get_current();
             listInfo += "Title: " + oList.get_title() + " Created: " +
                 oList.get_created().toString() + "<br/>";
         }
@@ -117,7 +117,7 @@ function readSpecificProps(resultpanel: HTMLElement) {
 
         var listInfo = "";
         while (listEnumerator.moveNext()) {
-            var oList = <SP.List>listEnumerator.get_current();
+            var oList = listEnumerator.get_current();
             listInfo += "Title: " + oList.get_title() +
                 " ID: " + oList.get_id().toString() + "<br/>";
         }
@@ -181,7 +181,7 @@ function readFilter(resultpanel: HTMLElement) {
 
             var listInfo = "";
             while (fieldEnumerator.moveNext()) {
-                var oField = <SP.Field>fieldEnumerator.get_current();
+                var oField = fieldEnumerator.get_current();
                 var regEx = new RegExp("name", "ig");
 
                 if (regEx.test(oField.get_internalName())) {
@@ -437,7 +437,7 @@ function readInclude(resultpanel: HTMLElement) {
 
         var listItemInfo = "";
         while (listItemEnumerator.moveNext()) {
-            var oListItem = <SP.ListItem>listItemEnumerator.get_current();
+            var oListItem = listItemEnumerator.get_current();
             listItemInfo += "ID: " + oListItem.get_id() + "<br/>" +
             "Display name: " + oListItem.get_displayName() + "<br/>" +
             "Unique role assignments: " + oListItem.get_hasUniqueRoleAssignments() + "<br/>";

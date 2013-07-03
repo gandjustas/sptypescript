@@ -24,7 +24,7 @@ declare module SP {
             get_useCount(): number;
         }
 
-        export class HashTagCollection extends SP.ClientObjectCollection {
+        export class HashTagCollection extends SP.ClientObjectCollection<HashTag> {
             itemAt(index: number): HashTag;
             get_item(index: number): HashTag;
         }

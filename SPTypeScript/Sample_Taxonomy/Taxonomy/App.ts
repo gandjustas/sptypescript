@@ -55,7 +55,7 @@ module _ {
         // For each group, we'll build a clickable div.
         while (groupEnum.moveNext()) {
             (() => {
-                var currentGroup = <SP.Taxonomy.TermGroup>groupEnum.get_current();
+                var currentGroup = groupEnum.get_current();
                 var groupName = document.createElement("div");
                 groupName.setAttribute("style", "float:none;cursor:pointer");
                 var groupID = currentGroup.get_id();
@@ -116,7 +116,7 @@ module _ {
                     var termSetEnum = termSets.getEnumerator();
                     while (termSetEnum.moveNext()) {
                         (() => {                                    
-                            var currentTermSet = <SP.Taxonomy.TermSet>termSetEnum.get_current();
+                            var currentTermSet = termSetEnum.get_current();
                             var termSetName = document.createElement("div");
                             termSetName.appendChild(document.createTextNode(" + " + currentTermSet.get_name()));
                             termSetName.setAttribute("style", "float:none;cursor:pointer;");
@@ -185,7 +185,7 @@ module _ {
             .then(() => { 
                     var termsEnum = terms.getEnumerator();
                     while (termsEnum.moveNext()) {
-                        var currentTerm = <SP.Taxonomy.Term>termsEnum.get_current();
+                        var currentTerm = termsEnum.get_current();
 
                         var term = document.createElement("div");
                         term.appendChild(document.createTextNode("    - " + currentTerm.get_name()));

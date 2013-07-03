@@ -909,14 +909,14 @@ declare var $addHandler: { (element: HTMLElement, eventName: string, handler: (e
 declare var $removeHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void ): void; };
 
 
-interface IEnumerator {
-    get_current(): any;
+interface IEnumerator<T> {
+    get_current(): T;
     moveNext(): bool;
     reset(): void;
 }
 
-interface IEnumerable {
-    getEnumerator(): IEnumerator;
+interface IEnumerable<T> {
+    getEnumerator(): IEnumerator<T>;
 }
 
 declare module SP {
@@ -1014,10 +1014,10 @@ declare module SP {
         fullMask,
     }
 
-    export class BaseCollection implements IEnumerable {
-        getEnumerator(): IEnumerator;
+    export class BaseCollection<T> implements IEnumerable<T> {
+        getEnumerator(): IEnumerator<T>;
         get_count(): number;
-        itemAtIndex(index: number): any;
+        itemAtIndex(index: number): T;
         constructor();
     }
     export interface IFromJson {
@@ -1362,17 +1362,20 @@ declare module SP {
         constructor();
     }
     /** Provides a base class for a collection of objects on a remote client. */
-    export class ClientObjectCollection extends SP.ClientObject implements IEnumerable {
+    export class ClientObjectCollection<T> extends SP.ClientObject implements IEnumerable<T> {
         get_areItemsAvailable(): bool;
         /** Gets the data for all of the items in the collection. */
         retrieveItems(): SP.ClientObjectPrototype;
         /** Returns an enumerator that iterates through the collection. */
-        getEnumerator(): IEnumerator;
+        getEnumerator(): IEnumerator<T>;
         /** Returns number of items in the collection. */
         get_count(): number;
+        get_data(): T[];
+        addChild(obj: T): void;
+        getItemAtIndex(index: number): T;
         fromJson(obj: any): void;
     }
-    export class ClientObjectList extends SP.ClientObjectCollection {
+    export class ClientObjectList<T> extends SP.ClientObjectCollection<T> {
         constructor(context: SP.ClientRuntimeContext, objectPath: SP.ObjectPath, childItemType: any);
         fromJson(initValue: any): void;
         customFromJson(initValue: any): bool;
@@ -1457,9 +1460,9 @@ declare module SP {
         parseObjectFromJsonString(json: string): any;
         parseObjectFromJsonString(json: string, skipTypeFixup: bool): any;
         load(clientObject: SP.ClientObject): void;
-        loadQuery(clientObjectCollection: SP.ClientObjectCollection, exp: string): any;
+        loadQuery<T>(clientObjectCollection: SP.ClientObjectCollection<T>, exp: string): any;
         load(clientObject: SP.ClientObject, ...exps: string[]): void;
-        loadQuery(clientObjectCollection: SP.ClientObjectCollection): any;
+        loadQuery<T>(clientObjectCollection: SP.ClientObjectCollection<T>): any;
         get_serverSchemaVersion(): string;
         get_serverLibraryVersion(): string;
         get_traceCorrelationId(): string;
@@ -1477,9 +1480,9 @@ declare module SP {
         customWriteToXml(writer: SP.XmlWriter, serializationContext: SP.SerializationContext): bool;
         get_typeId(): string;
     }
-    export class ClientValueObjectCollection extends SP.ClientValueObject implements IEnumerable {
+    export class ClientValueObjectCollection<T> extends SP.ClientValueObject implements IEnumerable<T> {
         get_count(): number;
-        getEnumerator(): IEnumerator;
+        getEnumerator(): IEnumerator<T>;
         writeToXml(writer: SP.XmlWriter, serializationContext: SP.SerializationContext): void;
     }
     export class ExceptionHandlingScope {
@@ -1794,7 +1797,7 @@ declare module SP {
         writeToXml(writer: SP.XmlWriter, serializationContext: SP.SerializationContext): void;
         constructor();
     }
-    export class AppLicenseCollection extends SP.ClientValueObjectCollection {
+    export class AppLicenseCollection extends SP.ClientValueObjectCollection<AppLicense> {
         add(item: SP.AppLicense): void;
         get_item(index: number): SP.AppLicense;
         get_typeId(): string;
@@ -1812,7 +1815,7 @@ declare module SP {
         get_serverRelativeUrl(): string;
         deleteObject(): void;
     }
-    export class AttachmentCollection extends SP.ClientObjectCollection {
+    export class AttachmentCollection extends SP.ClientObjectCollection<Attachment> {
         itemAt(index: number): SP.Attachment;
         get_item(index: number): SP.Attachment;
         getByFileName(fileName: string): SP.Attachment;
@@ -1909,7 +1912,7 @@ declare module SP {
         get_alertId(): SP.Guid;
         get_webId(): SP.Guid;
     }
-    export class ChangeCollection extends SP.ClientObjectCollection {
+    export class ChangeCollection extends SP.ClientObjectCollection<Change> {
         itemAt(index: number): SP.Change;
         get_item(index: number): SP.Change;
     }
@@ -2129,7 +2132,7 @@ declare module SP {
         update(updateChildren: bool): void;
         deleteObject(): void;
     }
-    export class ContentTypeCollection extends SP.ClientObjectCollection {
+    export class ContentTypeCollection extends SP.ClientObjectCollection<ContentType> {
         itemAt(index: number): SP.ContentType;
         get_item(index: number): SP.ContentType;
         getById(contentTypeId: string): SP.ContentType;
@@ -2187,7 +2190,7 @@ declare module SP {
         update(): void;
         deleteObject(): void;
     }
-    export class EventReceiverDefinitionCollection extends SP.ClientObjectCollection {
+    export class EventReceiverDefinitionCollection extends SP.ClientObjectCollection<EventReceiverDefinition> {
         itemAt(index: number): SP.EventReceiverDefinition;
         get_item(index: number): SP.EventReceiverDefinition;
         getById(eventReceiverId: SP.Guid): SP.EventReceiverDefinition;
@@ -2298,7 +2301,7 @@ declare module SP {
     export class Feature extends SP.ClientObject {
         get_definitionId(): SP.Guid;
     }
-    export class FeatureCollection extends SP.ClientObjectCollection {
+    export class FeatureCollection extends SP.ClientObjectCollection<Feature> {
         itemAt(index: number): SP.Feature;
         get_item(index: number): SP.Feature;
         getById(featureId: SP.Guid): SP.Feature;
@@ -2391,7 +2394,7 @@ declare module SP {
         get_editFormat(): SP.ChoiceFormatType;
         set_editFormat(value: SP.ChoiceFormatType): void;
     }
-    export class FieldCollection extends SP.ClientObjectCollection {
+    export class FieldCollection extends SP.ClientObjectCollection<Field> {
         itemAt(index: number): SP.Field;
         get_item(index: number): SP.Field;
         get_schemaXml(): string;
@@ -2450,7 +2453,7 @@ declare module SP {
         set_required(value: bool): void;
         deleteObject(): void;
     }
-    export class FieldLinkCollection extends SP.ClientObjectCollection {
+    export class FieldLinkCollection extends SP.ClientObjectCollection<FieldLink> {
         itemAt(index: number): SP.FieldLink;
         get_item(index: number): SP.FieldLink;
         getById(id: SP.Guid): SP.FieldLink;
@@ -2663,7 +2666,7 @@ declare module SP {
         recycle(): SP.GuidResult;
         checkOut(): void;
     }
-    export class FileCollection extends SP.ClientObjectCollection {
+    export class FileCollection extends SP.ClientObjectCollection<File> {
         itemAt(index: number): SP.File;
         get_item(index: number): SP.File;
         getByUrl(url: string): SP.File;
@@ -2716,7 +2719,7 @@ declare module SP {
         get_versionLabel(): string;
         deleteObject(): void;
     }
-    export class FileVersionCollection extends SP.ClientObjectCollection {
+    export class FileVersionCollection extends SP.ClientObjectCollection<FileVersion> {
         itemAt(index: number): SP.FileVersion;
         get_item(index: number): SP.FileVersion;
         getById(versionid: number): SP.FileVersion;
@@ -2743,7 +2746,7 @@ declare module SP {
         deleteObject(): void;
         recycle(): SP.GuidResult;
     }
-    export class FolderCollection extends SP.ClientObjectCollection {
+    export class FolderCollection extends SP.ClientObjectCollection<Folder> {
         itemAt(index: number): SP.Folder;
         get_item(index: number): SP.Folder;
         getByUrl(url: string): SP.Folder;
@@ -2754,7 +2757,7 @@ declare module SP {
         get_serverRelativeUrl(): string;
         get_formType(): SP.PageType;
     }
-    export class FormCollection extends SP.ClientObjectCollection {
+    export class FormCollection extends SP.ClientObjectCollection<Form> {
         itemAt(index: number): SP.Form;
         get_item(index: number): SP.Form;
         getByPageType(formType: SP.PageType): SP.Form;
@@ -2790,7 +2793,7 @@ declare module SP {
         get_users(): SP.UserCollection;
         update(): void;
     }
-    export class GroupCollection extends SP.ClientObjectCollection {
+    export class GroupCollection extends SP.ClientObjectCollection<Group> {
         itemAt(index: number): SP.Group;
         get_item(index: number): SP.Group;
         getByName(name: string): SP.Group;
@@ -3081,7 +3084,7 @@ declare module SP {
         addItem(parameters: SP.ListItemCreationInformation): SP.ListItem;
     }
     /** Represents a collection of SP.List objects */
-    export class ListCollection extends SP.ClientObjectCollection {
+    export class ListCollection extends SP.ClientObjectCollection<List> {
         /** Gets the list at the specified index in the collection. */
         itemAt(index: number): SP.List;
         /** Gets the list at the specified index in the collection. */
@@ -3206,7 +3209,7 @@ declare module SP {
         /** Validates form values specified for the list item. Errors are returned through hasException and errorMessage properties of the ListItemFormUpdateValue objects */
         validateUpdateListItem(formValues: SP.ListItemFormUpdateValue[], bNewDocumentUpdate: bool): SP.ListItemFormUpdateValue[];
     }
-    export class ListItemCollection extends SP.ClientObjectCollection {
+    export class ListItemCollection extends SP.ClientObjectCollection<ListItem> {
         itemAt(index: number): SP.ListItem;
         get_item(index: number): SP.ListItem;
         getById(id: number): SP.ListItem;
@@ -3235,7 +3238,7 @@ declare module SP {
         writeToXml(writer: SP.XmlWriter, serializationContext: SP.SerializationContext): void;
         constructor();
     }
-    export class ListItemEntityCollection extends SP.ClientObjectCollection {
+    export class ListItemEntityCollection extends SP.ClientObjectCollection<ListItem> {
         itemAt(index: number): SP.ListItem;
         get_item(index: number): SP.ListItem;
     }
@@ -3266,7 +3269,7 @@ declare module SP {
         get_listTemplateTypeKind(): number;
         get_unique(): bool;
     }
-    export class ListTemplateCollection extends SP.ClientObjectCollection {
+    export class ListTemplateCollection extends SP.ClientObjectCollection<ListTemplate> {
         itemAt(index: number): SP.ListTemplate;
         get_item(index: number): SP.ListTemplate;
         getByName(name: string): SP.ListTemplate;
@@ -3360,7 +3363,7 @@ declare module SP {
         update(): void;
         deleteObject(): void;
     }
-    export class NavigationNodeCollection extends SP.ClientObjectCollection {
+    export class NavigationNodeCollection extends SP.ClientObjectCollection<NavigationNode> {
         itemAt(index: number): SP.NavigationNode;
         get_item(index: number): SP.NavigationNode;
         add(parameters: SP.NavigationNodeCreationInformation): SP.NavigationNode;
@@ -3450,7 +3453,7 @@ declare module SP {
         get_user(): SP.User;
         update(): void;
     }
-    export class PushNotificationSubscriberCollection extends SP.ClientObjectCollection {
+    export class PushNotificationSubscriberCollection extends SP.ClientObjectCollection<PushNotificationSubscriber> {
         itemAt(index: number): SP.PushNotificationSubscriber;
         get_item(index: number): SP.PushNotificationSubscriber;
         getByStoreId(id: string): SP.PushNotificationSubscriber;
@@ -3474,7 +3477,7 @@ declare module SP {
         deleteObject(): void;
         restore(): void;
     }
-    export class RecycleBinItemCollection extends SP.ClientObjectCollection {
+    export class RecycleBinItemCollection extends SP.ClientObjectCollection<RecycleBinItem> {
         itemAt(index: number): SP.RecycleBinItem;
         get_item(index: number): SP.RecycleBinItem;
         getById(id: SP.Guid): SP.RecycleBinItem;
@@ -3539,7 +3542,7 @@ declare module SP {
         get_relationshipDeleteBehavior(): SP.RelationshipDeleteBehaviorType;
         get_webId(): SP.Guid;
     }
-    export class RelatedFieldCollection extends SP.ClientObjectCollection {
+    export class RelatedFieldCollection extends SP.ClientObjectCollection<RelatedField> {
         itemAt(index: number): SP.RelatedField;
         get_item(index: number): SP.RelatedField;
     }
@@ -3551,7 +3554,7 @@ declare module SP {
         get_toolTipDescription(): string;
         get_webId(): SP.Guid;
     }
-    export class RelatedFieldExtendedDataCollection extends SP.ClientObjectCollection {
+    export class RelatedFieldExtendedDataCollection extends SP.ClientObjectCollection<RelatedFieldExtendedData> {
         itemAt(index: number): SP.RelatedFieldExtendedData;
         get_item(index: number): SP.RelatedFieldExtendedData;
     }
@@ -3600,7 +3603,7 @@ declare module SP {
         update(): void;
         deleteObject(): void;
     }
-    export class RoleAssignmentCollection extends SP.ClientObjectCollection {
+    export class RoleAssignmentCollection extends SP.ClientObjectCollection<RoleAssignment> {
         itemAt(index: number): SP.RoleAssignment;
         get_item(index: number): SP.RoleAssignment;
         get_groups(): SP.GroupCollection;
@@ -3623,7 +3626,7 @@ declare module SP {
         update(): void;
         deleteObject(): void;
     }
-    export class RoleDefinitionBindingCollection extends SP.ClientObjectCollection {
+    export class RoleDefinitionBindingCollection extends SP.ClientObjectCollection<RoleDefinition> {
         itemAt(index: number): SP.RoleDefinition;
         get_item(index: number): SP.RoleDefinition;
         constructor(context: SP.ClientRuntimeContext);
@@ -3632,7 +3635,7 @@ declare module SP {
         remove(roleDefinition: SP.RoleDefinition): void;
         removeAll(): void;
     }
-    export class RoleDefinitionCollection extends SP.ClientObjectCollection {
+    export class RoleDefinitionCollection extends SP.ClientObjectCollection<RoleDefinition> {
         itemAt(index: number): SP.RoleDefinition;
         get_item(index: number): SP.RoleDefinition;
         getByName(name: string): SP.RoleDefinition;
@@ -3745,7 +3748,7 @@ declare module SP {
         localTimeToUTC(date: Date): SP.DateTimeResult;
         uTCToLocalTime(date: Date): SP.DateTimeResult;
     }
-    export class TimeZoneCollection extends SP.ClientObjectCollection {
+    export class TimeZoneCollection extends SP.ClientObjectCollection<TimeZone> {
         itemAt(index: number): SP.TimeZone;
         get_item(index: number): SP.TimeZone;
         getById(id: number): SP.TimeZone;
@@ -3814,7 +3817,7 @@ declare module SP {
         get_userId(): SP.UserIdInfo;
         update(): void;
     }
-    export class UserCollection extends SP.ClientObjectCollection {
+    export class UserCollection extends SP.ClientObjectCollection<User> {
         itemAt(index: number): SP.User;
         get_item(index: number): SP.User;
         getByLoginName(loginName: string): SP.User;
@@ -3872,7 +3875,7 @@ declare module SP {
         update(): void;
         deleteObject(): void;
     }
-    export class UserCustomActionCollection extends SP.ClientObjectCollection {
+    export class UserCustomActionCollection extends SP.ClientObjectCollection<UserCustomAction> {
         itemAt(index: number): SP.UserCustomAction;
         get_item(index: number): SP.UserCustomAction;
         getById(id: SP.Guid): SP.UserCustomAction;
@@ -3965,7 +3968,7 @@ declare module SP {
         renderAsHtml(): SP.StringResult;
         update(): void;
     }
-    export class ViewCollection extends SP.ClientObjectCollection {
+    export class ViewCollection extends SP.ClientObjectCollection<View> {
         itemAt(index: number): SP.View;
         get_item(index: number): SP.View;
         getByTitle(strTitle: string): SP.View;
@@ -3993,7 +3996,7 @@ declare module SP {
         writeToXml(writer: SP.XmlWriter, serializationContext: SP.SerializationContext): void;
         constructor();
     }
-    export class ViewFieldCollection extends SP.ClientObjectCollection {
+    export class ViewFieldCollection extends SP.ClientObjectCollection<string> {
         itemAt(index: number): string;
         get_item(index: number): string;
         get_schemaXml(): string;
@@ -4121,7 +4124,7 @@ declare module SP {
         ensureUser(logonName: string): SP.User;
         applyTheme(colorPaletteUrl: string, fontSchemeUrl: string, backgroundImageUrl: string, shareGenerated: bool): void;
     }
-    export class WebCollection extends SP.ClientObjectCollection {
+    export class WebCollection extends SP.ClientObjectCollection<Web> {
         itemAt(index: number): SP.Web;
         get_item(index: number): SP.Web;
         add(parameters: SP.WebCreationInformation): SP.Web;
@@ -4194,7 +4197,7 @@ declare module SP {
         get_name(): string;
         get_title(): string;
     }
-    export class WebTemplateCollection extends SP.ClientObjectCollection {
+    export class WebTemplateCollection extends SP.ClientObjectCollection<WebTemplate> {
         itemAt(index: number): SP.WebTemplate;
         get_item(index: number): SP.WebTemplate;
         getByName(name: string): SP.WebTemplate;
@@ -4533,7 +4536,7 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
 
-        export class StringCollection extends SP.ClientObjectCollection {
+        export class StringCollection extends SP.ClientObjectCollection<string> {
             constructor(context: SP.ClientContext);
             itemAt: (index: number) => string;
             get_item: (index: number) => string;
@@ -4614,7 +4617,7 @@ declare module Microsoft.SharePoint.Client.Search {
             static getQueryPropertyValueType: (val: QueryPropertyValue) => QueryPropertyValueType;
             static queryPropertyValueToObject: (val: QueryPropertyValue) => any;
         }
-        export class ReorderingRuleCollection extends SP.ClientObjectCollection {
+        export class ReorderingRuleCollection extends SP.ClientObjectCollection<ReorderingRule> {
             itemAt: (index: number) => ReorderingRule;
             get_item: (index: number) => ReorderingRule;
             get_childItemType: () => Object;
@@ -4645,7 +4648,7 @@ declare module Microsoft.SharePoint.Client.Search {
             set_matchValue: (value: string) => void;
         }
 
-        export class SortCollection extends SP.ClientObjectCollection {
+        export class SortCollection extends SP.ClientObjectCollection<Sort> {
             itemAt: (index: number) => Sort;
             get_item: (index: number) => Sort;
             get_childItemType: () => Object;
@@ -4667,7 +4670,7 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
 
-        export class ResultTableCollection extends SP.ClientValueObjectCollection {
+        export class ResultTableCollection extends SP.ClientValueObjectCollection<ResultTable> {
             get_item: (index: number) => ResultTable;
 
             get_elapsedTime: () => number;
@@ -4983,7 +4986,7 @@ declare module SP {
         export class MethodExecutionResult extends SP.ClientObject {
             get_returnParameterCollection(): SP.BusinessData.ReturnParameterCollection;
         }
-        export class ReturnParameterCollection extends SP.ClientObjectCollection {
+        export class ReturnParameterCollection extends SP.ClientObjectCollection<SP.BusinessData.Runtime.EntityFieldValueDictionary> {
             itemAt(index: number): SP.BusinessData.Runtime.EntityFieldValueDictionary;
             get_item(index: number): SP.BusinessData.Runtime.EntityFieldValueDictionary;
         }
@@ -5002,28 +5005,28 @@ declare module SP {
             getParentTypeDescriptor(): SP.BusinessData.TypeDescriptor;
         }
         export module Collections {
-            export class EntityFieldCollection extends SP.ClientObjectCollection {
+            export class EntityFieldCollection extends SP.ClientObjectCollection<SP.BusinessData.EntityField> {
                 itemAt(index: number): SP.BusinessData.EntityField;
                 get_item(index: number): SP.BusinessData.EntityField;
             }
-            export class EntityIdentifierCollection extends SP.ClientObjectCollection {
+            export class EntityIdentifierCollection extends SP.ClientObjectCollection<SP.BusinessData.EntityIdentifier> {
                 itemAt(index: number): SP.BusinessData.EntityIdentifier;
                 get_item(index: number): SP.BusinessData.EntityIdentifier;
             }
-            export class EntityInstanceCollection extends SP.ClientObjectCollection {
+            export class EntityInstanceCollection extends SP.ClientObjectCollection<SP.BusinessData.Runtime.EntityInstance> {
                 itemAt(index: number): SP.BusinessData.Runtime.EntityInstance;
                 get_item(index: number): SP.BusinessData.Runtime.EntityInstance;
             }
-            export class FilterCollection extends SP.ClientObjectCollection {
+            export class FilterCollection extends SP.ClientObjectCollection<SP.BusinessData.Filter> {
                 itemAt(index: number): SP.BusinessData.Filter;
                 get_item(index: number): SP.BusinessData.Filter;
                 setFilterValue(inputFilterName: string, valueIndex: number, value: any): void;
             }
-            export class LobSystemInstanceCollection extends SP.ClientObjectCollection {
+            export class LobSystemInstanceCollection extends SP.ClientObjectCollection<SP.BusinessData.LobSystemInstance> {
                 itemAt(index: number): SP.BusinessData.LobSystemInstance;
                 get_item(index: number): SP.BusinessData.LobSystemInstance;
             }
-            export class TypeDescriptorCollection extends SP.ClientObjectCollection {
+            export class TypeDescriptorCollection extends SP.ClientObjectCollection<SP.BusinessData.TypeDescriptor> {
                 itemAt(index: number): SP.BusinessData.TypeDescriptor;
                 get_item(index: number): SP.BusinessData.TypeDescriptor;
             }
@@ -5903,7 +5906,7 @@ declare module SP {
             getDefaultSiteCollectionTermStore(): TermStore;
         }
 
-        export class TermStoreCollection extends SP.ClientObjectCollection {
+        export class TermStoreCollection extends SP.ClientObjectCollection<TermStore> {
             itemAt(index: number): TermStore;
             get_item(index: number): TermStore;
             getById(id: SP.Guid): TermStore;
@@ -5965,7 +5968,7 @@ declare module SP {
             deleteObject(): void;
         }
 
-        export class TermGroupCollection extends SP.ClientObjectCollection {
+        export class TermGroupCollection extends SP.ClientObjectCollection<TermGroup> {
             itemAt(index: number): TermGroup;
             get_item(index: number): TermGroup;
             getById(id: SP.Guid): TermGroup;
@@ -6002,7 +6005,7 @@ declare module SP {
             setCustomProperty(name: string, value: string): void;
         }
 
-        export class TermSetCollection extends SP.ClientObjectCollection {
+        export class TermSetCollection extends SP.ClientObjectCollection<TermSet> {
             itemAt(index: number): TermSet;
             get_item(index: number): TermSet;
             getById(id: SP.Guid): TermSet;
@@ -6033,7 +6036,7 @@ declare module SP {
             move(targetGroup: TermGroup): void;
         }
 
-        export class TermCollection extends SP.ClientObjectCollection {
+        export class TermCollection extends SP.ClientObjectCollection<Term> {
             itemAt(index: number): Term;
             get_item(index: number): Term;
             getById(id: SP.Guid): Term;
@@ -6088,7 +6091,7 @@ declare module SP {
         }
 
 
-        export class LabelCollection extends SP.ClientObjectCollection {
+        export class LabelCollection extends SP.ClientObjectCollection<Label> {
             itemAt(index: number): Label;
             get_item(index: number): Label;
             getByValue(name: string): Label;
@@ -6151,7 +6154,7 @@ declare module SP {
             set_withinTimeSpan(value: number): void;
         }
 
-        export class ChangedItemCollection extends SP.ClientObjectCollection {
+        export class ChangedItemCollection extends SP.ClientObjectCollection<ChangedItem> {
             itemAt(index: number): ChangedItem;
             get_item(index: number): ChangedItem;
         }
@@ -6229,7 +6232,7 @@ declare module SP {
 
         }
 
-        export class TaxonomyFieldValueCollection extends SP.ClientObjectCollection {
+        export class TaxonomyFieldValueCollection extends SP.ClientObjectCollection<TaxonomyFieldValue> {
             constructor(context: SP.ClientContext, fieldValue: string, creatingField: SP.Field);
             itemAt(index: number): TaxonomyFieldValue;
             get_item(index: number): TaxonomyFieldValue;
@@ -6602,7 +6605,7 @@ declare module SP {
             get_useCount(): number;
         }
 
-        export class HashTagCollection extends SP.ClientObjectCollection {
+        export class HashTagCollection extends SP.ClientObjectCollection<HashTag> {
             itemAt(index: number): HashTag;
             get_item(index: number): HashTag;
         }
@@ -7224,7 +7227,7 @@ declare module SP {
             deleteWebPart(): void;
             moveWebPartTo(zoneID: string, zoneIndex: number): void;
         }
-        export class WebPartDefinitionCollection extends SP.ClientObjectCollection {
+        export class WebPartDefinitionCollection extends SP.ClientObjectCollection<WebPartDefinition> {
             itemAt(index: number): SP.WebParts.WebPartDefinition;
             get_item(index: number): SP.WebParts.WebPartDefinition;
             getById(id: SP.Guid): SP.WebParts.WebPartDefinition;
@@ -7266,7 +7269,7 @@ declare module SP {
             update(): void;
             deleteObject(): void;
         }
-        export class WorkflowAssociationCollection extends SP.ClientObjectCollection {
+        export class WorkflowAssociationCollection extends SP.ClientObjectCollection<WorkflowAssociation> {
             itemAt(index: number): SP.Workflow.WorkflowAssociation;
             get_item(index: number): SP.Workflow.WorkflowAssociation;
             getById(associationId: SP.Guid): SP.Workflow.WorkflowAssociation;
@@ -7301,7 +7304,7 @@ declare module SP {
             get_name(): string;
             get_permissionsManual(): SP.BasePermissions;
         }
-        export class WorkflowTemplateCollection extends SP.ClientObjectCollection {
+        export class WorkflowTemplateCollection extends SP.ClientObjectCollection<WorkflowTemplate> {
             itemAt(index: number): SP.Workflow.WorkflowTemplate;
             get_item(index: number): SP.Workflow.WorkflowTemplate;
             getById(templateId: SP.Guid): SP.Workflow.WorkflowTemplate;

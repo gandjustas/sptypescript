@@ -181,7 +181,7 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
 
-        export class StringCollection extends SP.ClientObjectCollection {
+        export class StringCollection extends SP.ClientObjectCollection<string> {
             constructor(context: SP.ClientContext);
             itemAt: (index: number) => string;
             get_item: (index: number) => string;
@@ -262,7 +262,7 @@ declare module Microsoft.SharePoint.Client.Search {
             static getQueryPropertyValueType: (val: QueryPropertyValue) => QueryPropertyValueType;
             static queryPropertyValueToObject: (val: QueryPropertyValue) => any;
         }
-        export class ReorderingRuleCollection extends SP.ClientObjectCollection {
+        export class ReorderingRuleCollection extends SP.ClientObjectCollection<ReorderingRule> {
             itemAt: (index: number) => ReorderingRule;
             get_item: (index: number) => ReorderingRule;
             get_childItemType: () => Object;
@@ -293,7 +293,7 @@ declare module Microsoft.SharePoint.Client.Search {
             set_matchValue: (value: string) => void;
         }
 
-        export class SortCollection extends SP.ClientObjectCollection {
+        export class SortCollection extends SP.ClientObjectCollection<Sort> {
             itemAt: (index: number) => Sort;
             get_item: (index: number) => Sort;
             get_childItemType: () => Object;
@@ -315,7 +315,7 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
 
-        export class ResultTableCollection extends SP.ClientValueObjectCollection {
+        export class ResultTableCollection extends SP.ClientValueObjectCollection<ResultTable> {
             get_item: (index: number) => ResultTable;
 
             get_elapsedTime: () => number;
