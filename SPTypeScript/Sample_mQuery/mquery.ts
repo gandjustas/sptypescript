@@ -6,11 +6,11 @@ module spdevlab {
         export class DynamicTable {
 
             // private fields
-            _domContainer = null;
-            _tableContainer = null;
+            _domContainer:Element;
+            _tableContainer:MQueryResultSetElements;
 
-            _rowTemplateId = null;
-            _rowTemplateContent = null;
+            _rowTemplateId:string = null;
+            _rowTemplateContent:string = null;
 
             _options = {
                 tableCnt: '.spdev-rep-tb',
@@ -19,7 +19,7 @@ module spdevlab {
             };
 
             // public methods
-            init(domContainer:MQueryResultSet, options) {
+            init(domContainer:Element, options) {
 
                 if (m$.isDefinedAndNotNull(options)) {
                     m$.extend(this._options, options);
@@ -53,7 +53,7 @@ module spdevlab {
 
                         m$("tr:last-child " + this._options.removeCnt, this._tableContainer).click( (e) => {
 
-                            var targetElement = e.currentTarget;
+                            var targetElement = <Element>e.currentTarget;
                             var parentRow = m$(targetElement).parents("tr").first();
 
                             m$(parentRow).remove();
@@ -74,20 +74,20 @@ module spdevlab {
                 }
             }
 
-            static _templates = [];
+            static _templates:string[] = [];
             static initTables() {
                 // init templates
-                m$('script').forEach((scriptContainer) =>  {
+                m$('script').forEach((template:HTMLElement) =>  {
 
-                    var id = m$(scriptContainer).attr("dynamic-table-template-id");
+                    var id = m$(template).attr("dynamic-table-template-id");
 
                     if (m$.isDefinedAndNotNull(id)) {
-                        DynamicTable._templates[id] = scriptContainer.innerHTML;
+                        DynamicTable._templates[id] = template.innerHTML;
                     }
                 });
 
                 // init tables
-                m$(".spdev-rep-tb-cnt").forEach( (divContainer) => {
+                m$(".spdev-rep-tb-cnt").forEach( divContainer => {
 
                     var dynamicTable = new DynamicTable();
 
@@ -101,7 +101,8 @@ module spdevlab {
 
 
     }
-    m$.ready(() => {
-        spdevlab.mQuery.DynamicTable.initTables();
-    });
 }
+
+m$.ready(() => {
+    spdevlab.mQuery.DynamicTable.initTables();
+});

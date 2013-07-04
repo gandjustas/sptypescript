@@ -1,12 +1,15 @@
 interface MQuery
 {
-    (selector: string, context?: any): MQueryResultSet;
-    (element: Element): MQueryResultSet;
-    (object: MQueryResultSet): MQueryResultSet;
-    (object: {}): MQueryResultSet;    
-    (elementArray: Element[]): MQueryResultSet;
-    (array: any[]): MQueryResultSet;
-    (): MQueryResultSet;
+    (selector: string, context?: any): MQueryResultSetElements;
+    (element: HTMLElement): MQueryResultSetElements;
+    (element: Element): MQueryResultSetElements;
+    (object: MQueryResultSetElements): MQueryResultSetElements;
+    <T>(object: MQueryResultSet<T>): MQueryResultSet<T>;
+    <T>(object: T): MQueryResultSet<T>;    
+    (elementArray: HTMLElement[]): MQueryResultSetElements;
+    (elementArray: Element[]): MQueryResultSetElements;
+    <T>(array: T[]): MQueryResultSet<T>;
+    <T>(): MQueryResultSet<T>;
 
     throttle(fn: Function, interval: number, shouldOverrideThrottle: boolean): Function;
 
@@ -39,29 +42,29 @@ interface MQuery
     proxy(context: any, name: string, ...args: any[]): any;
 
     every<T>(obj: T[], fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): boolean;
-    every(obj: any, fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): boolean;
+    every<T>(obj: MQueryResultSet<T>, fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): boolean;
     every<T>(obj: T[], fn: (elementOfArray: T) => boolean, context?: any): boolean;
-    every(obj: any, fn: (elementOfArray: any) => boolean, context?: any): boolean;
+    every<T>(obj: MQueryResultSet<T>, fn: (elementOfArray: any) => boolean, context?: any): boolean;
 
     some<T>(obj: T[], fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): boolean;
-    some(obj: any, fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): boolean;
+    some<T>(obj: MQueryResultSet<T>, fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): boolean;
     some<T>(obj: T[], fn: (elementOfArray: T) => boolean, context?: any): boolean;
-    some(obj: any, fn: (elementOfArray: any) => boolean, context?: any): boolean;
+    some<T>(obj: MQueryResultSet<T>, fn: (elementOfArray: T) => boolean, context?: any): boolean;
 
     filter<T>(obj: T[], fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): T[];
-    filter(obj: any, fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): any;
+    filter<T>(obj: MQueryResultSet<T>, fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): MQueryResultSet<T>;
     filter<T>(obj: T[], fn: (elementOfArray: T) => boolean, context?: any): T[];
-    filter(obj: any, fn: (elementOfArray: any) => boolean, context?: any): any;
+    filter<T>(obj: MQueryResultSet<T>, fn: (elementOfArray: T) => boolean, context?: any): MQueryResultSet<T>;
 
     forEach<T>(obj: T[], fn: (elementOfArray: T, indexInArray: number) => void, context?: any): void;
-    forEach(obj: any, fn: (elementOfArray: any, indexInArray: number) => void, context?: any): void;
+    forEach<T>(obj: MQueryResultSet<T>, fn: (elementOfArray: T, indexInArray: number) => void, context?: any): void;
     forEach<T>(obj: T[], fn: (elementOfArray: T) => void, context?: any): void;
-    forEach(obj: any, fn: (elementOfArray: any) => void, context?: any): void;
+    forEach<T>(obj: MQueryResultSet<T>, fn: (elementOfArray: T) => void, context?: any): void;
 
     map<T, U>(array: T[], callback: (elementOfArray: T, indexInArray: number) => U): U[];
-    map(array: any, callback: (elementOfArray: any, indexInArray: number) => any): any;
+    map<T, U>(array: MQueryResultSet<T>, callback: (elementOfArray: T, indexInArray: number) => U): MQueryResultSet<U>;
     map<T, U>(array: T[], callback: (elementOfArray: T) => U): U[];
-    map(array: any, callback: (elementOfArray: any) => any): any;
+    map<T, U>(array: MQueryResultSet<T>, callback: (elementOfArray: T) => U): MQueryResultSet<U>;
 
     indexOf<T>(obj: T[], object: T, startIndex?: number): number;
     lastIndexOf<T>(obj: T[], object: T, startIndex?: number): number;
@@ -74,128 +77,139 @@ interface MQuery
     hasData(element: Element): boolean;
 }
 
-interface MQueryResultSet {    
-    append(node: Element): MQueryResultSet;
-    append(mQuerySet: MQueryResultSet): MQueryResultSet;
-    append(html: string): MQueryResultSet;
+interface MQueryResultSetElements extends MQueryResultSet<Element>{
+    append(node: Element): MQueryResultSetElements;
+    append(mQuerySet: MQueryResultSetElements): MQueryResultSetElements;
+    append(html: string): MQueryResultSetElements;
 
-    bind(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
-    unbind(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
+    bind(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    unbind(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
     trigger(eventType: string): MQueryResultSet;
-    one(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
+    one(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
 
-    contains(contained: Element): boolean;
     detach(): MQueryResultSet;
 
-    find(selector: string): MQueryResultSet;
-    closest(selector: string, context?: any): MQueryResultSet;
+    find(selector: string): MQueryResultSetElements;
+    closest(selector: string, context?: any): MQueryResultSetElements;
     offset(): { left: number; top: number; };
-    offset(coordinates: { left: any; top: any; }): MQueryResultSet;
-    
-    filter(selector: string): MQueryResultSet;
-    filter(fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): MQueryResultSet;
-    filter(fn:(elementOfArray: any) => boolean, context?: any): MQueryResultSet;
-    
-    not(selector: string): MQueryResultSet;
+    offset(coordinates: { left: any; top: any; }): MQueryResultSetElements;
 
-    parent(selector?: string): MQueryResultSet;
+    filter(selector: string): MQueryResultSetElements;
+    filter(fn: (elementOfArray: Element, indexInArray: number) => boolean, context?: any): MQueryResultSetElements;
+    filter(fn: (elementOfArray: Element) => boolean, context?: any): MQueryResultSetElements;
 
-    offsetParent(selector?: string): MQueryResultSet;
+    not(selector: string): MQueryResultSetElements;
 
-    parents(selector?: string): MQueryResultSet;
-    parentsUntil(selector?: string, filter?: string): MQueryResultSet;
-    parentsUntil(element?: Element, filter?: string): MQueryResultSet;
+    parent(selector?: string): MQueryResultSetElements;
+
+    offsetParent(selector?: string): MQueryResultSetElements;
+
+    parents(selector?: string): MQueryResultSetElements;
+    parentsUntil(selector?: string, filter?: string): MQueryResultSetElements;
+    parentsUntil(element?: Element, filter?: string): MQueryResultSetElements;
 
     position(): { top: number; left: number; };
-    
-    attr(attributeName: string): string;
-    attr(attributeName: string, value: any): MQueryResultSet;
-    attr(map: { [key: string]: any; }): MQueryResultSet;
-    attr(attributeName: string, func: (index: number, attr: any) => any): MQueryResultSet;
 
-    addClass(classNames: string): MQueryResultSet;
-    removeClass(classNames: string): MQueryResultSet;
-    
+    attr(attributeName: string): string;
+    attr(attributeName: string, value: any): MQueryResultSetElements;
+    attr(map: { [key: string]: any; }): MQueryResultSetElements;
+    attr(attributeName: string, func: (index: number, attr: any) => any): MQueryResultSetElements;
+
+    addClass(classNames: string): MQueryResultSetElements;
+    removeClass(classNames: string): MQueryResultSetElements;
+
     css(propertyName: string): string;
     css(propertyNames: string[]): string;
-    css(properties: any): MQueryResultSet;
-    css(propertyName: string, value: any): MQueryResultSet;
-    css(propertyName: any, value: any): MQueryResultSet;
+    css(properties: any): MQueryResultSetElements;
+    css(propertyName: string, value: any): MQueryResultSetElements;
+    css(propertyName: any, value: any): MQueryResultSetElements;
 
-    remove(selector?: string): MQueryResultSet; 
-    children(selector?: string): MQueryResultSet; 
-    empty(): MQueryResultSet; 
-    first(): MQueryResultSet; 
+    remove(selector?: string): MQueryResultSetElements;
+    children(selector?: string): MQueryResultSetElements;
+    empty(): MQueryResultSetElements;
+    first(): MQueryResultSetElements;
 
-    data(key: string, value: any): MQueryResultSet;
-    data(obj: { [key: string]: any; }): MQueryResultSet;
+    data(key: string, value: any): MQueryResultSetElements;
+    data(obj: { [key: string]: any; }): MQueryResultSetElements;
     data(key: string): any;
 
-    removeData(key: string): MQueryResultSet;
+    removeData(key: string): MQueryResultSetElements;
 
-    every(fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): boolean;
-    every(fn: (elementOfArray: any) => boolean, context?: any): boolean;
+    map(callback: (elementOfArray: Element, indexInArray: number) => any): MQueryResultSetElements;
+    map(callback: (elementOfArray: Element) => any): MQueryResultSetElements;
+
+    blur(): MQueryResultSetElements;
+    blur(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    change(): MQueryResultSetElements;
+    change(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    click(): MQueryResultSetElements;
+    click(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    dblclick(): MQueryResultSetElements;
+    dblclick(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    error(): MQueryResultSetElements;
+    error(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    focus(): MQueryResultSetElements;
+    focus(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    focusin(): MQueryResultSetElements;
+    focusin(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    focusout(): MQueryResultSetElements;
+    focusout(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    keydown(): MQueryResultSetElements;
+    keydown(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    keypress(): MQueryResultSetElements;
+    keypress(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    keyup(): MQueryResultSetElements;
+    keyup(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    load(): MQueryResultSetElements;
+    load(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    mousedown(): MQueryResultSetElements;
+    mousedown(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    mouseenter(): MQueryResultSetElements;
+    mouseenter(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    mouseleave(): MQueryResultSetElements;
+    mouseleave(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    mousemove(): MQueryResultSetElements;
+    mousemove(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    mouseout(): MQueryResultSetElements;
+    mouseout(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    mouseover(): MQueryResultSetElements;
+    mouseover(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    mouseup(): MQueryResultSetElements;
+    mouseup(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    resize(): MQueryResultSetElements;
+    resize(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    scroll(): MQueryResultSetElements;
+    scroll(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    select(): MQueryResultSetElements;
+    select(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    submit(): MQueryResultSetElements;
+    submit(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
+    unload(): MQueryResultSetElements;
+    unload(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements; 
+
+}
+
+interface MQueryResultSet<T> {    
+    contains(contained: T): boolean;
     
-    some(fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): boolean;
-    some(fn: (elementOfArray: any) => boolean, context?: any): boolean;
+    filter(fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): MQueryResultSet<T>;
+    filter(fn: (elementOfArray: T) => boolean, context?: any): MQueryResultSet<T>;    
+
+    every(fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): boolean;
+    every(fn: (elementOfArray: T) => boolean, context?: any): boolean;
     
-    map(callback: (elementOfArray: any, indexInArray: number) => any): any;
-    map(callback: (elementOfArray: any) => any): any;
+    some(fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): boolean;
+    some(fn: (elementOfArray: T) => boolean, context?: any): boolean;
     
-    forEach(fn: (elementOfArray: any, indexInArray: number) => void, context?: any): void;
-    forEach(fn: (elementOfArray: any) => void, context?: any): void;
+    map(callback: (elementOfArray: T, indexInArray: number) => any): MQueryResultSet<T>;
+    map(callback: (elementOfArray: T) => any): MQueryResultSet<T>;
+    
+    forEach(fn: (elementOfArray: T, indexInArray: number) => void, context?: any): void;
+    forEach(fn: (elementOfArray: T) => void, context?: any): void;
 
     indexOf(object: any, startIndex?: number): number;
     lastIndexOf(object: any, startIndex?: number): number;
 
-    blur(): MQueryResultSet;
-    blur(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
-    change(): MQueryResultSet; 
-    change(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    click(): MQueryResultSet; 
-    click(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    dblclick(): MQueryResultSet;
-    dblclick(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
-    error(): MQueryResultSet; 
-    error(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    focus(): MQueryResultSet;
-    focus(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    focusin(): MQueryResultSet;
-    focusin(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
-    focusout(): MQueryResultSet;
-    focusout(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
-    keydown(): MQueryResultSet;
-    keydown(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;  
-    keypress(): MQueryResultSet;
-    keypress(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
-    keyup(): MQueryResultSet;
-    keyup(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    load(): MQueryResultSet;
-    load(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    mousedown(): MQueryResultSet;
-    mousedown(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
-    mouseenter(): MQueryResultSet;
-    mouseenter(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
-    mouseleave(): MQueryResultSet;
-    mouseleave(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;
-    mousemove(): MQueryResultSet;
-    mousemove(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    mouseout(): MQueryResultSet;
-    mouseout(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    mouseover(): MQueryResultSet;
-    mouseover(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;  
-    mouseup(): MQueryResultSet;
-    mouseup(handler: (eventObject: MQueryEvent) => any): MQueryResultSet;  
-    resize(): MQueryResultSet;
-    resize(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    scroll(): MQueryResultSet;
-    scroll(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    select(): MQueryResultSet;
-    select(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    submit(): MQueryResultSet;
-    submit(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
-    unload(): MQueryResultSet;
-    unload(handler: (eventObject: MQueryEvent) => any): MQueryResultSet; 
 }
 
 interface MQueryEvent extends Event {

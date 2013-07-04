@@ -3,8 +3,6 @@ var spdevlab;
     (function (mQuery) {
         var DynamicTable = (function () {
             function DynamicTable() {
-                this._domContainer = null;
-                this._tableContainer = null;
                 this._rowTemplateId = null;
                 this._rowTemplateContent = null;
                 this._options = {
@@ -62,11 +60,11 @@ var spdevlab;
             };
 
             DynamicTable.initTables = function () {
-                m$('script').forEach(function (scriptContainer) {
-                    var id = m$(scriptContainer).attr("dynamic-table-template-id");
+                m$('script').forEach(function (template) {
+                    var id = m$(template).attr("dynamic-table-template-id");
 
                     if (m$.isDefinedAndNotNull(id)) {
-                        DynamicTable._templates[id] = scriptContainer.innerHTML;
+                        DynamicTable._templates[id] = template.innerHTML;
                     }
                 });
 
@@ -85,8 +83,9 @@ var spdevlab;
         ;
     })(spdevlab.mQuery || (spdevlab.mQuery = {}));
     var mQuery = spdevlab.mQuery;
-    m$.ready(function () {
-        spdevlab.mQuery.DynamicTable.initTables();
-    });
 })(spdevlab || (spdevlab = {}));
+
+m$.ready(function () {
+    spdevlab.mQuery.DynamicTable.initTables();
+});
 //@ sourceMappingURL=mquery.js.map
