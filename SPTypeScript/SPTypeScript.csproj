@@ -77,6 +77,12 @@
     <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{75124c56-69cb-479f-896e-b00d60008b41}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_mQuery\mquery.js.map">
+      <DependentUpon>mquery.ts</DependentUpon>
+    </None>
+    <None Include="Sample_mQuery\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a700f00d-1afb-4055-bf4f-ff3c44fd3356}</SharePointProjectItemId>
+    </None>
     <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
       <DependentUpon>Search.ts</DependentUpon>
     </None>
@@ -121,6 +127,15 @@
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.ts" />
+    <Content Include="Sample_mQuery\Elements.xml" />
+    <TypeScriptCompile Include="Sample_mQuery\mquery.ts" />
+    <Content Include="Sample_mQuery\mquery.js">
+      <DependentUpon>mquery.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_mQuery\mquery.min.js">
+      <DependentUpon>mquery.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_mQuery\Page.aspx" />
     <Content Include="Sample_Social\Default.aspx" />
     <Content Include="Sample_Social\Elements.xml" />
     <TypeScriptCompile Include="Sample_Social\Social.ts" />

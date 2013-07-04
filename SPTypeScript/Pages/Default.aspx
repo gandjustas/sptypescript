@@ -12,6 +12,7 @@
         <ol>
             <li><a href="javascript:document.location = '../Sample_BasicCSOMActions/BasicTasksJSOM.html?'+document.URL.split('?')[1]">JSOM: Basic tasks in SharePoint using JSOM with TypeScript</a></li>
             <li><a href="../Taxonomy/Default.aspx">JSOM: Working with taxonomy with TypeScript.</a></li>
+            <li><a href="../Sample_mQuery/Page.aspx">mQuery: Sample dynamic table.</a></li>
             <li><a href="../Lists/CustomList/Overridable.aspx">Client Side Rendering: Custom list view</a></li>
             <li><a href="../Lists/CustomFieldList">Client Side Rendering: Complexity field</a></li>
             <li><a href="../Lists/ConditionalFormattingTasksList">Client Side Rendering: Conditional formatting</a></li>

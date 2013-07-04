@@ -40,18 +40,28 @@ interface MQuery
 
     every<T>(obj: T[], fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): boolean;
     every(obj: any, fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): boolean;
+    every<T>(obj: T[], fn: (elementOfArray: T) => boolean, context?: any): boolean;
+    every(obj: any, fn: (elementOfArray: any) => boolean, context?: any): boolean;
 
     some<T>(obj: T[], fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): boolean;
     some(obj: any, fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): boolean;
+    some<T>(obj: T[], fn: (elementOfArray: T) => boolean, context?: any): boolean;
+    some(obj: any, fn: (elementOfArray: any) => boolean, context?: any): boolean;
 
     filter<T>(obj: T[], fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): T[];
     filter(obj: any, fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): any;
+    filter<T>(obj: T[], fn: (elementOfArray: T) => boolean, context?: any): T[];
+    filter(obj: any, fn: (elementOfArray: any) => boolean, context?: any): any;
 
-    forEach<T>(obj: T[], fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): void;
-    forEach(obj: any, fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): void;
+    forEach<T>(obj: T[], fn: (elementOfArray: T, indexInArray: number) => void, context?: any): void;
+    forEach(obj: any, fn: (elementOfArray: any, indexInArray: number) => void, context?: any): void;
+    forEach<T>(obj: T[], fn: (elementOfArray: T) => void, context?: any): void;
+    forEach(obj: any, fn: (elementOfArray: any) => void, context?: any): void;
 
     map<T, U>(array: T[], callback: (elementOfArray: T, indexInArray: number) => U): U[];
     map(array: any, callback: (elementOfArray: any, indexInArray: number) => any): any;
+    map<T, U>(array: T[], callback: (elementOfArray: T) => U): U[];
+    map(array: any, callback: (elementOfArray: any) => any): any;
 
     indexOf<T>(obj: T[], object: T, startIndex?: number): number;
     lastIndexOf<T>(obj: T[], object: T, startIndex?: number): number;
@@ -83,7 +93,8 @@ interface MQueryResultSet {
     offset(coordinates: { left: any; top: any; }): MQueryResultSet;
     
     filter(selector: string): MQueryResultSet;
-    filter(fn:(elementOfArray: any, indexInArray: number) => boolean, context?: any): MQueryResultSet;
+    filter(fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): MQueryResultSet;
+    filter(fn:(elementOfArray: any) => boolean, context?: any): MQueryResultSet;
     
     not(selector: string): MQueryResultSet;
 
@@ -123,9 +134,17 @@ interface MQueryResultSet {
     removeData(key: string): MQueryResultSet;
 
     every(fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): boolean;
+    every(fn: (elementOfArray: any) => boolean, context?: any): boolean;
+    
     some(fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): boolean;
+    some(fn: (elementOfArray: any) => boolean, context?: any): boolean;
+    
     map(callback: (elementOfArray: any, indexInArray: number) => any): any;
-    forEach(fn: (elementOfArray: any, indexInArray: number) => boolean, context?: any): void;
+    map(callback: (elementOfArray: any) => any): any;
+    
+    forEach(fn: (elementOfArray: any, indexInArray: number) => void, context?: any): void;
+    forEach(fn: (elementOfArray: any) => void, context?: any): void;
+
     indexOf(object: any, startIndex?: number): number;
     lastIndexOf(object: any, startIndex?: number): number;
 
