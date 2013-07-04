@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions"
 		..\Definitions\callout.d.ts = ..\Definitions\callout.d.ts
 		..\Definitions\clienttemplates.d.ts = ..\Definitions\clienttemplates.d.ts
 		..\Definitions\MicrosoftAjax.d.ts = ..\Definitions\MicrosoftAjax.d.ts
+		..\Definitions\mQuery.d.ts = ..\Definitions\mQuery.d.ts
 		..\Definitions\SP.BusinessData.d.ts = ..\Definitions\SP.BusinessData.d.ts
 		..\Definitions\SP.d.ts = ..\Definitions\SP.d.ts
 		..\Definitions\SP.Init.d.ts = ..\Definitions\SP.Init.d.ts

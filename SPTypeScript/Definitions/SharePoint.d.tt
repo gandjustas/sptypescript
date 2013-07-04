@@ -6,9 +6,10 @@
 <#@ import namespace="System.IO" #>
 <#@ output extension=".ts" #>
 
+<#= GetFileContents(@"MicrosoftAjax.d.ts") #>
+<#= GetFileContents(@"mQuery.d.ts") #>
 <#= GetFileContents(@"callout.d.ts") #>
 <#= GetFileContents(@"clienttemplates.d.ts") #>
-<#= GetFileContents(@"MicrosoftAjax.d.ts") #>
 <#= GetFileContents(@"SP.d.ts") #>
 <#= GetFileContents(@"SP.Search.d.ts") #>
 <#= GetFileContents(@"SP.BusinessData.d.ts") #>
