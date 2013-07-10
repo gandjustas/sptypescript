@@ -87,6 +87,9 @@ declare module SPClientTemplates {
         Choices: string[];
         /** Number of choices. Appears only for Lookup field. */
         ChoiceCount: number;
+
+        LookupListId: string;
+
     }
     /** Represents schema for a DateTime field in list form or in list view in grid mode */
     export interface FieldSchema_InForm_DateTime extends FieldSchema_InForm {

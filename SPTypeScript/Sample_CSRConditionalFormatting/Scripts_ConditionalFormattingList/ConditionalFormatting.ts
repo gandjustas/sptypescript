@@ -24,7 +24,7 @@ module _ {
 
 
     if (document.location.href.indexOf('/Lists/ConditionalFormattingTasksList') > 0) {
-        SP.SOD.executeOrDelayUntilScriptLoaded(() => {
+        SP.SOD.executeOrDelayUntilScriptLoaded(() => {            
             SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
 
             SP.SOD.executeOrDelayUntilScriptLoaded(() => {

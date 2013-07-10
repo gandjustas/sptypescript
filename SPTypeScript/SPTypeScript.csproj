@@ -82,6 +82,21 @@
     <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{75124c56-69cb-479f-896e-b00d60008b41}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_FieldLookupBySearch\DetailsList\DetailsListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5f2aa50d-acd4-492d-96a5-5f1f70275403}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\DetailsList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{c75a54fe-47b4-48dc-9735-1298472ef24a}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\FieldLookupSearch.js.map">
+      <DependentUpon>FieldLookupSearch.ts</DependentUpon>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\MasterList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8b7ba033-7866-4904-b4a3-35f82937c0be}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{89c303b5-fdb9-4de3-b9f2-f7ad6f06c29b}</SharePointProjectItemId>
+    </None>
     <None Include="Sample_mQuery\mquery.js.map">
       <DependentUpon>mquery.ts</DependentUpon>
     </None>
@@ -141,6 +156,18 @@
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.ts" />
+    <Content Include="Sample_FieldLookupBySearch\DetailsList\DetailsListInstance\Elements.xml" />
+    <Content Include="Sample_FieldLookupBySearch\DetailsList\Elements.xml" />
+    <Content Include="Sample_FieldLookupBySearch\DetailsList\Schema.xml" />
+    <Content Include="Sample_FieldLookupBySearch\Elements.xml" />
+    <TypeScriptCompile Include="Sample_FieldLookupBySearch\FieldLookupSearch.ts" />
+    <Content Include="Sample_FieldLookupBySearch\FieldLookupSearch.js">
+      <DependentUpon>FieldLookupSearch.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_FieldLookupBySearch\FieldLookupSearch.min.js">
+      <DependentUpon>FieldLookupSearch.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_FieldLookupBySearch\MasterList\Elements.xml" />
     <Content Include="Sample_mQuery\Elements.xml" />
     <TypeScriptCompile Include="Sample_mQuery\mquery.ts" />
     <Content Include="Sample_mQuery\mquery.js">
