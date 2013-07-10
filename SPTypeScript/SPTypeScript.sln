@@ -5,6 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPTypeScript", "SPTypeScrip
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions", "{B7240F17-25E7-49EF-BFA3-ED82AD272AEE}"
 	ProjectSection(SolutionItems) = preProject
+		..\Definitions\autofill.d.ts = ..\Definitions\autofill.d.ts
 		..\Definitions\callout.d.ts = ..\Definitions\callout.d.ts
 		..\Definitions\clienttemplates.d.ts = ..\Definitions\clienttemplates.d.ts
 		..\Definitions\MicrosoftAjax.d.ts = ..\Definitions\MicrosoftAjax.d.ts

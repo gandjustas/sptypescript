@@ -4,7 +4,6 @@
     <ProjectItemFile Source="Elements.xml" Target="CustomFieldRenderingModule\" Type="ElementManifest" />
     <ProjectItemFile Source="fieldsamples.visafield.ts" Target="CustomFieldRenderingModule\" Type="ElementFile" />
     <ProjectItemFile Source="fieldsamples.visafield.js" Target="CustomFieldRenderingModule\" Type="ElementFile" />
-    <ProjectItemFile Source="fieldsamples.visafield.js.map" Target="CustomFieldRenderingModule\" Type="ElementFile" />
     <ProjectItemFile Source="fieldsamples.visafield.min.js" Target="CustomFieldRenderingModule\" Type="ElementFile" />
   </Files>
 </ProjectItem>

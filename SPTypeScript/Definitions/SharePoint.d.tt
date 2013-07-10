@@ -24,6 +24,7 @@
 <#= GetFileContents(@"SP.WebParts.d.ts") #>
 <#= GetFileContents(@"SP.Workflow.d.ts") #>
 <#= GetFileContents(@"SP.WorkflowServices.d.ts") #>
+<#= GetFileContents(@"autofill.d.ts") #>
 
 <#+
 

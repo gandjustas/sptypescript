@@ -52,6 +52,12 @@
     <None Include="Extensions\CSOMPromise.js.map">
       <DependentUpon>CSOMPromise.ts</DependentUpon>
     </None>
+    <None Include="Sample_AutoFill\autofill.js.map">
+      <DependentUpon>autofill.ts</DependentUpon>
+    </None>
+    <None Include="Sample_AutoFill\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b2bc5648-828d-4dd7-8044-e42f0b79a58f}</SharePointProjectItemId>
+    </None>
     <None Include="Sample_BasicCSOMActions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{36cba84f-cd3b-408d-b7a4-fc2b2c8972e5}</SharePointProjectItemId>
     </None>
@@ -73,7 +79,6 @@
     <None Include="Sample_CustomFieldRendering\CustomFieldRenderingList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{230160de-7c37-47c0-885e-641b8b27b019}</SharePointProjectItemId>
     </None>
-    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js.map" />
     <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{75124c56-69cb-479f-896e-b00d60008b41}</SharePointProjectItemId>
     </None>
@@ -107,6 +112,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SharePoint.d.tt</DependentUpon>
     </Content>
+    <TypeScriptCompile Include="Sample_AutoFill\autofill.ts" />
+    <Content Include="Sample_AutoFill\autofill.js">
+      <DependentUpon>autofill.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_AutoFill\autofill.min.js">
+      <DependentUpon>autofill.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_AutoFill\Elements.xml" />
+    <Content Include="Sample_AutoFill\Page.aspx" />
     <Content Include="Sample_CSRTabs\CSRTabs.js">
       <DependentUpon>CSRTabs.ts</DependentUpon>
     </Content>
