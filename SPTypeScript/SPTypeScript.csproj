@@ -126,7 +126,7 @@
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\Elements.xml" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js" />
-    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.ts" />
+    <TypeScriptCompile Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.ts" />
     <Content Include="Sample_mQuery\Elements.xml" />
     <TypeScriptCompile Include="Sample_mQuery\mquery.ts" />
     <Content Include="Sample_mQuery\mquery.js">
