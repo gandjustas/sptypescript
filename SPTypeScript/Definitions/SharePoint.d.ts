@@ -6705,6 +6705,9 @@ declare module SP {
             static setup(relativeElement: HTMLElement): void;
             constructor();
         }
+
+        export function $create_DialogOptions(): DialogOptions;
+
         /** Result of a modal dialog execution */
         export enum DialogResult {
             /** Do not use this */
@@ -6720,6 +6723,14 @@ declare module SP {
         }
         /** Options for dialog creation */
         export interface IDialogOptions {
+            /** Text displayed in the title bar of the dialog box. If not defined, it will default to the title of the page defined by url property. */
+            title?: string;
+            /** X coordinate of the dialog box. */
+            x?: number;
+            /** Y coordinate of the dialog box. */
+            y?: number;
+            /** The dialog will be maximized when shown. */
+            showMaximized?: number;
             /** url of the page which is shown in the modal dialog. You should use either html or url attribute, but not both. */
             url?: string;
             /** specifies if close button should be shown on the dialog */
@@ -6744,6 +6755,14 @@ declare module SP {
             args?: any;
         }
         export class DialogOptions implements IDialogOptions {
+            /** Text displayed in the title bar of the dialog box. If not defined, it will default to the title of the page defined by url property. */
+            title: string;
+            /** X coordinate of the dialog box. */
+            x: number;
+            /** Y coordinate of the dialog box. */
+            y: number;
+            /** The dialog will be maximized when shown. */
+            showMaximized: number;
             /** url of the page which is shown in the modal dialog. You should use either html or url attribute, but not both. */
             url: string;
             /** specifies if close button should be shown on the dialog */
