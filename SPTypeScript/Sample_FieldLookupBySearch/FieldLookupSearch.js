@@ -43,51 +43,51 @@ var _;
         function InitLookupControl() {
             _textInputElt = document.getElementById(_textInputId);
 
-            SP.SOD.executeFunc("autofill.js", null, function () {
+            SP.SOD.executeFunc("autofill.js", "SPClientAutoFill", function () {
                 _autoFillControl = new SPClientAutoFill(_textInputId, _autofillContainerId, OnPopulate);
                 _autoFillControl.AutoFillMinTextLength = 2;
                 _autoFillControl.VisibleItemCount = 15;
                 _autoFillControl.AutoFillTimeout = 500;
             });
-            SP.SOD.executeFunc("sp.search.js", null, null);
         }
         function OnPopulate(targetElement) {
             var value = targetElement.value;
             _autoFillControl.PopulateAutoFill([_buildLoadingItem('Please wait...')], OnSelectItem);
 
-            var Search = Microsoft.SharePoint.Client.Search.Query;
-            var ctx = SP.ClientContext.get_current();
-            var query = new Search.KeywordQuery(ctx);
-            query.set_rowLimit(_autoFillControl.VisibleItemCount);
-            query.set_queryText('contentclass:STS_ListItem ListID:{' + _schema.LookupListId + '} ' + value);
-            var selectProps = query.get_selectProperties();
-            selectProps.clear();
-            selectProps.add('Title');
-            selectProps.add('ListItemId');
-            var executor = new Search.SearchExecutor(ctx);
-            var result = executor.executeQuery(query);
-            ctx.executeQueryAsync(function () {
-                var tableCollection = new Search.ResultTableCollection();
-                tableCollection.initPropertiesFromJson(result.get_value());
+            SP.SOD.executeFunc("sp.search.js", "Microsoft.SharePoint.Client.Search.Query", function () {
+                var Search = Microsoft.SharePoint.Client.Search.Query;
+                var ctx = SP.ClientContext.get_current();
+                var query = new Search.KeywordQuery(ctx);
+                query.set_rowLimit(_autoFillControl.VisibleItemCount);
+                query.set_queryText('contentclass:STS_ListItem ListID:{' + _schema.LookupListId + '} ' + value);
+                var selectProps = query.get_selectProperties();
+                selectProps.clear();
+                selectProps.add('Title');
+                selectProps.add('ListItemId');
+                var executor = new Search.SearchExecutor(ctx);
+                var result = executor.executeQuery(query);
+                ctx.executeQueryAsync(function () {
+                    var tableCollection = new Search.ResultTableCollection();
+                    tableCollection.initPropertiesFromJson(result.get_value());
 
-                var relevantResults = tableCollection.get_item(0);
-                var rows = relevantResults.get_resultRows();
+                    var relevantResults = tableCollection.get_item(0);
+                    var rows = relevantResults.get_resultRows();
 
-                var items = [];
-                for (var i = 0; i < rows.length; i++) {
-                    items.push(_buildOptionItem(rows[i]["Title"], parseInt(rows[i]["ListItemId"], 10)));
-                }
+                    var items = [];
+                    for (var i = 0; i < rows.length; i++) {
+                        items.push(_buildOptionItem(rows[i]["Title"], parseInt(rows[i]["ListItemId"], 10)));
+                    }
 
-                items.push(_buildSeparatorItem());
+                    items.push(_buildSeparatorItem());
 
-                if (relevantResults.get_totalRows() == 0)
-                    items.push(_buildFooterItem("No results. Please refine your query.")); else
-                    items.push(_buildFooterItem("Showing " + rows.length + " of" + relevantResults.get_totalRows() + " items!"));
+                    if (relevantResults.get_totalRows() == 0)
+                        items.push(_buildFooterItem("No results. Please refine your query.")); else
+                        items.push(_buildFooterItem("Showing " + rows.length + " of" + relevantResults.get_totalRows() + " items!"));
 
-                _autoFillControl.PopulateAutoFill(items, OnSelectItem);
-            }, function (sender, args) {
-                _autoFillControl.PopulateAutoFill([], OnSelectItem);
-                alert(args.get_message());
+                    _autoFillControl.PopulateAutoFill(items, OnSelectItem);
+                }, function (sender, args) {
+                    alert(args.get_message());
+                });
             });
         }
         function _buildFooterItem(title) {

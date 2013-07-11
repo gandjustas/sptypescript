@@ -48,21 +48,20 @@ module _ {
         return BuildLookupDropdownControl();
         function InitLookupControl() {
             _textInputElt = <HTMLInputElement>document.getElementById(_textInputId);
-            _textInputElt.addEventListener("blur", () =>_autoFillControl.CloseAutoFill(null), false);
-
-            SP.SOD.executeFunc("autofill.js", null, () => {
+            
+            SP.SOD.executeFunc("autofill.js", "SPClientAutoFill", () => {
                 _autoFillControl = new SPClientAutoFill(_textInputId, _autofillContainerId, OnPopulate);
                 _autoFillControl.AutoFillMinTextLength = 2;
                 _autoFillControl.VisibleItemCount = 15;
                 _autoFillControl.AutoFillTimeout = 500;
             });
-            SP.SOD.executeFunc("sp.search.js", null, null);
 
         }
         function OnPopulate(targetElement: HTMLInputElement) {
             var value = targetElement.value;
             _autoFillControl.PopulateAutoFill([_buildLoadingItem('Please wait...')], OnSelectItem);
 
+            SP.SOD.executeFunc("sp.search.js", "Microsoft.SharePoint.Client.Search.Query" , () => { 
                 var Search = Microsoft.SharePoint.Client.Search.Query;
                 var ctx = SP.ClientContext.get_current();
                 var query = new Search.KeywordQuery(ctx);
@@ -98,9 +97,9 @@ module _ {
                         _autoFillControl.PopulateAutoFill(items, OnSelectItem);
 
                     },
-                    (sender, args) => { alert(args.get_message()); _autoFillControl.CloseAutoFill(null); }
+                    (sender, args) => { alert(args.get_message()); }
                     );
-
+            });
 
         }
         function _buildFooterItem(title: string) {
