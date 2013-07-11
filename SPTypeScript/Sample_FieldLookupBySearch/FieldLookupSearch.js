@@ -42,51 +42,52 @@ var _;
         return BuildLookupDropdownControl();
         function InitLookupControl() {
             _textInputElt = document.getElementById(_textInputId);
+
             SP.SOD.executeFunc("autofill.js", null, function () {
                 _autoFillControl = new SPClientAutoFill(_textInputId, _autofillContainerId, OnPopulate);
                 _autoFillControl.AutoFillMinTextLength = 2;
                 _autoFillControl.VisibleItemCount = 15;
                 _autoFillControl.AutoFillTimeout = 500;
             });
+            SP.SOD.executeFunc("sp.search.js", null, null);
         }
         function OnPopulate(targetElement) {
             var value = targetElement.value;
             _autoFillControl.PopulateAutoFill([_buildLoadingItem('Please wait...')], OnSelectItem);
 
-            SP.SOD.executeFunc("sp.search.js", null, function () {
-                var Search = Microsoft.SharePoint.Client.Search.Query;
-                var ctx = SP.ClientContext.get_current();
-                var query = new Search.KeywordQuery(ctx);
-                query.set_rowLimit(15);
-                query.set_queryText('contentclass:STS_ListItem ListID:{' + _schema.LookupListId + '} ' + value);
-                var selectProps = query.get_selectProperties();
-                selectProps.clear();
-                selectProps.add('Title');
-                selectProps.add('ListItemId');
-                var executor = new Search.SearchExecutor(ctx);
-                var result = executor.executeQuery(query);
-                ctx.executeQueryAsync(function () {
-                    var tableCollection = new Search.ResultTableCollection();
-                    tableCollection.initPropertiesFromJson(result.get_value());
+            var Search = Microsoft.SharePoint.Client.Search.Query;
+            var ctx = SP.ClientContext.get_current();
+            var query = new Search.KeywordQuery(ctx);
+            query.set_rowLimit(_autoFillControl.VisibleItemCount);
+            query.set_queryText('contentclass:STS_ListItem ListID:{' + _schema.LookupListId + '} ' + value);
+            var selectProps = query.get_selectProperties();
+            selectProps.clear();
+            selectProps.add('Title');
+            selectProps.add('ListItemId');
+            var executor = new Search.SearchExecutor(ctx);
+            var result = executor.executeQuery(query);
+            ctx.executeQueryAsync(function () {
+                var tableCollection = new Search.ResultTableCollection();
+                tableCollection.initPropertiesFromJson(result.get_value());
 
-                    var relevantResults = tableCollection.get_item(0);
-                    var rows = relevantResults.get_resultRows();
+                var relevantResults = tableCollection.get_item(0);
+                var rows = relevantResults.get_resultRows();
 
-                    var items = [];
-                    for (var i = 0; i < rows.length; i++) {
-                        items.push(_buildOptionItem(rows[i]["Title"], parseInt(rows[i]["ListItemId"], 10)));
-                    }
+                var items = [];
+                for (var i = 0; i < rows.length; i++) {
+                    items.push(_buildOptionItem(rows[i]["Title"], parseInt(rows[i]["ListItemId"], 10)));
+                }
 
-                    items.push(_buildSeparatorItem());
+                items.push(_buildSeparatorItem());
 
-                    if (relevantResults.get_totalRows() == 0)
-                        items.push(_buildFooterItem("No results. Please refine your query.")); else
-                        items.push(_buildFooterItem("Showing " + rows.length + " of" + relevantResults.get_totalRows() + " items!"));
+                if (relevantResults.get_totalRows() == 0)
+                    items.push(_buildFooterItem("No results. Please refine your query.")); else
+                    items.push(_buildFooterItem("Showing " + rows.length + " of" + relevantResults.get_totalRows() + " items!"));
 
-                    _autoFillControl.PopulateAutoFill(items, OnSelectItem);
-                }, function (sender, args) {
-                    alert(args.get_message());
-                });
+                _autoFillControl.PopulateAutoFill(items, OnSelectItem);
+            }, function (sender, args) {
+                _autoFillControl.PopulateAutoFill([], OnSelectItem);
+                alert(args.get_message());
             });
         }
         function _buildFooterItem(title) {
@@ -139,12 +140,11 @@ var _;
         }
         function BuildLookupDropdownControl() {
             var result = [];
-            result.push('<span dir="' + STSHtmlEncode(_myData.fieldSchema.Direction) + '">');
+            result.push('<div dir="' + STSHtmlEncode(_myData.fieldSchema.Direction) + '" style="position: relative;">');
             result.push('<input type="text" id="' + STSHtmlEncode(_textInputId) + '" value="' + STSHtmlEncode(_selectedValue.LookupValue) + '" title="' + STSHtmlEncode(_myData.fieldSchema.Title) + '"/>');
-            result.push('<br/>');
 
-            result.push("</span>");
             result.push("<div class='sp-peoplepicker-autoFillContainer' id='" + STSHtmlEncode(_autofillContainerId) + "'></div>");
+            result.push("</div>");
 
             return result.join("");
         }
