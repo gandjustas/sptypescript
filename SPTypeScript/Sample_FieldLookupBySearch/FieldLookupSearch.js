@@ -42,7 +42,8 @@ var _;
         return BuildLookupDropdownControl();
         function InitLookupControl() {
             _textInputElt = document.getElementById(_textInputId);
-            SP.SOD.executeFunc("autofill.js", null, function () {
+
+            SP.SOD.executeFunc("autofill.js", "SPClientAutoFill", function () {
                 _autoFillControl = new SPClientAutoFill(_textInputId, _autofillContainerId, OnPopulate);
                 _autoFillControl.AutoFillMinTextLength = 2;
                 _autoFillControl.VisibleItemCount = 15;
@@ -53,11 +54,11 @@ var _;
             var value = targetElement.value;
             _autoFillControl.PopulateAutoFill([_buildLoadingItem('Please wait...')], OnSelectItem);
 
-            SP.SOD.executeFunc("sp.search.js", null, function () {
+            SP.SOD.executeFunc("sp.search.js", "Microsoft.SharePoint.Client.Search.Query", function () {
                 var Search = Microsoft.SharePoint.Client.Search.Query;
                 var ctx = SP.ClientContext.get_current();
                 var query = new Search.KeywordQuery(ctx);
-                query.set_rowLimit(15);
+                query.set_rowLimit(_autoFillControl.VisibleItemCount);
                 query.set_queryText('contentclass:STS_ListItem ListID:{' + _schema.LookupListId + '} ' + value);
                 var selectProps = query.get_selectProperties();
                 selectProps.clear();
@@ -139,12 +140,11 @@ var _;
         }
         function BuildLookupDropdownControl() {
             var result = [];
-            result.push('<span dir="' + STSHtmlEncode(_myData.fieldSchema.Direction) + '">');
+            result.push('<div dir="' + STSHtmlEncode(_myData.fieldSchema.Direction) + '" style="position: relative;">');
             result.push('<input type="text" id="' + STSHtmlEncode(_textInputId) + '" value="' + STSHtmlEncode(_selectedValue.LookupValue) + '" title="' + STSHtmlEncode(_myData.fieldSchema.Title) + '"/>');
-            result.push('<br/>');
 
-            result.push("</span>");
             result.push("<div class='sp-peoplepicker-autoFillContainer' id='" + STSHtmlEncode(_autofillContainerId) + "'></div>");
+            result.push("</div>");
 
             return result.join("");
         }

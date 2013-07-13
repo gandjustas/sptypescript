@@ -8,6 +8,7 @@ declare module SP {
         static notifyEventAndExecuteWaitingJobs(eventName: string): void;
         static registerSod(fileName: string, url: string): void;
         static registerSodDep(fileName: string, dependentFileName: string): void;
+        static loadMultiple(keys: string[], fn: () => void , bSync: boolean): void;
     }
 }
 

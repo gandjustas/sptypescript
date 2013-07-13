@@ -48,7 +48,8 @@ module _ {
         return BuildLookupDropdownControl();
         function InitLookupControl() {
             _textInputElt = <HTMLInputElement>document.getElementById(_textInputId);
-            SP.SOD.executeFunc("autofill.js", null, () => {
+            
+            SP.SOD.executeFunc("autofill.js", "SPClientAutoFill", () => {
                 _autoFillControl = new SPClientAutoFill(_textInputId, _autofillContainerId, OnPopulate);
                 _autoFillControl.AutoFillMinTextLength = 2;
                 _autoFillControl.VisibleItemCount = 15;
@@ -60,11 +61,11 @@ module _ {
             var value = targetElement.value;
             _autoFillControl.PopulateAutoFill([_buildLoadingItem('Please wait...')], OnSelectItem);
 
-            SP.SOD.executeFunc("sp.search.js", null, () => {
+            SP.SOD.executeFunc("sp.search.js", "Microsoft.SharePoint.Client.Search.Query" , () => { 
                 var Search = Microsoft.SharePoint.Client.Search.Query;
                 var ctx = SP.ClientContext.get_current();
                 var query = new Search.KeywordQuery(ctx);
-                query.set_rowLimit(15);
+                query.set_rowLimit(_autoFillControl.VisibleItemCount);
                 query.set_queryText('contentclass:STS_ListItem ListID:{' + _schema.LookupListId + '} ' + value);
                 var selectProps = query.get_selectProperties();
                 selectProps.clear();
@@ -99,7 +100,6 @@ module _ {
                     (sender, args) => { alert(args.get_message()); }
                     );
             });
-
 
         }
         function _buildFooterItem(title: string) {
@@ -156,27 +156,11 @@ module _ {
         }
         function BuildLookupDropdownControl() {
             var result: string[] = [];
-            result.push('<span dir="' + STSHtmlEncode(_myData.fieldSchema.Direction) + '">');
+            result.push('<div dir="' + STSHtmlEncode(_myData.fieldSchema.Direction) + '" style="position: relative;">');
             result.push('<input type="text" id="' + STSHtmlEncode(_textInputId) + '" value="' + STSHtmlEncode(_selectedValue.LookupValue) + '" title="' + STSHtmlEncode(_myData.fieldSchema.Title) + '"/>');
-            result.push('<br/>');
 
-            //result += '<select id="' + STSHtmlEncode(_dropdownId) + '" title="' + STSHtmlEncode(_myData.fieldSchema.Title) + '">';
-            //if (!_myData.fieldSchema.Required && _optionsArray.length > 0) {
-            //    var noneOptSelectedStr = _noValueSelected ? 'selected="selected" ' : '';
-
-            //    result += '<option ' + noneOptSelectedStr + 'value="0">' + STSHtmlEncode(<any>Strings.STS.L_LookupFieldNoneOption) + '</option>';
-            //}
-            //for (var choiceIdx = 0; choiceIdx < _optionsArray.length; choiceIdx++) {
-            //    _optionsDictionary[_optionsArray[choiceIdx].LookupId] = _optionsArray[choiceIdx].LookupValue;
-            //    var curValueSelected = !_noValueSelected && _selectedValue.LookupId == _optionsArray[choiceIdx].LookupId;
-            //    var curValueSelectedStr = curValueSelected ? 'selected="selected" ' : '';
-
-            //    result += '<option ' + curValueSelectedStr + 'value="' + STSHtmlEncode(_optionsArray[choiceIdx].LookupId) + '">';
-            //    result += STSHtmlEncode(_optionsArray[choiceIdx].LookupValue) + '</option>';
-            //}
-            //result += '</select><br/></span>';
-            result.push("</span>");
             result.push("<div class='sp-peoplepicker-autoFillContainer' id='" + STSHtmlEncode(_autofillContainerId) + "'></div>");
+            result.push("</div>");
 
             return result.join("");
         }
