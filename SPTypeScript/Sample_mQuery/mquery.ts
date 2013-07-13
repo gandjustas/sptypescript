@@ -6,7 +6,7 @@ module spdevlab {
         export class DynamicTable {
 
             // private fields
-            _domContainer:Element;
+            _domContainer:HTMLElement;
             _tableContainer:MQueryResultSetElements;
 
             _rowTemplateId:string = null;
@@ -19,7 +19,7 @@ module spdevlab {
             };
 
             // public methods
-            init(domContainer:Element, options) {
+            init(domContainer: HTMLElement, options) {
 
                 if (m$.isDefinedAndNotNull(options)) {
                     m$.extend(this._options, options);
@@ -53,7 +53,7 @@ module spdevlab {
 
                         m$("tr:last-child " + this._options.removeCnt, this._tableContainer).click( (e) => {
 
-                            var targetElement = <Element>e.currentTarget;
+                            var targetElement = <HTMLElement>e.currentTarget;
                             var parentRow = m$(targetElement).parents("tr").first();
 
                             m$(parentRow).remove();
@@ -65,7 +65,6 @@ module spdevlab {
             }
 
             _initRowTemplate() {
-
                 var templateId = m$(this._tableContainer).attr("template-id");
 
                 if (m$.isDefinedAndNotNull(templateId)) {

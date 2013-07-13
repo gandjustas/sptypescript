@@ -2,12 +2,10 @@ interface MQuery
 {
     (selector: string, context?: any): MQueryResultSetElements;
     (element: HTMLElement): MQueryResultSetElements;
-    (element: Element): MQueryResultSetElements;
     (object: MQueryResultSetElements): MQueryResultSetElements;
     <T>(object: MQueryResultSet<T>): MQueryResultSet<T>;
     <T>(object: T): MQueryResultSet<T>;    
     (elementArray: HTMLElement[]): MQueryResultSetElements;
-    (elementArray: Element[]): MQueryResultSetElements;
     <T>(array: T[]): MQueryResultSet<T>;
     <T>(): MQueryResultSet<T>;
 
@@ -16,7 +14,7 @@ interface MQuery
     extend(target: any, ...objs: any[]): Object;
     extend(deep: boolean, target: any, ...objs: any[]): Object;
 
-    makeArray(obj: any): any[];
+    makeArray<T>(obj: any): any[];
 
     isDefined(obj: any): boolean;
     isNotNull(obj: any): boolean;
@@ -36,7 +34,7 @@ interface MQuery
     isEmptyObject(obj: any): boolean;
 
     ready(callback: () => void ): void;
-    contains(container: Element, contained: Element): boolean;
+    contains(container: HTMLElement, contained: HTMLElement): boolean;
 
     proxy(fn: (...args: any[]) => any, context: any, ...args: any[]): Function;
     proxy(context: any, name: string, ...args: any[]): any;
@@ -69,16 +67,16 @@ interface MQuery
     indexOf<T>(obj: T[], object: T, startIndex?: number): number;
     lastIndexOf<T>(obj: T[], object: T, startIndex?: number): number;
 
-    data(element: Element, key: string, value: any): any;
-    data(element: Element, key: string): any;
-    data(element: Element): any;
+    data(element: HTMLElement, key: string, value: any): any;
+    data(element: HTMLElement, key: string): any;
+    data(element: HTMLElement): any;
 
-    removeData(element: Element, name?: string): MQueryResultSet;
-    hasData(element: Element): boolean;
+    removeData(element: HTMLElement, name?: string): MQueryResultSet;
+    hasData(element: HTMLElement): boolean;
 }
 
-interface MQueryResultSetElements extends MQueryResultSet<Element>{
-    append(node: Element): MQueryResultSetElements;
+interface MQueryResultSetElements extends MQueryResultSet<HTMLElement>{
+    append(node: HTMLElement): MQueryResultSetElements;
     append(mQuerySet: MQueryResultSetElements): MQueryResultSetElements;
     append(html: string): MQueryResultSetElements;
 
@@ -95,8 +93,8 @@ interface MQueryResultSetElements extends MQueryResultSet<Element>{
     offset(coordinates: { left: any; top: any; }): MQueryResultSetElements;
 
     filter(selector: string): MQueryResultSetElements;
-    filter(fn: (elementOfArray: Element, indexInArray: number) => boolean, context?: any): MQueryResultSetElements;
-    filter(fn: (elementOfArray: Element) => boolean, context?: any): MQueryResultSetElements;
+    filter(fn: (elementOfArray: HTMLElement, indexInArray: number) => boolean, context?: any): MQueryResultSetElements;
+    filter(fn: (elementOfArray: HTMLElement) => boolean, context?: any): MQueryResultSetElements;
 
     not(selector: string): MQueryResultSetElements;
 
@@ -106,7 +104,7 @@ interface MQueryResultSetElements extends MQueryResultSet<Element>{
 
     parents(selector?: string): MQueryResultSetElements;
     parentsUntil(selector?: string, filter?: string): MQueryResultSetElements;
-    parentsUntil(element?: Element, filter?: string): MQueryResultSetElements;
+    parentsUntil(element?: HTMLElement, filter?: string): MQueryResultSetElements;
 
     position(): { top: number; left: number; };
 
@@ -135,8 +133,8 @@ interface MQueryResultSetElements extends MQueryResultSet<Element>{
 
     removeData(key: string): MQueryResultSetElements;
 
-    map(callback: (elementOfArray: Element, indexInArray: number) => any): MQueryResultSetElements;
-    map(callback: (elementOfArray: Element) => any): MQueryResultSetElements;
+    map(callback: (elementOfArray: HTMLElement, indexInArray: number) => any): MQueryResultSetElements;
+    map(callback: (elementOfArray: HTMLElement) => any): MQueryResultSetElements;
 
     blur(): MQueryResultSetElements;
     blur(handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
@@ -225,7 +223,7 @@ interface MQueryEvent extends Event {
     eventPhase: number;
     newValue: string;
     prevValue: string;
-    relatedNode: Element;
+    relatedNode: HTMLElement;
     screenX: number;
     screenY: number;
     shiftKey: boolean;
