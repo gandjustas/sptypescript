@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions"
 		..\Definitions\SP.BusinessData.d.ts = ..\Definitions\SP.BusinessData.d.ts
 		..\Definitions\SP.d.ts = ..\Definitions\SP.d.ts
 		..\Definitions\SP.Init.d.ts = ..\Definitions\SP.Init.d.ts
+		..\Definitions\SP.RequestExecutor.d.ts = ..\Definitions\SP.RequestExecutor.d.ts
 		..\Definitions\SP.Search.d.ts = ..\Definitions\SP.Search.d.ts
 		..\Definitions\SP.Sharing.d.ts = ..\Definitions\SP.Sharing.d.ts
 		..\Definitions\SP.Social.d.ts = ..\Definitions\SP.Social.d.ts

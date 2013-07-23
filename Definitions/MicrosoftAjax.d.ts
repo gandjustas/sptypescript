@@ -29,8 +29,86 @@ declare module Sys {
         }
     }
     module Net {
-        export class WebRequest { }
-        export class WebRequestExecutor { }
+        export class WebRequest {
+            get_url(): string;
+            set_url(value: string): void;
+            get_httpVerb(): string;
+            set_httpVerb(value: string): void;
+            get_timeout(): number;
+            set_timeout(value: number): void;
+            get_body(): string;
+            set_body(value: string): void;
+            get_headers(): { [key: string]: string; };
+            get_userContext(): any;
+            set_userContext(value: any): void;
+            get_executor(): WebRequestExecutor;
+            set_executor(value: WebRequestExecutor): void;
+
+            getResolvedUrl(); string;
+            invoke(): void;
+            completed(args: Sys.EventArgs): void;
+
+            add_completed(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;
+            remove_completed(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;
+        }
+
+        export class WebRequestExecutor {
+            get_aborted(): boolean;
+            get_responseAvailable(): boolean;
+            get_responseData(): string;
+            get_object(): any;
+            get_started(): boolean;
+            get_statusCode(): number;
+            get_statusText(): string;
+            get_timedOut(): boolean;
+            get_xml(): Document;
+            get_webRequest(): WebRequest;
+            abort(): void;
+            executeRequest(): void;
+            getAllResponseHeaders(): string;
+            getResponseHeader(key: string): string;
+        }
+        
+        export class NetworkRequestEventArgs extends EventArgs {
+            get_webRequest(): WebRequest;
+        }
+        
+        
+        export class WebRequestManager {
+            static get_defaultExecutorType(): string;
+            static set_defaultExecutorType(value: string): void;
+            static get_defaultTimeout(): number;
+            static set_defaultTimeout(value: number): void;
+
+            static executeRequest(request: WebRequest):void;
+            static add_completedRequest(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;
+            static remove_completedRequest(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;  
+            static add_invokingRequest(handler: (executor: WebRequestExecutor, args: NetworkRequestEventArgs) => void ): void;
+            static remove_invokingRequest(handler: (executor: WebRequestExecutor, args: NetworkRequestEventArgs ) => void ): void;               
+        } 
+
+        export class WebServiceProxy {
+            static invoke(
+                servicePath: string,
+                methodName: string,
+                useGet?: boolean,
+                params?: any,
+                onSuccess?: (result: string, eventArgs: EventArgs) => void ,
+                onFailure?: (error: WebServiceError) => void ,
+                userContext?: any,
+                timeout?: number,
+                enableJsonp?: boolean,
+                jsonpCallbackParameter?: string): WebRequest;
+        }
+        
+        export class WebServiceError {
+            get_errorObject(): any;
+            get_exceptionType(): any;
+            get_message(): string;
+            get_stackTrace(): string;
+            get_statusCode(): number;
+            get_timedOut(): bool;
+        }
     }
     interface IDisposable {
         dispose(): void;
