@@ -1,14 +1,23 @@
 declare module SP {
     export class SOD {
         static execute(fileName: string, functionName: string, args?: any[]): void;
-        static executeFunc(fileName: string, functionName: string, fn: () => void): void;
-        static executeOrDelayUntilEventNotified(func: () => void, eventName: string): bool;
-        static executeOrDelayUntilScriptLoaded(func: () => void, depScriptFileName: string): bool;
+        static executeFunc(fileName: string, typeName: string, fn: () => void ): void;
+        static executeOrDelayUntilEventNotified(func: Function, eventName: string): bool;
+        static executeOrDelayUntilScriptLoaded(func: () => void , depScriptFileName: string): bool;
         static notifyScriptLoadedAndExecuteWaitingJobs(scriptFileName: string): void;
-        static notifyEventAndExecuteWaitingJobs(eventName: string): void;
+        static notifyEventAndExecuteWaitingJobs(eventName: string, args?: any[]): void;
         static registerSod(fileName: string, url: string): void;
         static registerSodDep(fileName: string, dependentFileName: string): void;
         static loadMultiple(keys: string[], fn: () => void , bSync: boolean): void;
+        static delayUntilEventNotified(func: Function, eventName: string): void;
+
+        static get_prefetch(): bool;
+        static set_prefetch(value: bool): void;
+
+        static get_ribbonImagePrefetchEnabled(): bool;
+        static set_ribbonImagePrefetchEnabled(value: bool): void;
+
+
     }
 }
 
@@ -60,7 +69,7 @@ declare class _spPageContextInfo {
 
 declare function STSHtmlEncode(value: string): string;
 
-declare function AddEvtHandler(element: HTMLElement, event:string, func: EventListener): void;
+declare function AddEvtHandler(element: HTMLElement, event: string, func: EventListener): void;
 
 /** Gets query string parameter */
 declare function GetUrlKeyValue(key: string): string;

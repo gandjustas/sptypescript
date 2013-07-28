@@ -76,8 +76,8 @@ declare module Sys {
         
         
         export class WebRequestManager {
-            static get_defaultExecutor(): WebRequestExecutor;
-            static set_defaultExecutor(value: WebRequestExecutor): void;
+            static get_defaultExecutorType(): string;
+            static set_defaultExecutorType(value: string): void;
             static get_defaultTimeout(): number;
             static set_defaultTimeout(value: number): void;
 
@@ -124,14 +124,23 @@ declare var $removeHandler: { (element: HTMLElement, eventName: string, handler:
 declare module SP {
     export class SOD {
         static execute(fileName: string, functionName: string, args?: any[]): void;
-        static executeFunc(fileName: string, functionName: string, fn: () => void): void;
-        static executeOrDelayUntilEventNotified(func: () => void, eventName: string): bool;
-        static executeOrDelayUntilScriptLoaded(func: () => void, depScriptFileName: string): bool;
+        static executeFunc(fileName: string, typeName: string, fn: () => void ): void;
+        static executeOrDelayUntilEventNotified(func: Function, eventName: string): bool;
+        static executeOrDelayUntilScriptLoaded(func: () => void , depScriptFileName: string): bool;
         static notifyScriptLoadedAndExecuteWaitingJobs(scriptFileName: string): void;
-        static notifyEventAndExecuteWaitingJobs(eventName: string): void;
+        static notifyEventAndExecuteWaitingJobs(eventName: string, args?: any[]): void;
         static registerSod(fileName: string, url: string): void;
         static registerSodDep(fileName: string, dependentFileName: string): void;
         static loadMultiple(keys: string[], fn: () => void , bSync: boolean): void;
+        static delayUntilEventNotified(func: Function, eventName: string): void;
+
+        static get_prefetch(): bool;
+        static set_prefetch(value: bool): void;
+
+        static get_ribbonImagePrefetchEnabled(): bool;
+        static set_ribbonImagePrefetchEnabled(value: bool): void;
+
+
     }
 }
 
@@ -183,7 +192,7 @@ declare class _spPageContextInfo {
 
 declare function STSHtmlEncode(value: string): string;
 
-declare function AddEvtHandler(element: HTMLElement, event:string, func: EventListener): void;
+declare function AddEvtHandler(element: HTMLElement, event: string, func: EventListener): void;
 
 /** Gets query string parameter */
 declare function GetUrlKeyValue(key: string): string;
@@ -199,7 +208,7 @@ declare module SP {
     }
 
     export class RequestExecutor {
-        constructor(url: string, viaUrl?: string);
+        constructor(url: string, options?: any);
         get_formDigestHandlingEnabled(): boolean;
         set_formDigestHandlingEnabled(value: boolean): void;
         get_iFrameSourceUrl(): string;
@@ -237,11 +246,11 @@ declare module SP {
     }
 
     export class ProxyWebRequestExecutor extends Sys.Net.WebRequestExecutor {
-        constructor(url: string, viaUrl?: string);
+        constructor(url: string, options?: any);
     }
 
     export class ProxyWebRequestExecutorFactory implements SP.IWebRequestExecutorFactory {
-        constructor(url: string, viaUrl?: string);
+        constructor(url: string, options?: any);
         createWebRequestExecutor(): ProxyWebRequestExecutor;
     }
 }
