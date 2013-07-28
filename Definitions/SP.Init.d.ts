@@ -8,7 +8,7 @@ declare module SP {
         static notifyEventAndExecuteWaitingJobs(eventName: string, args?: any[]): void;
         static registerSod(fileName: string, url: string): void;
         static registerSodDep(fileName: string, dependentFileName: string): void;
-        static loadMultiple(keys: string[], fn: () => void , bSync: boolean): void;
+        static loadMultiple(keys: string[], fn: () => void , bSync?: boolean): void;
         static delayUntilEventNotified(func: Function, eventName: string): void;
 
         static get_prefetch(): bool;
