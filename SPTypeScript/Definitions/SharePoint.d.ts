@@ -123,7 +123,7 @@ declare var $removeHandler: { (element: HTMLElement, eventName: string, handler:
 
 declare module SP {
     export class SOD {
-        static execute(fileName: string, functionName: string, args?: any[]): void;
+        static execute(fileName: string, functionName: string, ...args: any[]): void;
         static executeFunc(fileName: string, typeName: string, fn: () => void ): void;
         static executeOrDelayUntilEventNotified(func: Function, eventName: string): bool;
         static executeOrDelayUntilScriptLoaded(func: () => void , depScriptFileName: string): bool;
@@ -131,7 +131,7 @@ declare module SP {
         static notifyEventAndExecuteWaitingJobs(eventName: string, args?: any[]): void;
         static registerSod(fileName: string, url: string): void;
         static registerSodDep(fileName: string, dependentFileName: string): void;
-        static loadMultiple(keys: string[], fn: () => void , bSync: boolean): void;
+        static loadMultiple(keys: string[], fn: () => void , bSync?: boolean): void;
         static delayUntilEventNotified(func: Function, eventName: string): void;
 
         static get_prefetch(): bool;
@@ -1355,6 +1355,77 @@ declare module SPClientForms {
 }
 
 
+declare module SPAnimation {
+    export enum Attribute {
+        PositionX,
+        PositionY,
+        Height,
+        Width,
+        Opacity
+    }
+
+    export enum ID {
+        Basic_Show,
+        Basic_SlowShow,
+        Basic_Fade,
+        Basic_Move,
+        Basic_Size,
+        Content_SlideInFadeInRight,
+        Content_SlideInFadeInRightInc,
+        Content_SlideOutFadeOutRight,
+        Content_SlideInFadeInLeft,
+        Content_SlideInFadeInLeftInc,
+        SmallObject_SlideInFadeInTop,
+        SmallObject_SlideInFadeInLeft,
+        Test_Instant,
+        Test_Hold,
+        Basic_Opacity,
+        Basic_QuickShow,
+        Basic_QuickFade,
+        Content_SlideInFadeInGeneric,
+        Basic_StrikeThrough,
+        SmallObject_SlideInFadeInBottom,
+        SmallObject_SlideOutFadeOutBottom,
+        Basic_QuickSize
+    }
+
+    export class Settings {
+        static DisableAnimation(): void;
+        static DisableSessionAnimation(): void;
+        static IsAnimationEnabled(): boolean;
+    }
+
+
+    export class State {
+        SetAttribute(attributeId: Attribute, value: number);
+        GetAttribute(attributeId: Attribute): number;
+        GetDataIndex(attributeId: Attribute): number
+    }
+
+    export class Object{
+        constructor(animationID: ID, delay: number, element: HTMLElement, finalState: State, finishFunc?: (data: any) => void , data?: any);
+        constructor(animationID: ID, delay: number, element: HTMLElement[], finalState: State, finishFunc?: (data: any) => void , data?: any);
+        RunAnimation(): void;
+    }
+}
+
+declare module SPAnimationUtility{
+    export class BasicAnimator {
+        static FadeIn(element: HTMLElement, finishFunc?: (data: any) => void , data?: any): void;
+        static FadeOut (element: HTMLElement, finishFunc?: (data: any) => void , data?: any): void;
+        static Move(element: HTMLElement, posX:number, posY:number, finishFunc?: (data: any) => void , data?: any): void;
+        static StrikeThrough(element: HTMLElement, strikeThroughWidth: number, finishFunc?: (data: any) => void , data?: any): void;
+        static Resize(element: HTMLElement, newHeight: number, newWidth: number, finishFunc?: (data: any) => void , data?: any): void;
+        static CommonResize(element: HTMLElement, newHeight: number, newWidth: number, finishFunc: (data: any) => void , data: any, animationId:SPAnimation.ID): void;
+        static QuickResize(element: HTMLElement, newHeight: number, newWidth: number, finishFunc?: (data: any) => void , data?: any): void;
+        static ResizeContainerAndFillContent(element: HTMLElement, newHeight: number, newWidth: number, finishFunc: () => void , fAddToEnd: boolean): void;
+        static GetWindowScrollPosition(): { x: number; y: number; };
+        static GetLeftOffset(element: HTMLElement): number;
+        static GetTopOffset(element: HTMLElement): number;
+        static GetRightOffset(element: HTMLElement): number;
+        static PositionElement(element: HTMLElement, topValue: number, leftValue: number, heightValue: number, widthValue: number): void;
+    }
+}
 
 interface IEnumerator<T> {
     get_current(): T;

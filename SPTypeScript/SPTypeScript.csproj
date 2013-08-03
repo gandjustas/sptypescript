@@ -52,6 +52,12 @@
     <None Include="Extensions\CSOMPromise.js.map">
       <DependentUpon>CSOMPromise.ts</DependentUpon>
     </None>
+    <None Include="Sample_Animation\Animation.js.map">
+      <DependentUpon>Animation.ts</DependentUpon>
+    </None>
+    <None Include="Sample_Animation\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3a32b5d6-a282-447a-9b04-ac34cfd91133}</SharePointProjectItemId>
+    </None>
     <None Include="Sample_AutoFill\autofill.js.map">
       <DependentUpon>autofill.ts</DependentUpon>
     </None>
@@ -131,6 +137,16 @@
       <DependentUpon>SharePoint.d.tt</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Sample_AutoFill\autofill.ts" />
+    <TypeScriptCompile Include="Sample_Animation\Animation.ts" />
+    <Content Include="Sample_Animation\Animation.js">
+      <DependentUpon>Animation.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_Animation\Animation.min.js">
+      <DependentUpon>Animation.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_Animation\Default.aspx" />
+    <Content Include="Sample_Animation\Elements.xml" />
+    <Content Include="Sample_Animation\photo.jpg" />
     <Content Include="Sample_AutoFill\autofill.js">
       <DependentUpon>autofill.ts</DependentUpon>
     </Content>

@@ -1,6 +1,6 @@
 declare module SP {
     export class SOD {
-        static execute(fileName: string, functionName: string, args?: any[]): void;
+        static execute(fileName: string, functionName: string, ...args: any[]): void;
         static executeFunc(fileName: string, typeName: string, fn: () => void ): void;
         static executeOrDelayUntilEventNotified(func: Function, eventName: string): bool;
         static executeOrDelayUntilScriptLoaded(func: () => void , depScriptFileName: string): bool;
