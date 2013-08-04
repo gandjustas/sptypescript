@@ -4,7 +4,10 @@
 module CSR {
 
     /** Creates new overrides. Call .register() at the end.*/
-    export function override(listTemplateType?: number, baseViewId?: number): ICSR {
+    export function override(listTemplateType?: number, baseViewId?: string): ICSR;
+    export function override(listTemplateType?: number, baseViewId?: number): ICSR;
+
+    export function override(listTemplateType?: number, baseViewId?: any): ICSR {
         return new csr(listTemplateType, baseViewId);
     }
 
@@ -13,12 +16,22 @@ module CSR {
         public Templates: SPClientTemplates.TemplateOverrides;
         public OnPreRender: { (ctx: SPClientTemplates.RenderContext): void; }[];
         public OnPostRender: { (ctx: SPClientTemplates.RenderContext): void; }[];
+        private IsRegistered: boolean;
 
-        constructor(public ListTemplateType?: number, public BaseViewID?: number) {
+
+        constructor(public ListTemplateType?: number, public BaseViewID?: any) {
             this.Templates = { Fields: {} };
+            this.OnPreRender = [];
+            this.OnPostRender = [];
+            this.IsRegistered = false;
         }
 
         /* tier 1 methods */
+        view(template: any): ICSR {
+            this.Templates.View = template;
+            return this;
+        }
+
         item(template: any): ICSR {
             this.Templates.Item = template;
             return this;
@@ -26,6 +39,11 @@ module CSR {
 
         header(template: any): ICSR {
             this.Templates.Header = template;
+            return this;
+        }
+        
+        body(template: any): ICSR {
+            this.Templates.Body = template;
             return this;
         }
 
@@ -72,17 +90,24 @@ module CSR {
 
         /* common */
         onPreRender(...callbacks: { (ctx: SPClientTemplates.RenderContext): void; }[]): ICSR {
-            this.OnPreRender = callbacks;
+            for (var i = 0; i < callbacks.length; i++) {
+                this.OnPreRender.push(callbacks[i]);
+            }
             return this;
         }
 
         onPostRender(...callbacks: { (ctx: SPClientTemplates.RenderContext): void; }[]): ICSR {
-            this.OnPostRender = callbacks;
+            for (var i = 0; i < callbacks.length; i++) {
+                this.OnPostRender.push(callbacks[i]);
+            }          
             return this;
         }
 
         register() {
-            SPClientTemplates.TemplateManager.RegisterTemplateOverrides(this);
+            if (!this.IsRegistered) {
+                SPClientTemplates.TemplateManager.RegisterTemplateOverrides(this);
+                this.IsRegistered = true;
+            }
         }
     }
 
@@ -127,6 +152,16 @@ module CSR {
         /** Registers overrides in client-side templating engine.*/
         register(): void;
 
+        /** Override View rendering template.
+            @param template New view template.
+        */
+        view(template: string): ICSR;
+
+        /** Override View rendering template.
+            @param template New view template.
+        */
+        view(template: (ctx: SPClientTemplates.RenderContext_InView) => string): ICSR;
+
         /** Override Item rendering template.
             @param template New item template.
         */
@@ -146,6 +181,16 @@ module CSR {
             @param template New header template.
         */
         header(template: (ctx: SPClientTemplates.RenderContext) => string): ICSR;
+
+        /** Override Body rendering template.
+            @param template New body template.
+        */
+        body(template: string): ICSR;
+
+        /** Override Body rendering template.
+            @param template New body template.
+        */
+        body(template: (ctx: SPClientTemplates.RenderContext) => string): ICSR;
 
         /** Override Footer rendering template.
             @param template New footer template.
@@ -207,4 +252,6 @@ module CSR {
     }
 }
 
-SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("typescripttemplates.ts");
+if (SP && SP.SOD) {
+    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("typescripttemplates.ts");
+}

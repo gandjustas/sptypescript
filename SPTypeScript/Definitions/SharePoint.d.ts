@@ -444,6 +444,7 @@ interface MQueryResultSetElements extends MQueryResultSet<HTMLElement>{
 }
 
 interface MQueryResultSet<T> {    
+    [index: number]: T;
     contains(contained: T): boolean;
     
     filter(fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): MQueryResultSet<T>;
@@ -1240,7 +1241,7 @@ declare module SPClientTemplates {
         ListTemplateType?: number;
         /** Base view ID (SPView.BaseViewID) for which the template should be applied.
             If not defined, the templates will be applied to all views. */
-        BaseViewID?: number;
+        BaseViewID?: any;
     }
     export class TemplateManager {
         static RegisterTemplateOverrides(renderCtx: TemplateOverridesOptions): void;
@@ -1424,6 +1425,11 @@ declare module SPAnimationUtility{
         static GetTopOffset(element: HTMLElement): number;
         static GetRightOffset(element: HTMLElement): number;
         static PositionElement(element: HTMLElement, topValue: number, leftValue: number, heightValue: number, widthValue: number): void;
+        static PositionAbsolute(element: HTMLElement): void;
+        static PositionRelative(element: HTMLElement): void;
+        static PositionRelativeExact(element: HTMLElement, topValue: number, leftValue: number, heightValue: number, widthValue: number): void;
+        static PositionAbsoluteExact(element: HTMLElement, topValue: number, leftValue: number, heightValue: number, widthValue: number): void;
+        static IsPositioned(element: HTMLElement): boolean;
     }
 }
 

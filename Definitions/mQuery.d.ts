@@ -188,6 +188,7 @@ interface MQueryResultSetElements extends MQueryResultSet<HTMLElement>{
 }
 
 interface MQueryResultSet<T> {    
+    [index: number]: T;
     contains(contained: T): boolean;
     
     filter(fn: (elementOfArray: T, indexInArray: number) => boolean, context?: any): MQueryResultSet<T>;

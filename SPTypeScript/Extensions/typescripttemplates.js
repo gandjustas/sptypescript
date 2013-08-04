@@ -10,7 +10,15 @@
             this.ListTemplateType = ListTemplateType;
             this.BaseViewID = BaseViewID;
             this.Templates = { Fields: {} };
+            this.OnPreRender = [];
+            this.OnPostRender = [];
+            this.IsRegistered = false;
         }
+        csr.prototype.view = function (template) {
+            this.Templates.View = template;
+            return this;
+        };
+
         csr.prototype.item = function (template) {
             this.Templates.Item = template;
             return this;
@@ -18,6 +26,11 @@
 
         csr.prototype.header = function (template) {
             this.Templates.Header = template;
+            return this;
+        };
+
+        csr.prototype.body = function (template) {
+            this.Templates.Body = template;
             return this;
         };
 
@@ -66,7 +79,9 @@
             for (var _i = 0; _i < (arguments.length - 0); _i++) {
                 callbacks[_i] = arguments[_i + 0];
             }
-            this.OnPreRender = callbacks;
+            for (var i = 0; i < callbacks.length; i++) {
+                this.OnPreRender.push(callbacks[i]);
+            }
             return this;
         };
 
@@ -75,16 +90,22 @@
             for (var _i = 0; _i < (arguments.length - 0); _i++) {
                 callbacks[_i] = arguments[_i + 0];
             }
-            this.OnPostRender = callbacks;
+            for (var i = 0; i < callbacks.length; i++) {
+                this.OnPostRender.push(callbacks[i]);
+            }
             return this;
         };
 
         csr.prototype.register = function () {
-            SPClientTemplates.TemplateManager.RegisterTemplateOverrides(this);
+            if (!this.IsRegistered) {
+                SPClientTemplates.TemplateManager.RegisterTemplateOverrides(this);
+                this.IsRegistered = true;
+            }
         };
         return csr;
     })();
 })(CSR || (CSR = {}));
 
-SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("typescripttemplates.ts");
-//@ sourceMappingURL=typescripttemplates.js.map
+if (SP && SP.SOD) {
+    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("typescripttemplates.ts");
+}
