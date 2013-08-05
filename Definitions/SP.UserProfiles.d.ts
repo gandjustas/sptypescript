@@ -417,6 +417,7 @@ declare module SP {
                 @param accountName Specifies the user by account name.
                 @param propertyNames Specifies an array of strings that specify the properties to retrieve. */
             constructor(context: SP.ClientContext, accountName: string, propertyNames: string[]);
+
             /** Specifies the user account name */
             get_accountName(): string;
             /** Specifies the user account name */
