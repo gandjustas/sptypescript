@@ -413,9 +413,10 @@ declare module SP {
         /** Represents a set of user profile properties for a specified user. */
         export class UserProfilePropertiesForUser extends SP.ClientObject {
             /** Creates new UserProfilePropertiesForUser object
+                @param context Specifies the client context to use.
                 @param accountName Specifies the user by account name.
-                @propertyNames Specifies an array of strings that specify the properties to retrieve. */
-            constructor(accountName: string, propertyNames: string[]);
+                @param propertyNames Specifies an array of strings that specify the properties to retrieve. */
+            constructor(context: SP.ClientContext, accountName: string, propertyNames: string[]);
             /** Specifies the user account name */
             get_accountName(): string;
             /** Specifies the user account name */
