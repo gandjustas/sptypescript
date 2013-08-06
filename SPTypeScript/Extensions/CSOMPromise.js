@@ -1,3 +1,5 @@
+/// <reference path="../Definitions/jQuery.d.ts" />
+/// <reference path="../Definitions/SharePoint.d.ts" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -6,11 +8,13 @@ var __extends = this.__extends || function (d, b) {
 };
 var SP;
 (function (SP) {
+    // Class
     var ClientContextPromise = (function (_super) {
         __extends(ClientContextPromise, _super);
         function ClientContextPromise(serverRelativeUrlOrFullUrl) {
             _super.call(this, serverRelativeUrlOrFullUrl);
         }
+        /** To use this function, you must ensure that jQuery and CSOMPromise js files are loaded to the page */
         ClientContextPromise.prototype.executeQueryPromise = function () {
             var deferred = new jQuery.Deferred();
             this.executeQueryAsync(function (sender, args) {
@@ -29,4 +33,4 @@ var SP;
     SP.ClientContextPromise = ClientContextPromise;
 })(SP || (SP = {}));
 SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("CSOMPromise.ts");
-//@ sourceMappingURL=CSOMPromise.js.map
+//# sourceMappingURL=CSOMPromise.js.map

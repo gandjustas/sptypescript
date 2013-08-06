@@ -8,9 +8,9 @@ declare class CalloutActionOptions {
         @param action The action object */
     onClickCallback: (event: Event, action: CalloutAction) => any;
     /** Callback which returns if the action link is enabled */
-    isEnabledCallback: (action: CalloutAction) => bool;
+    isEnabledCallback: (action: CalloutAction) => boolean;
     /** Callback which returns if the action link is visible */
-    isVisibleCallback: (action: CalloutAction) => bool;
+    isVisibleCallback: (action: CalloutAction) => boolean;
     /** Submenu entries for the action. If defined, the action link click will popup the specified menu. */
     menuEntries: CalloutActionMenuEntry[];
 }
@@ -50,13 +50,13 @@ declare class CalloutAction {
     getToolTop(): string;
     getDisabledToolTip(): string;
     getOnClickCallback(): (event, action: CalloutAction) => any;
-    getIsDisabledCallback(): (action: CalloutAction) => bool;
-    getIsVisibleCallback(): (action: CalloutAction) => bool;
-    getIsMenu(): bool;
+    getIsDisabledCallback(): (action: CalloutAction) => boolean;
+    getIsVisibleCallback(): (action: CalloutAction) => boolean;
+    getIsMenu(): boolean;
     getMenuEntries(): CalloutActionMenuEntry[];
     render(): void;
-    isEnabled(): bool;
-    isVisible(): bool;
+    isEnabled(): boolean;
+    isVisible(): boolean;
     set (options: CalloutActionOptions): void;
 }
 
@@ -87,15 +87,15 @@ declare class Callout {
     /** Returns the position algorithm function defined for the callout during its creation. */
     getPositionAlgorithm(): any;
     /** Specifies wherever callout is in "Opened" state */
-    isOpen(): bool;
+    isOpen(): boolean;
     /** Specifies wherever callout is in "Opening" state */
-    isOpening(): bool;
+    isOpening(): boolean;
     /** Specifies wherever callout is in "Opened" or "Opening" state */
-    isOpenOrOpening(): bool;
+    isOpenOrOpening(): boolean;
     /** Specifies wherever callout is in "Closing" state */
-    isClosing(): bool;
+    isClosing(): boolean;
     /** Specifies wherever callout is in "Closed" state */
-    isClosed(): bool;
+    isClosed(): boolean;
     /** Returns the callout actions menu */
     getActionMenu(): CalloutActionMenu;
     /** Adds a link to the actions panel in the bottom part of the callout window */
@@ -103,9 +103,9 @@ declare class Callout {
     /** Re-renders the actions menu. Call after the actions menu is changed. */
     refreshActions(): void;
     /** Display the callout. Animation can be used only for IE9+ */
-    open(useAnimation: bool);
+    open(useAnimation: boolean);
     /** Hide the callout. Animation can be used only for IE9+ */
-    close(useAnimation: bool);
+    close(useAnimation: boolean);
     /** Display if hidden, hide if shown. */
     toggle(): void;
     /** Do not call this directly. Instead, use CalloutManager.remove */
@@ -116,9 +116,9 @@ declare class CalloutOpenOptions {
     /** HTML event name, e.g. "click" */
     event: string;
     /** Callout will be closed on blur */
-    closeCalloutOnBlur: bool;
+    closeCalloutOnBlur: boolean;
     /** Close button will be shown within the callout window */
-    showCloseButton: bool;
+    showCloseButton: boolean;
 }
 
 declare class CalloutOptions {
@@ -166,15 +166,15 @@ declare class CalloutManager {
     static getFromLaunchPointIfExists(launchPoint: HTMLElement): Callout;
     /** Gets the first launch point within the specified ancestor element, and returns true if the associated with it callout is opened or opening.
         If the launch point is not found or the callout is hidden, returns false. */
-    static containsOneCalloutOpen(ancestor: HTMLElement): bool;
+    static containsOneCalloutOpen(ancestor: HTMLElement): boolean;
     /** Finds the closest launch point based on the specified descendant element, and returns callout associated with the launch point. */
     static getFromCalloutDescendant(descendant: HTMLElement): Callout;
     /** Perform some action for each callout on the page. */
     static forEach(callback: (callout: Callout) => void);
     /** Closes all callouts on the page */
-    static closeAll(): bool;
+    static closeAll(): boolean;
     /** Returns true if at least one of the defined on page callouts is opened. */
-    static isAtLeastOneCalloutOpen(): bool;
+    static isAtLeastOneCalloutOpen(): boolean;
     /** Returns true if at least one of the defined on page callouts is opened or opening. */
-    static isAtLeastOneCalloutOn(): bool;
+    static isAtLeastOneCalloutOn(): boolean;
 }

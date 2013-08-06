@@ -3,7 +3,7 @@
 declare module SP {
     export module WebParts {
         export class LimitedWebPartManager extends SP.ClientObject {
-            get_hasPersonalizedParts(): bool;
+            get_hasPersonalizedParts(): boolean;
             get_scope(): SP.WebParts.PersonalizationScope;
             get_webParts(): SP.WebParts.WebPartDefinitionCollection;
             addWebPart(webPart: SP.WebParts.WebPart, zoneId: string, zoneIndex: number): SP.WebParts.WebPartDefinition;
@@ -31,9 +31,9 @@ declare module SP {
             constructor();
         }
         export class WebPart extends SP.ClientObject {
-            get_hidden(): bool;
-            set_hidden(value: bool): void;
-            get_isClosed(): bool;
+            get_hidden(): boolean;
+            set_hidden(value: boolean): void;
+            get_isClosed(): boolean;
             get_properties(): SP.PropertyValues;
             get_subtitle(): string;
             get_title(): string;

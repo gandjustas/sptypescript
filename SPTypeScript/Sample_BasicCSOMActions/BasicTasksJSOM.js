@@ -1,4 +1,6 @@
-﻿function retrieveWebsite(resultpanel) {
+﻿///<reference path="../Definitions/SharePoint.d.ts" />
+// Website tasks
+function retrieveWebsite(resultpanel) {
     var clientContext = SP.ClientContext.get_current();
     var oWebsite = clientContext.get_web();
     clientContext.load(oWebsite);
@@ -51,6 +53,7 @@ function writeWebsiteProps(resultpanel) {
     }
 }
 
+// Lists tasks
 function readAllProps(resultpanel) {
     var clientContext = SP.ClientContext.get_current();
     var oWebsite = clientContext.get_web();
@@ -162,6 +165,7 @@ function readFilter(resultpanel) {
     }
 }
 
+// Create, update and delete lists
 function createList(resultpanel) {
     var clientContext = SP.ClientContext.get_current();
     var oWebsite = clientContext.get_web();
@@ -248,6 +252,7 @@ function deleteList(resultpanel) {
     }
 }
 
+// Create, update and delete folders
 function createFolder(resultpanel) {
     var clientContext = SP.ClientContext.get_current();
     var oWebsite = clientContext.get_web();
@@ -311,6 +316,7 @@ function deleteFolder(resultpanel) {
     }
 }
 
+// List item tasks
 function readItems(resultpanel) {
     var clientContext = SP.ClientContext.get_current();
     var oWebsite = clientContext.get_web();
@@ -368,6 +374,7 @@ function readInclude(resultpanel) {
     }
 }
 
+// Create, update and delete list items
 function createListItem(resultpanel) {
     var clientContext = SP.ClientContext.get_current();
     var oWebsite = clientContext.get_web();
@@ -430,4 +437,4 @@ function deleteListItem(resultpanel) {
         resultpanel.innerHTML = "Request failed: " + arguments[1].get_message();
     }
 }
-//@ sourceMappingURL=BasicTasksJSOM.js.map
+//# sourceMappingURL=BasicTasksJSOM.js.map

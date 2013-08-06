@@ -11,7 +11,7 @@ declare module Sys {
         /** Clears the contents of the string builder */
         clear(): void;
         /** Indicates wherever the string builder is empty */
-        isEmpty(): bool;
+        isEmpty(): boolean;
         /** Gets the contents of the string builder as a string */
         toString(): string;
     }
@@ -107,7 +107,7 @@ declare module Sys {
             get_message(): string;
             get_stackTrace(): string;
             get_statusCode(): number;
-            get_timedOut(): bool;
+            get_timedOut(): boolean;
         }
     }
     interface IDisposable {

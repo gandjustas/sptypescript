@@ -1,4 +1,6 @@
-﻿var CSR;
+﻿///<reference path="../Definitions/SharePoint.d.ts" />
+/** Lightweight client-side rendering template overrides.*/
+var CSR;
 (function (CSR) {
     function override(listTemplateType, baseViewId) {
         return new csr(listTemplateType, baseViewId);
@@ -14,6 +16,7 @@
             this.OnPostRender = [];
             this.IsRegistered = false;
         }
+        /* tier 1 methods */
         csr.prototype.view = function (template) {
             this.Templates.View = template;
             return this;
@@ -63,6 +66,7 @@
             return this;
         };
 
+        /* tier 2 methods */
         csr.prototype.template = function (name, template) {
             this.Templates[name] = template;
             return this;
@@ -74,6 +78,7 @@
             return this;
         };
 
+        /* common */
         csr.prototype.onPreRender = function () {
             var callbacks = [];
             for (var _i = 0; _i < (arguments.length - 0); _i++) {
@@ -109,3 +114,4 @@
 if (SP && SP.SOD) {
     SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("typescripttemplates.ts");
 }
+//# sourceMappingURL=typescripttemplates.js.map

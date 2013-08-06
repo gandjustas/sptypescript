@@ -38,7 +38,7 @@ declare module SP {
             unsubscribe(subscription: SP.BusinessData.Runtime.Subscription, onBehalfOfUser: string, unsubscriberName: string, lobSystemInstance: SP.BusinessData.LobSystemInstance): void;
         }
         export class EntityField extends SP.ClientObject {
-            get_containsLocalizedDisplayName(): bool;
+            get_containsLocalizedDisplayName(): boolean;
             get_defaultDisplayName(): string;
             get_localizedDisplayName(): string;
             get_name(): string;
@@ -82,9 +82,9 @@ declare module SP {
             get_item(index: number): SP.BusinessData.Runtime.EntityFieldValueDictionary;
         }
         export class TypeDescriptor extends SP.ClientObject {
-            get_containsReadOnly(): bool;
-            get_isCollection(): bool;
-            get_isReadOnly(): bool;
+            get_containsReadOnly(): boolean;
+            get_isCollection(): boolean;
+            get_isReadOnly(): boolean;
             get_name(): string;
             get_typeName(): string;
             containsLocalizedDisplayName(): SP.BooleanResult;

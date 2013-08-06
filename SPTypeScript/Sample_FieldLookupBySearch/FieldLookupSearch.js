@@ -1,3 +1,5 @@
+///<reference path="../Definitions/SharePoint.d.ts" />
+///<reference path="../extensions/typescripttemplates.ts" />
 var _;
 (function (_) {
     function init() {
@@ -67,6 +69,7 @@ var _;
                 var executor = new Search.SearchExecutor(ctx);
                 var result = executor.executeQuery(query);
                 ctx.executeQueryAsync(function () {
+                    //TODO: Discover proper way to load collection
                     var tableCollection = new Search.ResultTableCollection();
                     tableCollection.initPropertiesFromJson(result.get_value());
 
@@ -81,7 +84,8 @@ var _;
                     items.push(_buildSeparatorItem());
 
                     if (relevantResults.get_totalRows() == 0)
-                        items.push(_buildFooterItem("No results. Please refine your query.")); else
+                        items.push(_buildFooterItem("No results. Please refine your query."));
+else
                         items.push(_buildFooterItem("Showing " + rows.length + " of" + relevantResults.get_totalRows() + " items!"));
 
                     _autoFillControl.PopulateAutoFill(items, OnSelectItem);
@@ -150,4 +154,4 @@ var _;
         }
     }
 })(_ || (_ = {}));
-//@ sourceMappingURL=FieldLookupSearch.js.map
+//# sourceMappingURL=FieldLookupSearch.js.map

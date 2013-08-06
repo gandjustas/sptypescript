@@ -50,19 +50,19 @@ declare module SP.WorkflowServices {
         /** Gets custom properties of the workflow definition */
         get_properties(): { [propertyName: string]: any; };
         /** true if the workflow definition has been published to the external workflow host; false if the workflow definition is only saved on the site  */
-        get_published(): bool;
+        get_published(): boolean;
         /** Determines whether to automatically generate an association form for this workflow.
             If the value is true, and the associationUrl is not already set, a default association form is automatically generated for the workflow when saveDefinition is called.  */
-        get_requiresAssociationForm(): bool;
+        get_requiresAssociationForm(): boolean;
         /** Determines whether to automatically generate an association form for this workflow.
             If the value is true, and the associationUrl is not already set, a default association form is automatically generated for the workflow when saveDefinition is called.  */
-        set_requiresAssociationForm(value: bool): bool;
+        set_requiresAssociationForm(value: boolean): boolean;
         /** Determines whether to automatically generate an initiation form for this workflow.
             If the value is true, and the initiationUrl is not already set, a default initiation form is automatically generated for the workflow when saveDefinition is called.  */
-        get_requiresInitiationForm(): bool;
+        get_requiresInitiationForm(): boolean;
         /** Determines whether to automatically generate an initiation form for this workflow.
             If the value is true, and the initiationUrl is not already set, a default initiation form is automatically generated for the workflow when saveDefinition is called.  */
-        set_requiresInitiationForm(value: bool): bool;
+        set_requiresInitiationForm(value: boolean): boolean;
         /** RestrictToScope is a GUID value, used in conjunction with the RestrictToType property to further restrict the scope of the definition.
             For example, if the RestrictToType is "List", then setting the RestrictToScope to a particular list identifier limits the definition to be associable only to the specified list.
             If the RestrictToType is "List" but the RestrictToScope is null or the empty string, then the definition is associable to any list. */
@@ -88,7 +88,7 @@ declare module SP.WorkflowServices {
     }
 
     /** Represents a collection of WorkflowDefinition objects */
-    export class WorkflowDefinitionCollection extends SP.ClientObjectCollection {
+    export class WorkflowDefinitionCollection extends SP.ClientObjectCollection<WorkflowDefinition> {
         itemAt(index: number): WorkflowDefinition;
         get_item(index: number): WorkflowDefinition;
         /** returns SP.WorkflowDefinition class */
@@ -115,7 +115,7 @@ declare module SP.WorkflowServices {
             @param definitionId The guid identifier of the workflow definition.  */
         deleteDefinition(definitionId: string): void;
         /** Retrieves workflow definitions from the workflow store that match the tags. */
-        enumerateDefinitions(publishedOnly: bool): WorkflowDefinitionCollection;
+        enumerateDefinitions(publishedOnly: boolean): WorkflowDefinitionCollection;
         /** Retrieves a specified workflow definition from the workflow store.
             @param definitionId The guid identifier of the workflow definition.  */
         getDefinition(definitionId: string): WorkflowDefinition;
@@ -167,7 +167,7 @@ declare module SP.WorkflowServices {
     }
 
     /** Represents a collection of WorkflowInstance objects */
-    export class WorkflowInstanceCollection extends SP.ClientObjectCollection {
+    export class WorkflowInstanceCollection extends SP.ClientObjectCollection<WorkflowInstance> {
         itemAt(index: number): WorkflowInstance;
         get_item(index: number): WorkflowInstance;
         /** returns SP.WorkflowInstance class */
@@ -222,7 +222,7 @@ declare module SP.WorkflowServices {
         /** The current application identifier.*/
         get_appId(): string;
         /** Indicates whether this workflow service is actively connected to a workflow host. */
-        get_isConnected(): bool;
+        get_isConnected(): boolean;
         /** Returns the path of the current scope in the workflow host. */
         get_scopePath(): string;
         getWorkflowDeploymentService(): WorkflowDeploymentService;
@@ -241,10 +241,10 @@ declare module SP.WorkflowServices {
         set_definitionId(value);
         /** Gets a boolean value that specifies if the workflow subscription is enabled.
             When disabled, new instances of the subscription cannot be started, but existing instances will continue to run.  */
-        get_enabled(): bool;
+        get_enabled(): boolean;
         /** Sets a boolean value that enables or disables the workflow subscription.
             When disabled, new instances of the subscription cannot be started, but existing instances will continue to run.  */
-        set_enabled(value: bool): bool;
+        set_enabled(value: boolean): boolean;
         /** Gets the logical source instance name of the event. (GUID) */
         get_eventSourceId(): string;
         /** Sets the logical source instance name of the event. (GUID) */
@@ -260,9 +260,9 @@ declare module SP.WorkflowServices {
         /** Unique identifier (GUID) of the workflow subscription */
         set_id(value: string): string;
         /** Boolean value that specifies whether multiple workflow instances can be started manually on the same list item at the same time. This property can be used for list workflows only.  */
-        get_manualStartBypassesActivationLimit(): bool;
+        get_manualStartBypassesActivationLimit(): boolean;
         /** Boolean value that specifies whether multiple workflow instances can be started manually on the same list item at the same time. This property can be used for list workflows only.  */
-        set_manualStartBypassesActivationLimit(value: bool): bool;
+        set_manualStartBypassesActivationLimit(value: boolean): boolean;
         /** Gets the name of the workflow subscription for the specified event source.  */
         get_name();
         /** Sets the name of the workflow subscription for the specified event source.  */
@@ -280,7 +280,7 @@ declare module SP.WorkflowServices {
     }
 
     /** Represents a collection of WorkflowSubscription objects */
-    export class WorkflowSubscriptionCollection extends SP.ClientObjectCollection {
+    export class WorkflowSubscriptionCollection extends SP.ClientObjectCollection<WorkflowSubscription> {
         itemAt(index: number): WorkflowSubscription;
         get_item(index: number): WorkflowSubscription;
         /** returns SP.WorkflowInstance class */

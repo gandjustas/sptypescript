@@ -1,3 +1,5 @@
+///<reference path="../Definitions/SharePoint.d.ts" />
+///<reference path="../extensions/typescripttemplates.ts" />
 var _;
 (function (_) {
     function init() {
@@ -14,17 +16,20 @@ var _;
         "V complex": { color: "Maroon", days: 12 }
     };
 
+    // Overriding the list view
     function SPFieldComplexity_View(ctx) {
         var complexity = ctx.CurrentItem[ctx.CurrentFieldSchema.Name];
         return GetDisplayHtml(complexity);
     }
     ;
 
+    // Overriding the Display Form
     function SPFieldComplexity_Display(ctx) {
         return GetDisplayHtml(ctx.CurrentFieldValue);
     }
     ;
 
+    // Overriding the Add and Edit Form
     function SPFieldComplexity_Edit(ctx) {
         var fieldInternalName = ctx.CurrentFieldSchema.Name;
         var dropDownId = fieldInternalName + '_$DropDownChoice';
@@ -75,9 +80,10 @@ var _;
     SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
 
+        //Enable script with MDS
         SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Sample_CSRComplexityField/CSRField.js"), init);
         }, "sp.js");
     }, "clienttemplates.js");
 })(_ || (_ = {}));
-//@ sourceMappingURL=CSRField.js.map
+//# sourceMappingURL=CSRField.js.map

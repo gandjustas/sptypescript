@@ -1,3 +1,4 @@
+///<reference path="../Definitions/SharePoint.d.ts" />
 SP.SOD.executeOrDelayUntilScriptLoaded(function () {
     var context = SP.ClientContext.get_current();
 
@@ -16,4 +17,4 @@ SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         alert('Error: ' + args.get_message());
     });
 }, 'sp.userprofiles.js');
-//@ sourceMappingURL=UserProfiles.js.map
+//# sourceMappingURL=UserProfiles.js.map

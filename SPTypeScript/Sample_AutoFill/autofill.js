@@ -1,3 +1,4 @@
+///<reference path="../Definitions/SharePoint.d.ts" />
 var spdevlab;
 (function (spdevlab) {
     (function (demo) {
@@ -32,7 +33,8 @@ var spdevlab;
                     items.push(this._buildSeparatorItem());
 
                     if (totalItems == 0)
-                        items.push(this._buildFooterItem("No results. Please refine your query.")); else
+                        items.push(this._buildFooterItem("No results. Please refine your query."));
+else
                         items.push(this._buildFooterItem("Found " + totalItems + " items!"));
 
                     this._autofillControl.PopulateAutoFill(items, this._onSelectItem);
@@ -289,4 +291,4 @@ var spdevlab;
         var control = new spdevlab.demo.autofill.AutoCountries("clientName", "clientAutoCompleteValues");
     });
 })(spdevlab || (spdevlab = {}));
-//@ sourceMappingURL=autofill.js.map
+//# sourceMappingURL=autofill.js.map

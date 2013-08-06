@@ -33,28 +33,28 @@ declare module SP {
             static getTaxonomySession(context: SP.ClientContext): TaxonomySession;
             get_offlineTermStoreNames(): string[];
             get_termStores(): TermStoreCollection;
-            getTerms(termLabel: string, trimUnavailable: bool): TermCollection;
+            getTerms(termLabel: string, trimUnavailable: boolean): TermCollection;
             getTerms(labelMatchInformation: LabelMatchInformation): TermCollection;
             updateCache(): void;
             getTerm(guid: SP.Guid): Term;
             getTermsById(termIds: SP.Guid[]): TermCollection;
             getTermsInDefaultLanguage(
                 termLabel: string,
-                defaultLabelOnly: bool,
+                defaultLabelOnly: boolean,
                 stringMatchOption: StringMatchOption,
                 resultCollectionSize: number,
-                trimUnavailable: bool,
-                trimDeprecated: bool): TermCollection;
+                trimUnavailable: boolean,
+                trimDeprecated: boolean): TermCollection;
 
             getTermsInWorkingLocale(
                 termLabel: string,
-                defaultLabelOnly: bool,
+                defaultLabelOnly: boolean,
                 stringMatchOption: StringMatchOption,
                 resultCollectionSize: number,
-                trimUnavailable: bool,
-                trimDeprecated: bool): TermCollection;
+                trimUnavailable: boolean,
+                trimDeprecated: boolean): TermCollection;
 
-            getTermsWithCustomProperty(customPropertyName: string, trimUnavailable: bool): TermCollection;
+            getTermsWithCustomProperty(customPropertyName: string, trimUnavailable: boolean): TermCollection;
             getTermsWithCustomProperty(customPropertyMatchInformation: CustomPropertyMatchInformation): TermCollection;
             getTermSetsByName(termSetName: string, lcid: number): TermSetCollection;
             getTermSetsByTermLabel(requiredTermLabels: string[], lcid: number): TermSetCollection;
@@ -76,7 +76,7 @@ declare module SP {
             get_groups(): TermGroupCollection;
             get_hashTagsTermSet(): TermSet;
             get_id(): SP.Guid;
-            get_isOnline(): bool;
+            get_isOnline(): boolean;
             get_keywordsTermSet(): TermSet;
             get_languages(): number[];
             get_name(): string;
@@ -98,18 +98,18 @@ declare module SP {
             getTerm(termId: SP.Guid): Term;
             getTermInTermSet(termSetId: SP.Guid, termId: SP.Guid): Term;
             getTermsById(termIds: SP.Guid[]): TermCollection;
-            getTerms(termLabel: string, trimUnavailable: bool): TermCollection;
+            getTerms(termLabel: string, trimUnavailable: boolean): TermCollection;
             getTerms(labelMatchInformation: LabelMatchInformation): TermCollection;
             getTermSetsByName(termSetName: string, lcid: number): TermSetCollection;
             getTermSetsByTermLabel(requiredTermLabels: string[], lcid: number): TermSetCollection;
-            getTermsWithCustomProperty(customPropertyName: string, trimUnavailable: bool): TermCollection;
+            getTermsWithCustomProperty(customPropertyName: string, trimUnavailable: boolean): TermCollection;
             getTermsWithCustomProperty(customPropertyMatchInformation: CustomPropertyMatchInformation): TermCollection;
 
             getTermSet(termSetId: SP.Guid): TermSet;
             getTermSetsWithCustomProperty(customPropertyMatchInformation: CustomPropertyMatchInformation): TermSetCollection;
             rollbackAll(): void;
             updateCache(): void;
-            getSiteCollectionGroup(currentSite: SP.Site, createIfMissing: bool): TermGroup;
+            getSiteCollectionGroup(currentSite: SP.Site, createIfMissing: boolean): TermGroup;
             updateUsedTermsOnSite(currentSite: SP.Site): void;
         }
 
@@ -134,8 +134,8 @@ declare module SP {
         export class TermGroup extends TaxonomyItem {
             get_description(): string;
             set_description(value: string): void;
-            get_isSiteCollectionGroup(): bool;
-            get_isSystemGroup(): bool;
+            get_isSiteCollectionGroup(): boolean;
+            get_isSystemGroup(): boolean;
             get_termSets(): TermSetCollection;
             createTermSet(name: string, newTermSetId: SP.Guid, lcid: number): TermSet;
             exportObject(): SP.StringResult;
@@ -147,14 +147,14 @@ declare module SP {
             get_customProperties(): { [key: string]: string; };
             get_customSortOrder(): string;
             set_customSortOrder(value: string): void;
-            get_isAvailableForTagging(): bool;
-            set_isAvailableForTagging(value: bool): void;
+            get_isAvailableForTagging(): boolean;
+            set_isAvailableForTagging(value: boolean): void;
             get_owner(): string;
             set_owner(value: string): void;
             get_terms(): TermCollection;
             createTerm(name: string, lcid: number, newTermId: SP.Guid): Term;
             /*getTerms(pagingLimit: number): TermCollection;*/ //Moved to descendants to void TypeScript errors
-            reuseTerm(sourceTerm: Term, reuseBranch: bool): Term;
+            reuseTerm(sourceTerm: Term, reuseBranch: boolean): Term;
             reuseTermWithPinning(sourceTerm: Term): Term;
             deleteCustomProperty(name: string): void;
             deleteAllCustomProperties(): void;
@@ -174,8 +174,8 @@ declare module SP {
             get_description(): string;
             set_description(value: string): void;
             get_group(): TermGroup;
-            get_isOpenForTermCreation(): bool;
-            set_isOpenForTermCreation(value: bool): void;
+            get_isOpenForTermCreation(): boolean;
+            set_isOpenForTermCreation(value: boolean): void;
             get_stakeholders(): string[];
             addStakeholder(stakeholderName: string): void;
             copy(): TermSet;
@@ -185,9 +185,9 @@ declare module SP {
             getChanges(changeInformation: ChangeInformation): ChangedItemCollection;
             getTerm(termId: SP.Guid): Term;
             getTerms(pagingLimit: number): TermCollection;
-            getTerms(termLabel: string, trimUnavailable: bool): TermCollection;
+            getTerms(termLabel: string, trimUnavailable: boolean): TermCollection;
             getTerms(labelMatchInformation: LabelMatchInformation): TermCollection;
-            getTermsWithCustomProperty(customPropertyName: string, trimUnavailable: bool): TermCollection;
+            getTermsWithCustomProperty(customPropertyName: string, trimUnavailable: boolean): TermCollection;
             getTermsWithCustomProperty(customPropertyMatchInformation: CustomPropertyMatchInformation): TermCollection;
             move(targetGroup: TermGroup): void;
         }
@@ -201,13 +201,13 @@ declare module SP {
 
         export class Term extends TermSetItem {
             get_description(): string;
-            get_isDeprecated(): bool;
-            get_isKeyword(): bool;
-            get_isPinned(): bool;
-            get_isPinnedRoot(): bool;
-            get_isReused(): bool;
-            get_isRoot(): bool;
-            get_isSourceTerm(): bool;
+            get_isDeprecated(): boolean;
+            get_isKeyword(): boolean;
+            get_isPinned(): boolean;
+            get_isPinnedRoot(): boolean;
+            get_isReused(): boolean;
+            get_isRoot(): boolean;
+            get_isSourceTerm(): boolean;
             get_labels: LabelCollection;
             get_localCustomProperties(): { [key: string]: string; };
             get_mergedTermIds(): SP.Guid[];
@@ -219,11 +219,11 @@ declare module SP {
             get_termsCount(): number;
             get_termSet(): TermSet;
             get_termSets(): TermSetCollection;
-            copy(doCopyChildren: bool): Term;
-            createLabel(labelName: string, lcid: number, isDefault: bool): Label;
+            copy(doCopyChildren: boolean): Term;
+            createLabel(labelName: string, lcid: number, isDefault: boolean): Label;
             deleteLocalCustomProperty(name: string): void;
             deleteAllLocalCustomProperties(): void;
-            deprecate(doDepricate: bool): void;
+            deprecate(doDepricate: boolean): void;
             getAllLabels(lcid: number): LabelCollection;
             getDefaultLabel(lcid: number): Label;
             getDescription(lcid: number): SP.StringResult;
@@ -232,10 +232,10 @@ declare module SP {
             getTerms(
                 termLabel: string,
                 lcid: number,
-                defaultLabelOnly: bool,
+                defaultLabelOnly: boolean,
                 stringMatchOption: StringMatchOption,
                 resultCollectionSize: number,
-                trimUnavailable: bool): TermCollection;
+                trimUnavailable: boolean): TermCollection;
 
             merge(termToMerge: Term): void;
             move(newParnt: TermSetItem): void;
@@ -254,7 +254,7 @@ declare module SP {
         }
 
         export class Label extends SP.ClientObject {
-            get_isDefaultForLanguage(): bool;
+            get_isDefaultForLanguage(): boolean;
             get_language(): number;
             set_language(value: number): void;
             get_term(): Term;
@@ -266,10 +266,10 @@ declare module SP {
 
         export class LabelMatchInformation extends SP.ClientObject {
             constructor(context: SP.ClientContext);
-            get_defaultLabelOnly(): bool;
-            set_defaultLabelOnly(value: bool): void;
-            get_excludeKeyword(): bool;
-            set_excludeKeyword(value: bool): void;
+            get_defaultLabelOnly(): boolean;
+            set_defaultLabelOnly(value: boolean): void;
+            get_excludeKeyword(): boolean;
+            set_excludeKeyword(value: boolean): void;
             get_lcid(): number;
             set_lcid(value: number): void;
             get_resultCollectionSize(): number;
@@ -278,10 +278,10 @@ declare module SP {
             set_stringMatchOption(value: StringMatchOption): void;
             get_termLabel(): string;
             set_termLabel(value: string): void;
-            get_trimDeprecated(): bool;
-            set_trimDeprecated(value: bool): void;
-            get_trimUnavailable(): bool;
-            set_trimUnavailable(value: bool): void;
+            get_trimDeprecated(): boolean;
+            set_trimDeprecated(value: boolean): void;
+            get_trimUnavailable(): boolean;
+            set_trimUnavailable(value: boolean): void;
         }
 
         export class CustomPropertyMatchInformation extends SP.ClientObject {
@@ -294,8 +294,8 @@ declare module SP {
             set_resultCollectionSize(value: number): void;
             get_stringMatchOption(): StringMatchOption;
             set_stringMatchOption(value: StringMatchOption): void;
-            get_trimUnavailable(): bool;
-            set_trimUnavailable(value: bool): void;
+            get_trimUnavailable(): boolean;
+            set_trimUnavailable(value: boolean): void;
         }
 
         export class ChangeInformation extends SP.ClientObject {
@@ -347,24 +347,24 @@ declare module SP {
         }
         export class ChangedTermStore extends ChangedItem {
             get_changedLanguage(): number;
-            get_isDefaultLanguageChanged(): bool;
-            get_isFullFarmRestore(): bool;
+            get_isDefaultLanguageChanged(): boolean;
+            get_isFullFarmRestore(): boolean;
         }
 
         export class TaxonomyField extends SP.FieldLookup {
             constructor(context: SP.ClientContext, fields: SP.FieldCollection, filedName: string);
             get_anchorId(): SP.Guid;
             set_anchorId(value: SP.Guid): void;
-            get_createValuesInEditForm(): bool;
-            set_createValuesInEditForm(value: bool): void;
-            get_isAnchorValid(): bool;
-            get_isKeyword(): bool;
-            set_isKeyword(value: bool): void;
-            get_isPathRendered(): bool;
-            set_isPathRendered(value: bool): void;
-            get_isTermSetValid(): bool;
-            get_open(): bool;
-            set_open(value: bool): void;
+            get_createValuesInEditForm(): boolean;
+            set_createValuesInEditForm(value: boolean): void;
+            get_isAnchorValid(): boolean;
+            get_isKeyword(): boolean;
+            set_isKeyword(value: boolean): void;
+            get_isPathRendered(): boolean;
+            set_isPathRendered(value: boolean): void;
+            get_isTermSetValid(): boolean;
+            get_open(): boolean;
+            set_open(value: boolean): void;
             get_sspId(): SP.Guid;
             set_sspId(value: SP.Guid): void;
             get_targetTemplate(): string;
@@ -405,7 +405,7 @@ declare module SP {
         }
 
         export class MobileTaxonomyField extends SP.ClientObject {
-            get_readOnly(): bool;
+            get_readOnly(): boolean;
         }
     }
 }

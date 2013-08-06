@@ -2,8 +2,8 @@ declare module SP {
     export class SOD {
         static execute(fileName: string, functionName: string, ...args: any[]): void;
         static executeFunc(fileName: string, typeName: string, fn: () => void ): void;
-        static executeOrDelayUntilEventNotified(func: Function, eventName: string): bool;
-        static executeOrDelayUntilScriptLoaded(func: () => void , depScriptFileName: string): bool;
+        static executeOrDelayUntilEventNotified(func: Function, eventName: string): boolean;
+        static executeOrDelayUntilScriptLoaded(func: () => void , depScriptFileName: string): boolean;
         static notifyScriptLoadedAndExecuteWaitingJobs(scriptFileName: string): void;
         static notifyEventAndExecuteWaitingJobs(eventName: string, args?: any[]): void;
         static registerSod(fileName: string, url: string): void;
@@ -11,11 +11,11 @@ declare module SP {
         static loadMultiple(keys: string[], fn: () => void , bSync?: boolean): void;
         static delayUntilEventNotified(func: Function, eventName: string): void;
 
-        static get_prefetch(): bool;
-        static set_prefetch(value: bool): void;
+        static get_prefetch(): boolean;
+        static set_prefetch(value: boolean): void;
 
-        static get_ribbonImagePrefetchEnabled(): bool;
-        static set_ribbonImagePrefetchEnabled(value: bool): void;
+        static get_ribbonImagePrefetchEnabled(): boolean;
+        static set_ribbonImagePrefetchEnabled(value: boolean): void;
 
 
     }
@@ -40,10 +40,10 @@ declare class JSRequest {
 }
 
 declare class _spPageContextInfo {
-    static alertsEnabled: bool; //true
+    static alertsEnabled: boolean; //true
     static allowSilverlightPrompt: string; //"True"
     static clientServerTimeDelta: number; //-182
-    static crossDomainPhotosEnabled: bool; //true
+    static crossDomainPhotosEnabled: boolean; //true
     static currentCultureName: string; //"ru-RU"
     static currentLanguage: number; //1049
     static currentUICultureName: string; //"ru-RU"

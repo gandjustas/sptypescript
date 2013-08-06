@@ -3,26 +3,26 @@
 declare module SP {
     export module Workflow {
         export class WorkflowAssociation extends SP.ClientObject {
-            get_allowManual(): bool;
-            set_allowManual(value: bool): void;
+            get_allowManual(): boolean;
+            set_allowManual(value: boolean): void;
             get_associationData(): string;
             set_associationData(value: string): void;
-            get_autoStartChange(): bool;
-            set_autoStartChange(value: bool): void;
-            get_autoStartCreate(): bool;
-            set_autoStartCreate(value: bool): void;
+            get_autoStartChange(): boolean;
+            set_autoStartChange(value: boolean): void;
+            get_autoStartCreate(): boolean;
+            set_autoStartCreate(value: boolean): void;
             get_baseId(): SP.Guid;
             get_created(): Date;
             get_description(): string;
             set_description(value: string): void;
-            get_enabled(): bool;
-            set_enabled(value: bool): void;
+            get_enabled(): boolean;
+            set_enabled(value: boolean): void;
             get_historyListTitle(): string;
             set_historyListTitle(value: string): void;
             get_id(): SP.Guid;
             get_instantiationUrl(): string;
             get_internalName(): string;
-            get_isDeclarative(): bool;
+            get_isDeclarative(): boolean;
             get_listId(): SP.Guid;
             get_modified(): Date;
             get_name(): string;
@@ -58,13 +58,13 @@ declare module SP {
             constructor();
         }
         export class WorkflowTemplate extends SP.ClientObject {
-            get_allowManual(): bool;
+            get_allowManual(): boolean;
             get_associationUrl(): string;
-            get_autoStartChange(): bool;
-            get_autoStartCreate(): bool;
+            get_autoStartChange(): boolean;
+            get_autoStartCreate(): boolean;
             get_description(): string;
             get_id(): SP.Guid;
-            get_isDeclarative(): bool;
+            get_isDeclarative(): boolean;
             get_name(): string;
             get_permissionsManual(): SP.BasePermissions;
         }

@@ -163,7 +163,7 @@ declare module SP {
             /** Identifies whether the actor is a user, document, site, or tag. */
             get_actorType(): SocialActorType;
             /** Specifies whether the actor can be followed by the current user. */
-            get_canFollow(): bool;
+            get_canFollow(): boolean;
             /** Returns the URI of the document or site content.
                 This property is only available for social actors of type Document or Site. */
             get_contentUri(): string;
@@ -177,7 +177,7 @@ declare module SP {
                 This property is only available if actor is User, Document, or Site. */
             get_imageUri(): string;
             /** Returns true if the current user is following the actor; otherwise, it returns false. */
-            get_isFollowed(): bool;
+            get_isFollowed(): boolean;
             /** Returns the URI of the library containing the document.
                 This property is only available for social actors of type "document". */
             get_libraryUri(): string;
@@ -404,7 +404,7 @@ declare module SP {
             /** Returns the root post and all reply posts in the thread. */
             getFullThread(threadId: string): SocialThread;
             /** Returns a feed containing mention reference threads from the current user's personal feed. */
-            getMentions(clearUnreadMentions: bool, options: SocialFeedOptions): SocialFeed;
+            getMentions(clearUnreadMentions: boolean, options: SocialFeedOptions): SocialFeed;
             /** Returns the server's count of unread mentions of the current user. 
                 The server maintains a count of unread mentions in posts, but does not track which mentions have been read. 
                 When a new mention is stored on the server, it increments the unread mention for the user specified by the mention. 
@@ -510,7 +510,7 @@ declare module SP {
 
         /** Specifies a set of users, documents, sites, and tags by an index into the SocialThreadActors array  */
         export class SocialPostActorInfo extends SP.ClientValueObject {
-            get_includesCurrentUser(): bool;
+            get_includesCurrentUser(): boolean;
             /** Specifies an array of indexes into the SocialThreadActors array.
                 The server can choose to return a limited set of actors. For example, the server can choose to return a subset of the users that like a post. */
             get_indexes(): number[];
@@ -551,9 +551,9 @@ declare module SP {
             /** Specifies that access to the post SHOULD be restricted to users that have access to the objects identified by the array of URIs */
             set_securityUris(value: string[]): string[];
             /** Indicates whether the post is to be used as the current user's new status message. */
-            get_updateStatusText(): bool;
+            get_updateStatusText(): boolean;
             /** Indicates whether the post is to be used as the current user's new status message. */
-            set_updateStatusText(value: bool): bool;
+            set_updateStatusText(value: boolean): boolean;
         }
 
         /** Provides additional information about server-generated posts.

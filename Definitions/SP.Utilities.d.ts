@@ -26,7 +26,7 @@ declare module SP {
             static getCurrentUserEmailAddresses(context: SP.ClientRuntimeContext): SP.StringResult;
             static createEmailBodyForInvitation(context: SP.ClientRuntimeContext, pageAddress: string): SP.StringResult;
             static getPeoplePickerURL(context: SP.ClientRuntimeContext, web: SP.Web, fieldUser: SP.FieldUser): SP.StringResult;
-            static resolvePrincipal(context: SP.ClientRuntimeContext, web: SP.Web, input: string, scopes: SP.Utilities.PrincipalType, sources: SP.Utilities.PrincipalSource, usersContainer: SP.UserCollection, inputIsEmailOnly: bool): SP.Utilities.PrincipalInfo;
+            static resolvePrincipal(context: SP.ClientRuntimeContext, web: SP.Web, input: string, scopes: SP.Utilities.PrincipalType, sources: SP.Utilities.PrincipalSource, usersContainer: SP.UserCollection, inputIsEmailOnly: boolean): SP.Utilities.PrincipalInfo;
             static getLowerCaseString(context: SP.ClientRuntimeContext, sourceValue: string, lcid: number): SP.StringResult;
             static formatDateTime(context: SP.ClientRuntimeContext, web: SP.Web, datetime: Date, format: SP.Utilities.DateTimeFormat): SP.StringResult;
             static isUserLicensedForEntityInContext(context: SP.ClientRuntimeContext, licensableEntity: string): SP.BooleanResult;
@@ -116,7 +116,7 @@ declare module SP {
             constructor();
         }
         export class DateUtility {
-            static isLeapYear(year: number): bool;
+            static isLeapYear(year: number): boolean;
             static dateToJulianDay(year: number, month: number, day: number): number;
             static julianDayToDate(julianDay: number): SP.DateTimeUtil.SimpleDate;
             static daysInMonth(year: number, month: number): number;
@@ -159,11 +159,11 @@ declare module SP {
             set_day(value: number): void;
             get_era(): number;
             set_era(value: number): void;
-            static dateEquals(date1: SimpleDate, date2: SimpleDate): bool;
-            static dateLessEqual(date1: SimpleDate, date2: SimpleDate): bool;
-            static dateGreaterEqual(date1: SimpleDate, date2: SimpleDate): bool;
-            static dateLess(date1: SimpleDate, date2: SimpleDate): bool;
-            static dateGreater(date1: SimpleDate, date2: SimpleDate): bool;
+            static dateEquals(date1: SimpleDate, date2: SimpleDate): boolean;
+            static dateLessEqual(date1: SimpleDate, date2: SimpleDate): boolean;
+            static dateGreaterEqual(date1: SimpleDate, date2: SimpleDate): boolean;
+            static dateLess(date1: SimpleDate, date2: SimpleDate): boolean;
+            static dateGreater(date1: SimpleDate, date2: SimpleDate): boolean;
         }
     }
 }

@@ -8,8 +8,8 @@ declare module Microsoft.SharePoint.Client.Search {
             get_blockDedupeMode: () => number;
             set_blockDedupeMode: (value: number) => void;
 
-            get_bypassResultTypes: () => bool;
-            set_bypassResultTypes: (value: bool) => void;
+            get_bypassResultTypes: () => boolean;
+            set_bypassResultTypes: (value: boolean) => void;
 
             get_clientType: () => string;
             set_clientType: (value: string) => void;
@@ -20,34 +20,34 @@ declare module Microsoft.SharePoint.Client.Search {
             get_desiredSnippetLength: () => number;
             set_desiredSnippetLength: (value: number) => void;
 
-            get_enableInterleaving: () => bool;
-            set_enableInterleaving: (value: bool) => void;
+            get_enableInterleaving: () => boolean;
+            set_enableInterleaving: (value: boolean) => void;
 
-            get_enableNicknames: () => bool;
-            set_enableNicknames: (value: bool) => void;
+            get_enableNicknames: () => boolean;
+            set_enableNicknames: (value: boolean) => void;
 
-            get_enableOrderingHitHighlightedProperty: () => bool;
-            set_enableOrderingHitHighlightedProperty: (value: bool) => void;
+            get_enableOrderingHitHighlightedProperty: () => boolean;
+            set_enableOrderingHitHighlightedProperty: (value: boolean) => void;
 
-            get_enablePhonetic: () => bool;
-            set_enablePhonetic: (value: bool) => void;
+            get_enablePhonetic: () => boolean;
+            set_enablePhonetic: (value: boolean) => void;
 
-            get_enableQueryRules: () => bool;
-            set_enableQueryRules: (value: bool) => void;
+            get_enableQueryRules: () => boolean;
+            set_enableQueryRules: (value: boolean) => void;
 
-            get_enableStemming: () => bool;
-            set_enableStemming: (value: bool) => void;
+            get_enableStemming: () => boolean;
+            set_enableStemming: (value: boolean) => void;
 
-            get_generateBlockRankLog: () => bool;
-            set_generateBlockRankLog: (value: bool) => void;
+            get_generateBlockRankLog: () => boolean;
+            set_generateBlockRankLog: (value: boolean) => void;
 
             get_hitHighlightedMultivaluePropertyLimit: () => number;
             set_hitHighlightedMultivaluePropertyLimit: (value: number) => void;
 
             get_hitHighlightedProperties: () => StringCollection;
 
-            get_ignoreSafeQueryPropertiesTemplateUrl: () => bool;
-            set_ignoreSafeQueryPropertiesTemplateUrl: (value: bool) => void;
+            get_ignoreSafeQueryPropertiesTemplateUrl: () => boolean;
+            set_ignoreSafeQueryPropertiesTemplateUrl: (value: boolean) => void;
 
             get_impressionID: () => string;
             set_impressionID: (value: string) => void;
@@ -58,11 +58,11 @@ declare module Microsoft.SharePoint.Client.Search {
             get_personalizationData: () => QueryPersonalizationData;
             set_personalizationData: (QueryPersonalizationData) => void;
 
-            get_processBestBets: () => bool;
-            set_processBestBets: (value: bool) => void;
+            get_processBestBets: () => boolean;
+            set_processBestBets: (value: boolean) => void;
 
-            get_processPersonalFavorites: () => bool;
-            set_processPersonalFavorites: (value: bool) => void;
+            get_processPersonalFavorites: () => boolean;
+            set_processPersonalFavorites: (value: boolean) => void;
 
             get_queryTag: () => string;
             set_queryTag: (value: string) => void;
@@ -70,7 +70,7 @@ declare module Microsoft.SharePoint.Client.Search {
             get_queryTemplate: () => string;
             set_queryTemplate: (value: string) => void;
 
-            get_queryTemplateParameters: () => { [key: string]: bool; };
+            get_queryTemplateParameters: () => { [key: string]: boolean; };
 
             get_queryText: () => string;
             set_queryText: (value: string) => void;
@@ -90,8 +90,8 @@ declare module Microsoft.SharePoint.Client.Search {
             get_safeQueryPropertiesTemplateUrl: () => string;
             set_safeQueryPropertiesTemplateUrl: (value: string) => void;
 
-            get_showPeopleNameSuggestions: () => bool;
-            set_showPeopleNameSuggestions: (value: bool) => void;
+            get_showPeopleNameSuggestions: () => boolean;
+            set_showPeopleNameSuggestions: (value: boolean) => void;
 
             get_sourceId: () => SP.Guid;
             set_sourceId: (value: SP.Guid) => void;
@@ -108,8 +108,8 @@ declare module Microsoft.SharePoint.Client.Search {
             get_totalRowsExactMinimum: () => number;
             set_totalRowsExactMinimum: (value: number) => void;
 
-            get_trimDuplicates: () => bool;
-            set_trimDuplicates: (value: bool) => void;
+            get_trimDuplicates: () => boolean;
+            set_trimDuplicates: (value: boolean) => void;
 
 
             get_uiLanguage: () => number;
@@ -119,10 +119,10 @@ declare module Microsoft.SharePoint.Client.Search {
 
             getQuerySuggestionsWithResults: (iNumberOfQuerySuggestions: number,
                 iNumberOfResultSuggestions: number,
-                fPreQuerySuggestions: bool,
-                fHitHighlighting: bool,
-                fCapitalizeFirstLetters: bool,
-                fPrefixMatchAllTerms: bool) => QuerySuggestionResults;
+                fPreQuerySuggestions: boolean,
+                fHitHighlighting: boolean,
+                fCapitalizeFirstLetters: boolean,
+                fPrefixMatchAllTerms: boolean) => QuerySuggestionResults;
 
 
         }
@@ -134,8 +134,8 @@ declare module Microsoft.SharePoint.Client.Search {
             get_collapseSpecification: () => string;
             set_collapseSpecification: (value: string) => void;
 
-            get_enableSorting: () => bool;
-            set_enableSorting: (value: bool) => void;
+            get_enableSorting: () => boolean;
+            set_enableSorting: (value: boolean) => void;
 
             get_hiddenConstraints: () => string;
             set_hiddenConstraints: (value: string) => void;
@@ -166,7 +166,7 @@ declare module Microsoft.SharePoint.Client.Search {
 
             /**Runs a query.*/
             executeQuery: (query: Query) => SP.JsonObjectResult;
-            executeQueries: (queryIds: string[], queries: Query[], handleExceptions: bool) => SP.JsonObjectResult;
+            executeQueries: (queryIds: string[], queries: Query[], handleExceptions: boolean) => SP.JsonObjectResult;
             recordPageClick: (
                 pageInfo: string,
                 clickType: string,
@@ -209,8 +209,8 @@ declare module Microsoft.SharePoint.Client.Search {
             get_highlightedTitle: () => string;
             set_highlightedTitle: (value: string) => void;
 
-            get_isBestBet: () => bool;
-            set_isBestBet: (value: bool) => void;
+            get_isBestBet: () => boolean;
+            set_isBestBet: (value: boolean) => void;
 
             get_title: () => string;
             set_title: (value: string) => void;
@@ -220,8 +220,8 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         export class QuerySuggestionQuery extends SP.ClientValueObject {
-            get_isPersonal: () => bool;
-            set_isPersonal: (value: bool) => void;
+            get_isPersonal: () => boolean;
+            set_isPersonal: (value: boolean) => void;
 
             get_query: () => string;
             set_query: (value: string) => void;
@@ -244,8 +244,8 @@ declare module Microsoft.SharePoint.Client.Search {
         }
 
         export class QueryPropertyValue extends SP.ClientValueObject {
-            get_boolVal: () => bool;
-            set_boolVal: (value: bool) => bool;
+            get_boolVal: () => boolean;
+            set_boolVal: (value: boolean) => boolean;
 
             get_intVal: () => number;
             set_intVal: (value: number) => number;
@@ -450,7 +450,7 @@ declare module Microsoft.SharePoint.Client.Search {
 
             get_correlationID: () => string;
 
-            get_encodeDetails: () => bool;
+            get_encodeDetails: () => boolean;
 
             get_header: () => string;
 
@@ -462,9 +462,9 @@ declare module Microsoft.SharePoint.Client.Search {
 
             get_serverTypeId: () => string;
 
-            get_showForViewerUsers: () => bool;
+            get_showForViewerUsers: () => boolean;
 
-            get_showInEditModeOnly: () => bool;
+            get_showInEditModeOnly: () => boolean;
 
             get_stackTrace: () => string;
 
@@ -481,10 +481,10 @@ declare module Microsoft.SharePoint.Client.Search {
     module Administration {
         export class DocumentCrawlLog extends SP.ClientObject {
             constructor(context: SP.ClientContext, site: SP.Site);
-            getCrawledUrls: (getCountOnly: bool,
+            getCrawledUrls: (getCountOnly: boolean,
                 maxRows: { High: number; Low: number; },
                 queryString: string,
-                isLike: bool,
+                isLike: boolean,
                 contentSourceID: number,
                 errorLevel: number,
                 errorID: number,

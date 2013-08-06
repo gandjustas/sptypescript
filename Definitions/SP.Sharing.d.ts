@@ -5,7 +5,7 @@ declare module SP {
         export class DocumentSharingManager {
             static getRoleDefinition(context: SP.ClientRuntimeContext, role: SP.Sharing.Role): SP.RoleDefinition;
             static isDocumentSharingEnabled(context: SP.ClientRuntimeContext, list: SP.List): SP.BooleanResult;
-            static updateDocumentSharingInfo(context: SP.ClientRuntimeContext, resourceAddress: string, userRoleAssignments: SP.Sharing.UserRoleAssignment[], validateExistingPermissions: bool, additiveMode: bool, sendServerManagedNotification: bool, customMessage: string, includeAnonymousLinksInNotification: bool): SP.Sharing.UserSharingResult[];
+            static updateDocumentSharingInfo(context: SP.ClientRuntimeContext, resourceAddress: string, userRoleAssignments: SP.Sharing.UserRoleAssignment[], validateExistingPermissions: boolean, additiveMode: boolean, sendServerManagedNotification: boolean, customMessage: string, includeAnonymousLinksInNotification: boolean): SP.Sharing.UserSharingResult[];
         }
         export enum Role {
             none,
@@ -25,9 +25,9 @@ declare module SP {
         export class UserSharingResult extends SP.ClientValueObject {
             get_allowedRoles(): SP.Sharing.Role[];
             get_currentRole(): SP.Sharing.Role;
-            get_isUserKnown(): bool;
+            get_isUserKnown(): boolean;
             get_message(): string;
-            get_status(): bool;
+            get_status(): boolean;
             get_user(): string;
             get_typeId(): string;
             writeToXml(writer: SP.XmlWriter, serializationContext: SP.SerializationContext): void;

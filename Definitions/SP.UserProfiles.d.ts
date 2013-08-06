@@ -59,7 +59,7 @@ declare module SP {
             /** Gets the URL of the edit profile page for the current user. */
             get_editProfileLink(): string;
             /** Gets a Boolean value that indicates whether the current user's People I'm Following list is public. */
-            get_isMyPeopleListPublic(): bool;
+            get_isMyPeopleListPublic(): boolean;
             /** Gets tags that the user is following. */
             getFollowedTags(numberOfTagsToFetch: number): string[];
             /** Gets user properties for the current user. */
@@ -151,7 +151,7 @@ declare module SP {
             /** Specifies an array of strings that specify the account names of person's extended reports. */
             get_extendedReports(): string[];
             /** Represents whether or not the current user is following this person. */
-            get_isFollowed(): bool;
+            get_isFollowed(): boolean;
             /** Specifies the person's latest microblog post. */
             get_latestPost(): string;
             /** Specifies an array of strings that specify the account names of person's peers, that is, those who have the same manager. */
@@ -192,17 +192,17 @@ declare module SP {
             /** Provides the state of the user's personal site */
             get_personalSiteInstantiationState(): PersonalSiteInstantiationState;
             /** Specifies whether the user can import pictures */
-            get_pictureImportEnabled(): bool;
+            get_pictureImportEnabled(): boolean;
             /** Specifies the URL to allow the current user to create a personal site. */
             get_urlToCreatePersonalSite(): string;
             /** Specifies whether the current user's social data is to be shared. */
-            shareAllSocialData(shareAll: bool): void;
+            shareAllSocialData(shareAll: boolean): void;
             /** This member is reserved for internal use and is not intended to be used directly from your code.
                 Use the createPersonalSiteEnque method to create a personal site. */
             createPersonalSite(lcid: number): void;
             /** Enquees creation of a personal site for the current user.
                 @param isInteractive Has a true value if the request is from a web browser and a false value if the request is from a client application. */
-            createPersonalSiteEnque(isInteractive: bool): void;
+            createPersonalSiteEnque(isInteractive: boolean): void;
         }
 
         /** Provides access to followed content items. */
@@ -284,13 +284,13 @@ declare module SP {
                 The server stores the data so that it can return it to the client. */
             set_flags(value: string): string;
             /** Indicates whether the followed site has a feed. */
-            get_hasFeed(): bool;
+            get_hasFeed(): boolean;
             /** Indicates whether the followed site has a feed. */
-            set_hasFeed(value: bool): bool;
+            set_hasFeed(value: boolean): boolean;
             /** Specifies if the item is hidden from the user. If true this item will not generate activity in the user's feed. */
-            get_hidden(): bool;
+            get_hidden(): boolean;
             /** Specifies if the item is hidden from the user. If true this item will not generate activity in the user's feed. */
-            set_hidden(value: bool): bool;
+            set_hidden(value: boolean): boolean;
             /** Specifies the URL of an icon to represent this item. */
             get_iconUrl(): string;
             /** Specifies the URL of an icon to represent this item. */

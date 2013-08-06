@@ -1,3 +1,5 @@
+///<reference path="../../definitions/jquery.d.ts" />
+///<reference path="../../Definitions/SharePoint.d.ts" />
 $(function () {
     $("#toolbarDiv").show();
     $("#toolbarDiv input[type=button]").click(function (e) {
@@ -28,6 +30,7 @@ $(function () {
                     var executor = new Search.SearchExecutor(ctx);
                     var result = executor.executeQuery(query);
                     ctx.executeQueryAsync(function () {
+                        //TODO: Discover proper way to load collection
                         var tableCollection = new Search.ResultTableCollection();
                         tableCollection.initPropertiesFromJson(result.get_value());
 
@@ -58,4 +61,4 @@ $(function () {
         Results.load();
     }
 });
-//@ sourceMappingURL=Search.js.map
+//# sourceMappingURL=Search.js.map

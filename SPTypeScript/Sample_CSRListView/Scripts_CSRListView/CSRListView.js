@@ -1,7 +1,10 @@
+///<reference path="../../Definitions/SharePoint.d.ts" />
+///<reference path="../../extensions/typescripttemplates.ts" />
 var _;
 (function (_) {
     function init() {
         CSR.override(10057, 2).onPreRender(function (ctx) {
+            // Override the default title with user input
             ctx.ListTitle = prompt("Type a title", ctx.ListTitle);
         }).header("<b><#=ctx.ListTitle#></b>" + "<hr><ul id='unorderedlist'>").item(function (ctx) {
             return "<li>" + ctx.CurrentItem['Title'] + "</li>";
@@ -9,7 +12,11 @@ var _;
     }
     ;
 
+    // The postRenderHandler handles the
+    // OnPostRender event
     function postRenderHandler(ctx) {
+        // You can manipulate the DOM
+        // in the postRender event
         var ulObj;
         var i, j;
 
@@ -29,10 +36,11 @@ var _;
     SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
 
+        //Enable script with MDS
         SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_CSRListView/CSRListView.js"), init);
         }, "sp.js");
     }, "clienttemplates.js");
 })(_ || (_ = {}));
 ;
-//@ sourceMappingURL=CSRListView.js.map
+//# sourceMappingURL=CSRListView.js.map

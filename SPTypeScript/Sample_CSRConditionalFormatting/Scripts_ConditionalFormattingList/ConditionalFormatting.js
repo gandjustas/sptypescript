@@ -1,3 +1,5 @@
+///<reference path="../../Definitions/SharePoint.d.ts" />
+///<reference path="../../extensions/typescripttemplates.ts" />
 var _;
 (function (_) {
     function init() {
@@ -23,10 +25,11 @@ var _;
             SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
 
             SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+                //Enable script with MDS
                 RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_ConditionalFormattingList/ConditionalFormatting.js"), init);
             }, "sp.js");
         }, "clienttemplates.js");
     }
 })(_ || (_ = {}));
 ;
-//@ sourceMappingURL=ConditionalFormatting.js.map
+//# sourceMappingURL=ConditionalFormatting.js.map

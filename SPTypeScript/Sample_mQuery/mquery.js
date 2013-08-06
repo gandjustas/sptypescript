@@ -1,3 +1,4 @@
+///<reference path="../Definitions/SharePoint.d.ts" />
 var spdevlab;
 (function (spdevlab) {
     (function (mQuery) {
@@ -11,6 +12,7 @@ var spdevlab;
                     removeCnt: '.spdev-rep-tb-del'
                 };
             }
+            // public methods
             DynamicTable.prototype.init = function (domContainer, options) {
                 if (m$.isDefinedAndNotNull(options)) {
                     m$.extend(this._options, options);
@@ -23,6 +25,7 @@ var spdevlab;
                 this._showUI();
             };
 
+            // private methods
             DynamicTable.prototype._initContainers = function (domContainer) {
                 this._domContainer = domContainer;
                 this._tableContainer = m$(this._options.tableCnt, this._domContainer);
@@ -60,6 +63,7 @@ var spdevlab;
             };
 
             DynamicTable.initTables = function () {
+                // init templates
                 m$('script').forEach(function (template) {
                     var id = m$(template).attr("dynamic-table-template-id");
 
@@ -68,6 +72,7 @@ var spdevlab;
                     }
                 });
 
+                // init tables
                 m$(".spdev-rep-tb-cnt").forEach(function (divContainer) {
                     var dynamicTable = new DynamicTable();
 
@@ -88,4 +93,4 @@ var spdevlab;
 m$.ready(function () {
     spdevlab.mQuery.DynamicTable.initTables();
 });
-//@ sourceMappingURL=mquery.js.map
+//# sourceMappingURL=mquery.js.map

@@ -30,13 +30,13 @@ declare class SPClientAutoFill{
     public AllOptionData: { [key:string]: ISPClientAutoFillData };
 
     PopulateAutoFill(jsonObjSuggestions: ISPClientAutoFillData[], fnOnAutoFillCloseFuncName: (elmTextId: string, objData:ISPClientAutoFillData) => void ): void;
-    IsAutoFillOpen(): bool;
+    IsAutoFillOpen(): boolean;
     SetAutoFillHeight(): void;
     SelectAutoFillOption(elemOption:HTMLElement): void;
     FocusAutoFill() :void;
     BlurAutoFill(): void;
     CloseAutoFill(ojData: ISPClientAutoFillData): void;
-    UpdateAutoFillMenuFocus(bMoveNextLink:bool): void;
+    UpdateAutoFillMenuFocus(bMoveNextLink:boolean): void;
     UpdateAutoFillPosition(): void;
 }
 

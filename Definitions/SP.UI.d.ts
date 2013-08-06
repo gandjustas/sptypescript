@@ -3,10 +3,10 @@
 declare module SP {
     export module UI {
         export class PopoutMenu implements Sys.IDisposable {
-            constructor(launcherId: string, menuId: string, iconId: string, launcherOpenCssClass: string, textDirection: string, closeIconUrl: string, isClustered: bool, closeIconOffsetLeft: number, closeIconOffsetTop: number, closeIconHeight: number, closeIconWidth: number);
+            constructor(launcherId: string, menuId: string, iconId: string, launcherOpenCssClass: string, textDirection: string, closeIconUrl: string, isClustered: boolean, closeIconOffsetLeft: number, closeIconOffsetTop: number, closeIconHeight: number, closeIconWidth: number);
             launchMenu(): void;
             closeMenu(): void;
-            static createPopoutMenuInstanceAndLaunch(anchorId: string, menuId: string, iconId: string, anchorOpenCss: string, textDirection: string, closeIconUrl: string, isClustered: bool, x: number, y: number, height: number, width: number): void;
+            static createPopoutMenuInstanceAndLaunch(anchorId: string, menuId: string, iconId: string, anchorOpenCss: string, textDirection: string, closeIconUrl: string, isClustered: boolean, x: number, y: number, height: number, width: number): void;
             static closeActivePopoutMenuInstance(): void;
             dispose(): void;
         }
@@ -23,7 +23,7 @@ declare module SP {
             constructor();
         }
         export class Notify {
-            static addNotification(strHtml: string, bSticky: bool): string;
+            static addNotification(strHtml: string, bSticky: boolean): string;
             static removeNotification(nid: string): void;
             constructor();
         }
@@ -39,14 +39,14 @@ declare module SP {
             OnNotificationCountChanged,
         }
         export class SPNotification {
-            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: bool, strTooltip: string, onclickHandler: () => void , extraData: any);
-            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: bool, strTooltip: string, onclickHandler: () => void );
-            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: bool, strTooltip: string);
-            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: bool);
+            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: boolean, strTooltip: string, onclickHandler: () => void , extraData: any);
+            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: boolean, strTooltip: string, onclickHandler: () => void );
+            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: boolean, strTooltip: string);
+            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: boolean);
             constructor(containerId: SP.UI.ContainerID, strHtml: string);
             get_id(): string;
-            Show(bNoAnimate: bool): void;
-            Hide(bNoAnimate: bool): void;
+            Show(bNoAnimate: boolean): void;
+            Hide(bNoAnimate: boolean): void;
         }
         export class SPNotificationContainer {
             constructor(id: number, element: any, layer: number, notificationLimit: number);
@@ -56,12 +56,12 @@ declare module SP {
             SetEventHandler(eventId: SP.UI.EventID, eventHandler: any): void;
         }
         export class Status {
-            static addStatus(strTitle: string, strHtml: string, atBegining: bool): string;
+            static addStatus(strTitle: string, strHtml: string, atBegining: boolean): string;
             static appendStatus(sid: string, strTitle: string, strHtml: string): string;
             static updateStatus(sid: string, strHtml: string): void;
             static setStatusPriColor(sid: string, strColor: string): void;
             static removeStatus(sid: string): void;
-            static removeAllStatus(hide: bool): void;
+            static removeAllStatus(hide: boolean): void;
             constructor();
         }
         export class Workspace {
@@ -73,8 +73,8 @@ declare module SP {
             addMenuItem(text: string, actionScriptText: string, imageSourceUrl: string, imageAlternateText: string, sequenceNumber: number, description: string, id: string): HTMLElement;
             addSeparator(): void;
             addSubMenu(text: string, imageSourceUrl: string, imageAlternateText: string, sequenceNumber: number, description: string, id: string): SP.UI.Menu;
-            show(relativeElement: HTMLElement, forceRefresh: bool, flipTopLevelMenu: bool, yOffset: number): void;
-            showFilterMenu(relativeElement: HTMLElement, forceRefresh: bool, flipTopLevelMenu: bool, yOffset: number, fShowClose: bool, fShowCheckBoxes: bool): void;
+            show(relativeElement: HTMLElement, forceRefresh: boolean, flipTopLevelMenu: boolean, yOffset: number): void;
+            showFilterMenu(relativeElement: HTMLElement, forceRefresh: boolean, flipTopLevelMenu: boolean, yOffset: number, fShowClose: boolean, fShowCheckBoxes: boolean): void;
             hideIcons(): void;
             showIcons(): void;
         }
@@ -111,17 +111,17 @@ declare module SP {
             /** url of the page which is shown in the modal dialog. You should use either html or url attribute, but not both. */
             url?: string;
             /** specifies if close button should be shown on the dialog */
-            showClose?: bool;
+            showClose?: boolean;
             /** specifies if maximize button should be shown on the dialog */
-            allowMaximize?: bool;
+            allowMaximize?: boolean;
             /** callback that is called after dialog is closed */
             dialogReturnValueCallback?: DialogReturnValueCallback;
             /** automatically determine size of the dialog based on its contents. */
-            autoSize?: bool;
+            autoSize?: boolean;
             /** minimum width of the dialog when using autoSize option */
             autoSizeStartWidth?: number;
             /** include padding for adding a scrollbar */
-            includeScrollBarPadding?: bool;
+            includeScrollBarPadding?: boolean;
             /** width of the dialog. if not specified, will be determined automatically based on the contents of the dialog */
             width?: number;
             /** height of the dialog. if not specified, will be determined automatically based on the contents of the dialog */
@@ -143,17 +143,17 @@ declare module SP {
             /** url of the page which is shown in the modal dialog. You should use either html or url attribute, but not both. */
             url: string;
             /** specifies if close button should be shown on the dialog */
-            showClose: bool;
+            showClose: boolean;
             /** specifies if maximize button should be shown on the dialog */
-            allowMaximize: bool;
+            allowMaximize: boolean;
             /** callback that is called after dialog is closed */
             dialogReturnValueCallback: DialogReturnValueCallback;
             /** automatically determine size of the dialog based on its contents. */
-            autoSize: bool;
+            autoSize: boolean;
             /** minimum width of the dialog when using autoSize option */
             autoSizeStartWidth: number;
             /** include padding for adding a scrollbar */
-            includeScrollBarPadding: bool;
+            includeScrollBarPadding: boolean;
             /** width of the dialog. if not specified, will be determined automatically based on the contents of the dialog */
             width: number;
             /** height of the dialog. if not specified, will be determined automatically based on the contents of the dialog */
@@ -171,14 +171,14 @@ declare module SP {
             get_html(): string;
             get_title(): string;
             get_args(): any;
-            get_allowMaximize(): bool;
-            get_showClose(): bool;
+            get_allowMaximize(): boolean;
+            get_showClose(): boolean;
             get_returnValue(): any;
             set_returnValue(value: any): void;
             get_frameElement(): HTMLFrameElement;
             get_dialogElement(): HTMLElement;
-            get_isMaximized(): bool;
-            get_closed(): bool;
+            get_isMaximized(): boolean;
+            get_closed(): boolean;
             autoSizeSuppressScrollbar(resizePageCallBack: any): void;
             autoSize(): void;
         }

@@ -71,14 +71,14 @@ declare module SPClientTemplates {
     /** Represents schema for a Lookup field in list form or in list view in grid mode */
     export interface FieldSchema_InForm_Lookup extends FieldSchema_InForm {
         /** Specifies if the field allows multiple values */
-        AllowMultipleValues: bool;
+        AllowMultipleValues: boolean;
         /** Returns base url for a list display form, e.g. "http://portal/web/_layouts/15/listform.aspx?PageType=4"
             You must add "ListId" (Guid of the list) and "ID" (integer Id of the item) parameters in order to use this Url */
         BaseDisplayFormUrl: string;
         /** Indicates if the field is a dependent lookup */
-        DependentLookup: bool;
+        DependentLookup: boolean;
         /** Indicates wherever the lookup list is throttled (contains more items than value of the "List Throttle Limit" setting). */
-        Throttled: bool;
+        Throttled: boolean;
         /** Returns string representation of a number that represents the current value for the "List Throttle Limit" web application setting.
             Only appears if Throttled property is true, i.e. the target lookup list is throttled. */
         MaxQueryResult: string;
@@ -99,7 +99,7 @@ declare module SPClientTemplates {
         DisplayFormat: DateTimeDisplayFormat;
         /** Indicates wherever current user regional settings specify to display week numbers in day or week views of a calendar.
             Only appears for DateTime fields. */
-        ShowWeekNumber: bool;
+        ShowWeekNumber: boolean;
         TimeSeparator: string;
         TimeZoneDifference: string;
         FirstDayOfWeek: number;
@@ -110,39 +110,39 @@ declare module SPClientTemplates {
         LanguageId: string;
         MinJDay: number;
         MaxJDay: number;
-        HoursMode24: bool;
+        HoursMode24: boolean;
         HoursOptions: string[];
     }
     /** Represents schema for a DateTime field in list form or in list view in grid mode */
     export interface FieldSchema_InForm_Geolocation extends FieldSchema_InForm {
         BingMapsKey: string;
-        IsBingMapBlockedInCurrentRegion: bool;
+        IsBingMapBlockedInCurrentRegion: boolean;
     }
     /** Represents schema for a Choice field in list form or in list view in grid mode */
     export interface FieldSchema_InForm_MultiChoice extends FieldSchema_InForm {
         /** List of choices for this field. */
         MultiChoices: string[];
         /** Indicates wherever fill-in choice is allowed */
-        FillInChoice: bool;
+        FillInChoice: boolean;
     }
     /** Represents schema for a Choice field in list form or in list view in grid mode */
     export interface FieldSchema_InForm_MultiLineText extends FieldSchema_InForm {
         /** Specifies whether rich text formatting can be used in the field */
-        RichText: bool;
+        RichText: boolean;
         /** Changes are appended to the existing text. */
-        AppendOnly: bool;
+        AppendOnly: boolean;
         /** Rich text mode for the field */
         RichTextMode: RichTextMode;
         /** Number of lines configured to display */
         NumberOfLines: number;
         /** A boolean value that specifies whether hyperlinks can be used in this fields. */
-        AllowHyperlink: bool;
+        AllowHyperlink: boolean;
         /** WebPartAdderId for the ScriptEditorWebPart */
         ScriptEditorAdderId: string;
     }
     /** Represents schema for a Number field in list form or in list view in grid mode */
     export interface FieldSchema_InForm_Number extends FieldSchema_InForm {
-        ShowAsPercentage: bool;
+        ShowAsPercentage: boolean;
     }
     /** Represents schema for a Number field in list form or in list view in grid mode */
     export interface FieldSchema_InForm_Text extends FieldSchema_InForm {
@@ -154,23 +154,23 @@ declare module SPClientTemplates {
     }
     /** Represents schema for a Number field in list form or in list view in grid mode */
     export interface FieldSchema_InForm_User extends FieldSchema_InForm {
-        Presence: bool;
-        WithPicture: bool;
-        DefaultRender: bool;
-        WithPictureDetail: bool;
+        Presence: boolean;
+        WithPicture: boolean;
+        DefaultRender: boolean;
+        WithPictureDetail: boolean;
         /** Server relative Url for ~site/_layouts/listform.aspx */
         ListFormUrl: string;
         /** Server relative Url for ~site/_layouts/userdisp.aspx */
         UserDisplayUrl: string;
         EntitySeparator: string;
-        PictureOnly: bool;
+        PictureOnly: boolean;
         PictureSize: string;
     }
     /** Represents field schema in Grid mode and on list forms.
         Consider casting objects of this type to more specific field types, e.g. FieldSchemaInForm_Lookup */
     export interface FieldSchema_InForm {
         /** Specifies if the field can be edited while list view is in the Grid mode */
-        AllowGridEditing: bool;
+        AllowGridEditing: boolean;
         /** Description for this field. */
         Description: string;
         /** Direction of the reading order for the field. */
@@ -178,7 +178,7 @@ declare module SPClientTemplates {
         /** String representation of the field type, e.g. "Lookup". Same as SPField.TypeAsString */
         FieldType: string;
         /** Indicates whether the field is hidden */
-        Hidden: bool;
+        Hidden: boolean;
         /** Guid of the field */
         Id: string;
         /** Specifies Input Method Editor (IME) mode bias to use for the field.
@@ -187,17 +187,17 @@ declare module SPClientTemplates {
         /** Internal name of the field */
         Name: string;
         /** Specifies if the field is read only */
-        ReadOnlyField: bool;
+        ReadOnlyField: boolean;
         /** Specifies wherever field requires values */
-        Required: bool;
-        RestrictedMode: bool;
+        Required: boolean;
+        RestrictedMode: boolean;
         /** Title of the field */
         Title: string;
         /** For OOTB fields, returns the type of field. For "UserMulti" returns "User", for "LookupMulti" returns "Lookup".
             For custom field types, returns base type of the field. */
         Type: string;
         /** If SPFarm.Local.UseMinWidthForHtmlPicker is true, UseMinWidth will be set to true. Undefined in other cases. */
-        UseMinWidth: bool;
+        UseMinWidth: boolean;
     }
     export interface ListSchema_InForm {
         Field: FieldSchema_InForm[];
@@ -371,26 +371,26 @@ declare module SPClientTemplates {
         CurrentItems: Item[];
     }
     export interface RenderContext_InView extends RenderContext {
-        AllowCreateFolder: bool;
-        AllowGridMode: bool;
-        BasePermissions: { [PermissionName: string]: bool; }; // SP.BasePermissions?
-        bInitialRender: bool;
-        CanShareLinkForNewDocument: bool;
+        AllowCreateFolder: boolean;
+        AllowGridMode: boolean;
+        BasePermissions: { [PermissionName: string]: boolean; }; // SP.BasePermissions?
+        bInitialRender: boolean;
+        CanShareLinkForNewDocument: boolean;
         CascadeDeleteWarningMessage: string;
         clvp: HTMLElement; // not in View
-        ContentTypesEnabled: bool;
+        ContentTypesEnabled: boolean;
         ctxId: number;
         ctxType: any; // not in View
         CurrentUserId: number;
-        CurrentUserIsSiteAdmin: bool;
+        CurrentUserIsSiteAdmin: boolean;
         dictSel: any;
         /** Absolute path for the list display form */
         displayFormUrl: string;
         /** Absolute path for the list edit form */
         editFormUrl: string;
-        EnableMinorVersions: bool;
-        ExternalDataList: bool;
-        enteringGridMode: bool;
+        EnableMinorVersions: boolean;
+        ExternalDataList: boolean;
+        enteringGridMode: boolean;
         existingServerFilterHash: any;
         HasRelatedCascadeLists: number;
         heroId: string; // e.g. "idHomePageNewItem"
@@ -398,19 +398,19 @@ declare module SPClientTemplates {
         HttpRoot: string;
         imagesPath: string;
         inGridFullRender: any; // not in View
-        inGridMode: bool;
-        IsAppWeb: bool;
-        IsClientRendering: bool;
-        isForceCheckout: bool;
-        isModerated: bool;
+        inGridMode: boolean;
+        IsAppWeb: boolean;
+        IsClientRendering: boolean;
+        isForceCheckout: boolean;
+        isModerated: boolean;
         isPortalTemplate: any;
         isWebEditorPreview: number;
         isVersions: number;
-        isXslView: bool;
+        isXslView: boolean;
         LastRowIndexSelected: any; // not in View
         LastSelectableRowIdx: any;
         LastSelectedItemId: any; // not in View
-        leavingGridMode: bool;
+        leavingGridMode: boolean;
         listBaseType: number;
         ListData: ListData_InView;
         ListDataJSONItemsKey: string; // ="Row"
@@ -420,21 +420,21 @@ declare module SPClientTemplates {
         listTemplate: string;
         ListTitle: string;
         listUrlDir: string;
-        loadingAsyncData: bool;
+        loadingAsyncData: boolean;
         ModerationStatus: number;
-        NavigateForFormsPages: bool;
+        NavigateForFormsPages: boolean;
         /** Absolute path for the list new form */
         newFormUrl: string;
         NewWOPIDocumentEnabled: any;
         NewWOPIDocumentUrl: any;
-        noGroupCollapse: bool;
+        noGroupCollapse: boolean;
         OfficialFileName: string;
         OfficialFileNames: string;
         overrideDeleteConfirmation: string; // not in View
         overrideFilterQstring: string; // not in View
         PortalUrl: string;
         queryString: any;
-        recursiveView: bool;
+        recursiveView: boolean;
         /** either 1 or 0 */
         RecycleBinEnabled: number;
         RegionalSettingsTimeZoneBias: string;
@@ -446,7 +446,7 @@ declare module SPClientTemplates {
         SendToLocationUrl: string;
         serverUrl: any;
         SiteTitle: string;
-        StateInitDone: bool;
+        StateInitDone: boolean;
         TableCbxFocusHandler: any;
         TableMouseOverHandler: any;
         TotalListItems: any;
@@ -454,7 +454,7 @@ declare module SPClientTemplates {
         /** Guid of the view. */
         view: string;
         viewTitle: string;
-        WorkflowAssociated: bool;
+        WorkflowAssociated: boolean;
         wpq: string;
         WriteSecurity: string;
     }
@@ -602,7 +602,7 @@ declare module SPClientTemplates {
         static FileSystemObjectTypeToString(fileSystemObjectType: SPClientTemplates.FileSystemObjectType): string;
         static ChoiceFormatTypeToString(fileSystemObjectType: SPClientTemplates.ChoiceFormatType): string;
         static RichTextModeToString(fileSystemObjectType: SPClientTemplates.RichTextMode): string;
-        static IsValidControlMode(mode: number): bool;
+        static IsValidControlMode(mode: number): boolean;
         /** Removes leading and trailing spaces */
         static Trim(str: string): string;
         /** Creates SP.ClientContext based on the specified Web URL. If the SP.Runtime.js script is not loaded, returns null */
@@ -617,7 +617,7 @@ declare module SPClientTemplates {
         static ParseLookupValue(valueStr: string): ClientLookupValue;
         static ParseMultiLookupValues(valueStr: string): ClientLookupValue[];
         /** Represents lookup values array in some strange format */
-        static BuildLookupValuesAsString(choiceArray: ClientLookupValue[], isMultiLookup: bool, setGroupDesc: bool): string;
+        static BuildLookupValuesAsString(choiceArray: ClientLookupValue[], isMultiLookup: boolean, setGroupDesc: boolean): string;
         static ParseURLValue(value: string): ClientUrlValue;
         static GetFormContextForCurrentField(context: RenderContext_Form): ClientFormContext;
     }
@@ -628,11 +628,11 @@ declare module SPClientTemplates {
         fieldName: string;
         controlMode: number;
         webAttributes: {
-            AllowScriptableWebParts: bool;
+            AllowScriptableWebParts: boolean;
             CurrentUserId: number;
-            EffectivePresenceEnabled: bool;
+            EffectivePresenceEnabled: boolean;
             LCID: string;
-            PermissionCustomizePages: bool;
+            PermissionCustomizePages: boolean;
             WebUrl: string;
         };
         itemAttributes: {
@@ -645,7 +645,7 @@ declare module SPClientTemplates {
             BaseType: number;
             DefaultItemOpen: number;
             Direction: string;
-            EnableVesioning: bool;
+            EnableVesioning: boolean;
             Id: string;
         };
         registerInitCallback(fieldname: string, callback: () => void ): void;
@@ -668,7 +668,7 @@ declare function CoreRender(template: any, context: any): string;
 declare module SPClientForms {
     module ClientValidation {
         export class ValidationResult {
-            constructor(hasErrors: bool, errorMsg: string);
+            constructor(hasErrors: boolean, errorMsg: string);
         }
 
         export class ValidatorSet {
