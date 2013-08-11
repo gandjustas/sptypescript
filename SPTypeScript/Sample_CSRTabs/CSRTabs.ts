@@ -10,6 +10,8 @@ declare module SP {
 
 module CSRTabs {
 
+    var author, editor, created, modified;
+
     export function init() {
         var options: SPClientTemplates.TemplateOverridesOptions;
         options = { Templates: {} };
@@ -93,6 +95,12 @@ module CSRTabs {
         resultHtml += tabs.renderContents(context);
         resultHtml += '</div>';
 
+        // Fix for proper displaying CreatedModifiedInfo control
+        author = context.RenderFieldByName(context, "Author");
+        created = context.RenderFieldByName(context, "Created");
+        editor = context.RenderFieldByName(context, "Editor");
+        modified = context.RenderFieldByName(context, "Modified");
+
         return resultHtml;
     }
 
@@ -111,8 +119,14 @@ module CSRTabs {
         return resultHtml;
     }
 
-    function OnPostRender(ctx: SPClientTemplates.RenderContext_Form) {
+    function OnPostRender(context: SPClientTemplates.RenderContext_Form) {
         $("#tabbedForm").tabs();
+
+        var prefix = context.FormUniqueId + context.FormContext.listAttributes.Id;
+        $get(prefix + 'Author').innerHTML = author;
+        $get(prefix + 'Created').innerHTML = created;
+        $get(prefix + 'Editor').innerHTML = editor;
+        $get(prefix + 'Modified').innerHTML = modified;
     }
 
 };

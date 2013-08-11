@@ -35,6 +35,7 @@
     						<SharePoint:FormComponent TemplateName="AttachmentRows" ComponentRequiresPostback="false" runat="server"/>
 						</table>
                     </div>
+                    <SharePoint:ItemHiddenVersion runat="server"/>
 					<wssuc:ToolBar CssClass="ms-formtoolbar" id="toolBarTbl" RightButtonSeparator="&amp;#160;" runat="server">
 							<Template_Buttons>
 								<SharePoint:CreatedModifiedInfo ID="CreatedModifiedInfo1" runat="server"/>

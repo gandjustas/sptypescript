@@ -1,5 +1,7 @@
 var CSRTabs;
 (function (CSRTabs) {
+    var author, editor, created, modified;
+
     function init() {
         var options;
         options = { Templates: {} };
@@ -71,6 +73,11 @@ var CSRTabs;
         resultHtml += tabs.renderContents(context);
         resultHtml += '</div>';
 
+        author = context.RenderFieldByName(context, "Author");
+        created = context.RenderFieldByName(context, "Created");
+        editor = context.RenderFieldByName(context, "Editor");
+        modified = context.RenderFieldByName(context, "Modified");
+
         return resultHtml;
     }
 
@@ -87,8 +94,14 @@ var CSRTabs;
         return resultHtml;
     }
 
-    function OnPostRender(ctx) {
+    function OnPostRender(context) {
         $("#tabbedForm").tabs();
+
+        var prefix = context.FormUniqueId + context.FormContext.listAttributes.Id;
+        $get(prefix + 'Author').innerHTML = author;
+        $get(prefix + 'Created').innerHTML = created;
+        $get(prefix + 'Editor').innerHTML = editor;
+        $get(prefix + 'Modified').innerHTML = modified;
     }
 })(CSRTabs || (CSRTabs = {}));
 ;
@@ -97,10 +110,9 @@ var CSRTabs;
     SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         CSRTabs.init();
 
-        //Enable script with MDS
         SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Sample_CSRTabs/CSRTabs.js"), CSRTabs.init);
         }, "sp.js");
     }, "clienttemplates.js");
 })();
-//# sourceMappingURL=CSRTabs.js.map
+//@ sourceMappingURL=CSRTabs.js.map
