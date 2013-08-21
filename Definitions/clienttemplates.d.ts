@@ -82,9 +82,8 @@ declare module SPClientTemplates {
         /** Returns string representation of a number that represents the current value for the "List Throttle Limit" web application setting.
             Only appears if Throttled property is true, i.e. the target lookup list is throttled. */
         MaxQueryResult: string;
-        /** List of choices for this field.
-            For a lookup field, contains array of possible values pulled from the target lookup list. */
-        Choices: string[];
+        /** List of choices for this field. */
+        Choices: { LookupId: number; LookupValue: string; }[];
         /** Number of choices. Appears only for Lookup field. */
         ChoiceCount: number;
 
