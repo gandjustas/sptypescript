@@ -327,7 +327,7 @@ interface MQuery
     data(element: HTMLElement, key: string): any;
     data(element: HTMLElement): any;
 
-    removeData(element: HTMLElement, name?: string): MQueryResultSet;
+    removeData(element: HTMLElement, name?: string): MQueryResultSet<HTMLElement>;
     hasData(element: HTMLElement): boolean;
 }
 
@@ -338,10 +338,10 @@ interface MQueryResultSetElements extends MQueryResultSet<HTMLElement>{
 
     bind(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
     unbind(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
-    trigger(eventType: string): MQueryResultSet;
+    trigger(eventType: string): MQueryResultSet<HTMLElement>;
     one(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
 
-    detach(): MQueryResultSet;
+    detach(): MQueryResultSet<HTMLElement>;
 
     find(selector: string): MQueryResultSetElements;
     closest(selector: string, context?: any): MQueryResultSetElements;
@@ -752,9 +752,8 @@ declare module SPClientTemplates {
         /** Returns string representation of a number that represents the current value for the "List Throttle Limit" web application setting.
             Only appears if Throttled property is true, i.e. the target lookup list is throttled. */
         MaxQueryResult: string;
-        /** List of choices for this field.
-            For a lookup field, contains array of possible values pulled from the target lookup list. */
-        Choices: string[];
+        /** List of choices for this field. */
+        Choices: { LookupId: number; LookupValue: string; }[];
         /** Number of choices. Appears only for Lookup field. */
         ChoiceCount: number;
 
@@ -2246,8 +2245,8 @@ declare module SP {
         get_versionString(): string;
     }
     export class AppCatalog {
-        static getAppInstances(context: SP.ClientRuntimeContext, web: SP.Web): SP.ClientObjectList;
-        static getDeveloperSiteAppInstancesByIds(context: SP.ClientRuntimeContext, site: SP.Site, appInstanceIds: SP.Guid[]): SP.ClientObjectList;
+        static getAppInstances(context: SP.ClientRuntimeContext, web: SP.Web): SP.ClientObjectList<SP.AppInstance>;
+        static getDeveloperSiteAppInstancesByIds(context: SP.ClientRuntimeContext, site: SP.Site, appInstanceIds: SP.Guid[]): SP.ClientObjectList<SP.AppInstance>;
         static isAppSideloadingEnabled(context: SP.ClientRuntimeContext): SP.BooleanResult;
     }
     export class AppContextSite extends SP.ClientObject {
@@ -2268,7 +2267,7 @@ declare module SP {
         get_status(): SP.AppInstanceStatus;
         get_title(): string;
         get_webId(): SP.Guid;
-        getErrorDetails(): SP.ClientObjectList;
+        getErrorDetails(): SP.ClientObjectList<SP.AppInstanceErrorDetails>;
         uninstall(): SP.GuidResult;
         upgrade(appPackageStream: any[]): void;
         cancelAllJobs(): SP.BooleanResult;
@@ -3918,7 +3917,7 @@ declare module SP {
         get_isSharedWithMany(): boolean;
         get_isSharedWithSecurityGroup(): boolean;
         get_pendingAccessRequestsLink(): string;
-        getSharedWithUsers(): SP.ClientObjectList;
+        getSharedWithUsers(): SP.ClientObjectList<SP.ObjectSharingInformationUser>;
         static getListItemSharingInformation(context: SP.ClientRuntimeContext, listID: SP.Guid, itemID: number, excludeCurrentUser: boolean, excludeSiteAdmin: boolean, excludeSecurityGroups: boolean, retrieveAnonymousLinks: boolean, retrieveUserInfoDetails: boolean, checkForAccessRequests: boolean): SP.ObjectSharingInformation;
         static getWebSharingInformation(context: SP.ClientRuntimeContext, excludeCurrentUser: boolean, excludeSiteAdmin: boolean, excludeSecurityGroups: boolean, retrieveAnonymousLinks: boolean, retrieveUserInfoDetails: boolean, checkForAccessRequests: boolean): SP.ObjectSharingInformation;
         static getObjectSharingInformation(context: SP.ClientRuntimeContext, securableObject: SP.SecurableObject, excludeCurrentUser: boolean, excludeSiteAdmin: boolean, excludeSecurityGroups: boolean, retrieveAnonymousLinks: boolean, retrieveUserInfoDetails: boolean, checkForAccessRequests: boolean, retrievePermissionLevels: boolean): SP.ObjectSharingInformation;
@@ -4190,7 +4189,7 @@ declare module SP {
         editor,
     }
     export class ServerSettings {
-        static getAlternateUrls(context: SP.ClientRuntimeContext): SP.ClientObjectList;
+        static getAlternateUrls(context: SP.ClientRuntimeContext): SP.ClientObjectList<SP.AlternateUrl>;
         static getGlobalInstalledLanguages(context: SP.ClientRuntimeContext, compatibilityLevel: number): SP.Language[];
     }
     export class Site extends SP.ClientObject {
@@ -4641,7 +4640,7 @@ declare module SP {
         getAppBdcCatalog(): SP.BusinessData.AppBdcCatalog;
         getSubwebsForCurrentUser(query: SP.SubwebQuery): SP.WebCollection;
         getAppInstanceById(appInstanceId: SP.Guid): SP.AppInstance;
-        getAppInstancesByProductId(productId: SP.Guid): SP.ClientObjectList;
+        getAppInstancesByProductId(productId: SP.Guid): SP.ClientObjectList<SP.AppInstance>;
         loadAndInstallAppInSpecifiedLocale(appPackageStream: any[], installationLocaleLCID: number): SP.AppInstance;
         loadApp(appPackageStream: any[], installationLocaleLCID: number): SP.AppInstance;
         loadAndInstallApp(appPackageStream: any[]): SP.AppInstance;
@@ -7131,7 +7130,7 @@ declare module SP {
             /** Gets suggestions for who the current user might want to follow.
                 Note: The recommended API to use for this task is SocialFollowingManager.getSuggestions.
                 Returns list of PersonProperties objects */
-            getMySuggestions(): SP.ClientObjectList;
+            getMySuggestions(): SP.ClientObjectList<PersonProperties>;
             /** Removes the specified user from the user's list of suggested people to follow. */
             hideSuggestion(accountName: string): void;
             follow(accountName: string): void;
@@ -7143,10 +7142,10 @@ declare module SP {
                 @param tagId GUID of the tag to stop following. */
             stopFollowingTag(tagId: string): void;
             amIFollowing(accountName: string): SP.BooleanResult;
-            getPeopleFollowedByMe(): SP.ClientObjectList;
-            getPeopleFollowedBy(accountName: string): SP.ClientObjectList;
-            getMyFollowers(): SP.ClientObjectList;
-            getFollowersFor(accountName: string): SP.ClientObjectList;
+            getPeopleFollowedByMe(): SP.ClientObjectList<PersonProperties>;
+            getPeopleFollowedBy(accountName: string): SP.ClientObjectList<PersonProperties>;
+            getMyFollowers(): SP.ClientObjectList<PersonProperties>;
+            getFollowersFor(accountName: string): SP.ClientObjectList<PersonProperties>;
             amIFollowedBy(accountName: string): SP.BooleanResult;
             /** Uploads and sets the user profile picture.
                 Pictures in bmp, jpg and png formats and up to 5,000,000 bytes are supported.
@@ -7499,7 +7498,7 @@ declare module SP {
             static getLayoutsPageUrl(pageName: string): string;
             static getImageUrl(imageName: string): string;
             static createWikiPageInContextWeb(context: SP.ClientRuntimeContext, parameters: SP.Utilities.WikiPageCreationInformation): SP.File;
-            static localizeWebPartGallery(context: SP.ClientRuntimeContext, items: SP.ListItemCollection): SP.ClientObjectList;
+            static localizeWebPartGallery(context: SP.ClientRuntimeContext, items: SP.ListItemCollection): SP.ClientObjectList<SP.ListItem>;
             static getAppLicenseInformation(context: SP.ClientRuntimeContext, productId: SP.Guid): SP.AppLicenseCollection;
             static importAppLicense(context: SP.ClientRuntimeContext, licenseTokenToImport: string, contentMarket: string, billingMarket: string, appName: string, iconUrl: string, providerName: string, appSubtype: number): void;
             static getAppLicenseDeploymentId(context: SP.ClientRuntimeContext): SP.GuidResult;

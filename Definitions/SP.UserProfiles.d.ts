@@ -72,7 +72,7 @@ declare module SP {
             /** Gets suggestions for who the current user might want to follow.
                 Note: The recommended API to use for this task is SocialFollowingManager.getSuggestions.
                 Returns list of PersonProperties objects */
-            getMySuggestions(): SP.ClientObjectList;
+            getMySuggestions(): SP.ClientObjectList<PersonProperties>;
             /** Removes the specified user from the user's list of suggested people to follow. */
             hideSuggestion(accountName: string): void;
             follow(accountName: string): void;
@@ -84,10 +84,10 @@ declare module SP {
                 @param tagId GUID of the tag to stop following. */
             stopFollowingTag(tagId: string): void;
             amIFollowing(accountName: string): SP.BooleanResult;
-            getPeopleFollowedByMe(): SP.ClientObjectList;
-            getPeopleFollowedBy(accountName: string): SP.ClientObjectList;
-            getMyFollowers(): SP.ClientObjectList;
-            getFollowersFor(accountName: string): SP.ClientObjectList;
+            getPeopleFollowedByMe(): SP.ClientObjectList<PersonProperties>;
+            getPeopleFollowedBy(accountName: string): SP.ClientObjectList<PersonProperties>;
+            getMyFollowers(): SP.ClientObjectList<PersonProperties>;
+            getFollowersFor(accountName: string): SP.ClientObjectList<PersonProperties>;
             amIFollowedBy(accountName: string): SP.BooleanResult;
             /** Uploads and sets the user profile picture.
                 Pictures in bmp, jpg and png formats and up to 5,000,000 bytes are supported.

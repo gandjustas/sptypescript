@@ -71,7 +71,7 @@ interface MQuery
     data(element: HTMLElement, key: string): any;
     data(element: HTMLElement): any;
 
-    removeData(element: HTMLElement, name?: string): MQueryResultSet;
+    removeData(element: HTMLElement, name?: string): MQueryResultSet<HTMLElement>;
     hasData(element: HTMLElement): boolean;
 }
 
@@ -82,10 +82,10 @@ interface MQueryResultSetElements extends MQueryResultSet<HTMLElement>{
 
     bind(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
     unbind(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
-    trigger(eventType: string): MQueryResultSet;
+    trigger(eventType: string): MQueryResultSet<HTMLElement>;
     one(eventType: string, handler: (eventObject: MQueryEvent) => any): MQueryResultSetElements;
 
-    detach(): MQueryResultSet;
+    detach(): MQueryResultSet<HTMLElement>;
 
     find(selector: string): MQueryResultSetElements;
     closest(selector: string, context?: any): MQueryResultSetElements;

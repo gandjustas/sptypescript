@@ -817,8 +817,8 @@ declare module SP {
         get_versionString(): string;
     }
     export class AppCatalog {
-        static getAppInstances(context: SP.ClientRuntimeContext, web: SP.Web): SP.ClientObjectList;
-        static getDeveloperSiteAppInstancesByIds(context: SP.ClientRuntimeContext, site: SP.Site, appInstanceIds: SP.Guid[]): SP.ClientObjectList;
+        static getAppInstances(context: SP.ClientRuntimeContext, web: SP.Web): SP.ClientObjectList<SP.AppInstance>;
+        static getDeveloperSiteAppInstancesByIds(context: SP.ClientRuntimeContext, site: SP.Site, appInstanceIds: SP.Guid[]): SP.ClientObjectList<SP.AppInstance>;
         static isAppSideloadingEnabled(context: SP.ClientRuntimeContext): SP.BooleanResult;
     }
     export class AppContextSite extends SP.ClientObject {
@@ -839,7 +839,7 @@ declare module SP {
         get_status(): SP.AppInstanceStatus;
         get_title(): string;
         get_webId(): SP.Guid;
-        getErrorDetails(): SP.ClientObjectList;
+        getErrorDetails(): SP.ClientObjectList<SP.AppInstanceErrorDetails>;
         uninstall(): SP.GuidResult;
         upgrade(appPackageStream: any[]): void;
         cancelAllJobs(): SP.BooleanResult;
@@ -2489,7 +2489,7 @@ declare module SP {
         get_isSharedWithMany(): boolean;
         get_isSharedWithSecurityGroup(): boolean;
         get_pendingAccessRequestsLink(): string;
-        getSharedWithUsers(): SP.ClientObjectList;
+        getSharedWithUsers(): SP.ClientObjectList<SP.ObjectSharingInformationUser>;
         static getListItemSharingInformation(context: SP.ClientRuntimeContext, listID: SP.Guid, itemID: number, excludeCurrentUser: boolean, excludeSiteAdmin: boolean, excludeSecurityGroups: boolean, retrieveAnonymousLinks: boolean, retrieveUserInfoDetails: boolean, checkForAccessRequests: boolean): SP.ObjectSharingInformation;
         static getWebSharingInformation(context: SP.ClientRuntimeContext, excludeCurrentUser: boolean, excludeSiteAdmin: boolean, excludeSecurityGroups: boolean, retrieveAnonymousLinks: boolean, retrieveUserInfoDetails: boolean, checkForAccessRequests: boolean): SP.ObjectSharingInformation;
         static getObjectSharingInformation(context: SP.ClientRuntimeContext, securableObject: SP.SecurableObject, excludeCurrentUser: boolean, excludeSiteAdmin: boolean, excludeSecurityGroups: boolean, retrieveAnonymousLinks: boolean, retrieveUserInfoDetails: boolean, checkForAccessRequests: boolean, retrievePermissionLevels: boolean): SP.ObjectSharingInformation;
@@ -2761,7 +2761,7 @@ declare module SP {
         editor,
     }
     export class ServerSettings {
-        static getAlternateUrls(context: SP.ClientRuntimeContext): SP.ClientObjectList;
+        static getAlternateUrls(context: SP.ClientRuntimeContext): SP.ClientObjectList<SP.AlternateUrl>;
         static getGlobalInstalledLanguages(context: SP.ClientRuntimeContext, compatibilityLevel: number): SP.Language[];
     }
     export class Site extends SP.ClientObject {
@@ -3212,7 +3212,7 @@ declare module SP {
         getAppBdcCatalog(): SP.BusinessData.AppBdcCatalog;
         getSubwebsForCurrentUser(query: SP.SubwebQuery): SP.WebCollection;
         getAppInstanceById(appInstanceId: SP.Guid): SP.AppInstance;
-        getAppInstancesByProductId(productId: SP.Guid): SP.ClientObjectList;
+        getAppInstancesByProductId(productId: SP.Guid): SP.ClientObjectList<SP.AppInstance>;
         loadAndInstallAppInSpecifiedLocale(appPackageStream: any[], installationLocaleLCID: number): SP.AppInstance;
         loadApp(appPackageStream: any[], installationLocaleLCID: number): SP.AppInstance;
         loadAndInstallApp(appPackageStream: any[]): SP.AppInstance;
