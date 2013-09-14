@@ -1,1 +1,7 @@
-*.map
+*.suo
+*.csproj.user
+*.js.map
+obj/*
+bin/*
+pkg/*
+pkgobj/*
