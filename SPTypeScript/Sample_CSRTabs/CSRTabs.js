@@ -73,6 +73,7 @@ var CSRTabs;
         resultHtml += tabs.renderContents(context);
         resultHtml += '</div>';
 
+        // Fix for proper displaying CreatedModifiedInfo control
         author = context.RenderFieldByName(context, "Author");
         created = context.RenderFieldByName(context, "Created");
         editor = context.RenderFieldByName(context, "Editor");
@@ -110,9 +111,10 @@ var CSRTabs;
     SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         CSRTabs.init();
 
+        //Enable script with MDS
         SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Sample_CSRTabs/CSRTabs.js"), CSRTabs.init);
         }, "sp.js");
     }, "clienttemplates.js");
 })();
-//@ sourceMappingURL=CSRTabs.js.map
+//# sourceMappingURL=CSRTabs.js.map
