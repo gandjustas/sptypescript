@@ -21,6 +21,7 @@
 <#= GetFileContents(@"SP.Taxonomy.d.ts") #>
 <#= GetFileContents(@"SP.UI.ApplicationPages.d.ts") #>
 <#= GetFileContents(@"SP.UI.d.ts") #>
+<#= GetFileContents(@"SP.UI.Controls.d.ts") #>
 <#= GetFileContents(@"SP.UserProfiles.d.ts") #>
 <#= GetFileContents(@"SP.Utilities.d.ts") #>
 <#= GetFileContents(@"SP.WebParts.d.ts") #>

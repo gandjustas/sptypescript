@@ -22,11 +22,35 @@ declare module Sys {
         initialize(): void;
         updated(): void;
     }
+
+    export interface IContainer {
+        addComponent(component: Component): void;
+        findComponent(id: string): Component;
+        getComponents(): Component[];
+        removeComponent(component: Component);
+    }
+
+    export class Application extends Component implements IContainer {
+        addComponent(component: Component): void;
+        findComponent(id: string): Component;
+        getComponents(): Component[];
+        removeComponent(component: Component);
+
+        static add_load(handler: (sender: Application, eventArgs: ApplicationLoadEventArgs) => void);
+        static remove_load(handler: (sender: Application, eventArgs: ApplicationLoadEventArgs) => void);
+    }
+
+    export class ApplicationLoadEventArgs {
+        constructor(components: Component[], isPartialLoad: boolean);
+        public components: Component[];
+        public isPartialLoad: boolean;
+    }
+
     module UI {
         export class Control { }
         export class DomEvent {
-            static addHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void );
-            static removeHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void );
+            static addHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void);
+            static removeHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void);
         }
     }
     module Net {
@@ -49,8 +73,8 @@ declare module Sys {
             invoke(): void;
             completed(args: Sys.EventArgs): void;
 
-            add_completed(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;
-            remove_completed(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;
+            add_completed(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void): void;
+            remove_completed(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void): void;
         }
 
         export class WebRequestExecutor {
@@ -69,24 +93,24 @@ declare module Sys {
             getAllResponseHeaders(): string;
             getResponseHeader(key: string): string;
         }
-        
+
         export class NetworkRequestEventArgs extends EventArgs {
             get_webRequest(): WebRequest;
         }
-        
-        
+
+
         export class WebRequestManager {
             static get_defaultExecutorType(): string;
             static set_defaultExecutorType(value: string): void;
             static get_defaultTimeout(): number;
             static set_defaultTimeout(value: number): void;
 
-            static executeRequest(request: WebRequest):void;
-            static add_completedRequest(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;
-            static remove_completedRequest(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;  
-            static add_invokingRequest(handler: (executor: WebRequestExecutor, args: NetworkRequestEventArgs) => void ): void;
-            static remove_invokingRequest(handler: (executor: WebRequestExecutor, args: NetworkRequestEventArgs ) => void ): void;               
-        } 
+            static executeRequest(request: WebRequest): void;
+            static add_completedRequest(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void): void;
+            static remove_completedRequest(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void): void;
+            static add_invokingRequest(handler: (executor: WebRequestExecutor, args: NetworkRequestEventArgs) => void): void;
+            static remove_invokingRequest(handler: (executor: WebRequestExecutor, args: NetworkRequestEventArgs) => void): void;
+        }
 
         export class WebServiceProxy {
             static invoke(
@@ -94,14 +118,14 @@ declare module Sys {
                 methodName: string,
                 useGet?: boolean,
                 params?: any,
-                onSuccess?: (result: string, eventArgs: EventArgs) => void ,
-                onFailure?: (error: WebServiceError) => void ,
+                onSuccess?: (result: string, eventArgs: EventArgs) => void,
+                onFailure?: (error: WebServiceError) => void,
                 userContext?: any,
                 timeout?: number,
                 enableJsonp?: boolean,
                 jsonpCallbackParameter?: string): WebRequest;
         }
-        
+
         export class WebServiceError {
             get_errorObject(): any;
             get_exceptionType(): any;
@@ -118,8 +142,8 @@ declare module Sys {
 }
 
 declare var $get: { (id: string): HTMLElement; };
-declare var $addHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void ): void; };
-declare var $removeHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void ): void; };
+declare var $addHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void): void; };
+declare var $removeHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void): void; };
 
 declare module SP {
     export class SOD {
@@ -7055,6 +7079,93 @@ declare module SP {
             close(dialogResult: SP.UI.DialogResult): void;
         }
 
+    }
+}
+
+declare module SP {
+    export module UI {
+        export module Controls {
+
+            export interface INavigationOptions {
+                assetId?: string;
+                siteTitle?: string;
+                siteUrl?: string;
+                appTitle?: string;
+                appTitleIconUrl?: string;
+                rightToLeft?: boolean;
+                appStartPage?: string;
+                appIconUrl?: string;
+                appHelpPageUrl?: string;
+                appHelpPageOnClick?: string;
+                settingsLinks?: ISettingsLink[];
+                language?: string;
+                clientTag?: string;
+                appWebUrl?: string;
+                onCssLoaded?: string;
+
+
+                bottomHeaderVisible?: boolean;
+                topHeaderVisible?: boolean;
+            }
+
+            export class NavigationOptions implements INavigationOptions { }
+
+
+            export interface ISettingsLink {
+                linkUrl: string;
+                displayName: string;
+            }
+
+            export class SettingsLink implements ISettingsLink {
+                linkUrl: string;
+                displayName: string;
+            }
+
+
+            export class Navigation {
+                constructor(placeholderDOMElementId: string, options: INavigationOptions);
+                public get_assetId(): string;
+                public get_siteTitle(): string;
+                public get_siteUrl(): string;
+
+                public get_appTitle(): string;
+                public set_appTitle(value: string): string;
+
+                public get_appTitleIconUrl(): string;
+                public set_appTitleIconUrl(value: string): string;
+
+                public get_rightToLeft(): boolean;
+                public set_rightToLeft(value: boolean): boolean;
+
+                public get_appStartPage(): string;
+                public set_appStartPage(value: string): string;
+
+                public get_appIconUrl(): string;
+                public set_appIconUrl(value: string): string;
+
+                public get_appHelpPageUrl(): string;
+                public set_appHelpPageUrl(value: string): string;
+
+                public get_appHelpPageOnClick(): string;
+                public set_appHelpPageOnClick(value: string): string;
+
+                public get_settingsLinks(): ISettingsLink[];
+                public set_settingsLinks(value: ISettingsLink[]): ISettingsLink[];
+
+                public setVisible(value: boolean): void;
+
+                public setTopHeaderVisible(value: boolean): void;
+                public setBottomHeaderVisible(value: boolean): void;
+                public remove(): void;
+
+                static getVersionedLayoutsUrl(pageName: string): string;
+            }
+
+
+            export class ControlManager {
+                static getControl(placeHolderId: string): any;
+            }
+        }
     }
 }
 

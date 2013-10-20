@@ -7,6 +7,7 @@ $(function () {
             var funcName;
             var func;
 
+
             funcName = this.parentElement.id.replace("Container", "");
             func = window[funcName];
             func($("#" + this.parentElement.id + " .result-panel")[0]);
@@ -26,8 +27,7 @@ $(function () {
             funcText = funcText.replace(/\r\n/g, "<br/>");
             funcText = funcText.replace(/ /g, "&nbsp;");
 
-            $("#" + this.parentElement.id + " .code-content").html(funcText);
+            $("#" + this.parentElement.id + " .code-content").html(funcText)
         }
     });
 });
-//# sourceMappingURL=AppUIEvents.js.map

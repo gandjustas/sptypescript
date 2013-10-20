@@ -21,11 +21,35 @@ declare module Sys {
         initialize(): void;
         updated(): void;
     }
+
+    export interface IContainer {
+        addComponent(component: Component): void;
+        findComponent(id: string): Component;
+        getComponents(): Component[];
+        removeComponent(component: Component);
+    }
+
+    export class Application extends Component implements IContainer {
+        addComponent(component: Component): void;
+        findComponent(id: string): Component;
+        getComponents(): Component[];
+        removeComponent(component: Component);
+
+        static add_load(handler: (sender: Application, eventArgs: ApplicationLoadEventArgs) => void);
+        static remove_load(handler: (sender: Application, eventArgs: ApplicationLoadEventArgs) => void);
+    }
+
+    export class ApplicationLoadEventArgs {
+        constructor(components: Component[], isPartialLoad: boolean);
+        public components: Component[];
+        public isPartialLoad: boolean;
+    }
+
     module UI {
         export class Control { }
         export class DomEvent {
-            static addHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void );
-            static removeHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void );
+            static addHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void);
+            static removeHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void);
         }
     }
     module Net {
@@ -48,8 +72,8 @@ declare module Sys {
             invoke(): void;
             completed(args: Sys.EventArgs): void;
 
-            add_completed(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;
-            remove_completed(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;
+            add_completed(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void): void;
+            remove_completed(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void): void;
         }
 
         export class WebRequestExecutor {
@@ -68,24 +92,24 @@ declare module Sys {
             getAllResponseHeaders(): string;
             getResponseHeader(key: string): string;
         }
-        
+
         export class NetworkRequestEventArgs extends EventArgs {
             get_webRequest(): WebRequest;
         }
-        
-        
+
+
         export class WebRequestManager {
             static get_defaultExecutorType(): string;
             static set_defaultExecutorType(value: string): void;
             static get_defaultTimeout(): number;
             static set_defaultTimeout(value: number): void;
 
-            static executeRequest(request: WebRequest):void;
-            static add_completedRequest(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;
-            static remove_completedRequest(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void ): void;  
-            static add_invokingRequest(handler: (executor: WebRequestExecutor, args: NetworkRequestEventArgs) => void ): void;
-            static remove_invokingRequest(handler: (executor: WebRequestExecutor, args: NetworkRequestEventArgs ) => void ): void;               
-        } 
+            static executeRequest(request: WebRequest): void;
+            static add_completedRequest(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void): void;
+            static remove_completedRequest(handler: (executor: WebRequestExecutor, args: Sys.EventArgs) => void): void;
+            static add_invokingRequest(handler: (executor: WebRequestExecutor, args: NetworkRequestEventArgs) => void): void;
+            static remove_invokingRequest(handler: (executor: WebRequestExecutor, args: NetworkRequestEventArgs) => void): void;
+        }
 
         export class WebServiceProxy {
             static invoke(
@@ -93,14 +117,14 @@ declare module Sys {
                 methodName: string,
                 useGet?: boolean,
                 params?: any,
-                onSuccess?: (result: string, eventArgs: EventArgs) => void ,
-                onFailure?: (error: WebServiceError) => void ,
+                onSuccess?: (result: string, eventArgs: EventArgs) => void,
+                onFailure?: (error: WebServiceError) => void,
                 userContext?: any,
                 timeout?: number,
                 enableJsonp?: boolean,
                 jsonpCallbackParameter?: string): WebRequest;
         }
-        
+
         export class WebServiceError {
             get_errorObject(): any;
             get_exceptionType(): any;
@@ -117,5 +141,5 @@ declare module Sys {
 }
 
 declare var $get: { (id: string): HTMLElement; };
-declare var $addHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void ): void; };
-declare var $removeHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void ): void; };
+declare var $addHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void): void; };
+declare var $removeHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void): void; };

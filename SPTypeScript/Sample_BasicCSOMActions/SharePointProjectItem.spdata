@@ -4,14 +4,18 @@
     <ProjectItemFile Source="Elements.xml" Target="Sample_BasicCSOMActions\" Type="ElementManifest" />
     <ProjectItemFile Source="BasicTasksJSOM.css" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
     <ProjectItemFile Source="BasicTasksJSOM.html" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
-    <ProjectItemFile Source="ChromeLoader.js" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
+    <ProjectItemFile Source="ChromeLoader.ts" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
     <ProjectItemFile Source="BasicTasksJSOM.ts" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
     <ProjectItemFile Source="BasicTasksJSOM.min.js" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
     <ProjectItemFile Source="BasicTasksJSOM.js.map" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
     <ProjectItemFile Source="BasicTasksJSOM.js" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
-    <ProjectItemFile Source="AppUIEvents.js" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
+    <ProjectItemFile Source="AppUIEvents.ts" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
     <ProjectItemFile Source="Help.html" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
     <ProjectItemFile Source="Contact.html" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
     <ProjectItemFile Source="Account.html" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
+    <ProjectItemFile Source="ChromeLoader.js" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
+    <ProjectItemFile Source="ChromeLoader.js.map" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
+    <ProjectItemFile Source="AppUIEvents.js" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
+    <ProjectItemFile Source="AppUIEvents.js.map" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
   </Files>
 </ProjectItem>

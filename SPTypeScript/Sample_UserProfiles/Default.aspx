@@ -13,6 +13,8 @@
 
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
 
+    <div class="ms-textXLarge">For futher demo add "Who Is?" app part to page on host web.</div>
+
     <div>
         <div id="results">
             Loading data from service...

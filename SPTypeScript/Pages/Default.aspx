@@ -14,7 +14,7 @@
             <li><a href="../Taxonomy/Default.aspx">JSOM: Working with taxonomy with TypeScript.</a></li>
             <li><a href="../Sample_mQuery/Page.aspx">mQuery: Sample dynamic table.</a></li>
             <li><a href="../Sample_Animation/Default.aspx">JSOM: Basic animation.</a></li>
-            <li><a href="../Sample_AutoFill/Page.aspx">Client controls: Autofill sample.</a></li>
+            <li><a href="../Sample_AutoFill/Page.aspx">Client controls: Autofill sample</a></li>
             <li><a href="../Lists/CustomList/Overridable.aspx">Client Side Rendering: Custom list view</a></li>
             <li><a href="../Lists/CustomFieldList">Client Side Rendering: Complexity field</a></li>
             <li><a href="../Lists/ConditionalFormattingTasksList">Client Side Rendering: Conditional formatting</a></li>
@@ -25,6 +25,7 @@
             <li><a href="javascript:document.location = '../SearchCSOM/Search.aspx?'+document.URL.split('?')[1]">Search: Using search CSOM  with TypeScript</a></li>
             <li><a href="../Sample_UserProfiles">User Profiles: Retrieve properties for current user</a></li>
             <li><a href="javascript:document.location = '../Sample_Social?' + document.URL.split('?')[1]">Social: Determine if the current user follows a site and follow it, if not yet</a></li>
+            <li><a href="javascript:document.location = '../Sample_WhoIsWebPart/Part.aspx?' + document.URL.split('?')[1]">App Part: Sample App Part with People Picker</a></li>
         </ol>
     </div>
 

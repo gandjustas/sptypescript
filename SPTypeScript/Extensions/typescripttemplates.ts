@@ -252,6 +252,6 @@ module CSR {
     }
 }
 
-if (SP && SP.SOD) {
-    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("typescripttemplates.ts");
+if (typeof SP == 'object' && SP && typeof SP.SOD == 'object' && SP.SOD) {
+    SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("typescripttemplates.ts");    
 }

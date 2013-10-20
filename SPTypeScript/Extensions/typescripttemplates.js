@@ -111,7 +111,7 @@ var CSR;
     })();
 })(CSR || (CSR = {}));
 
-if (SP && SP.SOD) {
+if (typeof SP == 'object' && SP && typeof SP.SOD == 'object' && SP.SOD) {
     SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("typescripttemplates.ts");
 }
 //# sourceMappingURL=typescripttemplates.js.map

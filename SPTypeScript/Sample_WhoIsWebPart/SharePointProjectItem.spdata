@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Sample_WhoIsWebPart\" Type="ElementManifest" />
+    <ProjectItemFile Source="Part.ts" Target="Sample_WhoIsWebPart\" Type="ElementFile" />
+    <ProjectItemFile Source="Part.js.map" Target="Sample_WhoIsWebPart\" Type="ElementFile" />
+    <ProjectItemFile Source="Part.js" Target="Sample_WhoIsWebPart\" Type="ElementFile" />
+    <ProjectItemFile Source="Part.aspx" Target="Sample_WhoIsWebPart\" Type="ElementFile" />
+    <ProjectItemFile Source="Part.css" Target="Sample_WhoIsWebPart\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

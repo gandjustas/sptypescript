@@ -64,6 +64,8 @@
     <None Include="Sample_AutoFill\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b2bc5648-828d-4dd7-8044-e42f0b79a58f}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_BasicCSOMActions\AppUIEvents.js.map" />
+    <None Include="Sample_BasicCSOMActions\ChromeLoader.js.map" />
     <None Include="Sample_BasicCSOMActions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{36cba84f-cd3b-408d-b7a4-fc2b2c8972e5}</SharePointProjectItemId>
     </None>
@@ -121,11 +123,20 @@
     <None Include="Sample_Social\Social.js.map">
       <DependentUpon>Social.ts</DependentUpon>
     </None>
+    <None Include="Sample_WhoIsWebPart\Part.js.map">
+      <DependentUpon>Part.ts</DependentUpon>
+    </None>
     <None Include="Sample_UserProfiles\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{11708b77-3db1-4de7-96e5-75df4d64b4c0}</SharePointProjectItemId>
     </None>
     <None Include="Sample_UserProfiles\UserProfiles.js.map">
       <DependentUpon>UserProfiles.ts</DependentUpon>
+    </None>
+    <None Include="Sample_WhoIsWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2df0d68d-2b83-4a6e-8945-d3bdbd202738}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_WhoIsWebPart\WhoIsWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9ca75564-e101-4387-b7ef-89712504b7c0}</SharePointProjectItemId>
     </None>
     <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
@@ -155,6 +166,8 @@
     </Content>
     <Content Include="Sample_AutoFill\Elements.xml" />
     <Content Include="Sample_AutoFill\Page.aspx" />
+    <Content Include="Sample_BasicCSOMActions\AppUIEvents.js" />
+    <Content Include="Sample_BasicCSOMActions\ChromeLoader.js" />
     <Content Include="Sample_CSRTabs\CSRTabs.js">
       <DependentUpon>CSRTabs.ts</DependentUpon>
     </Content>
@@ -205,11 +218,21 @@
     <Content Include="Sample_Social\Social.min.js">
       <DependentUpon>Social.ts</DependentUpon>
     </Content>
+    <Content Include="Sample_WhoIsWebPart\Part.aspx" />
+    <Content Include="Sample_WhoIsWebPart\Part.css" />
+    <Content Include="Sample_WhoIsWebPart\Part.js">
+      <DependentUpon>Part.ts</DependentUpon>
+    </Content>
     <Content Include="Sample_UserProfiles\UserProfiles.min.js">
       <DependentUpon>UserProfiles.ts</DependentUpon>
     </Content>
+    <Content Include="Sample_WhoIsWebPart\Elements.xml" />
+    <Content Include="Sample_WhoIsWebPart\WhoIsWebPart\Elements.xml">
+      <OpcRelationship>feature-elementmanifest</OpcRelationship>
+    </Content>
     <Content Include="Sample_WorkflowServices\Default.aspx" />
     <Content Include="Sample_WorkflowServices\Elements.xml" />
+    <TypeScriptCompile Include="Sample_WhoIsWebPart\Part.ts" />
     <TypeScriptCompile Include="Sample_WorkflowServices\WorkflowServices.ts" />
     <Content Include="Sample_WorkflowServices\WorkflowServices.js">
       <DependentUpon>WorkflowServices.ts</DependentUpon>
@@ -257,7 +280,7 @@
     <Content Include="Sample_UserProfiles\UserProfiles.js">
       <DependentUpon>UserProfiles.ts</DependentUpon>
     </Content>
-    <Content Include="Sample_BasicCSOMActions\AppUIEvents.js" />
+    <TypeScriptCompile Include="Sample_BasicCSOMActions\AppUIEvents.ts" />
     <Content Include="Sample_BasicCSOMActions\BasicTasksJSOM.js">
       <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
     </Content>
@@ -273,7 +296,7 @@
     <Content Include="Sample_BasicCSOMActions\BasicTasksJSOM.min.js">
       <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
     </Content>
-    <Content Include="Sample_BasicCSOMActions\ChromeLoader.js" />
+    <TypeScriptCompile Include="Sample_BasicCSOMActions\ChromeLoader.ts" />
     <TypeScriptCompile Include="Sample_BasicCSOMActions\BasicTasksJSOM.ts" />
     <Content Include="Sample_BasicCSOMActions\Shared Documents\Elements.xml">
       <SubType>Designer</SubType>
