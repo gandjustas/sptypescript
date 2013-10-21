@@ -10,7 +10,20 @@
 <head>
     <title>Who is?</title>
     <script src="/_layouts/15/MicrosoftAjax.js"></script>
-    <script src="/_layouts/15/sp.ui.controls.js"></script>
+    <SharePoint:ScriptLink runat="server" Name="core.js" />
+    <SharePoint:ScriptLink runat="server" Name="mQuery.js" />
+    
+    <SharePoint:ScriptLink runat="server" Name="sp.ui.controls.js" />
+
+    <SharePoint:ScriptLink runat="server" Name="sp.js" />
+
+    <SharePoint:ScriptLink runat="server" Name="autofill.js" />
+    <SharePoint:ScriptLink runat="server" Name="clientforms.js" />
+    <SharePoint:ScriptLink runat="server" Name="clientpeoplepicker.js" />
+
+
+    <SharePoint:ScriptLink Name="SP.UserProfiles.js" runat="server" OnDemand="false" Localizable="false" LoadAfterUI="true" />
+
     <script src="Part.js"></script>
     <link href="Part.css" rel="stylesheet" />
 </head>
@@ -23,7 +36,7 @@
         <h3 id="editmodehdr" style="display: none">Part in edit mode.</h3>
     </div>
 
-    <div id="content">
+    <div id="content" >
         <div id="peoplePicker" style="margin-top: 13px; height: 20px; width: 300px;"></div>
         <div id="userInfo" style="margin-top: 20px; width: 330px;">
             <span id="pic" class="ms-floatLeft"></span>

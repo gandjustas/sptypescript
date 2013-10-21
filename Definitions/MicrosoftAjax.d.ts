@@ -46,10 +46,14 @@ declare module Sys {
     }
 
     module UI {
-        export class Control { }
+        export class Control extends Component { }
         export class DomEvent {
             static addHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void);
             static removeHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void);
+        }
+
+        export class DomElement {
+            static getBounds(element: HTMLElement): { x: number; y: number; width: number; height: number; };
         }
     }
     module Net {
