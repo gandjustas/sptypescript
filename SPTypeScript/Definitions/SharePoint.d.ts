@@ -8423,4 +8423,17 @@ interface ISPClientPeoplePickerEntity {
     DomainText?: string;
     [key: string]: any;
 }
+declare module Microsoft {
+    export module Office {
+        export module Server {
+            export module ReputationModel {
+                export class Reputation {
+                    constructor();
+                    static setLike(context: SP.ClientContext, listId: string, itemId: number, like: boolean);
+                    static setRating(context: SP.ClientContext, listId: string, itemId: number, rating: number);
+                }
+            }
+        }
+    }
+}
 

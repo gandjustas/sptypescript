@@ -26,6 +26,7 @@
             <li><a href="../Sample_UserProfiles">User Profiles: Retrieve properties for current user</a></li>
             <li><a href="javascript:document.location = '../Sample_Social?' + document.URL.split('?')[1]">Social: Determine if the current user follows a site and follow it, if not yet</a></li>
             <li><a href="javascript:document.location = '../Sample_WhoIsWebPart/Part.aspx?' + document.URL.split('?')[1]">App Part: Sample App Part with People Picker</a></li>
+            <li><a href="../Lists/ReputationListWithLikes">Reputation: Like items in list</a></li>
         </ol>
     </div>
 

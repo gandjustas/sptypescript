@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="ReputationListWithLikes"
+                OnQuickLaunch="TRUE"
+                TemplateType="10004"
+                Url="Lists/ReputationListWithLikes"
+                Description="My List Instance">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Title">First item</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Second item</Field>
+        </Row>
+      </Rows>
+    </Data>
+  </ListInstance>
+</Elements>

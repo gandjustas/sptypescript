@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="ReputationModule">
+    <File Path="ReputationModule\likes.ts" Url="ReputationModule/likes.ts" ReplaceContent="TRUE" />
+    <File Path="ReputationModule\likes.js" Url="ReputationModule/likes.js" ReplaceContent="TRUE" />
+    <File Path="ReputationModule\likes.js.map" Url="ReputationModule/likes.js.map" ReplaceContent="TRUE" />
+  </Module>
+</Elements>
