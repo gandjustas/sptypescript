@@ -37,7 +37,7 @@ var _;
 
         ctx.FormContext.registerInitCallback(fieldInternalName, function () {
             $addHandler($get(dropDownId), "change", function (e) {
-                var val = ($get(dropDownId)).value;
+                var val = $get(dropDownId).value;
                 ctx.FormContext.updateControlValue(fieldInternalName, val);
                 document.getElementById(messageId).innerHTML = GetDisplayHtml(val);
             });

@@ -2,6 +2,8 @@
 /** Lightweight client-side rendering template overrides.*/
 var CSR;
 (function (CSR) {
+    
+
     function override(listTemplateType, baseViewId) {
         return new csr(listTemplateType, baseViewId);
     }
@@ -109,6 +111,8 @@ var CSR;
         };
         return csr;
     })();
+
+    
 })(CSR || (CSR = {}));
 
 if (typeof SP == 'object' && SP && typeof SP.SOD == 'object' && SP.SOD) {

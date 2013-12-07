@@ -16,7 +16,7 @@ var SP;
         }
         /** To use this function, you must ensure that jQuery and CSOMPromise js files are loaded to the page */
         ClientContextPromise.prototype.executeQueryPromise = function () {
-            var deferred = new jQuery.Deferred();
+            var deferred = jQuery.Deferred();
             this.executeQueryAsync(function (sender, args) {
                 deferred.resolve(sender, args);
             }, function (sender, args) {

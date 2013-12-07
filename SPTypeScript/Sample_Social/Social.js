@@ -11,12 +11,12 @@ SP.SOD.executeOrDelayUntilScriptLoaded(function () {
     context.executeQueryAsync(function (sender, args) {
         if (isFollowed.get_value())
             $get("results").innerHTML = "You are already following the app host site!";
-else {
+        else {
             var followResult = followingManager.follow(info);
             context.executeQueryAsync(function (sender, args) {
                 if (followResult.get_value() == 0)
                     $get("results").innerHTML = "Now you're following the app host site! Check it on your profile page.";
-else
+                else
                     $get("results").innerHTML = "You failed to follow the app host site due to some mysterious error.";
             }, function (sender, args) {
                 alert('Error trying to follow the app host site: ' + args.get_message());

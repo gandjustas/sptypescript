@@ -85,7 +85,7 @@ var _;
 
                     if (relevantResults.get_totalRows() == 0)
                         items.push(_buildFooterItem("No results. Please refine your query."));
-else
+                    else
                         items.push(_buildFooterItem("Showing " + rows.length + " of" + relevantResults.get_totalRows() + " items!"));
 
                     _autoFillControl.PopulateAutoFill(items, OnSelectItem);

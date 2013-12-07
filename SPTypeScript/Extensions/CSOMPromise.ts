@@ -6,8 +6,8 @@ module SP {
     // Class
     export class ClientContextPromise extends SP.ClientContext {
         /** To use this function, you must ensure that jQuery and CSOMPromise js files are loaded to the page */
-        executeQueryPromise(): JQueryPromise {
-            var deferred = new jQuery.Deferred();
+        executeQueryPromise(): JQueryPromise<any> {
+            var deferred = jQuery.Deferred<any>();
             this.executeQueryAsync(function (sender, args) {
                 deferred.resolve(sender, args);
             },

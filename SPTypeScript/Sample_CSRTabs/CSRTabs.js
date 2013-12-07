@@ -1,3 +1,8 @@
+///<reference path="../Definitions/jquery.d.ts" />
+///<reference path="../Definitions/SharePoint.d.ts" />
+///<reference path="../Definitions/jquery.d.ts" />
+///<reference path="../Definitions/jqueryui.d.ts" />
+
 var CSRTabs;
 (function (CSRTabs) {
     var author, editor, created, modified;
@@ -49,7 +54,7 @@ var CSRTabs;
             this.fields = fields;
         }
         Tab.prototype.renderHeader = function () {
-            return (String).format('<li><a href="#{0}">{1}</a></li>', this.name, this.title);
+            return String.format('<li><a href="#{0}">{1}</a></li>', this.name, this.title);
         };
         Tab.prototype.renderContent = function (context) {
             var resultHtml = '';
@@ -87,10 +92,10 @@ var CSRTabs;
         resultHtml += '<td width="113" class="ms-formlabel" nowrap="true" valign="top"><h3 class="ms-standardheader"><nobr>';
         resultHtml += field.Title;
         if (field.Required && context.FieldControlModes[field.Name] != SPClientTemplates.ClientControlMode.DisplayForm) {
-            resultHtml += (String).format('<span title="{0}" class="ms-accentText"> *</span>', Strings.STS.L_RequiredField_Tooltip);
+            resultHtml += String.format('<span title="{0}" class="ms-accentText"> *</span>', Strings.STS.L_RequiredField_Tooltip);
         }
         resultHtml += '</nobr></h3></td>';
-        resultHtml += (String).format('<td width="350" class="ms-formbody" valign="top">{0}</td>', context.RenderFieldByName(context, field.Name));
+        resultHtml += String.format('<td width="350" class="ms-formbody" valign="top">{0}</td>', context.RenderFieldByName(context, field.Name));
         resultHtml += '</tr>';
         return resultHtml;
     }
