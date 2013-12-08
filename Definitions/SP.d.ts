@@ -140,9 +140,14 @@ declare module SP {
         constructor(clientObject: SP.ClientObject, propertyName: string, comparisonOperator: string, valueToCompare: any);
         constructor(clientObject: SP.ClientObject, propertyName: string, comparisonOperator: string, valueToCompare: any, allowAllActions: boolean);
     }
-    export class ClientResult {
-        get_value(): any;
-        setValue(value: any): void;
+    //export class ClientResult {
+    //    get_value(): any;
+    //    setValue(value: any): void;
+    //    constructor();
+    //}
+    export class ClientResult<T> {
+        get_value(): T;
+        setValue(value: T): void;
         constructor();
     }
     export class BooleanResult {
@@ -177,8 +182,8 @@ declare module SP {
         get_value(): any;
         constructor();
     }
-    export class ClientDictionaryResultHandler {
-        constructor(dict: SP.ClientResult);
+    export class ClientDictionaryResultHandler<T> {
+        constructor(dict: SP.ClientResult<T>);
     }
     export class ClientUtility {
         static urlPathEncodeForXmlHttpRequest(url: string): string;

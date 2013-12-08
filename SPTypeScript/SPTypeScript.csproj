@@ -24,6 +24,7 @@
     <SccAuxPath>&lt;Source Control Database&gt;</SccAuxPath>
     <SccProvider>Mercurial Source Control Package</SccProvider>
     <ActivePublishProfile />
+    <TypeScriptModuleKind>none</TypeScriptModuleKind>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -113,6 +114,10 @@
     </None>
     <None Include="Sample_mQuery\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a700f00d-1afb-4055-bf4f-ff3c44fd3356}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_Publishing\publishing.js.map" />
+    <None Include="Sample_Publishing\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4e22ac66-7bed-4e41-a129-30f392061140}</SharePointProjectItemId>
     </None>
     <None Include="Sample_Reputation\ReputationModule\likes.js.map" />
     <None Include="Sample_Reputation\ReputationModule\SharePointProjectItem.spdata">
@@ -219,6 +224,9 @@
       <DependentUpon>mquery.ts</DependentUpon>
     </Content>
     <Content Include="Sample_mQuery\Page.aspx" />
+    <Content Include="Sample_Publishing\Default.aspx" />
+    <Content Include="Sample_Publishing\Elements.xml" />
+    <Content Include="Sample_Publishing\publishing.js" />
     <Content Include="Sample_Reputation\ReputationModule\Elements.xml" />
     <Content Include="Sample_Reputation\ReputationListWithLikes\Elements.xml" />
     <Content Include="Sample_Reputation\ReputationListWithLikes\ReputationListWithLikesInstance\Elements.xml" />
@@ -226,6 +234,7 @@
     <Content Include="Sample_Reputation\ReputationModule\likes.js" />
     <Content Include="Sample_Social\Default.aspx" />
     <Content Include="Sample_Social\Elements.xml" />
+    <TypeScriptCompile Include="Sample_Publishing\publishing.ts" />
     <TypeScriptCompile Include="Sample_Reputation\ReputationModule\likes.ts" />
     <TypeScriptCompile Include="Sample_Social\Social.ts" />
     <Content Include="Sample_Social\Social.js">

@@ -102,7 +102,7 @@ declare module SP.WorkflowServices {
         getDesignerActions(web: SP.Web): SP.StringResult;
         /** Returns an XML representation of a collection of XAML class signatures for workflow definitions.
             @param lastChanges Date time value representing the latest changes; class signatures older than this time are excluded from the result set.  */
-        getActivitySignatures(lastChanged: string): SP.ClientResult;
+        getActivitySignatures(lastChanged: string): SP.ClientResult<any>;
         /** Saves a SharePoint workflow definition to the workflow store.  */
         saveDefinition(definition: WorkflowDefinition): SP.GuidResult;
         /** Validates the specified activity against workflow definitions in the workflow store.  */
