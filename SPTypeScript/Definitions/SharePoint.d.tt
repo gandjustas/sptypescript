@@ -19,6 +19,7 @@
 <#= GetFileContents(@"SP.Sharing.d.ts") #>
 <#= GetFileContents(@"SP.Social.d.ts") #>
 <#= GetFileContents(@"SP.Taxonomy.d.ts") #>
+<#= GetFileContents(@"SP.DocumentManagement.d.ts") #>
 <#= GetFileContents(@"SP.UI.ApplicationPages.d.ts") #>
 <#= GetFileContents(@"SP.UI.d.ts") #>
 <#= GetFileContents(@"SP.UI.Controls.d.ts") #>

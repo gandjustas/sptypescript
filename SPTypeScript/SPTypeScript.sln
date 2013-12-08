@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions"
 		..\Definitions\reputation.d.ts = ..\Definitions\reputation.d.ts
 		..\Definitions\SP.BusinessData.d.ts = ..\Definitions\SP.BusinessData.d.ts
 		..\Definitions\SP.d.ts = ..\Definitions\SP.d.ts
+		..\Definitions\SP.DocumentManagement.d.ts = ..\Definitions\SP.DocumentManagement.d.ts
 		..\Definitions\SP.Init.d.ts = ..\Definitions\SP.Init.d.ts
 		..\Definitions\SP.Publishing.d.ts = ..\Definitions\SP.Publishing.d.ts
 		..\Definitions\SP.RequestExecutor.d.ts = ..\Definitions\SP.RequestExecutor.d.ts
