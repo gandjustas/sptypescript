@@ -103,6 +103,89 @@ module CSR {
             return this;
         }
 
+        makeReadOnly(fieldName: string): ICSR {
+            this.onPreRender(ctx => {
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid
+                    || ctx.ControlMode == SPClientTemplates.ClientControlMode.DisplayForm) return;
+
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
+                    var ctxInView = <SPClientTemplates.RenderContext_InView>ctx;
+
+                    var fieldSchema: SPClientTemplates.FieldSchema;
+                    var fields = ctxInView.ListSchema.Field;
+
+                    for (var i = 0; i < fields.length; i++) {
+                        if (fields[i].Name === fieldName) {
+                            fieldSchema = fields[i];
+                        }
+                    }
+                    if (fieldSchema) {
+                        if (ctxInView.inGridMode) {
+                            //TODO: Disable editing in grid mode
+                            (<SPClientTemplates.FieldSchema_InForm>fieldSchema).ReadOnlyField = true;
+                        } else {
+                            var fieldSchemaInView = <SPClientTemplates.FieldSchema_InView>fieldSchema;
+                            fieldSchemaInView.ReadOnly = "TRUE";
+                        }
+                    }
+                } else {
+                    var ctxInForm = <SPClientTemplates.RenderContext_FieldInForm>ctx;
+                    var fieldSchemaInForm = ctxInForm.ListSchema.Field[0];
+                    if (fieldSchemaInForm.Name === fieldName) {
+                        fieldSchemaInForm.ReadOnlyField = true;
+                        var template = GetFieldTemplate(fieldSchemaInForm, SPClientTemplates.ClientControlMode.DisplayForm);
+                        ctxInForm.Templates.Fields[fieldName] = template;
+                    }
+                    //TODO: Fixup list data for User field
+                }
+
+            });
+            return this;
+        }
+
+        makeHidden(fieldName: string): ICSR {
+            this.onPreRender(ctx => {
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid) return;
+
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
+                    var ctxInView = <SPClientTemplates.RenderContext_InView>ctx;
+
+                    var fieldSchema: SPClientTemplates.FieldSchema;
+                    var fields = ctxInView.ListSchema.Field;
+
+                    for (var i = 0; i < fields.length; i++) {
+                        if (fields[i].Name === fieldName) {
+                            fieldSchema = fields[i];
+                        }
+                    }
+                    if (fieldSchema) {
+                        if (ctxInView.inGridMode) {
+                            //TODO: Hide item in grid mode
+                            (<SPClientTemplates.FieldSchema_InForm>fieldSchema).Hidden = true;
+                        } else {
+                            ctxInView.ListSchema.Field.splice(ctxInView.ListSchema.Field.indexOf(fieldSchema), 1);
+                        }
+                    }
+                } else {
+                    var ctxInForm = <SPClientTemplates.RenderContext_FieldInForm>ctx;
+                    var fieldSchemaInForm = ctxInForm.ListSchema.Field[0];
+                    if (fieldSchemaInForm.Name === fieldName) {
+                        fieldSchemaInForm.Hidden = true;
+                        var pHolderId = ctxInForm.FormUniqueId + ctxInForm.FormContext.listAttributes.Id + fieldName;
+                        var placeholder = $get(pHolderId);
+                        var current = placeholder;
+                        while (current.tagName.toUpperCase()!== "TR") {
+                            current = current.parentElement;
+                        }
+                        var row = <HTMLTableRowElement>current;
+                        row.style.display = 'none';
+                    }
+                }
+
+            });
+            return this;
+        }
+
         register() {
             if (!this.IsRegistered) {
                 SPClientTemplates.TemplateManager.RegisterTemplateOverrides(this);
@@ -249,6 +332,24 @@ module CSR {
             @param template New NewForm template.
         */
         fieldNew(fieldName: string, template: (ctx: SPClientTemplates.RenderContext_FieldInForm) => string): ICSR;
+
+
+        /** Make field readonly in forms and quick edit.
+            @param fieldName Internal name of the field.
+        */
+        makeReadOnly(fieldName: string): ICSR;
+
+        /** Make field hidden in list view and standard forms.
+            @param fieldName Internal name of the field.
+        */
+        makeHidden(fieldName: string): ICSR
+    }
+
+    function GetFieldTemplate(field: SPClientTemplates.FieldSchema, mode: SPClientTemplates.ClientControlMode): SPClientTemplates.FieldCallback {
+        var ctx = { ListSchema: { Field: [field] }, FieldControlModes: {} };
+        ctx.FieldControlModes[field.Name] = mode;
+        var templates = SPClientTemplates.TemplateManager.GetTemplates(ctx);
+        return templates.Fields[field.Name];
     }
 }
 

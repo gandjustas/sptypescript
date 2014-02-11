@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="CSRFormFields">
+    <File Path="CSRFormFields\CSRFormField.ts" Url="CSRFormFields/CSRFormField.ts" ReplaceContent="TRUE" />
+    <File Path="CSRFormFields\CSRFormField.js" Url="CSRFormFields/CSRFormField.js" ReplaceContent="TRUE" />
+    <File Path="CSRFormFields\CSRFormField.js.map" Url="CSRFormFields/CSRFormField.js.map" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

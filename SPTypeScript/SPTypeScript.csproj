@@ -70,6 +70,16 @@
     <None Include="Sample_BasicCSOMActions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{36cba84f-cd3b-408d-b7a4-fc2b2c8972e5}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.js.map" />
+    <None Include="Sample_CSRCustomForm\CSRFormFields\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4212071f-17dd-4c7d-a8a7-b49e6a7e7f25}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRCustomForm\Sample_CSRCustomFormInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4b084cf1-936e-46ed-8774-1cdcb9532518}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRCustomForm\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{61bc6fe2-2093-4560-8f39-acacadbdba8d}</SharePointProjectItemId>
+    </None>
     <None Include="Sample_CSRTabs\CSRTabs.js.map">
       <DependentUpon>CSRTabs.ts</DependentUpon>
     </None>
@@ -156,6 +166,7 @@
     <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
     </None>
+    <TypeScriptCompile Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.ts" />
     <TypeScriptCompile Include="Sample_CSRTabs\CSRTabs.ts" />
     <Content Include="Definitions\SharePoint.d.ts">
       <AutoGen>True</AutoGen>
@@ -183,6 +194,11 @@
     <Content Include="Sample_AutoFill\Page.aspx" />
     <Content Include="Sample_BasicCSOMActions\AppUIEvents.js" />
     <Content Include="Sample_BasicCSOMActions\ChromeLoader.js" />
+    <Content Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.js" />
+    <Content Include="Sample_CSRCustomForm\CSRFormFields\Elements.xml" />
+    <Content Include="Sample_CSRCustomForm\Elements.xml" />
+    <Content Include="Sample_CSRCustomForm\Sample_CSRCustomFormInstance\Elements.xml" />
+    <Content Include="Sample_CSRCustomForm\Schema.xml" />
     <Content Include="Sample_CSRTabs\CSRTabs.js">
       <DependentUpon>CSRTabs.ts</DependentUpon>
     </Content>

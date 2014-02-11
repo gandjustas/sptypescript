@@ -111,22 +111,13 @@ var CSR;
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
                     var ctxInView = ctx;
 
-                    var fieldSchema;
-                    var fields = ctxInView.ListSchema.Field;
-
-                    for (var i = 0; i < fields.length; i++) {
-                        if (fields[i].Name === fieldName) {
-                            fieldSchema = fields[i];
-                        }
-                    }
-                    if (fieldSchema) {
-                        if (ctxInView.inGridMode) {
-                            //TODO: Disable editing in grid mode
-                            fieldSchema.ReadOnlyField = true;
-                        } else {
-                            var fieldSchemaInView = fieldSchema;
-                            fieldSchemaInView.ReadOnly = "TRUE";
-                        }
+                    var fieldSchema = ctxInView.ListSchema.Field[fieldName];
+                    if (ctxInView.inGridMode) {
+                        //TODO: Disable editing in grid mode
+                        fieldSchema.ReadOnlyField = true;
+                    } else {
+                        var fieldSchemaInView = fieldSchema;
+                        fieldSchemaInView.ReadOnly = "TRUE";
                     }
                 } else {
                     var ctxInForm = ctx;
@@ -136,7 +127,7 @@ var CSR;
                         var template = GetFieldTemplate(fieldSchemaInForm, SPClientTemplates.ClientControlMode.DisplayForm);
                         ctxInForm.Templates.Fields[fieldName] = template;
                     }
-                    //TODO: Fixup list data for User field
+                    //TODO: Fixup list data for user field
                 }
             });
             return this;
@@ -150,21 +141,11 @@ var CSR;
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
                     var ctxInView = ctx;
 
-                    var fieldSchema;
-                    var fields = ctxInView.ListSchema.Field;
-
-                    for (var i = 0; i < fields.length; i++) {
-                        if (fields[i].Name === fieldName) {
-                            fieldSchema = fields[i];
-                        }
-                    }
-                    if (fieldSchema) {
-                        if (ctxInView.inGridMode) {
-                            //TODO: Hide item in grid mode
-                            fieldSchema.Hidden = true;
-                        } else {
-                            ctxInView.ListSchema.Field.splice(ctxInView.ListSchema.Field.indexOf(fieldSchema), 1);
-                        }
+                    var fieldSchema = ctxInView.ListSchema.Field[fieldName];
+                    if (ctxInView.inGridMode) {
+                        fieldSchema.Hidden = true;
+                    } else {
+                        ctxInView.ListSchema.Field.splice(ctxInView.ListSchema.Field.indexOf(fieldSchema), 1);
                     }
                 } else {
                     var ctxInForm = ctx;

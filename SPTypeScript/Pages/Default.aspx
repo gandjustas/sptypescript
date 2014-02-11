@@ -21,6 +21,7 @@
             <li><a href="../Lists/ListWithTabsForm/NewForm.aspx">Client Side Rendering: Form with tabs</a></li>
             <li><a href="../Lists/CustomFieldRenderingList">Client Side Rendering: Custom Field with Validator</a></li>
             <li><a href="../Lists/DetailsList">Client Side Rendering: Lookup field with search</a></li>
+            <li><a href="../Lists/CSRCustomForm">Client Side Rendering: Make fields hidden and readonly in views and froms</a></li>
             <li><a href="../Sample_WorkflowServices">Workflow Services: Retrieve list of available workflow actions</a></li>
             <li><a href="javascript:document.location = '../SearchCSOM/Search.aspx?'+document.URL.split('?')[1]">Search: Using search CSOM  with TypeScript</a></li>
             <li><a href="../Sample_UserProfiles">User Profiles: Retrieve properties for current user</a></li>

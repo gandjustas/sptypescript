@@ -863,17 +863,26 @@ declare module SPClientTemplates {
         PictureOnly: boolean;
         PictureSize: string;
     }
-    /** Represents field schema in Grid mode and on list forms.
-        Consider casting objects of this type to more specific field types, e.g. FieldSchemaInForm_Lookup */
-    export interface FieldSchema_InForm {
+
+    export interface FieldSchema {
         /** Specifies if the field can be edited while list view is in the Grid mode */
         AllowGridEditing: boolean;
+        /** String representation of the field type, e.g. "Lookup". Same as SPField.TypeAsString */
+        FieldType: string;
+        /** Internal name of the field */
+        Name: string;
+        /** For OOTB fields, returns the type of field. For "UserMulti" returns "User", for "LookupMulti" returns "Lookup".
+            For custom field types, returns base type of the field. */
+        Type: string;
+    }
+
+/** Represents field schema in Grid mode and on list forms.
+        Consider casting objects of this type to more specific field types, e.g. FieldSchemaInForm_Lookup */
+    export interface FieldSchema_InForm extends FieldSchema {
         /** Description for this field. */
         Description: string;
         /** Direction of the reading order for the field. */
         Direction: string;
-        /** String representation of the field type, e.g. "Lookup". Same as SPField.TypeAsString */
-        FieldType: string;
         /** Indicates whether the field is hidden */
         Hidden: boolean;
         /** Guid of the field */
@@ -881,8 +890,6 @@ declare module SPClientTemplates {
         /** Specifies Input Method Editor (IME) mode bias to use for the field.
             The IME enables conversion of keystrokes between languages when one writing system has more characters than can be encoded for the given keyboard. */
         IMEMode: any;
-        /** Internal name of the field */
-        Name: string;
         /** Specifies if the field is read only */
         ReadOnlyField: boolean;
         /** Specifies wherever field requires values */
@@ -890,9 +897,6 @@ declare module SPClientTemplates {
         RestrictedMode: boolean;
         /** Title of the field */
         Title: string;
-        /** For OOTB fields, returns the type of field. For "UserMulti" returns "User", for "LookupMulti" returns "Lookup".
-            For custom field types, returns base type of the field. */
-        Type: string;
         /** If SPFarm.Local.UseMinWidthForHtmlPicker is true, UseMinWidth will be set to true. Undefined in other cases. */
         UseMinWidth: boolean;
     }
@@ -941,9 +945,7 @@ declare module SPClientTemplates {
         DefaultRender: string;
     }
     /** Represents field schema in a list view. */
-    export interface FieldSchema_InView {
-        /** Either "TRUE" or "FALSE" */
-        AllowGridEditing: string;
+    export interface FieldSchema_InView extends FieldSchema {
         /** Either "TRUE" or "FALSE" */
         CalloutMenu: string;
         ClassInfo: string; // e.g. "Menu"
@@ -953,8 +955,6 @@ declare module SPClientTemplates {
         Explicit: string;
         fieldRenderer: any;
         FieldTitle: string;
-        /** Represents SPField.TypeAsString, e.g. "Computed", "UserMulti", etc. */
-        FieldType: string;
         /** Indicates whether the field can be filtered. Either "TRUE" or "FALSE" */
         Filterable: string;
         /** Set to "TRUE" for fields that comply to the following Xpath query:
@@ -967,14 +967,12 @@ declare module SPClientTemplates {
         /** Specifies if the field contains list item menu.
             Corresponds to ViewFields/FieldRef/@ListItemMenu attribute. Either "TRUE" or "FALSE" and might be missing. */
         listItemMenu: string;
-        Name: string;
         RealFieldName: string;
         /** Either "TRUE" or "FALSE" */
         ReadOnly: string;
         ResultType: string;
         /** Indicates whether the field can be sorted. Either "TRUE" or "FALSE" */
         Sortable: string;
-        Type: string;
     }
     export interface ListSchema_InView {
         /** Key-value object that represents all aggregations defined for the view.
@@ -988,7 +986,7 @@ declare module SPClientTemplates {
         /** Either "0" or "1" */
         EffectivePresenceEnabled: string;
         /** If in grid mode (context.inGridMode == true), cast to FieldSchema_InForm[], otherwise cast to FieldSchema_InView[] */
-        Field: any[];
+        Field: FieldSchema[];
         FieldSortParam: string;
         Filter: any;
         /** Either "0" or "1" */
@@ -1195,7 +1193,7 @@ declare module SPClientTemplates {
         RenderItems: (renderContext: RenderContext) => string;
         RenderView: (renderContext: RenderContext) => string;
         SiteClientTag: string;
-        Templates: TemplateOverrides;
+        Templates: Templates;
     }
 
     export interface SingleTemplateCallback {
@@ -1210,6 +1208,12 @@ declare module SPClientTemplates {
         /** Must return null in order to fall back to a more common template or to a system default template */
         (renderContext: RenderContext): string;
     }
+
+    export interface FieldCallback {
+        /** Must return null in order to fall back to a more common template or to a system default template */
+        (renderContext: RenderContext): string;
+    }
+
     export interface FieldInFormCallback {
         /** Must return null in order to fall back to a more common template or to a system default template */
         (renderContext: RenderContext_FieldInForm): string;
@@ -1228,6 +1232,27 @@ declare module SPClientTemplates {
         NewForm?: FieldInFormCallback;
         /** Defines templates for rendering the field on a list view. */
         View?: FieldInViewCallback;
+    }
+
+    export interface FieldTemplates {
+        [fieldInternalName: string]: FieldCallback;
+    }
+
+    export interface Templates {
+        View?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template
+        Body?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template 
+        /** Defines templates for rendering groups (aggregations). */
+        Group?: GroupCallback;
+        /** Defines templates for list items rendering. */
+        Item?: ItemCallback;
+        /** Defines template for rendering list view header.
+            Can be either string or SingleTemplateCallback */
+        Header?: SingleTemplateCallback;
+        /** Defines template for rendering list view footer.
+            Can be either string or SingleTemplateCallback */
+        Footer?: SingleTemplateCallback;
+        /** Defines templates for fields rendering. The field is specified by it's internal name. */
+        Fields?: FieldTemplates;
     }
 
     export interface FieldTemplateMap {
@@ -1272,6 +1297,7 @@ declare module SPClientTemplates {
     }
     export class TemplateManager {
         static RegisterTemplateOverrides(renderCtx: TemplateOverridesOptions): void;
+        static GetTemplates(renderCtx: any): Templates;
     }
 
     export interface ClientUserValue {
