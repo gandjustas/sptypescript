@@ -208,7 +208,7 @@ declare module SP {
             get_isReused(): boolean;
             get_isRoot(): boolean;
             get_isSourceTerm(): boolean;
-            get_labels: LabelCollection;
+            get_labels(): LabelCollection;
             get_localCustomProperties(): { [key: string]: string; };
             get_mergedTermIds(): SP.Guid[];
             get_parent(): Term;

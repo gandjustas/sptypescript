@@ -6084,7 +6084,7 @@ declare module SP {
         /** Provides access to social feeds.
             It provides methods to create posts, delete posts, read posts, and perform other operations on posts. */
         export class SocialFeedManager extends SP.ClientObject {
-            constructor();
+            constructor(context: SP.ClientRuntimeContext);
             /** Returns the current user */
             get_owner(): SocialActor;
             /** Specifies the URI of the personal site portal. */
@@ -6569,7 +6569,7 @@ declare module SP {
             get_isReused(): boolean;
             get_isRoot(): boolean;
             get_isSourceTerm(): boolean;
-            get_labels: LabelCollection;
+            get_labels(): LabelCollection;
             get_localCustomProperties(): { [key: string]: string; };
             get_mergedTermIds(): SP.Guid[];
             get_parent(): Term;

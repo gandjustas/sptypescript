@@ -367,7 +367,7 @@ declare module SP {
         /** Provides access to social feeds.
             It provides methods to create posts, delete posts, read posts, and perform other operations on posts. */
         export class SocialFeedManager extends SP.ClientObject {
-            constructor();
+            constructor(context: SP.ClientRuntimeContext);
             /** Returns the current user */
             get_owner(): SocialActor;
             /** Specifies the URI of the personal site portal. */
