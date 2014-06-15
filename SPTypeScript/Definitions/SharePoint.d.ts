@@ -7467,7 +7467,7 @@ declare module SP {
         }
 
         export module UIUtility {
-            export function generateRandomElement(): string;
+            export function generateRandomElementId(): string;
             export function cancelEvent(evt: Event): void;
             export function clearChildNodes(elem: HTMLElement): void;
             export function hideElement(elem: HTMLElement): void;
