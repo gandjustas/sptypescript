@@ -297,7 +297,7 @@ declare module Microsoft.SharePoint.Client.Search {
             itemAt: (index: number) => Sort;
             get_item: (index: number) => Sort;
             get_childItemType: () => Object;
-            add: (property: Sort) => void;
+            add: (strProperty: string, sortDirection: SortDirection) => void;
             clear: () => void;
         }
 

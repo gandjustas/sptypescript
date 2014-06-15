@@ -146,6 +146,18 @@ declare module SP {
             /** Same as get_url() */
             toString(): string;
         }
+
+        export class LocUtility {
+            static getLocalizedCountValue(locText:string, intervals:string, count:number):string;
+        }
+
+        export class VersionUtility {
+            static get_layoutsLatestVersionRelativeUrl():string;
+            static get_layoutsLatestVersionUrl(): string;
+            static getLayoutsPageUrl(pageName:string): string;
+            static getImageUrl(imageName:string): string;
+        }
+
     }
     
     export module DateTimeUtil {

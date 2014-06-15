@@ -1,14 +1,16 @@
+///<reference path="clienttemplates.d.ts" />
+
 declare module SP {
     export class SOD {
         static execute(fileName: string, functionName: string, ...args: any[]): void;
-        static executeFunc(fileName: string, typeName: string, fn: () => void ): void;
+        static executeFunc(fileName: string, typeName: string, fn: () => void): void;
         static executeOrDelayUntilEventNotified(func: Function, eventName: string): boolean;
-        static executeOrDelayUntilScriptLoaded(func: () => void , depScriptFileName: string): boolean;
+        static executeOrDelayUntilScriptLoaded(func: () => void, depScriptFileName: string): boolean;
         static notifyScriptLoadedAndExecuteWaitingJobs(scriptFileName: string): void;
         static notifyEventAndExecuteWaitingJobs(eventName: string, args?: any[]): void;
         static registerSod(fileName: string, url: string): void;
         static registerSodDep(fileName: string, dependentFileName: string): void;
-        static loadMultiple(keys: string[], fn: () => void , bSync?: boolean): void;
+        static loadMultiple(keys: string[], fn: () => void, bSync?: boolean): void;
         static delayUntilEventNotified(func: Function, eventName: string): void;
 
         static get_prefetch(): boolean;
@@ -16,13 +18,112 @@ declare module SP {
 
         static get_ribbonImagePrefetchEnabled(): boolean;
         static set_ribbonImagePrefetchEnabled(value: boolean): void;
-
-
     }
+
+    export enum ListLevelPermissionMask {
+        viewListItems,//: 1,
+        insertListItems,//: 2,
+        editListItems,//: 4,
+        deleteListItems,//: 8,
+        approveItems,//: 16,
+        openItems,//: 32,
+        viewVersions,//: 64,
+        deleteVersions,//: 128,
+        breakCheckout,//: 256,
+        managePersonalViews,//: 512,
+        manageLists//: 2048
+    }
+
+    export class HtmlBuilder {
+        constructor();
+        addAttribute(name: string, value: string): void;
+        addCssClass(cssClassName: string): void;
+        addCommunitiesCssClass(cssClassName: string): void;
+        renderBeginTag(tagName: string): void;
+        renderEndTag(): void;
+        write(s: string): void;
+        writeEncoded(s: string): void;
+        toString(): string;
+    }
+
+    export class ScriptHelpers {
+        static disableWebpartSelection(context: SPClientTemplates.RenderContext): void;
+        static getDocumentQueryPairs(): { [index: string]: string; };
+        static getFieldFromSchema(schema: SPClientTemplates.ListSchema, fieldName: string): SPClientTemplates.FieldSchema;
+        static getLayoutsPageUrl(pageName: string, webServerRelativeUrl: string): string;
+        static getListLevelPermissionMask(jsonItem: string): number;
+        static getTextAreaElementValue(textAreaElement: HTMLTextAreaElement): string;
+        static getUrlQueryPairs(docUrl: string): { [index: string]: string; };
+        static getUserFieldProperty(item: ListItem, fieldName: string, propertyName: string): any;
+        static hasPermission(listPermissionMask: number, listPermission: ListLevelPermissionMask): boolean;
+        static newGuid(): SP.Guid;
+        static isNullOrEmptyString(str: string): boolean;
+        static isNullOrUndefined(obj: any): boolean;
+        static isNullOrUndefinedOrEmpty(str: string): boolean;
+        static isUndefined(obj: any): boolean;
+        static replaceOrAddQueryString(url: string, key: string, value: string): string;
+        static removeHtml(str: string): string;
+        static removeStyleChildren(element: HTMLElement);
+        static removeHtmlAndTrimStringWithEllipsis(str: string, maxLength: number): string;
+        static setTextAreaElementValue(textAreaElement: HTMLTextAreaElement, newValue: string): void;
+        static truncateToInt(n: number): number;
+        static urlCombine(path1: string, path2: string): string;
+        static resizeImageToSquareLength(imgElement: HTMLImageElement, squareLength: number): void;
+    }
+
+
+    export class PageContextInfo {
+        static get_siteServerRelativeUrl(): string;
+        static get_webServerRelativeUrl(): string;
+        static get_webAbsoluteUrl(): string;
+        static get_serverRequestPath(): string;
+        static get_siteAbsoluteUrl(): string;
+        static get_webTitle(): string;
+        static get_tenantAppVersion(): string;
+        static get_webLogoUrl(): string;
+        static get_webLanguage(): number;
+        static get_currentLanguage(): number;
+        static get_pageItemId(): number;
+        static get_pageListId(): string;
+        static get_webPermMasks(): { High: number; Low: number; };
+        static get_currentCultureName(): string;
+        static get_currentUICultureName(): string;
+        static get_clientServerTimeDelta(): number;
+        static get_userLoginName(): string;
+        static get_webTemplate(): string;
+        get_pagePersonalizationScope(): string;
+    }
+
+    export class ContextPermissions {
+        has(perm: number): boolean;
+        hasPermissions(high: number, low: number): boolean;
+        fromJson(json: { High: number; Low: number; }): void;
+    }
+
+    export module ListOperation {
+        export module ViewOperation {
+            export function getSelectedView(): string;
+            export function navigateUp(viewId: string): void;
+            export function refreshView(viewId: string): void;
+        }
+        export module Selection {
+            export function selectListItem(iid: string, bSelect: boolean);
+            export function getSelectedItems(): { id: number; fsObjType: FileSystemObjectType; }[];
+            export function getSelectedList(): string;
+            export function getSelectedView(): string;
+            export function navigateUp(viewId: string): void;
+            export function deselectAllListItems(iid: string);
+        }
+        export module Overrides {
+            export function overrideDeleteConfirmation(listId: string, overrideText:string):void;
+        }
+    }
+
+
 }
 
 /** Register function to rerun on partial update in MDS-enabled site.*/
-declare function RegisterModuleInit(scriptFileName: string, initFunc: () => void ): void;
+declare function RegisterModuleInit(scriptFileName: string, initFunc: () => void): void;
 
 /** Provides access to url and query string parts.*/
 declare class JSRequest {
@@ -73,3 +174,140 @@ declare function AddEvtHandler(element: HTMLElement, event: string, func: EventL
 
 /** Gets query string parameter */
 declare function GetUrlKeyValue(key: string): string;
+
+declare class AjaxNavigate {
+    update(url:string, updateParts:Object, fullNavigate:boolean, anchorName:string):void;
+    add_navigate(handler: Function): void;
+    remove_navigate(handler:Function):void;
+    submit(formToSubmit:HTMLFormElement):void;
+    getParam(paramName:string):string;
+    getSavedFormAction():string;
+    get_href(): string;
+    get_hash(): string;
+    get_search():string;
+    convertMDSURLtoRegularURL(mdsPath:string):string;
+}
+
+declare var ajaxNavigate: AjaxNavigate;
+
+declare class Browseris {
+    firefox: boolean;
+    firefox36up: boolean;
+    firefox3up: boolean;
+    firefox4up: boolean;
+    ie: boolean;
+    ie55up: boolean;
+    ie5up: boolean;
+    ie7down: boolean;
+    ie8down: boolean;
+    ie9down: boolean;
+    ie8standard: boolean;
+    ie8standardUp: boolean;
+    ie9standardUp: boolean;
+    ipad: boolean;
+    windowsphone: boolean;
+    chrome: boolean;
+    chrome7up: boolean;
+    chrome8up: boolean;
+    chrome9up: boolean;
+    iever: boolean;
+    mac: boolean;
+    major: boolean;
+    msTouch: boolean;
+    isTouch: boolean;
+    nav: boolean;
+    nav6: boolean;
+    nav6up: boolean;
+    nav7up: boolean;
+    osver: boolean;
+    safari: boolean;
+    safari125up: boolean;
+    safari3up: boolean;
+    verIEFull: boolean;
+    w3c: boolean;
+    webKit: boolean;
+    win: boolean;
+    win8AppHost: boolean;
+    win32: boolean;
+    win64bit: boolean;
+    winnt: boolean;
+    armProcessor: boolean
+}
+
+declare var browseris: Browseris;
+
+interface ContextInfo extends SPClientTemplates.RenderContext {
+    AllowGridMode: boolean;
+    BasePermissions: any;
+    BaseViewID: any;
+    CascadeDeleteWarningMessage: string;
+    ContentTypesEnabled: boolean;
+    CurrentSelectedItems: boolean;
+    CurrentUserId: number;
+    EnableMinorVersions: boolean;
+    ExternalDataList: boolean;
+    HasRelatedCascadeLists: boolean;
+    HttpPath: string;
+    HttpRoot: string;
+    LastSelectableRowIdx: number;
+    LastSelectedItemIID: number;
+    LastRowIndexSelected: number;
+    RowFocusTimerID: number;
+    ListData: any;// SPClientTemplates.ListData_InView | SPClientTemplates.ListData_InForm
+    ListSchema: SPClientTemplates.ListSchema;
+    ModerationStatus: number;
+    PortalUrl: string;
+    RecycleBinEnabled: number;
+    SelectAllCbx: HTMLElement;
+    SendToLocationName: string;
+    SendToLocationUrl: string;
+    StateInitDone: boolean;
+    TableCbxFocusHandler: Function;
+    TableMouseoverHandler: Function;
+    TotalListItems: number;
+    WorkflowsAssociated: boolean;
+    clvp: any;
+    ctxId: number;
+    ctxType: any;
+    dictSel: any;
+    displayFormUrl: string;
+    editFormUrl: string;
+    imagesPath: string;
+    inGridMode: boolean;
+    inGridFullRender: boolean;
+    isForceCheckout: boolean;
+    isModerated: boolean;
+    isPortalTemplate: boolean;
+    isVersions: boolean;
+    isWebEditorPreview: boolean;
+    leavingGridMode: boolean;
+    loadingAsyncData: boolean;
+    listBaseType: number;
+    listName: string;
+    listTemplate: string;
+    listUrlDir: string;
+    newFormUrl: string;
+    onRefreshFailed: Function;
+    overrideDeleteConfirmation: string;
+    overrideFilterQstring: string;
+    recursiveView: boolean;
+    rootFolderForDisplay: string;
+    serverUrl: string;
+    verEnabled: boolean;
+    view: string;
+    queryString: string;
+    IsClientRendering: boolean;
+    wpq: string;
+    rootFolder: string;
+    IsAppWeb: boolean;
+    NewWOPIDocumentEnabled: boolean;
+    NewWOPIDocumentUrl: string;
+    AllowCreateFolder: boolean;
+    CanShareLinkForNewDocument: boolean;
+    noGroupCollapse: boolean;
+    SiteTemplateId: number;
+    ExcludeFromOfflineClient: boolean;
+
+}
+
+declare function GetCurrentCtx():ContextInfo;

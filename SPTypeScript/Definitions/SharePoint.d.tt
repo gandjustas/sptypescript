@@ -29,9 +29,11 @@
 <#= GetFileContents(@"SP.Workflow.d.ts") #>
 <#= GetFileContents(@"SP.WorkflowServices.d.ts") #>
 <#= GetFileContents(@"SP.Publishing.d.ts") #>
+<#= GetFileContents(@"SP.Policy.d.ts") #>
 <#= GetFileContents(@"autofill.d.ts") #>
 <#= GetFileContents(@"clientpeoplepicker.d.ts") #>
 <#= GetFileContents(@"reputation.d.ts") #>
+<#= GetFileContents(@"SPO.d.ts") #>
 
 <#+
 

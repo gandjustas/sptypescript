@@ -202,7 +202,13 @@ declare module SPClientTemplates {
         /** If SPFarm.Local.UseMinWidthForHtmlPicker is true, UseMinWidth will be set to true. Undefined in other cases. */
         UseMinWidth: boolean;
     }
-    export interface ListSchema_InForm {
+
+    export interface ListSchema {
+        Field: FieldSchema[];
+    }
+
+
+    export interface ListSchema_InForm extends ListSchema {
         Field: FieldSchema_InForm[];
     }
     export interface ListData_InForm {
@@ -276,7 +282,7 @@ declare module SPClientTemplates {
         /** Indicates whether the field can be sorted. Either "TRUE" or "FALSE" */
         Sortable: string;
     }
-    export interface ListSchema_InView {
+    export interface ListSchema_InView extends ListSchema {
         /** Key-value object that represents all aggregations defined for the view.
             Key specifies the field internal name, and value specifies the type of the aggregation. */
         Aggregate: { [name: string]: string; };
@@ -288,7 +294,6 @@ declare module SPClientTemplates {
         /** Either "0" or "1" */
         EffectivePresenceEnabled: string;
         /** If in grid mode (context.inGridMode == true), cast to FieldSchema_InForm[], otherwise cast to FieldSchema_InView[] */
-        Field: FieldSchema[];
         FieldSortParam: string;
         Filter: any;
         /** Either "0" or "1" */
@@ -476,26 +481,26 @@ declare module SPClientTemplates {
     }
 
     export interface RenderContext {
-        BaseViewID: number;
-        ControlMode: ClientControlMode;
-        CurrentCultureName: string;
-        CurrentLanguage: number;
-        CurrentSelectedItems: any;
-        CurrentUICultureName: string;
-        ListTemplateType: number;
-        OnPostRender: any;
-        OnPreRender: any;
-        onRefreshFailed: any;
-        RenderBody: (renderContext: RenderContext) => string;
-        RenderFieldByName: (renderContext: RenderContext, fieldName: string) => string;
-        RenderFields: (renderContext: RenderContext) => string;
-        RenderFooter: (renderContext: RenderContext) => string;
-        RenderGroups: (renderContext: RenderContext) => string;
-        RenderHeader: (renderContext: RenderContext) => string;
-        RenderItems: (renderContext: RenderContext) => string;
-        RenderView: (renderContext: RenderContext) => string;
-        SiteClientTag: string;
-        Templates: Templates;
+        BaseViewID?: number;
+        ControlMode?: ClientControlMode;
+        CurrentCultureName?: string;
+        CurrentLanguage?: number;
+        CurrentSelectedItems?: any;
+        CurrentUICultureName?: string;
+        ListTemplateType?: number;
+        OnPostRender?: any;
+        OnPreRender?: any;
+        onRefreshFailed?: any;
+        RenderBody?: (renderContext: RenderContext) => string;
+        RenderFieldByName?: (renderContext: RenderContext, fieldName: string) => string;
+        RenderFields?: (renderContext: RenderContext) => string;
+        RenderFooter?: (renderContext: RenderContext) => string;
+        RenderGroups?: (renderContext: RenderContext) => string;
+        RenderHeader?: (renderContext: RenderContext) => string;
+        RenderItems?: (renderContext: RenderContext) => string;
+        RenderView?: (renderContext: RenderContext) => string;
+        SiteClientTag?: string;
+        Templates?: Templates;
     }
 
     export interface SingleTemplateCallback {

@@ -22,39 +22,27 @@ declare module SP {
             get_textElement(): HTMLElement;
             constructor();
         }
-        export class Notify {
-            static addNotification(strHtml: string, bSticky: boolean): string;
-            static removeNotification(nid: string): void;
-            constructor();
+
+        export module Notify {
+            export function addNotification(strHtml: string, bSticky: boolean): string;
+            export function removeNotification(nid: string): void;
+            export function showLoadingNotification(bSticky: boolean): string;
+
+
+            export class Notification {
+                constructor(containerId: SPNotifications.ContainerID, strHtml: string, bSticky?: boolean, strTooltip?: string, onclickHandler?: () => void, extraData?: SPStatusNotificationData);
+                get_id(): string;
+                Show(bNoAnimate: boolean): void;
+                Hide(bNoAnimate: boolean): void;
+            }
+            export class NotificationContainer {
+                constructor(id: number, element: any, layer: number, notificationLimit?: number);
+                Clear(): void;
+                GetCount(): number;
+                SetEventHandler(eventId: SPNotifications.EventID, eventHandler: any): void;
+            }
         }
-        export enum ContainerID {
-            Basic,
-            Status,
-        }
-        export enum EventID {
-            OnShow,
-            OnHide,
-            OnDisplayNotification,
-            OnRemoveNotification,
-            OnNotificationCountChanged,
-        }
-        export class SPNotification {
-            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: boolean, strTooltip: string, onclickHandler: () => void , extraData: any);
-            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: boolean, strTooltip: string, onclickHandler: () => void );
-            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: boolean, strTooltip: string);
-            constructor(containerId: SP.UI.ContainerID, strHtml: string, bSticky: boolean);
-            constructor(containerId: SP.UI.ContainerID, strHtml: string);
-            get_id(): string;
-            Show(bNoAnimate: boolean): void;
-            Hide(bNoAnimate: boolean): void;
-        }
-        export class SPNotificationContainer {
-            constructor(id: number, element: any, layer: number, notificationLimit: number);
-            constructor(id: number, element: any, layer: number);
-            Clear(): void;
-            GetCount(): number;
-            SetEventHandler(eventId: SP.UI.EventID, eventHandler: any): void;
-        }
+
         export class Status {
             static addStatus(strTitle: string, strHtml: string, atBegining: boolean): string;
             static appendStatus(sid: string, strTitle: string, strHtml: string): string;
@@ -64,9 +52,10 @@ declare module SP {
             static removeAllStatus(hide: boolean): void;
             constructor();
         }
-        export class Workspace {
-            static add_resized(handler: () => void ): void;
-            static remove_resized(handler: () => void ): void;
+
+        export module Workspace {
+            export function add_resized(handler: () => void): void;
+            export function remove_resized(handler: () => void): void;
         }
         export class Menu {
             static create(id: string): SP.UI.Menu;
@@ -209,5 +198,118 @@ declare module SP {
             close(dialogResult: SP.UI.DialogResult): void;
         }
 
+
+        export class Command {
+            constructor(name: string, displayName: string);
+            get_displayName(): string;
+            set_displayName(value: string): string;
+
+            get_tooltip(): string;
+            set_tooltip(value: string): string;
+
+            get_isEnabled(): boolean;
+            set_isEnabled(value: boolean): boolean;
+
+            get_href(): string;
+            get_name(): string;
+            get_elementIDPrefix(): string;
+            set_elementIDPrefix(value: string): string;
+
+            get_linkElement():HTMLAnchorElement;
+
+            get_isDropDownCommand(): boolean;
+            set_isDropDownCommand(value: boolean): boolean;
+
+            attachEvents(): void;
+            render(builder: HtmlBuilder): void;
+
+
+            /**Should override*/
+            onClick(): void;
+
+        }
+
+
+        export class CommandBar {
+            constructor();
+            get_commands():Command[];
+            get_dropDownThreshold(): number;
+            set_dropDownThreshold(value: number): number;
+            get_elementID(): string;
+            get_overrideClass(): string;
+            set_overrideClass(value: string): string;
+            addCommand(action:Command):void;
+            insertCommand(action: Command, position:number): void;
+            render(builder: HtmlBuilder): void;
+            attachEvents(): void;
+            findCommandByName(name:string):Command;
+        }
+
+
+        export class PagingControl {
+            constructor(id: string);
+            render(innerContent:string): string;
+            postRender():void;
+            get_innerContent():HTMLSpanElement;
+            get_innerContentClass():string;
+            setButtonState(buttonId:number, state:number):void;
+            getButtonState(buttonId: number): number;
+            onWindowResized(): void;
+
+            /**Should override*/
+            onPrev(): void;
+            onNext(): void;
+
+            static ButtonIDs: {
+                prev: number;
+                next: number;
+            }
+
+            static ButtonState: {
+                hidden: number
+                disabled: number;
+                enabled: number;
+            }
+        }
+
+        export module UIUtility {
+            export function generateRandomElement(): string;
+            export function cancelEvent(evt: Event): void;
+            export function clearChildNodes(elem: HTMLElement): void;
+            export function hideElement(elem: HTMLElement): void;
+            export function showElement(elem: HTMLElement): void;
+            export function insertBefore(elem: HTMLElement, targetElement: HTMLElement): void;
+            export function insertAfter(elem: HTMLElement, targetElement: HTMLElement): void;
+            export function removeNode(elem: HTMLElement): void;
+            export function calculateOffsetLeft(elem: HTMLElement): number;
+            export function calculateOffsetTop(elem: HTMLElement): number;
+            export function createHtmlInputText(text: string): HTMLInputElement;
+            export function createHtmlInputCheck(isChecked: boolean): HTMLInputElement;
+            export function setInnerText(elem: HTMLElement, value: string): void;
+            export function getInnerText(elem: HTMLElement): string;
+            export function isTextNode(elem: HTMLElement): boolean;
+            export function isSvgNode(elem: HTMLElement): boolean;
+            export function isNodeOfType(elem: HTMLElement, tagNames: string[]): boolean;
+            export function focusValidOnThisNode(elem: HTMLElement): boolean;
+        }
     }
+}
+
+declare module SPNotifications {
+
+    export enum ContainerID {
+        Basic,
+        Status,
+    }
+    export enum EventID {
+        OnShow,
+        OnHide,
+        OnDisplayNotification,
+        OnRemoveNotification,
+        OnNotificationCountChanged,
+    }
+}
+
+declare class  SPStatusNotificationData {
+    constructor(text: string, subText: string, imageUrl: string, sip: string);
 }
