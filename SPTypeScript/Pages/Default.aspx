@@ -20,6 +20,7 @@
             <li><a href="../Lists/ConditionalFormattingTasksList">Client Side Rendering: Conditional formatting</a></li>
             <li><a href="../Lists/ListWithTabsForm/NewForm.aspx">Client Side Rendering: Form with tabs</a></li>
             <li><a href="../Lists/CustomFieldRenderingList">Client Side Rendering: Custom Field with Validator</a></li>
+            <li><a href="../Lists/Details1">Client Side Rendering: Cascaded Lookup field</a></li>
             <li><a href="../Lists/DetailsList">Client Side Rendering: Lookup field with search</a></li>
             <li><a href="../Lists/CSRCustomForm">Client Side Rendering: Make fields hidden and readonly in views and froms</a></li>
             <li><a href="../Sample_WorkflowServices">Workflow Services: Retrieve list of available workflow actions</a></li>

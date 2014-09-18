@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <!-- Не изменяйте значение атрибута Name, указанное ниже. Если оно не совпадает с именем папки элемента проекта "Список", при выполнении проекта возникнет ошибка. -->
+    <ListTemplate
+        Name="Details1"
+        Type="10009"
+        BaseType="0"
+        OnQuickLaunch="TRUE"
+        SecurityBits="11"
+        Sequence="410"
+        DisplayName="Details1"
+        Description="Мое определение списка"
+        Image="/_layouts/15/images/itgen.png"/>
+</Elements>

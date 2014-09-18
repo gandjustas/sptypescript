@@ -53,6 +53,9 @@
     <None Include="Extensions\CSOMPromise.js.map">
       <DependentUpon>CSOMPromise.ts</DependentUpon>
     </None>
+    <None Include="Extensions\typescripttemplates.min.js.map">
+      <DependentUpon>typescripttemplates.min.js</DependentUpon>
+    </None>
     <None Include="Sample_Animation\Animation.js.map">
       <DependentUpon>Animation.ts</DependentUpon>
     </None>
@@ -69,6 +72,18 @@
     <None Include="Sample_BasicCSOMActions\ChromeLoader.js.map" />
     <None Include="Sample_BasicCSOMActions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{36cba84f-cd3b-408d-b7a4-fc2b2c8972e5}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CascadedDropdown\Details1\Details1Instance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d35be178-0a20-4d99-9789-c47b9fa255a7}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CascadedDropdown\Details1\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{07e50a69-be9f-48f6-8b7d-ee6e6680c36a}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CascadedDropdown\FieldCascadedLookup.js.map">
+      <DependentUpon>FieldCascadedLookup.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CascadedDropdown\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8a3b571c-5a6e-426b-bebe-f4083e433d01}</SharePointProjectItemId>
     </None>
     <None Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.js.map" />
     <None Include="Sample_CSRCustomForm\CSRFormFields\SharePointProjectItem.spdata">
@@ -166,6 +181,7 @@
     <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
     </None>
+    <TypeScriptCompile Include="Sample_CascadedDropdown\FieldCascadedLookup.ts" />
     <TypeScriptCompile Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.ts" />
     <TypeScriptCompile Include="Sample_CSRTabs\CSRTabs.ts" />
     <Content Include="Definitions\SharePoint.d.ts">
@@ -194,6 +210,13 @@
     <Content Include="Sample_AutoFill\Page.aspx" />
     <Content Include="Sample_BasicCSOMActions\AppUIEvents.js" />
     <Content Include="Sample_BasicCSOMActions\ChromeLoader.js" />
+    <Content Include="Sample_CascadedDropdown\Details1\Details1Instance\Elements.xml" />
+    <Content Include="Sample_CascadedDropdown\Details1\Elements.xml" />
+    <Content Include="Sample_CascadedDropdown\Details1\Schema.xml" />
+    <Content Include="Sample_CascadedDropdown\Elements.xml" />
+    <Content Include="Sample_CascadedDropdown\FieldCascadedLookup.js">
+      <DependentUpon>FieldCascadedLookup.ts</DependentUpon>
+    </Content>
     <Content Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.js" />
     <Content Include="Sample_CSRCustomForm\CSRFormFields\Elements.xml" />
     <Content Include="Sample_CSRCustomForm\Elements.xml" />
@@ -221,7 +244,9 @@
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.ts" />
     <Content Include="Sample_FieldLookupBySearch\DetailsList\DetailsListInstance\Elements.xml" />
     <Content Include="Sample_FieldLookupBySearch\DetailsList\Elements.xml" />
-    <Content Include="Sample_FieldLookupBySearch\DetailsList\Schema.xml" />
+    <Content Include="Sample_FieldLookupBySearch\DetailsList\Schema.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Sample_FieldLookupBySearch\Elements.xml" />
     <TypeScriptCompile Include="Sample_FieldLookupBySearch\FieldLookupSearch.ts" />
     <Content Include="Sample_FieldLookupBySearch\FieldLookupSearch.js">

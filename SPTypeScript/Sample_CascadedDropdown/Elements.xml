@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Sample_CascadedDropdown">
+    <File Path="Sample_CascadedDropdown\FieldCascadedLookup.js.map" Url="Sample_CascadedDropdown/FieldCascadedLookup.js.map" ReplaceContent="TRUE" />
+    <File Path="Sample_CascadedDropdown\FieldCascadedLookup.js" Url="Sample_CascadedDropdown/FieldCascadedLookup.js" ReplaceContent="TRUE" />
+    <File Path="Sample_CascadedDropdown\FieldCascadedLookup.ts" Url="Sample_CascadedDropdown/FieldCascadedLookup.ts" ReplaceContent="TRUE" />
+  </Module>
+</Elements>
