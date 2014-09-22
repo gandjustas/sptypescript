@@ -6,5 +6,6 @@
     <ProjectItemFile Source="FieldLookupSearch.js" Target="Sample_FieldLookupBySearch\" Type="ElementFile" />
     <ProjectItemFile Source="FieldLookupSearch.js.map" Target="Sample_FieldLookupBySearch\" Type="ElementFile" />
     <ProjectItemFile Source="FieldLookupSearch.min.js" Target="Sample_FieldLookupBySearch\" Type="ElementFile" />
+    <ProjectItemFile Source="FieldLookupSearch.min.js.map" Target="Sample_FieldLookupBySearch\" Type="ElementFile" />
   </Files>
 </ProjectItem>

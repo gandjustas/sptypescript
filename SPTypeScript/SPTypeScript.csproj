@@ -53,6 +53,9 @@
     <None Include="Extensions\CSOMPromise.js.map">
       <DependentUpon>CSOMPromise.ts</DependentUpon>
     </None>
+    <None Include="Extensions\CSOMPromise.min.js.map">
+      <DependentUpon>CSOMPromise.min.js</DependentUpon>
+    </None>
     <None Include="Extensions\typescripttemplates.min.js.map">
       <DependentUpon>typescripttemplates.min.js</DependentUpon>
     </None>
@@ -69,6 +72,9 @@
       <SharePointProjectItemId>{b2bc5648-828d-4dd7-8044-e42f0b79a58f}</SharePointProjectItemId>
     </None>
     <None Include="Sample_BasicCSOMActions\AppUIEvents.js.map" />
+    <None Include="Sample_BasicCSOMActions\BasicTasksJSOM.min.js.map">
+      <DependentUpon>BasicTasksJSOM.min.js</DependentUpon>
+    </None>
     <None Include="Sample_BasicCSOMActions\ChromeLoader.js.map" />
     <None Include="Sample_BasicCSOMActions\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{36cba84f-cd3b-408d-b7a4-fc2b2c8972e5}</SharePointProjectItemId>
@@ -127,6 +133,9 @@
     </None>
     <None Include="Sample_FieldLookupBySearch\FieldLookupSearch.js.map">
       <DependentUpon>FieldLookupSearch.ts</DependentUpon>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\FieldLookupSearch.min.js.map">
+      <DependentUpon>FieldLookupSearch.min.js</DependentUpon>
     </None>
     <None Include="Sample_FieldLookupBySearch\MasterList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{8b7ba033-7866-4904-b4a3-35f82937c0be}</SharePointProjectItemId>
@@ -255,7 +264,9 @@
     <Content Include="Sample_FieldLookupBySearch\FieldLookupSearch.min.js">
       <DependentUpon>FieldLookupSearch.ts</DependentUpon>
     </Content>
-    <Content Include="Sample_FieldLookupBySearch\MasterList\Elements.xml" />
+    <Content Include="Sample_FieldLookupBySearch\MasterList\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Sample_mQuery\Elements.xml" />
     <TypeScriptCompile Include="Sample_mQuery\mquery.ts" />
     <Content Include="Sample_mQuery\mquery.js">

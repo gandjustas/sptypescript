@@ -9,5 +9,6 @@
     <File Path="Extensions\CSOMPromise.min.js" Url="Extensions/CSOMPromise.min.js" ReplaceContent="TRUE" />
     <File Path="Extensions\CSOMPromise.js.map" Url="Extensions/CSOMPromise.js.map" ReplaceContent="TRUE" />
     <File Path="Extensions\typescripttemplates.min.js.map" Url="Extensions/typescripttemplates.min.js.map" ReplaceContent="TRUE" />
+    <File Path="Extensions\CSOMPromise.min.js.map" Url="Extensions/CSOMPromise.min.js.map" ReplaceContent="TRUE" />
   </Module>
 </Elements>

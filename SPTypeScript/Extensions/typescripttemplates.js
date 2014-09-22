@@ -5,9 +5,92 @@ var CSR;
     
 
     function override(listTemplateType, baseViewId) {
-        return new csr(listTemplateType, baseViewId);
+        return new csr(listTemplateType, baseViewId).onPreRender(hookFormContext);
+
+        function hookFormContext(ctx) {
+            if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+                var fieldSchemaInForm = ctx.ListSchema.Field[0];
+
+                if (!ctx.FormContextHook) {
+                    ctx.FormContextHook = {};
+
+                    var oldRegisterGetValueCallback = ctx.FormContext.registerGetValueCallback;
+                    ctx.FormContext.registerGetValueCallback = function (fieldName, callback) {
+                        ctx.FormContextHook[fieldName].getValue = callback;
+                        oldRegisterGetValueCallback(fieldName, callback);
+                    };
+
+                    var oldUpdateControlValue = ctx.FormContext.updateControlValue;
+                    ctx.FormContext.updateControlValue = function (fieldName, value) {
+                        oldUpdateControlValue(fieldName, value);
+
+                        var hookedContext = ensureFormContextHookField(ctx.FormContextHook, fieldName);
+                        hookedContext.lastValue = value;
+
+                        var updatedCallbacks = ctx.FormContextHook[fieldName].updatedValueCallbacks;
+                        for (var i = 0; i < updatedCallbacks.length; i++) {
+                            updatedCallbacks[i](value, hookedContext.fieldSchema);
+                        }
+                    };
+                }
+                ensureFormContextHookField(ctx.FormContextHook, fieldSchemaInForm.Name).fieldSchema = fieldSchemaInForm;
+            }
+        }
     }
     CSR.override = override;
+
+    function getFieldValue(ctx, fieldName) {
+        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+            var contextWithHook = ctx;
+            if (contextWithHook.FormContextHook && contextWithHook.FormContextHook[fieldName] && contextWithHook.FormContextHook[fieldName].getValue) {
+                return contextWithHook.FormContextHook[fieldName].getValue();
+            }
+        }
+        return null;
+    }
+    CSR.getFieldValue = getFieldValue;
+
+    function getFieldSchema(ctx, fieldName) {
+        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+            var contextWithHook = ctx;
+            if (contextWithHook.FormContextHook && contextWithHook.FormContextHook[fieldName]) {
+                return contextWithHook.FormContextHook[fieldName].fieldSchema;
+            }
+        }
+        return null;
+    }
+    CSR.getFieldSchema = getFieldSchema;
+
+    function addUpdatedValueCallback(ctx, fieldName, callback) {
+        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+            var contextWithHook = ctx;
+            if (contextWithHook.FormContextHook) {
+                var f = ensureFormContextHookField(contextWithHook.FormContextHook, fieldName);
+                var callbacks = f.updatedValueCallbacks;
+                if (callbacks.indexOf(callback) == -1) {
+                    callbacks.push(callback);
+                    if (f.lastValue) {
+                        callback(f.lastValue, f.fieldSchema);
+                    }
+                }
+            }
+        }
+    }
+    CSR.addUpdatedValueCallback = addUpdatedValueCallback;
+
+    function removeUpdatedValueCallback(ctx, fieldName, callback) {
+        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+            var contextWithHook = ctx;
+            if (contextWithHook.FormContextHook) {
+                var callbacks = ensureFormContextHookField(contextWithHook.FormContextHook, fieldName).updatedValueCallbacks;
+                var index = callbacks.indexOf(callback);
+                if (index != -1) {
+                    callbacks.splice(index, 1);
+                }
+            }
+        }
+    }
+    CSR.removeUpdatedValueCallback = removeUpdatedValueCallback;
 
     function getControl(schema) {
         var id = schema.Name + '_' + schema.Id + '_$' + schema.FieldType + 'Field';
@@ -16,6 +99,14 @@ var CSR;
         return $get(id);
     }
     CSR.getControl = getControl;
+
+    function getFieldTemplate(field, mode) {
+        var ctx = { ListSchema: { Field: [field] }, FieldControlModes: {} };
+        ctx.FieldControlModes[field.Name] = mode;
+        var templates = SPClientTemplates.TemplateManager.GetTemplates(ctx);
+        return templates.Fields[field.Name];
+    }
+    CSR.getFieldTemplate = getFieldTemplate;
 
     var csr = (function () {
         function csr(ListTemplateType, BaseViewID) {
@@ -141,8 +232,12 @@ var CSR;
                     var fieldSchemaInForm = ctxInForm.ListSchema.Field[0];
                     if (fieldSchemaInForm.Name === fieldName) {
                         fieldSchemaInForm.ReadOnlyField = true;
-                        var template = GetFieldTemplate(fieldSchemaInForm, SPClientTemplates.ClientControlMode.DisplayForm);
+                        var template = getFieldTemplate(fieldSchemaInForm, SPClientTemplates.ClientControlMode.DisplayForm);
                         ctxInForm.Templates.Fields[fieldName] = template;
+
+                        ctxInForm.FormContext.registerGetValueCallback(fieldName, function () {
+                            return ctxInForm.ListData.Items[0][fieldName];
+                        });
                     }
                     //TODO: Fixup list data for User field
                 }
@@ -194,100 +289,50 @@ var CSR;
         };
 
         csr.prototype.cascadeLookup = function (fieldName, camlFilter) {
-            var parseRegex = /\{[^\}]+\}/g;
-            var dependentFieldNames = parseRegex.exec(camlFilter).map(function (v, idx, _) {
-                return stripBraces(v);
-            });
-            var dependentControls = {};
-
-            var _dropdownElt;
-            var _schema;
-            var _myData;
-
-            return this.fieldEdit(fieldName, SPFieldCascadedLookup_Edit).fieldNew(fieldName, SPFieldCascadedLookup_Edit).onPostRender(postRender);
-
-            function postRender(ctx) {
-                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
-                    var schema = ctx.ListSchema.Field[0];
-                    dependentFieldNames.forEach(function (field, idx, _) {
-                        if (schema.Name == field) {
-                            dependentControls[field] = CSR.getControl(schema);
-                            $addHandler(dependentControls[field], "change", function (e) {
-                                loadOptions();
-                            });
-                        }
-                    });
-                }
-            }
-
-            function loadOptions() {
-                SP.SOD.executeFunc('sp.js', 'SP.ClientContext', function () {
-                    var ctx = SP.ClientContext.get_current();
-
-                    //TODO: Handle lookup to another web
-                    var web = ctx.get_web();
-                    var listId = _schema.LookupListId;
-                    var list = web.get_lists().getById(listId);
-                    var query = new SP.CamlQuery();
-
-                    var predicate = camlFilter.replace(parseRegex, function (v, a) {
-                        var field = stripBraces(v);
-                        return dependentControls[field] ? dependentControls[field].value : '';
-                    });
-
-                    //TODO: Handle ShowField attribure
-                    query.set_viewXml('<View><Query><Where>' + predicate + '</Where></Query> ' + '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
-                    var results = list.getItems(query);
-                    ctx.load(results);
-                    ctx.executeQueryAsync(function (o, e) {
-                        while (_dropdownElt.options.length) {
-                            _dropdownElt.options.remove(0);
-                        }
-
-                        //TODO: Save selected value
-                        if (!_schema.Required) {
-                            var defaultOpt = new Option(Strings.STS.L_LookupFieldNoneOption, '0');
-                            _dropdownElt.options.add(defaultOpt);
-                        }
-
-                        var enumerator = results.getEnumerator();
-                        while (enumerator.moveNext()) {
-                            var c = enumerator.get_current();
-                            var opt = new Option(c.get_item('Title'), c.get_item('ID'));
-                            _dropdownElt.options.add(opt);
-                        }
-                        OnLookupValueChanged();
-                    }, function (o, args) {
-                        console.log(args.get_message());
-                    });
-                });
-            }
+            return this.fieldEdit(fieldName, SPFieldCascadedLookup_Edit).fieldNew(fieldName, SPFieldCascadedLookup_Edit);
 
             function SPFieldCascadedLookup_Edit(rCtx) {
+                var parseRegex = /\{[^\}]+\}/g;
+                var dependencyExpressions = [];
+                var result;
+                while ((result = parseRegex.exec(camlFilter))) {
+                    dependencyExpressions.push(stripBraces(result[0]));
+                }
+                var dependencyValues = {};
+
+                var _dropdownElt;
+                var _myData;
+
                 if (rCtx == null)
                     return '';
                 _myData = SPClientTemplates.Utility.GetFormContextForCurrentField(rCtx);
 
                 if (_myData == null || _myData.fieldSchema == null)
                     return '';
-                _schema = _myData.fieldSchema;
+
+                var _schema = _myData.fieldSchema;
+
+                var validators = new SPClientForms.ClientValidation.ValidatorSet();
+                validators.RegisterValidator(new BooleanValueValidator(function () {
+                    return _optionsLoaded;
+                }, "Wait until lookup values loaded and try again"));
 
                 if (_myData.fieldSchema.Required) {
-                    var validators = new SPClientForms.ClientValidation.ValidatorSet();
-
                     validators.RegisterValidator(new SPClientForms.ClientValidation.RequiredValidator());
-                    _myData.registerClientValidator(_myData.fieldName, validators);
                 }
+                _myData.registerClientValidator(_myData.fieldName, validators);
 
                 var _dropdownId = _myData.fieldName + '_' + _myData.fieldSchema.Id + '_$LookupField';
                 var _valueStr = _myData.fieldValue != null ? _myData.fieldValue : '';
-                var _selectedValue = SPClientTemplates.Utility.ParseLookupValue(_valueStr);
-                var _noValueSelected = _selectedValue.LookupId == 0;
+                var _selectedValue = SPClientTemplates.Utility.ParseLookupValue(_valueStr).LookupId;
+                var _noValueSelected = _selectedValue == 0;
+                var _optionsLoaded = false;
 
                 if (_noValueSelected)
                     _valueStr = '';
 
                 _myData.registerInitCallback(_myData.fieldName, InitLookupControl);
+
                 _myData.registerFocusCallback(_myData.fieldName, function () {
                     if (_dropdownElt != null)
                         _dropdownElt.focus();
@@ -304,80 +349,341 @@ var CSR;
                     _dropdownElt = document.getElementById(_dropdownId);
                     if (_dropdownElt != null)
                         AddEvtHandler(_dropdownElt, "onchange", OnLookupValueChanged);
-                    loadOptions();
+
+                    SP.SOD.executeFunc('sp.js', 'SP.ClientContext', function () {
+                        bindDependentControls(dependencyExpressions);
+                        loadOptions();
+                    });
                 }
 
                 function BuildLookupDropdownControl() {
                     var result = '<span dir="' + STSHtmlEncode(_myData.fieldSchema.Direction) + '">';
-
                     result += '<select id="' + STSHtmlEncode(_dropdownId) + '" title="' + STSHtmlEncode(_myData.fieldSchema.Title) + '">';
-
-                    //if (!_myData.fieldSchema.Required && _optionsArray.length > 0) {
-                    //    var noneOptSelectedStr = _noValueSelected ? 'selected="selected" ' : '';
-                    //    result += '<option ' + noneOptSelectedStr + 'value="0">' + STSHtmlEncode(Strings.STS.L_LookupFieldNoneOption) + '</option>';
-                    //}
-                    //for (var choiceIdx = 0; choiceIdx < _optionsArray.length; choiceIdx++) {
-                    //    _optionsDictionary[_optionsArray[choiceIdx].LookupId] = _optionsArray[choiceIdx].LookupValue;
-                    //    var curValueSelected = !_noValueSelected && _selectedValue.LookupId == _optionsArray[choiceIdx].LookupId;
-                    //    var curValueSelectedStr = curValueSelected ? 'selected="selected" ' : '';
-                    //    result += '<option ' + curValueSelectedStr + 'value="' + STSHtmlEncode(_optionsArray[choiceIdx].LookupId.toString()) + '">';
-                    //    result += STSHtmlEncode(_optionsArray[choiceIdx].LookupValue) + '</option>';
-                    //}
                     result += '</select><br/></span>';
                     return result;
                 }
-            }
 
-            function OnLookupValueChanged() {
-                if (_dropdownElt != null)
-                    _myData.updateControlValue(_myData.fieldName, GetCurrentLookupValue());
-            }
+                function OnLookupValueChanged() {
+                    if (_optionsLoaded) {
+                        if (_dropdownElt != null) {
+                            _myData.updateControlValue(_myData.fieldName, GetCurrentLookupValue());
+                            _selectedValue = parseInt(_dropdownElt.value, 10);
+                        }
+                    }
+                }
 
-            function GetCurrentLookupValue() {
-                if (_dropdownElt == null)
-                    return '';
-                return _dropdownElt.value == '0' || _dropdownElt.value == '' ? '' : _dropdownElt.value + ';#' + _dropdownElt.options[_dropdownElt.selectedIndex].text;
-            }
+                function GetCurrentLookupValue() {
+                    if (_dropdownElt == null)
+                        return '';
+                    return _dropdownElt.value == '0' || _dropdownElt.value == '' ? '' : _dropdownElt.value + ';#' + _dropdownElt.options[_dropdownElt.selectedIndex].text;
+                }
 
-            function stripBraces(input) {
-                return input.substring(1, input.length - 1);
+                function stripBraces(input) {
+                    return input.substring(1, input.length - 1);
+                }
+
+                function getDependencyValue(expr, value, listId, expressionParts, callback) {
+                    var isLookupValue = !!listId;
+                    if (isLookupValue) {
+                        var lookup = SPClientTemplates.Utility.ParseLookupValue(value);
+                        if (expressionParts.length == 1 && expressionParts[0] == 'Value') {
+                            value = lookup.LookupValue;
+                            expressionParts.shift();
+                        } else {
+                            value = lookup.LookupId.toString();
+                        }
+                    }
+
+                    if (expressionParts.length == 0) {
+                        dependencyValues[expr] = value;
+                        callback();
+                    } else {
+                        var ctx = SP.ClientContext.get_current();
+                        var web = ctx.get_web();
+
+                        //TODO: Handle lookup to another web
+                        var list = web.get_lists().getById(listId);
+                        var item = list.getItemById(parseInt(value, 10));
+                        var field = list.get_fields().getByInternalNameOrTitle(expressionParts.shift());
+                        ctx.load(item);
+                        ctx.load(field);
+
+                        ctx.executeQueryAsync(function (o, e) {
+                            var value = item.get_item(field.get_internalName());
+
+                            if (field.get_typeAsString() == 'Lookup') {
+                                field = ctx.castTo(field, SP.FieldLookup);
+                                var lookup = value;
+                                value = lookup.get_lookupId() + ';#' + lookup.get_lookupValue();
+                                listId = field.get_lookupList();
+                            }
+
+                            getDependencyValue(expr, value, listId, expressionParts, callback);
+                        }, function (o, args) {
+                            console.log(args.get_message());
+                        });
+                    }
+                }
+
+                function bindDependentControls(dependencyExpressions) {
+                    dependencyExpressions.forEach(function (expr) {
+                        var exprParts = expr.split(".");
+                        var field = exprParts.shift();
+
+                        CSR.addUpdatedValueCallback(rCtx, field, function (v, s) {
+                            getDependencyValue(expr, v, s.LookupListId, exprParts.slice(0), loadOptions);
+                        });
+                    });
+                }
+
+                function loadOptions() {
+                    _optionsLoaded = false;
+
+                    var ctx = SP.ClientContext.get_current();
+
+                    //TODO: Handle lookup to another web
+                    var web = ctx.get_web();
+                    var listId = _schema.LookupListId;
+                    var list = web.get_lists().getById(listId);
+                    var query = new SP.CamlQuery();
+
+                    var predicate = camlFilter.replace(parseRegex, function (v, a) {
+                        var expr = stripBraces(v);
+                        return dependencyValues[expr] ? dependencyValues[expr] : '';
+                    });
+
+                    //TODO: Handle ShowField attribure
+                    query.set_viewXml('<View><Query><Where>' + predicate + '</Where></Query> ' + '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
+                    var results = list.getItems(query);
+                    ctx.load(results);
+
+                    while (_dropdownElt.options.length) {
+                        _dropdownElt.options.remove(0);
+                    }
+
+                    ctx.executeQueryAsync(function (o, e) {
+                        if (!_schema.Required) {
+                            var defaultOpt = new Option(Strings.STS.L_LookupFieldNoneOption, '0', _selectedValue == 0, _selectedValue == 0);
+                            _dropdownElt.options.add(defaultOpt);
+                        }
+
+                        var enumerator = results.getEnumerator();
+                        while (enumerator.moveNext()) {
+                            var c = enumerator.get_current();
+                            var id = c.get_id();
+                            var opt = new Option(c.get_item('Title'), c.get_item('ID'), _selectedValue == id, _selectedValue == id);
+                            _dropdownElt.options.add(opt);
+                        }
+
+                        _optionsLoaded = true;
+                        OnLookupValueChanged();
+                    }, function (o, args) {
+                        console.log(args.get_message());
+                    });
+                }
             }
         };
 
         csr.prototype.computedValue = function (targetField, transform) {
+            var _this = this;
             var sourceField = [];
             for (var _i = 0; _i < (arguments.length - 2); _i++) {
                 sourceField[_i] = arguments[_i + 2];
             }
-            var dependentControls = {};
-            var targetControl;
+            var dependentValues = {};
 
             return this.onPostRender(function (ctx) {
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
                     var schema = ctx.ListSchema.Field[0];
 
                     if (schema.Name == targetField) {
-                        targetControl = CSR.getControl(schema);
-                    }
-
-                    sourceField.forEach(function (field, idx, _) {
-                        if (schema.Name == field) {
-                            dependentControls[field] = CSR.getControl(schema);
-                            $addHandler(dependentControls[field], "change", function (e) {
-                                updateValue();
+                        var targetControl = CSR.getControl(schema);
+                        sourceField.forEach(function (field) {
+                            CSR.addUpdatedValueCallback(ctx, field, function (v) {
+                                dependentValues[field] = v;
+                                targetControl.value = transform.apply(_this, sourceField.map(function (n) {
+                                    return dependentValues[n] || '';
+                                }));
                             });
-                        }
-                    });
+                        });
+                    }
                 }
             });
+        };
 
-            function updateValue() {
-                if (targetControl) {
-                    targetControl.value = transform.apply(this, sourceField.map(function (n) {
-                        return dependentControls[n] ? dependentControls[n].value : '';
-                    }));
+        csr.prototype.setInitialValue = function (fieldName, value, ignoreNull) {
+            if (value || !ignoreNull) {
+                return this.onPreRender(function (ctx) {
+                    var fieldSchemaInForm = ctx.ListSchema.Field[0];
+
+                    if (fieldSchemaInForm.Name === fieldName) {
+                        ctx.ListData.Items[0][fieldName] = value;
+                    }
+                });
+            } else {
+                return this;
+            }
+        };
+
+        csr.prototype.autofill = function (fieldName, init) {
+            return this.fieldNew(fieldName, SPFieldLookup_Autofill_Edit).fieldEdit(fieldName, SPFieldLookup_Autofill_Edit);
+
+            function SPFieldLookup_Autofill_Edit(rCtx) {
+                if (rCtx == null)
+                    return '';
+                var _myData = SPClientTemplates.Utility.GetFormContextForCurrentField(rCtx);
+
+                if (_myData == null || _myData.fieldSchema == null)
+                    return '';
+
+                var _autoFillControl;
+                var _textInputElt;
+                var _textInputId = _myData.fieldName + '_' + _myData.fieldSchema.Id + '_$' + _myData.fieldSchema.Type + 'Field';
+                var _autofillContainerId = _myData.fieldName + '_' + _myData.fieldSchema.Id + '_$AutoFill';
+
+                var validators = new SPClientForms.ClientValidation.ValidatorSet();
+                if (_myData.fieldSchema.Required) {
+                    validators.RegisterValidator(new SPClientForms.ClientValidation.RequiredValidator());
+                }
+                _myData.registerClientValidator(_myData.fieldName, validators);
+
+                _myData.registerInitCallback(_myData.fieldName, initAutoFillControl);
+                _myData.registerFocusCallback(_myData.fieldName, function () {
+                    if (_textInputElt != null)
+                        _textInputElt.focus();
+                });
+                _myData.registerValidationErrorCallback(_myData.fieldName, function (errorResult) {
+                    SPFormControl_AppendValidationErrorMessage(_textInputId, errorResult);
+                });
+                _myData.registerGetValueCallback(_myData.fieldName, function () {
+                    return _myData.fieldValue;
+                });
+                _myData.updateControlValue(_myData.fieldName, _myData.fieldValue);
+
+                return buildAutoFillControl();
+
+                function initAutoFillControl() {
+                    _textInputElt = document.getElementById(_textInputId);
+
+                    SP.SOD.executeFunc("autofill.js", "SPClientAutoFill", function () {
+                        _autoFillControl = new SPClientAutoFill(_textInputId, _autofillContainerId, function (_) {
+                            return callback();
+                        });
+                        var callback = init({
+                            renderContext: rCtx,
+                            fieldContext: _myData,
+                            autofill: _autoFillControl,
+                            control: _textInputElt
+                        });
+                        //_autoFillControl.AutoFillMinTextLength = 2;
+                        //_autoFillControl.VisibleItemCount = 15;
+                        //_autoFillControl.AutoFillTimeout = 500;
+                    });
+                }
+
+                //function OnPopulate(targetElement: HTMLInputElement) {
+                //}
+                //function OnLookupValueChanged() {
+                //    _myData.updateControlValue(_myData.fieldName, GetCurrentLookupValue());
+                //}
+                //function GetCurrentLookupValue() {
+                //    return _valueStr;
+                //}
+                function buildAutoFillControl() {
+                    var result = [];
+                    result.push('<div dir="' + STSHtmlEncode(_myData.fieldSchema.Direction) + '" style="position: relative;">');
+                    result.push('<input type="text" id="' + STSHtmlEncode(_textInputId) + '" title="' + STSHtmlEncode(_myData.fieldSchema.Title) + '"/>');
+
+                    result.push("<div class='sp-peoplepicker-autoFillContainer' id='" + STSHtmlEncode(_autofillContainerId) + "'></div>");
+                    result.push("</div>");
+
+                    return result.join("");
                 }
             }
+        };
+
+        csr.prototype.seachLookup = function (fieldName) {
+            return this.autofill(fieldName, function (ctx) {
+                var _myData = ctx.fieldContext;
+                var _schema = _myData.fieldSchema;
+                if (_myData.fieldSchema.Type != 'Lookup') {
+                    return null;
+                }
+
+                var _valueStr = _myData.fieldValue != null ? _myData.fieldValue : '';
+                var _selectedValue = SPClientTemplates.Utility.ParseLookupValue(_valueStr);
+                var _noValueSelected = _selectedValue.LookupId == 0;
+                ctx.control.value = _selectedValue.LookupValue;
+                $addHandler(ctx.control, "blur", function (_) {
+                    if (ctx.control.value == '') {
+                        _myData.fieldValue = '';
+                        _myData.updateControlValue(fieldName, _myData.fieldValue);
+                    }
+                });
+
+                if (_noValueSelected)
+                    _myData.fieldValue = '';
+
+                var _autoFillControl = ctx.autofill;
+                _autoFillControl.AutoFillMinTextLength = 2;
+                _autoFillControl.VisibleItemCount = 15;
+                _autoFillControl.AutoFillTimeout = 500;
+
+                return function () {
+                    var value = ctx.control.value;
+                    _autoFillControl.PopulateAutoFill([AutoFillOptionBuilder.buildLoadingItem('Please wait...')], onSelectItem);
+
+                    SP.SOD.executeFunc("sp.search.js", "Microsoft.SharePoint.Client.Search.Query", function () {
+                        var Search = Microsoft.SharePoint.Client.Search.Query;
+                        var ctx = SP.ClientContext.get_current();
+                        var query = new Search.KeywordQuery(ctx);
+                        query.set_rowLimit(_autoFillControl.VisibleItemCount);
+                        query.set_queryText('contentclass:STS_ListItem ListID:{' + _schema.LookupListId + '} ' + value);
+                        var selectProps = query.get_selectProperties();
+                        selectProps.clear();
+
+                        //TODO: Handle ShowField attribute
+                        selectProps.add('Title');
+                        selectProps.add('ListItemId');
+                        var executor = new Search.SearchExecutor(ctx);
+                        var result = executor.executeQuery(query);
+                        ctx.executeQueryAsync(function () {
+                            //TODO: Discover proper way to load collection
+                            var tableCollection = new Search.ResultTableCollection();
+                            tableCollection.initPropertiesFromJson(result.get_value());
+
+                            var relevantResults = tableCollection.get_item(0);
+                            var rows = relevantResults.get_resultRows();
+
+                            var items = [];
+                            for (var i = 0; i < rows.length; i++) {
+                                items.push(AutoFillOptionBuilder.buildOptionItem(parseInt(rows[i]["ListItemId"], 10), rows[i]["Title"]));
+                            }
+
+                            items.push(AutoFillOptionBuilder.buildSeparatorItem());
+
+                            if (relevantResults.get_totalRows() == 0)
+                                items.push(AutoFillOptionBuilder.buildFooterItem("No results. Please refine your query."));
+                            else
+                                items.push(AutoFillOptionBuilder.buildFooterItem("Showing " + rows.length + " of" + relevantResults.get_totalRows() + " items!"));
+
+                            _autoFillControl.PopulateAutoFill(items, onSelectItem);
+                        }, function (sender, args) {
+                            _autoFillControl.PopulateAutoFill([AutoFillOptionBuilder.buildFooterItem("Error executing query/ See log for details.")], onSelectItem);
+                            console.log(args.get_message());
+                        });
+                    });
+                };
+
+                function onSelectItem(targetInputId, item) {
+                    var targetElement = ctx.control;
+                    targetElement.value = item[SPClientAutoFill.DisplayTextProperty];
+                    _selectedValue.LookupId = item[SPClientAutoFill.KeyProperty];
+                    _selectedValue.LookupValue = item[SPClientAutoFill.DisplayTextProperty];
+                    _myData.fieldValue = item[SPClientAutoFill.KeyProperty] + ';#' + item[SPClientAutoFill.TitleTextProperty];
+                    _myData.updateControlValue(_myData.fieldSchema.Name, _myData.fieldValue);
+                }
+            });
         };
 
         csr.prototype.register = function () {
@@ -389,14 +695,65 @@ var CSR;
         return csr;
     })();
 
+    var AutoFillOptionBuilder = (function () {
+        function AutoFillOptionBuilder() {
+        }
+        AutoFillOptionBuilder.buildFooterItem = function (title) {
+            var item = {};
+
+            item[SPClientAutoFill.DisplayTextProperty] = title;
+            item[SPClientAutoFill.MenuOptionTypeProperty] = SPClientAutoFill.MenuOptionType.Footer;
+
+            return item;
+        };
+
+        AutoFillOptionBuilder.buildOptionItem = function (id, title, displayText, subDisplayText) {
+            var item = {};
+
+            item[SPClientAutoFill.KeyProperty] = id;
+            item[SPClientAutoFill.DisplayTextProperty] = displayText || title;
+            item[SPClientAutoFill.SubDisplayTextProperty] = subDisplayText;
+            item[SPClientAutoFill.TitleTextProperty] = title;
+            item[SPClientAutoFill.MenuOptionTypeProperty] = SPClientAutoFill.MenuOptionType.Option;
+
+            return item;
+        };
+
+        AutoFillOptionBuilder.buildSeparatorItem = function () {
+            var item = {};
+            item[SPClientAutoFill.MenuOptionTypeProperty] = SPClientAutoFill.MenuOptionType.Separator;
+            return item;
+        };
+
+        AutoFillOptionBuilder.buildLoadingItem = function (title) {
+            var item = {};
+
+            item[SPClientAutoFill.MenuOptionTypeProperty] = SPClientAutoFill.MenuOptionType.Loading;
+            item[SPClientAutoFill.DisplayTextProperty] = title;
+            return item;
+        };
+        return AutoFillOptionBuilder;
+    })();
+    CSR.AutoFillOptionBuilder = AutoFillOptionBuilder;
+
     
 
-    function GetFieldTemplate(field, mode) {
-        var ctx = { ListSchema: { Field: [field] }, FieldControlModes: {} };
-        ctx.FieldControlModes[field.Name] = mode;
-        var templates = SPClientTemplates.TemplateManager.GetTemplates(ctx);
-        return templates.Fields[field.Name];
+    function ensureFormContextHookField(hook, fieldName) {
+        return hook[fieldName] = hook[fieldName] || {
+            updatedValueCallbacks: []
+        };
     }
+
+    var BooleanValueValidator = (function () {
+        function BooleanValueValidator(valueGetter, validationMessage) {
+            this.valueGetter = valueGetter;
+            this.validationMessage = validationMessage;
+        }
+        BooleanValueValidator.prototype.Validate = function (value) {
+            return new SPClientForms.ClientValidation.ValidationResult(!this.valueGetter(), this.validationMessage);
+        };
+        return BooleanValueValidator;
+    })();
 })(CSR || (CSR = {}));
 
 if (typeof SP == 'object' && SP && typeof SP.SOD == 'object' && SP.SOD) {

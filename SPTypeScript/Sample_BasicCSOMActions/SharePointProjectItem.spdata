@@ -17,5 +17,6 @@
     <ProjectItemFile Source="ChromeLoader.js.map" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
     <ProjectItemFile Source="AppUIEvents.js" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
     <ProjectItemFile Source="AppUIEvents.js.map" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
+    <ProjectItemFile Source="BasicTasksJSOM.min.js.map" Target="Sample_BasicCSOMActions\" Type="ElementFile" />
   </Files>
 </ProjectItem>

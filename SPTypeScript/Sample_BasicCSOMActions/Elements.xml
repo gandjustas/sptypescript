@@ -16,5 +16,6 @@
     <File Path="Sample_BasicCSOMActions\ChromeLoader.js.map" Url="Sample_BasicCSOMActions/ChromeLoader.js.map" ReplaceContent="TRUE" />
     <File Path="Sample_BasicCSOMActions\AppUIEvents.js" Url="Sample_BasicCSOMActions/AppUIEvents.js" ReplaceContent="TRUE" />
     <File Path="Sample_BasicCSOMActions\AppUIEvents.js.map" Url="Sample_BasicCSOMActions/AppUIEvents.js.map" ReplaceContent="TRUE" />
+    <File Path="Sample_BasicCSOMActions\BasicTasksJSOM.min.js.map" Url="Sample_BasicCSOMActions/BasicTasksJSOM.min.js.map" ReplaceContent="TRUE" />
   </Module>
 </Elements>
