@@ -202,6 +202,38 @@ var CSR;
             return this;
         };
 
+        csr.prototype.onPreRenderField = function (field, callback) {
+            return this.onPreRender(function (ctx) {
+                var ctxInView = ctx;
+
+                //ListSchema schma exists in Form and in View rener context
+                var fields = ctxInView.ListSchema.Field;
+                if (fields) {
+                    for (var i = 0; i < fields.length; i++) {
+                        if (fields[i].Name === field) {
+                            callback(fields[i], ctx);
+                        }
+                    }
+                }
+            });
+        };
+
+        csr.prototype.onPostRenderField = function (field, callback) {
+            return this.onPostRender(function (ctx) {
+                var ctxInView = ctx;
+
+                //ListSchema schma exists in Form and in View rener context
+                var fields = ctxInView.ListSchema.Field;
+                if (fields) {
+                    for (var i = 0; i < fields.length; i++) {
+                        if (fields[i].Name === field) {
+                            callback(fields[i], ctx);
+                        }
+                    }
+                }
+            });
+        };
+
         csr.prototype.makeReadOnly = function (fieldName) {
             this.onPreRender(function (ctx) {
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid || ctx.ControlMode == SPClientTemplates.ClientControlMode.DisplayForm)
@@ -288,7 +320,7 @@ var CSR;
             return this;
         };
 
-        csr.prototype.cascadeLookup = function (fieldName, camlFilter) {
+        csr.prototype.filteredLookup = function (fieldName, camlFilter) {
             return this.fieldEdit(fieldName, SPFieldCascadedLookup_Edit).fieldNew(fieldName, SPFieldCascadedLookup_Edit);
 
             function SPFieldCascadedLookup_Edit(rCtx) {
@@ -682,6 +714,42 @@ var CSR;
                     _selectedValue.LookupValue = item[SPClientAutoFill.DisplayTextProperty];
                     _myData.fieldValue = item[SPClientAutoFill.KeyProperty] + ';#' + item[SPClientAutoFill.TitleTextProperty];
                     _myData.updateControlValue(_myData.fieldSchema.Name, _myData.fieldValue);
+                }
+            });
+        };
+
+        csr.prototype.lookupAddNew = function (fieldName, prompt, showDialog, contentTypeId) {
+            return this.onPostRenderField(fieldName, function (schema, ctx) {
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm)
+                    var control = CSR.getControl(schema);
+                if (control) {
+                    var weburl = _spPageContextInfo.webServerRelativeUrl;
+                    if (weburl[weburl.length - 1] == '/') {
+                        weburl = weburl.substring(0, weburl.length - 1);
+                    }
+                    var newFormUrl = weburl + '/_layouts/listform.aspx/listform.aspx?PageType=8' + "&ListId=" + encodeURIComponent('{' + schema.LookupListId + '}');
+                    if (contentTypeId) {
+                        newFormUrl += '&ContentTypeId=' + contentTypeId;
+                    }
+
+                    var link = document.createElement('a');
+                    link.href = "javascript:NewItem2(event, \'" + newFormUrl + "&Source=" + encodeURIComponent(document.location.href) + "')";
+                    link.textContent = prompt;
+                    if (control.nextElementSibling) {
+                        control.parentElement.insertBefore(link, control.nextElementSibling);
+                    } else {
+                        control.parentElement.appendChild(link);
+                    }
+
+                    if (showDialog) {
+                        $addHandler(link, "click", function (e) {
+                            SP.SOD.executeFunc('sp.ui.dialog.js', 'SP.UI.ModalDialog.ShowPopupDialog', function () {
+                                SP.UI.ModalDialog.ShowPopupDialog(newFormUrl);
+                            });
+                            e.stopPropagation();
+                            e.preventDefault();
+                        });
+                    }
                 }
             });
         };

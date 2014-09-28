@@ -4,7 +4,8 @@
 module _ {
     function init() {
         CSR.override(10009)
-            .cascadeLookup("Master", '<BeginsWith><FieldRef Name ="Title" /><Value Type = "Text" >{Title}</Value></BeginsWith>')
+            .filteredLookup("Master", '<BeginsWith><FieldRef Name ="Title" /><Value Type = "Text" >{Title}</Value></BeginsWith>')
+            .lookupAddNew("Master", "Add New Master item", true)
             .register();        
     }
 
