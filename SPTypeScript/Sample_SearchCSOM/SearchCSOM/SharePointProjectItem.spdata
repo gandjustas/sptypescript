@@ -7,5 +7,6 @@
     <ProjectItemFile Source="Search.js" Target="SearchCSOM\" Type="ElementFile" />
     <ProjectItemFile Source="Search.min.js" Target="SearchCSOM\" Type="ElementFile" />
     <ProjectItemFile Source="Search.js.map" Target="SearchCSOM\" Type="ElementFile" />
+    <ProjectItemFile Source="Search.min.js.map" Target="SearchCSOM\" Type="ElementFile" />
   </Files>
 </ProjectItem>

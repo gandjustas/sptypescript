@@ -329,7 +329,7 @@ module CSR {
             return this;
         }
 
-        filteredLookup(fieldName: string, camlFilter: string): ICSR {
+        filteredLookup(fieldName: string, camlFilter: string, listname?:string, lookupField?:string): ICSR {
 
 
             return this.fieldEdit(fieldName, SPFieldCascadedLookup_Edit)
@@ -398,7 +398,7 @@ module CSR {
 
                     SP.SOD.executeFunc('sp.js', 'SP.ClientContext', () => {
                         bindDependentControls(dependencyExpressions);
-                        loadOptions();
+                        loadOptions(true);
                     });
                 }
 
@@ -488,14 +488,14 @@ module CSR {
                 }
 
 
-                function loadOptions() {
+                function loadOptions(isFirstLoad?:boolean) {
                     _optionsLoaded = false;
 
                     var ctx = SP.ClientContext.get_current();
                     //TODO: Handle lookup to another web
                     var web = ctx.get_web();
                     var listId = _schema.LookupListId;
-                    var list = web.get_lists().getById(listId);
+                    var list = !listname ? web.get_lists().getById(listId) : web.get_lists().getByTitle(listname) ;
                     var query = new SP.CamlQuery();
 
                     var predicate = camlFilter.replace(parseRegex, (v, a) => {
@@ -504,18 +504,22 @@ module CSR {
                     });
 
                     //TODO: Handle ShowField attribure
-                    query.set_viewXml('<View><Query><Where>' +
-                        predicate +
-                        '</Where></Query> ' +
-                        '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
+                    if (predicate.substr(0, 6) == '<View>') {
+                        query.set_viewXml(predicate);
+                    } else {
+                        query.set_viewXml('<View><Query><Where>' +
+                            predicate +
+                            '</Where></Query> ' +
+                            '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
+                    }
                     var results = list.getItems(query);
                     ctx.load(results);
 
-                    while (_dropdownElt.options.length) {
-                        _dropdownElt.options.remove(0);
-                    }
 
                     ctx.executeQueryAsync((o, e) => {
+                        while (_dropdownElt.options.length) {
+                            _dropdownElt.options.remove(0);
+                        }
 
                         if (!_schema.Required) {
                             var defaultOpt = new Option(Strings.STS.L_LookupFieldNoneOption, '0', _selectedValue == 0, _selectedValue == 0);
@@ -525,13 +529,26 @@ module CSR {
                         var enumerator = results.getEnumerator();
                         while (enumerator.moveNext()) {
                             var c = enumerator.get_current();
-                            var id = c.get_id();
-                            var opt = new Option(c.get_item('Title'), c.get_item('ID'), _selectedValue == id, _selectedValue == id);
+                            var id: number;
+                            var text: string;
+
+                            if (!lookupField) {
+                                id = c.get_id();
+                                text = c.get_item('Title');
+                            } else {
+                                var value = <SP.FieldLookupValue>c.get_item(lookupField);
+                                id = value.get_lookupId();
+                                text = value.get_lookupValue();
+                            }
+                            var opt = opt = new Option(text, id.toString(),
+                                _selectedValue == id, _selectedValue == id);
                             _dropdownElt.options.add(opt);
                         }
 
                         _optionsLoaded = true;
-                        OnLookupValueChanged();
+                        if (!isFirstLoad) {
+                            OnLookupValueChanged();
+                        }
 
 
                     }, (o, args) => { console.log(args.get_message()); });
@@ -1009,7 +1026,7 @@ module CSR {
             @param fieldName Internal name of the field.
             @param camlFilter CAML predicate expression (inside Where clause). Use {FieldName} tokens for dependency fields substitutions.
         */
-        filteredLookup(fieldName: string, camlFilter: string): ICSR
+        filteredLookup(fieldName: string, camlFilter: string, listname?: string, lookupField?: string): ICSR
 
         /** Auto computes text-based field value based on another fields.
             @param targetField Internal name of the field.

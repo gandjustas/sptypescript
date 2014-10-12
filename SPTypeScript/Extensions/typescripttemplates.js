@@ -320,7 +320,7 @@ var CSR;
             return this;
         };
 
-        csr.prototype.filteredLookup = function (fieldName, camlFilter) {
+        csr.prototype.filteredLookup = function (fieldName, camlFilter, listname, lookupField) {
             return this.fieldEdit(fieldName, SPFieldCascadedLookup_Edit).fieldNew(fieldName, SPFieldCascadedLookup_Edit);
 
             function SPFieldCascadedLookup_Edit(rCtx) {
@@ -384,7 +384,7 @@ var CSR;
 
                     SP.SOD.executeFunc('sp.js', 'SP.ClientContext', function () {
                         bindDependentControls(dependencyExpressions);
-                        loadOptions();
+                        loadOptions(true);
                     });
                 }
 
@@ -468,7 +468,7 @@ var CSR;
                     });
                 }
 
-                function loadOptions() {
+                function loadOptions(isFirstLoad) {
                     _optionsLoaded = false;
 
                     var ctx = SP.ClientContext.get_current();
@@ -476,7 +476,7 @@ var CSR;
                     //TODO: Handle lookup to another web
                     var web = ctx.get_web();
                     var listId = _schema.LookupListId;
-                    var list = web.get_lists().getById(listId);
+                    var list = !listname ? web.get_lists().getById(listId) : web.get_lists().getByTitle(listname);
                     var query = new SP.CamlQuery();
 
                     var predicate = camlFilter.replace(parseRegex, function (v, a) {
@@ -485,15 +485,19 @@ var CSR;
                     });
 
                     //TODO: Handle ShowField attribure
-                    query.set_viewXml('<View><Query><Where>' + predicate + '</Where></Query> ' + '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
+                    if (predicate.substr(0, 6) == '<View>') {
+                        query.set_viewXml(predicate);
+                    } else {
+                        query.set_viewXml('<View><Query><Where>' + predicate + '</Where></Query> ' + '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
+                    }
                     var results = list.getItems(query);
                     ctx.load(results);
 
-                    while (_dropdownElt.options.length) {
-                        _dropdownElt.options.remove(0);
-                    }
-
                     ctx.executeQueryAsync(function (o, e) {
+                        while (_dropdownElt.options.length) {
+                            _dropdownElt.options.remove(0);
+                        }
+
                         if (!_schema.Required) {
                             var defaultOpt = new Option(Strings.STS.L_LookupFieldNoneOption, '0', _selectedValue == 0, _selectedValue == 0);
                             _dropdownElt.options.add(defaultOpt);
@@ -502,13 +506,25 @@ var CSR;
                         var enumerator = results.getEnumerator();
                         while (enumerator.moveNext()) {
                             var c = enumerator.get_current();
-                            var id = c.get_id();
-                            var opt = new Option(c.get_item('Title'), c.get_item('ID'), _selectedValue == id, _selectedValue == id);
+                            var id;
+                            var text;
+
+                            if (!lookupField) {
+                                id = c.get_id();
+                                text = c.get_item('Title');
+                            } else {
+                                var value = c.get_item(lookupField);
+                                id = value.get_lookupId();
+                                text = value.get_lookupValue();
+                            }
+                            var opt = opt = new Option(text, id.toString(), _selectedValue == id, _selectedValue == id);
                             _dropdownElt.options.add(opt);
                         }
 
                         _optionsLoaded = true;
-                        OnLookupValueChanged();
+                        if (!isFirstLoad) {
+                            OnLookupValueChanged();
+                        }
                     }, function (o, args) {
                         console.log(args.get_message());
                     });

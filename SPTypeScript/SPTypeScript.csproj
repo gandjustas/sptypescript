@@ -166,6 +166,9 @@
     <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
       <DependentUpon>Search.ts</DependentUpon>
     </None>
+    <None Include="Sample_SearchCSOM\SearchCSOM\Search.min.js.map">
+      <DependentUpon>Search.min.js</DependentUpon>
+    </None>
     <None Include="Sample_Social\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a5e6d115-1d70-4fc2-a237-5e9fa521413f}</SharePointProjectItemId>
     </None>

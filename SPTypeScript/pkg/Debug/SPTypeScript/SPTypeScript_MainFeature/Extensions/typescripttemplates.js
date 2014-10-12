@@ -727,13 +727,13 @@ var CSR;
                     if (weburl[weburl.length - 1] == '/') {
                         weburl = weburl.substring(0, weburl.length - 1);
                     }
-                    var newFormUrl = weburl + '/_layouts/listform.aspx/listform.aspx' + "?ListId={" + schema.LookupListId + '}';
+                    var newFormUrl = weburl + '/_layouts/listform.aspx/listform.aspx?PageType=8' + "&ListId=" + encodeURIComponent('{' + schema.LookupListId + '}');
                     if (contentTypeId) {
                         newFormUrl += '&ContentTypeId=' + contentTypeId;
                     }
 
                     var link = document.createElement('a');
-                    link.href = "javascript:NewItem2(event, \'" + newFormUrl + "&PageType=8&Source=" + encodeURIComponent(document.location.href) + "')";
+                    link.href = "javascript:NewItem2(event, \'" + newFormUrl + "&Source=" + encodeURIComponent(document.location.href) + "')";
                     link.textContent = prompt;
                     if (control.nextElementSibling) {
                         control.parentElement.insertBefore(link, control.nextElementSibling);
@@ -744,7 +744,7 @@ var CSR;
                     if (showDialog) {
                         $addHandler(link, "click", function (e) {
                             SP.SOD.executeFunc('sp.ui.dialog.js', 'SP.UI.ModalDialog.ShowPopupDialog', function () {
-                                SP.UI.ModalDialog.ShowPopupDialog(newFormUrl + "&PageType=9");
+                                SP.UI.ModalDialog.ShowPopupDialog(newFormUrl);
                             });
                             e.stopPropagation();
                             e.preventDefault();
