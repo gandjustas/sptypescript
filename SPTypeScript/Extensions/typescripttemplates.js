@@ -485,21 +485,23 @@ var CSR;
                     });
 
                     //TODO: Handle ShowField attribure
-                    if (predicate.substr(0, 6) == '<View>') {
+                    if (predicate.substr(0, 5) == '<View') {
                         query.set_viewXml(predicate);
                     } else {
-                        query.set_viewXml('<View><Query><Where>' + predicate + '</Where></Query> ' + '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
+                        query.set_viewXml('<View Scope="RecursiveAll"><Query><Where>' + predicate + '</Where></Query> ' + '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
                     }
                     var results = list.getItems(query);
                     ctx.load(results);
 
                     ctx.executeQueryAsync(function (o, e) {
+                        var selected = _selectedValue == 0;
+
                         while (_dropdownElt.options.length) {
                             _dropdownElt.options.remove(0);
                         }
 
                         if (!_schema.Required) {
-                            var defaultOpt = new Option(Strings.STS.L_LookupFieldNoneOption, '0', _selectedValue == 0, _selectedValue == 0);
+                            var defaultOpt = new Option(Strings.STS.L_LookupFieldNoneOption, '0', selected, selected);
                             _dropdownElt.options.add(defaultOpt);
                         }
 
@@ -517,13 +519,22 @@ var CSR;
                                 id = value.get_lookupId();
                                 text = value.get_lookupValue();
                             }
-                            var opt = opt = new Option(text, id.toString(), _selectedValue == id, _selectedValue == id);
+                            var isSelected = _selectedValue == id;
+                            if (isSelected) {
+                                selected = true;
+                            }
+                            var opt = new Option(text, id.toString(), isSelected, isSelected);
                             _dropdownElt.options.add(opt);
                         }
 
                         _optionsLoaded = true;
                         if (!isFirstLoad) {
                             OnLookupValueChanged();
+                        } else {
+                            if (_selectedValue == 0) {
+                                _dropdownElt.selectedIndex = 0;
+                                OnLookupValueChanged();
+                            }
                         }
                     }, function (o, args) {
                         console.log(args.get_message());
