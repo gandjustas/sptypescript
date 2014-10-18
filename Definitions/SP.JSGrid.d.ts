@@ -112,8 +112,7 @@ declare module SP {
             /** Get current delegate. */
             GetDelegate(delegateKey: JsGrid.DelegateType): any;
 
-            /** Re-render the specified row in the view.
-                Usually not necessary. */
+            /** Re-render the specified row in the view. */
             RefreshRow(recordKey: number): void;
             /** Re-render all rows in the view.
                 It can be used e.g. if you have some custom display controls and they are rendered differently depending on some external settings.
@@ -351,6 +350,11 @@ declare module SP {
             RowError,
             NewRow
         }
+        export enum ValidationState {
+            Valid,
+            Pending,
+            Invalid
+        }
 
         export class RowHeaderStyleId {
             static Transfer: string;
@@ -400,7 +404,6 @@ declare module SP {
                 oldRecordKey: number;
                 oldFieldKey: string;
             }
-
             export class RowFocusChanged implements IEventArgs {
                 constructor(newRecordKey: number, oldRecordKey: number);
                 newRecordKey: number;
@@ -415,7 +418,7 @@ declare module SP {
                 constructor(recordKey: number, fieldKey: string, changeKey: JsGrid.IChangeKey, bCancelled: boolean);
                 recordKey: number;
                 fieldKey: string;
-                changeKey: string;
+                changeKey: JsGrid.IChangeKey;
                 bCancelled: boolean;
             }
             export class Click implements IEventArgs {
@@ -426,14 +429,14 @@ declare module SP {
                 fieldKey: string;
             }
             export class PropertyChanged implements IEventArgs {
-                constructor(recordKey, fieldKey, oldProp, newProp, propType, changeKey, validationState);
+                constructor(recordKey: number, fieldKey: string, oldProp: SP.JsGrid.Internal.PropertyUpdate, newProp: SP.JsGrid.Internal.PropertyUpdate, propType: SP.JsGrid.IPropertyType, changeKey: SP.JsGrid.IChangeKey, validationState: SP.JsGrid.ValidationState);
                 recordKey: number;
                 fieldKey: string;
-                oldProp: any;
-                newProp: any;
-                propType: any;
-                changeKey: JsGrid.IChangeKey;
-                validationState: any;
+                oldProp: SP.JsGrid.Internal.PropertyUpdate;
+                newProp: SP.JsGrid.Internal.PropertyUpdate;
+                propType: SP.JsGrid.IPropertyType;
+                changeKey: SP.JsGrid.IChangeKey;
+                validationState: SP.JsGrid.ValidationState;
             }
             export class RecordInserted implements IEventArgs {
                 constructor(recordKey, recordIdx, afterRecordKey, changeKey);
@@ -532,12 +535,11 @@ declare module SP {
                 tableCache: SP.JsGrid.TableCache;
                 name: any; // TODO
                 bNotificationsEnabled: boolean;
-                styleManager: any; // TODO
+                styleManager: IStyleManager;
                 minHeaderHeight: number;
                 minRowHeight: number;
                 commandMgr: SP.JsGrid.CommandManager;
-                enabledRowHeaderAutoStates: SP.Utilities.Set; // TODO
-
+                enabledRowHeaderAutoStates: SP.Utilities.Set;
             }
         }
 
@@ -549,94 +551,165 @@ declare module SP {
             // todo
         }
 
+        export interface IStyleManager {
+            gridPaneStyle: IStyleType.GridPane;
+            columnHeaderStyleCollection: {
+                normal: IStyleType.Header;
+                normalHover: IStyleType.Header;
+                partSelected: IStyleType.Header;
+                partSelectedHover: IStyleType.Header;
+                allSelected: IStyleType.Header;
+                allSelectedHover: IStyleType.Header;
+            };
+            rowHeaderStyleCollection: {
+                normal: IStyleType.Header;
+                normalHover: IStyleType.Header;
+                partSelected: IStyleType.Header;
+                partSelectedHover: IStyleType.Header;
+                allSelected: IStyleType.Header;
+                allSelectedHover: IStyleType.Header;
+            };
+            splitterStyleCollection: {
+                normal: IStyleType.Splitter;
+                normalHandle: IStyleType.SplitterHandle;
+                hover: IStyleType.Splitter;
+                hoverHandle: IStyleType.SplitterHandle;
+                dra: IStyleType.Splitter;
+                dragHandle: IStyleType.SplitterHandle;
+            };
+            defaultCellStyle: IStyleType.Cell;
+            readOnlyCellStyle: IStyleType.Cell;
+            readOnlyFocusedCellStyle: IStyleType.Cell;
+            timescaleTierStyle: IStyleType.TimescaleTier;
+            groupingStyles: any[];
+            widgetDockStyle: IStyleType.Widget;
+            widgetDockHoverStyle: IStyleType.Widget;
+            widgetDockPressedStyle: IStyleType.Widget;
+            RegisterCellStyle(styleId: string, cellStyle: IStyleType.Cell): void;
+            GetCellStyle(styleId: string): IStyleType.Cell;
+            UpdateSplitterStyleFromCss(styleObject: IStyleType.Splitter, splitterStyleNameCollection): void;
+            UpdateHeaderStyleFromCss(styleObject: IStyleType.Header, headerStyleNameCol): void;
+            UpdateGridPaneStyleFromCss(styleObject: IStyleType.GridPane, gridStyleNameCollection): void;
+            UpdateDefaultCellStyleFromCss(styleObject: IStyleType.Cell, cssClass): void;
+            UpdateGroupStylesFromCss(styleObject, prefix): void;
+        }
+
+        export interface IStyleType { }
+        export module IStyleType {
+            export interface Splitter extends IStyleType {
+                outerBorderColor: any;
+                leftInnerBorderColor: any;
+                innerBorderColor: any;
+                backgroundColor: any;
+            }
+            export interface SplitterHandle extends IStyleType{
+                outerBorderColor: any;
+                leftInnerBorderColor: any;
+                innerBorderColor: any;
+                backgroundColor: any;
+                gripUpperColor: any;
+                gripLowerColor: any;
+            }
+            export interface GridPane {
+                verticalBorderColor: any;
+                verticalBorderStyle: any;
+                horizontalBorderColor: any;
+                horizontalBorderStyle: any;
+                backgroundColor: any;
+                columnDropIndicatorColor: any;
+                rowDropIndicatorColor: any;
+                linkColor: any;
+                visitedLinkColor: any;
+                copyRectForeBorderColor: any;
+                copyRectBackBorderColor: any;
+                focusRectBorderColor: any;
+                selectionRectBorderColor: any;
+                selectedCellBgColor: any;
+                readonlySelectionRectBorderColor: any;
+                changeHighlightCellBgColor: any;
+                fillRectBorderColor: any;
+                errorRectBorderColor: any;
+            }
+            export interface Header {
+                font: any;
+                fontSize: any;
+                fontWeight: any;
+                textColor: any;
+                backgroundColor: any;
+                outerBorderColor: any;
+                innerBorderColor: any;
+                eyeBrowBorderColor: any;
+                eyeBrowColor: any;
+                menuColor: any;
+                menuBorderColor: any;
+                resizeColor: any;
+                resizeBorderColor: any;
+                menuHoverColor: any;
+                menuHoverBorderColor: any;
+                resizeHoverColor: any;
+                resizeHoverBorderColor: any;
+                eyeBrowHoverColor: any;
+                eyeBrowHoverBorderColor: any;
+                elementClickColor: any;
+                elementClickBorderColor: any;
+            }
+            export interface Cell extends IStyleType {
+                /** -> CSS font-family */
+                font: any;
+                /** -> CSS font-size */
+                fontSize: any;
+                /** -> CSS font-weight */
+                fontWeight: any;
+                /** -> CSS font-style */
+                fontStyle: any;
+                /** -> CSS color */
+                textColor: any;
+                /** -> CSS background-color */
+                backgroundColor: any;
+                /** -> CSS text-align */
+                textAlign: any;
+            }
+            export interface Widget {
+                backgroundColor: any;
+                borderColor: any;
+            }
+            export interface RowHeaderStyle {
+                backgroundColor: any;
+                outerBorderColor: any;
+                innerBorderColor: any;
+            }
+            export interface TimescaleTier {
+                font: any;
+                fontSize: any;
+                fontWeight: any;
+                textColor: any;
+                backgroundColor: any;
+                verticalBorderColor: any;
+                verticalBorderStyle: any;
+                horizontalBorderColor: any;
+                horizontalBorderStyle: any;
+                outerBorderColor: any;
+                todayLineColor: any;
+            }
+        }
+
         export class Style {
 
             static Type: {
-                Splitter: {
-                    outerBorderColor: any;
-                    leftInnerBorderColor: any;
-                    innerBorderColor: any;
-                    backgroundColor: any;
-                };
-                SplitterHandle: {
-                    outerBorderColor: any;
-                    leftInnerBorderColor: any;
-                    innerBorderColor: any;
-                    backgroundColor: any;
-                    gripUpperColor: any;
-                    gripLowerColor: any;
-                };
-                GridPane: {
-                    verticalBorderColor: any;
-                    verticalBorderStyle: any;
-                    horizontalBorderColor: any;
-                    horizontalBorderStyle: any;
-                    backgroundColor: any;
-                    columnDropIndicatorColor: any;
-                    rowDropIndicatorColor: any;
-                    linkColor: any;
-                    visitedLinkColor: any;
-                    copyRectForeBorderColor: any;
-                    copyRectBackBorderColor: any;
-                    focusRectBorderColor: any;
-                    selectionRectBorderColor: any;
-                    selectedCellBgColor: any;
-                    readonlySelectionRectBorderColor: any;
-                    changeHighlightCellBgColor: any;
-                    fillRectBorderColor: any;
-                    errorRectBorderColor: any;
-                };
-                Header: {
-                    font: any;
-                    fontSize: any;
-                    fontWeight: any;
-                    textColor: any;
-                    backgroundColor: any;
-                    outerBorderColor: any;
-                    innerBorderColor: any;
-                    eyeBrowBorderColor: any;
-                    eyeBrowColor: any;
-                    menuColor: any;
-                    menuBorderColor: any;
-                    resizeColor: any;
-                    resizeBorderColor: any;
-                    menuHoverColor: any;
-                    menuHoverBorderColor: any;
-                    resizeHoverColor: any;
-                    resizeHoverBorderColor: any;
-                    eyeBrowHoverColor: any;
-                    eyeBrowHoverBorderColor: any;
-                    elementClickColor: any;
-                    elementClickBorderColor: any;
-                };
-                RowHeaderStyle: any;
-                TimescaleTier: any;
-                Cell: {
-                    /** -> CSS font-family */
-                    font: any;
-                    /** -> CSS font-size */
-                    fontSize: any;
-                    /** -> CSS font-weight */
-                    fontWeight: any;
-                    /** -> CSS font-style */
-                    fontStyle: any;
-                    /** -> CSS color */
-                    textColor: any;
-                    /** -> CSS background-color */
-                    backgroundColor: any;
-                    /** -> CSS text-align */
-                    textAlign: any;
-                };
-                Widget: {
-                    backgroundColor: any;
-                    borderColor: any;
-                }
+                Splitter: IStyleType.Splitter;
+                SplitterHandle: IStyleType.SplitterHandle;
+                GridPane: IStyleType.GridPane;
+                Header: IStyleType.Header;
+                RowHeaderStyle: IStyleType.RowHeaderStyle;
+                TimescaleTier: IStyleType.TimescaleTier;
+                Cell: IStyleType.Cell;
+                Widget: IStyleType.Widget;
             };
 
             static SetRTL: { (rtlObject): void; };
-            static MakeJsGridStyleManager: { (): any };
-            static CreateStyleFromCss: { (styleType, cssStyleName, optExistingStyle, optClassId): any; };
-            static CreateStyle: { (styleType, styleProps): any; };
+            static MakeJsGridStyleManager: { (): IStyleManager };
+            static CreateStyleFromCss: { (styleType: IStyleType, cssStyleName: string, optExistingStyle, optClassId): any; };
+            static CreateStyle: { (styleType: IStyleType, styleProps: any): any; };
             static MergeCellStyles: { (majorStyle, minorStyle): any; };
             static ApplyCellStyle: { (td, style): void; };
             static ApplyRowHeaderStyle: { (domObj, style, fnGetHeaderSibling): void; };
@@ -799,6 +872,122 @@ declare module SP {
             GetIsMultiValue(): boolean;
         }
 
+        export interface IEditActorGridContext {
+            jsGridObj: JsGridControl;
+            parentNode: HTMLElement;
+            styleManager: IStyleManager;
+            RTL: any;
+            emptyValue: any;
+            bLightFocus: boolean;
+            OnKeyDown: { (domEvent: any): void; };
+        }
+
+        export interface IPropertyType {
+            ID: string;
+            BeginValidateNormalizeConvert(recordKey: number, fieldKey: string, newValue: any, bIsLocalized: boolean, fnCallback: { (args: { isValid: boolean; dataValue: any; normalizedLocValue: string }): void; }, fnError: any): void;
+        }
+
+        export interface ILookupPropertyType extends IPropertyType {
+            GetItems(fnCallback: any): void;
+            DataToLocalized(dataValue: any): string;
+            LocalizedToData(localized: string): any;
+            GetImageSource(record: IRecord, dataValue: any): string;
+            GetStyleId(dataValue: any): string;
+            GetIsLimitedToList(): boolean;
+            GetSerializableLookupPropType(): { items: any[]; id: string; bLimitToList: boolean };
+        }
+
+        export interface IMultiValuePropertyType extends IPropertyType {
+            bMultiValue: boolean;
+            separator: string;
+            singleValuePropType: string;
+            GetSerializableMultiValuePropType(): { singleValuePropTypeID: string; separatorChar: string; bDelayInit: boolean; };
+            InitSingleValuePropType(): void;
+            LocStrToLocStrArray(locStr: string): string[];
+            LocStrArrayToLocStr(locStrArray: string[]): string;
+        }
+
+        export class PropertyType {
+            /** Lookup property type factory, based on SP.JsGrid.PropertyType.LookupTable class.
+                displayCtrlName should be one of the following: SP.JsGrid.DisplayControl.Type.Image, SP.JsGrid.DisplayControl.Type.ImageText or SP.JsGrid.DisplayControl.Type.Text
+             */
+            static RegisterNewLookupPropType(id: string, items: any[], displayCtrlName: string, bLimitToList: boolean): void;
+
+            /** Register a custom property type. */
+            static RegisterNewCustomPropType(propType: IPropertyType, displayCtrlName: string, editControlName: string, widgetControlNames: string[]): void;
+
+            /** Register a custom property type, where display and edit controls, and also widgets, are derived from the specified parent property type. */
+            static RegisterNewDerivedCustomPropType(propType: IPropertyType, baseTypeName: string): void;
+        }
+
+        export module PropertyType {
+            export class String implements IPropertyType {
+                constructor();
+                ID: string;
+                BeginValidateNormalizeConvert(recordKey: number, fieldKey: string, newValue: any, bIsLocalized: boolean, fnCallback: { (args: { isValid: boolean; dataValue: any; normalizedLocValue: string }): void; }, fnError: any): void;
+                toString(): string;
+            }
+            export class LookupTable implements ILookupPropertyType {
+                constructor(items: any[], id: string, bLimitToList: boolean);
+                ID: string;
+                BeginValidateNormalizeConvert(recordKey: number, fieldKey: string, newValue: any, bIsLocalized: boolean, fnCallback: { (args: { isValid: boolean; dataValue: any; normalizedLocValue: string }): void; }, fnError: any): void;
+                GetItems(fnCallback: any): void;
+                DataToLocalized(dataValue: any): string;
+                LocalizedToData(localized: string): any;
+                GetImageSource(record: IRecord, dataValue: any): string;
+                GetStyleId(dataValue: any): string;
+                GetIsLimitedToList(): boolean;
+                GetSerializableLookupPropType(): { items: any[]; id: string; bLimitToList: boolean };
+
+            }
+            export class CheckBoxBoolean implements IPropertyType {
+                constructor();
+                ID: string;
+                BeginValidateNormalizeConvert(recordKey: number, fieldKey: string, newValue: any, bIsLocalized: boolean, fnCallback: { (args: { isValid: boolean; dataValue: any; normalizedLocValue: string }): void; }, fnError: any): void;
+                DataToLocalized(dataValue: any): string;
+                GetBool(dataValue: any): boolean;
+                toString(): string;
+            }
+            export class DropDownBoolean implements IPropertyType {
+                constructor();
+                ID: string;
+                BeginValidateNormalizeConvert(recordKey: number, fieldKey: string, newValue: any, bIsLocalized: boolean, fnCallback: { (args: { isValid: boolean; dataValue: any; normalizedLocValue: string }): void; }, fnError: any): void;
+                DataToLocalized(dataValue: any): string;
+                GetBool(dataValue: any): boolean;
+                toString(): string;
+            }
+            export class MultiValuePropType implements IMultiValuePropertyType {
+                ID: string;
+                BeginValidateNormalizeConvert(recordKey: number, fieldKey: string, newValue: any, bIsLocalized: boolean, fnCallback: { (args: { isValid: boolean; dataValue: any; normalizedLocValue: string }): void; }, fnError: any): void;
+                bMultiValue: boolean;
+                separator: string;
+                singleValuePropType: string;
+                GetSerializableMultiValuePropType(): { singleValuePropTypeID: string; separatorChar: string; bDelayInit: boolean; };
+                InitSingleValuePropType(): void;
+                LocStrToLocStrArray(locStr: string): string[];
+                LocStrArrayToLocStr(locStrArray: string[]): string;
+            }
+            export class HyperLink implements IPropertyType {
+                ID: string;
+                BeginValidateNormalizeConvert(recordKey: number, fieldKey: string, newValue: any, bIsLocalized: boolean, fnCallback: { (args: { isValid: boolean; dataValue: any; normalizedLocValue: string }): void; }, fnError: any): void;
+                bHyperlink: boolean;
+                DataToLocalized(dataValue: any): string;
+                GetAddress(dataValue: any): string;
+                /** Returns string like this: '"http://site.com, Site title"' */
+                GetCopyValue(record: IRecord, dataValue: any, locValue: string): string;
+                toString(): string;
+            }
+
+
+            export class Utils {
+                static RegisterDisplayControl(name: string, singleton, requiredFunctionNames: string[]);
+                static RegisterEditControl(name: string, factory: { (gridContext): IPropertyType; }, requiredFunctionNames: string[]);
+                static RegisterWidgetControl(name: string, factory: { (gridContext): IPropertyType; }, requiredFunctionNames: string[]);
+
+                static UpdateDisplayControlForPropType(propTypeName: string, displayControlType: string);
+            }
+        }
+
         export module WidgetControl {
             export class Type {
                 static Demo: string;
@@ -826,6 +1015,12 @@ declare module SP {
                 NotifySynchronizeToChange(changeKey: IChangeKey): void;
                 NotifyRollbackChange(changeKey: IChangeKey): void;
                 NotifyVacateChange(changeKey: IChangeKey): void;
+            }
+
+            export class PropertyUpdate {
+                constructor(data: any, localized: string);
+                data: any;
+                localized: string;
             }
         }
 
