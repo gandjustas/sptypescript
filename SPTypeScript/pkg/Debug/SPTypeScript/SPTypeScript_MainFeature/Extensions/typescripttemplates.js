@@ -9,31 +9,33 @@ var CSR;
 
         function hookFormContext(ctx) {
             if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
-                var fieldSchemaInForm = ctx.ListSchema.Field[0];
+                for (var i = 0; i < ctx.ListSchema.Field.length; i++) {
+                    var fieldSchemaInForm = ctx.ListSchema.Field[i];
 
-                if (!ctx.FormContextHook) {
-                    ctx.FormContextHook = {};
+                    if (!ctx.FormContextHook) {
+                        ctx.FormContextHook = {};
 
-                    var oldRegisterGetValueCallback = ctx.FormContext.registerGetValueCallback;
-                    ctx.FormContext.registerGetValueCallback = function (fieldName, callback) {
-                        ctx.FormContextHook[fieldName].getValue = callback;
-                        oldRegisterGetValueCallback(fieldName, callback);
-                    };
+                        var oldRegisterGetValueCallback = ctx.FormContext.registerGetValueCallback;
+                        ctx.FormContext.registerGetValueCallback = function (fieldName, callback) {
+                            ctx.FormContextHook[fieldName].getValue = callback;
+                            oldRegisterGetValueCallback(fieldName, callback);
+                        };
 
-                    var oldUpdateControlValue = ctx.FormContext.updateControlValue;
-                    ctx.FormContext.updateControlValue = function (fieldName, value) {
-                        oldUpdateControlValue(fieldName, value);
+                        var oldUpdateControlValue = ctx.FormContext.updateControlValue;
+                        ctx.FormContext.updateControlValue = function (fieldName, value) {
+                            oldUpdateControlValue(fieldName, value);
 
-                        var hookedContext = ensureFormContextHookField(ctx.FormContextHook, fieldName);
-                        hookedContext.lastValue = value;
+                            var hookedContext = ensureFormContextHookField(ctx.FormContextHook, fieldName);
+                            hookedContext.lastValue = value;
 
-                        var updatedCallbacks = ctx.FormContextHook[fieldName].updatedValueCallbacks;
-                        for (var i = 0; i < updatedCallbacks.length; i++) {
-                            updatedCallbacks[i](value, hookedContext.fieldSchema);
-                        }
-                    };
+                            var updatedCallbacks = ctx.FormContextHook[fieldName].updatedValueCallbacks;
+                            for (var i = 0; i < updatedCallbacks.length; i++) {
+                                updatedCallbacks[i](value, hookedContext.fieldSchema);
+                            }
+                        };
+                    }
+                    ensureFormContextHookField(ctx.FormContextHook, fieldSchemaInForm.Name).fieldSchema = fieldSchemaInForm;
                 }
-                ensureFormContextHookField(ctx.FormContextHook, fieldSchemaInForm.Name).fieldSchema = fieldSchemaInForm;
             }
         }
     }
@@ -235,92 +237,68 @@ var CSR;
         };
 
         csr.prototype.makeReadOnly = function (fieldName) {
-            this.onPreRender(function (ctx) {
+            return this.onPreRenderField(fieldName, function (schema, ctx) {
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid || ctx.ControlMode == SPClientTemplates.ClientControlMode.DisplayForm)
                     return;
+                schema.ReadOnlyField = true;
+                schema.ReadOnly = "TRUE";
 
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
                     var ctxInView = ctx;
-
-                    var fieldSchema;
-                    var fields = ctxInView.ListSchema.Field;
-
-                    for (var i = 0; i < fields.length; i++) {
-                        if (fields[i].Name === fieldName) {
-                            fieldSchema = fields[i];
-                        }
-                    }
-                    if (fieldSchema) {
-                        if (ctxInView.inGridMode) {
-                            //TODO: Disable editing in grid mode
-                            fieldSchema.ReadOnlyField = true;
-                        } else {
-                            var fieldSchemaInView = fieldSchema;
-                            fieldSchemaInView.ReadOnly = "TRUE";
-                        }
+                    if (ctxInView.inGridMode) {
+                        //TODO: Disable editing in grid mode
                     }
                 } else {
                     var ctxInForm = ctx;
-                    var fieldSchemaInForm = ctxInForm.ListSchema.Field[0];
-                    if (fieldSchemaInForm.Name === fieldName) {
-                        fieldSchemaInForm.ReadOnlyField = true;
-                        var template = getFieldTemplate(fieldSchemaInForm, SPClientTemplates.ClientControlMode.DisplayForm);
+                    if (schema.Type != 'User' && schema.Type != 'UserMulti') {
+                        var template = getFieldTemplate(schema, SPClientTemplates.ClientControlMode.DisplayForm);
                         ctxInForm.Templates.Fields[fieldName] = template;
-
                         ctxInForm.FormContext.registerGetValueCallback(fieldName, function () {
                             return ctxInForm.ListData.Items[0][fieldName];
                         });
                     }
-                    //TODO: Fixup list data for User field
+                }
+            }).onPostRenderField(fieldName, function (schema, ctx) {
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
+                    if (schema.Type == 'User' || schema.Type == 'UserMulti') {
+                        var topSpanId = schema.Name + '_' + schema.Id + '_$ClientPeoplePicker';
+                        var pp = SPClientPeoplePicker.SPClientPeoplePickerDict[topSpanId];
+                        pp.SetEnabledState(false);
+                    }
                 }
             });
-            return this;
         };
 
         csr.prototype.makeHidden = function (fieldName) {
-            this.onPreRender(function (ctx) {
+            return this.onPreRenderField(fieldName, function (schema, ctx) {
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid)
                     return;
+                schema.Hidden = true;
 
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
                     var ctxInView = ctx;
 
-                    var fieldSchema;
-                    var fields = ctxInView.ListSchema.Field;
-
-                    for (var i = 0; i < fields.length; i++) {
-                        if (fields[i].Name === fieldName) {
-                            fieldSchema = fields[i];
-                        }
-                    }
-                    if (fieldSchema) {
-                        if (ctxInView.inGridMode) {
-                            //TODO: Hide item in grid mode
-                            fieldSchema.Hidden = true;
-                        } else {
-                            ctxInView.ListSchema.Field.splice(ctxInView.ListSchema.Field.indexOf(fieldSchema), 1);
-                        }
+                    if (ctxInView.inGridMode) {
+                        //TODO: Hide item in grid mode
+                    } else {
+                        ctxInView.ListSchema.Field.splice(ctxInView.ListSchema.Field.indexOf(schema), 1);
                     }
                 } else {
                     var ctxInForm = ctx;
-                    var fieldSchemaInForm = ctxInForm.ListSchema.Field[0];
-                    if (fieldSchemaInForm.Name === fieldName) {
-                        fieldSchemaInForm.Hidden = true;
-                        var pHolderId = ctxInForm.FormUniqueId + ctxInForm.FormContext.listAttributes.Id + fieldName;
-                        var placeholder = $get(pHolderId);
-                        var current = placeholder;
-                        while (current.tagName.toUpperCase() !== "TR") {
-                            current = current.parentElement;
-                        }
-                        var row = current;
-                        row.style.display = 'none';
+
+                    var pHolderId = ctxInForm.FormUniqueId + ctxInForm.FormContext.listAttributes.Id + fieldName;
+                    var placeholder = $get(pHolderId);
+                    var current = placeholder;
+                    while (current.tagName.toUpperCase() !== "TR") {
+                        current = current.parentElement;
                     }
+                    var row = current;
+                    row.style.display = 'none';
                 }
             });
-            return this;
         };
 
-        csr.prototype.filteredLookup = function (fieldName, camlFilter) {
+        csr.prototype.filteredLookup = function (fieldName, camlFilter, listname, lookupField) {
             return this.fieldEdit(fieldName, SPFieldCascadedLookup_Edit).fieldNew(fieldName, SPFieldCascadedLookup_Edit);
 
             function SPFieldCascadedLookup_Edit(rCtx) {
@@ -384,7 +362,7 @@ var CSR;
 
                     SP.SOD.executeFunc('sp.js', 'SP.ClientContext', function () {
                         bindDependentControls(dependencyExpressions);
-                        loadOptions();
+                        loadOptions(true);
                     });
                 }
 
@@ -468,7 +446,7 @@ var CSR;
                     });
                 }
 
-                function loadOptions() {
+                function loadOptions(isFirstLoad) {
                     _optionsLoaded = false;
 
                     var ctx = SP.ClientContext.get_current();
@@ -476,7 +454,7 @@ var CSR;
                     //TODO: Handle lookup to another web
                     var web = ctx.get_web();
                     var listId = _schema.LookupListId;
-                    var list = web.get_lists().getById(listId);
+                    var list = !listname ? web.get_lists().getById(listId) : web.get_lists().getByTitle(listname);
                     var query = new SP.CamlQuery();
 
                     var predicate = camlFilter.replace(parseRegex, function (v, a) {
@@ -485,30 +463,57 @@ var CSR;
                     });
 
                     //TODO: Handle ShowField attribure
-                    query.set_viewXml('<View><Query><Where>' + predicate + '</Where></Query> ' + '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
+                    if (predicate.substr(0, 5) == '<View') {
+                        query.set_viewXml(predicate);
+                    } else {
+                        query.set_viewXml('<View Scope="RecursiveAll"><Query><Where>' + predicate + '</Where></Query> ' + '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
+                    }
                     var results = list.getItems(query);
                     ctx.load(results);
 
-                    while (_dropdownElt.options.length) {
-                        _dropdownElt.options.remove(0);
-                    }
-
                     ctx.executeQueryAsync(function (o, e) {
+                        var selected = _selectedValue == 0;
+
+                        while (_dropdownElt.options.length) {
+                            _dropdownElt.options.remove(0);
+                        }
+
                         if (!_schema.Required) {
-                            var defaultOpt = new Option(Strings.STS.L_LookupFieldNoneOption, '0', _selectedValue == 0, _selectedValue == 0);
+                            var defaultOpt = new Option(Strings.STS.L_LookupFieldNoneOption, '0', selected, selected);
                             _dropdownElt.options.add(defaultOpt);
                         }
 
                         var enumerator = results.getEnumerator();
                         while (enumerator.moveNext()) {
                             var c = enumerator.get_current();
-                            var id = c.get_id();
-                            var opt = new Option(c.get_item('Title'), c.get_item('ID'), _selectedValue == id, _selectedValue == id);
+                            var id;
+                            var text;
+
+                            if (!lookupField) {
+                                id = c.get_id();
+                                text = c.get_item('Title');
+                            } else {
+                                var value = c.get_item(lookupField);
+                                id = value.get_lookupId();
+                                text = value.get_lookupValue();
+                            }
+                            var isSelected = _selectedValue == id;
+                            if (isSelected) {
+                                selected = true;
+                            }
+                            var opt = new Option(text, id.toString(), isSelected, isSelected);
                             _dropdownElt.options.add(opt);
                         }
 
                         _optionsLoaded = true;
-                        OnLookupValueChanged();
+                        if (!isFirstLoad) {
+                            OnLookupValueChanged();
+                        } else {
+                            if (_selectedValue == 0) {
+                                _dropdownElt.selectedIndex = 0;
+                                OnLookupValueChanged();
+                            }
+                        }
                     }, function (o, args) {
                         console.log(args.get_message());
                     });
@@ -524,33 +529,25 @@ var CSR;
             }
             var dependentValues = {};
 
-            return this.onPostRender(function (ctx) {
+            return this.onPostRenderField(targetField, function (schema, ctx) {
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
-                    var schema = ctx.ListSchema.Field[0];
-
-                    if (schema.Name == targetField) {
-                        var targetControl = CSR.getControl(schema);
-                        sourceField.forEach(function (field) {
-                            CSR.addUpdatedValueCallback(ctx, field, function (v) {
-                                dependentValues[field] = v;
-                                targetControl.value = transform.apply(_this, sourceField.map(function (n) {
-                                    return dependentValues[n] || '';
-                                }));
-                            });
+                    var targetControl = CSR.getControl(schema);
+                    sourceField.forEach(function (field) {
+                        CSR.addUpdatedValueCallback(ctx, field, function (v) {
+                            dependentValues[field] = v;
+                            targetControl.value = transform.apply(_this, sourceField.map(function (n) {
+                                return dependentValues[n] || '';
+                            }));
                         });
-                    }
+                    });
                 }
             });
         };
 
         csr.prototype.setInitialValue = function (fieldName, value, ignoreNull) {
             if (value || !ignoreNull) {
-                return this.onPreRender(function (ctx) {
-                    var fieldSchemaInForm = ctx.ListSchema.Field[0];
-
-                    if (fieldSchemaInForm.Name === fieldName) {
-                        ctx.ListData.Items[0][fieldName] = value;
-                    }
+                return this.onPreRenderField(fieldName, function (schema, ctx) {
+                    ctx.ListData.Items[0][fieldName] = value;
                 });
             } else {
                 return this;

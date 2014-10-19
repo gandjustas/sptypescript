@@ -2,7 +2,8 @@ module _ {
     function init() {
         return CSR.override(10005)
             .makeReadOnly('CurrentDate')
-            .makeHidden('User1')
+            .makeReadOnly('User1')
+            .makeHidden('Number')
             .register();
     }
 

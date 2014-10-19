@@ -19,32 +19,34 @@ module CSR {
             if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
                 || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
 
-                var fieldSchemaInForm = ctx.ListSchema.Field[0];
+                for (var i = 0; i < ctx.ListSchema.Field.length; i++) {
+                    var fieldSchemaInForm = ctx.ListSchema.Field[i];
 
-                if (!ctx.FormContextHook) {
-                    ctx.FormContextHook = {}
+                    if (!ctx.FormContextHook) {
+                        ctx.FormContextHook = {}
 
-                    var oldRegisterGetValueCallback = ctx.FormContext.registerGetValueCallback;
-                    ctx.FormContext.registerGetValueCallback = (fieldName, callback) => {
-                        ctx.FormContextHook[fieldName].getValue = callback;
-                        oldRegisterGetValueCallback(fieldName, callback);
-                    };
+                        var oldRegisterGetValueCallback = ctx.FormContext.registerGetValueCallback;
+                        ctx.FormContext.registerGetValueCallback = (fieldName, callback) => {
+                            ctx.FormContextHook[fieldName].getValue = callback;
+                            oldRegisterGetValueCallback(fieldName, callback);
+                        };
 
-                    var oldUpdateControlValue = ctx.FormContext.updateControlValue;
-                    ctx.FormContext.updateControlValue = (fieldName: string, value: any) => {
-                        oldUpdateControlValue(fieldName, value);
+                        var oldUpdateControlValue = ctx.FormContext.updateControlValue;
+                        ctx.FormContext.updateControlValue = (fieldName: string, value: any) => {
+                            oldUpdateControlValue(fieldName, value);
 
-                        var hookedContext = ensureFormContextHookField(ctx.FormContextHook, fieldName);
-                        hookedContext.lastValue = value;
+                            var hookedContext = ensureFormContextHookField(ctx.FormContextHook, fieldName);
+                            hookedContext.lastValue = value;
 
-                        var updatedCallbacks = ctx.FormContextHook[fieldName].updatedValueCallbacks;
-                        for (var i = 0; i < updatedCallbacks.length; i++) {
-                            updatedCallbacks[i](value, hookedContext.fieldSchema);
+                            var updatedCallbacks = ctx.FormContextHook[fieldName].updatedValueCallbacks;
+                            for (var i = 0; i < updatedCallbacks.length; i++) {
+                                updatedCallbacks[i](value, hookedContext.fieldSchema);
+                            }
+
                         }
-
                     }
+                    ensureFormContextHookField(ctx.FormContextHook, fieldSchemaInForm.Name).fieldSchema = fieldSchemaInForm;
                 }
-                ensureFormContextHookField(ctx.FormContextHook, fieldSchemaInForm.Name).fieldSchema = fieldSchemaInForm;
             }
         }
     }
@@ -212,10 +214,10 @@ module CSR {
             return this;
         }
 
-        onPreRenderField(field:string, callback: { (schema:SPClientTemplates.FieldSchema, ctx: SPClientTemplates.RenderContext): void; }): ICSR {
+        onPreRenderField(field: string, callback: { (schema: SPClientTemplates.FieldSchema, ctx: SPClientTemplates.RenderContext): void; }): ICSR {
             return this.onPreRender((ctx: SPClientTemplates.RenderContext) => {
                 var ctxInView = <SPClientTemplates.RenderContext_InView>ctx;
-                
+
                 //ListSchema schma exists in Form and in View rener context
                 var fields = ctxInView.ListSchema.Field;
                 if (fields) {
@@ -245,91 +247,87 @@ module CSR {
         }
 
         makeReadOnly(fieldName: string): ICSR {
-            this.onPreRender(ctx => {
-                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid
-                    || ctx.ControlMode == SPClientTemplates.ClientControlMode.DisplayForm) return;
+            return this
+                .onPreRenderField(fieldName, (schema, ctx) => {
+                    if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid
+                        || ctx.ControlMode == SPClientTemplates.ClientControlMode.DisplayForm) return;
+                    (<SPClientTemplates.FieldSchema_InForm>schema).ReadOnlyField = true;
+                    (<SPClientTemplates.FieldSchema_InView>schema).ReadOnly = "TRUE";
 
-                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
-                    var ctxInView = <SPClientTemplates.RenderContext_InView>ctx;
-
-                    var fieldSchema: SPClientTemplates.FieldSchema;
-                    var fields = ctxInView.ListSchema.Field;
-
-                    for (var i = 0; i < fields.length; i++) {
-                        if (fields[i].Name === fieldName) {
-                            fieldSchema = fields[i];
-                        }
-                    }
-                    if (fieldSchema) {
+                    if (ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
+                        var ctxInView = <SPClientTemplates.RenderContext_InView>ctx;
                         if (ctxInView.inGridMode) {
                             //TODO: Disable editing in grid mode
-                            (<SPClientTemplates.FieldSchema_InForm>fieldSchema).ReadOnlyField = true;
-                        } else {
-                            var fieldSchemaInView = <SPClientTemplates.FieldSchema_InView>fieldSchema;
-                            fieldSchemaInView.ReadOnly = "TRUE";
+
+                        }
+
+                    } else {
+                        var ctxInForm = <SPClientTemplates.RenderContext_FieldInForm>ctx;
+                        if (schema.Type != 'User' && schema.Type != 'UserMulti') {
+
+                            var template = getFieldTemplate(schema, SPClientTemplates.ClientControlMode.DisplayForm);
+                            ctxInForm.Templates.Fields[fieldName] = template;
+                            ctxInForm.FormContext.registerGetValueCallback(fieldName, () => ctxInForm.ListData.Items[0][fieldName]);
+
                         }
                     }
-                } else {
-                    var ctxInForm = <SPClientTemplates.RenderContext_FieldInForm>ctx;
-                    var fieldSchemaInForm = ctxInForm.ListSchema.Field[0];
-                    if (fieldSchemaInForm.Name === fieldName) {
-                        fieldSchemaInForm.ReadOnlyField = true;
-                        var template = getFieldTemplate(fieldSchemaInForm, SPClientTemplates.ClientControlMode.DisplayForm);
-                        ctxInForm.Templates.Fields[fieldName] = template;
 
-                        ctxInForm.FormContext.registerGetValueCallback(fieldName, () => ctxInForm.ListData.Items[0][fieldName]);
+                })
+                .onPostRenderField(fieldName, (schema: SPClientTemplates.FieldSchema_InForm_User, ctx) => {
+                    if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
+                        || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+                        if (schema.Type == 'User' || schema.Type == 'UserMulti') {
+                            SP.SOD.executeFunc('clientpeoplepicker.js', 'SPClientPeoplePicker', () => {
+                                var topSpanId = schema.Name + '_' + schema.Id + '_$ClientPeoplePicker';
+                                var retryCount = 10;
+                                var callback = () => {
+                                    var pp = SPClientPeoplePicker.SPClientPeoplePickerDict[topSpanId];
+                                    if (!pp) {
+                                         if(retryCount--) setTimeout(callback, 1);
+                                    } else {
+                                        pp.SetEnabledState(false);
+                                        pp.DeleteProcessedUser = function() {};
+                                    }
+                                };
+                                callback();
+                            });
+                        }
                     }
-                    //TODO: Fixup list data for User field
-                }
-
-            });
-            return this;
+                });
         }
 
         makeHidden(fieldName: string): ICSR {
-            this.onPreRender(ctx => {
+            return this.onPreRenderField(fieldName, (schema, ctx) => {
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid) return;
+                (<SPClientTemplates.FieldSchema_InForm>schema).Hidden = true;
 
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
                     var ctxInView = <SPClientTemplates.RenderContext_InView>ctx;
 
-                    var fieldSchema: SPClientTemplates.FieldSchema;
-                    var fields = ctxInView.ListSchema.Field;
+                    if (ctxInView.inGridMode) {
+                        //TODO: Hide item in grid mode
+                    } else {
+                        ctxInView.ListSchema.Field.splice(ctxInView.ListSchema.Field.indexOf(schema), 1);
+                    }
 
-                    for (var i = 0; i < fields.length; i++) {
-                        if (fields[i].Name === fieldName) {
-                            fieldSchema = fields[i];
-                        }
-                    }
-                    if (fieldSchema) {
-                        if (ctxInView.inGridMode) {
-                            //TODO: Hide item in grid mode
-                            (<SPClientTemplates.FieldSchema_InForm>fieldSchema).Hidden = true;
-                        } else {
-                            ctxInView.ListSchema.Field.splice(ctxInView.ListSchema.Field.indexOf(fieldSchema), 1);
-                        }
-                    }
                 } else {
-                    var ctxInForm = <SPClientTemplates.RenderContext_FieldInForm>ctx;
-                    var fieldSchemaInForm = ctxInForm.ListSchema.Field[0];
-                    if (fieldSchemaInForm.Name === fieldName) {
-                        fieldSchemaInForm.Hidden = true;
-                        var pHolderId = ctxInForm.FormUniqueId + ctxInForm.FormContext.listAttributes.Id + fieldName;
-                        var placeholder = $get(pHolderId);
-                        var current = placeholder;
-                        while (current.tagName.toUpperCase() !== "TR") {
-                            current = current.parentElement;
-                        }
-                        var row = <HTMLTableRowElement>current;
-                        row.style.display = 'none';
+                    var ctxInForm = <SPClientTemplates.RenderContext_Form>ctx;
+
+                    var pHolderId = ctxInForm.FormUniqueId + ctxInForm.FormContext.listAttributes.Id + fieldName;
+                    var placeholder = $get(pHolderId);
+                    var current = placeholder;
+                    while (current.tagName.toUpperCase() !== "TR") {
+                        current = current.parentElement;
                     }
+                    var row = <HTMLTableRowElement>current;
+                    row.style.display = 'none';
+
                 }
 
             });
-            return this;
         }
 
-        filteredLookup(fieldName: string, camlFilter: string, listname?:string, lookupField?:string): ICSR {
+        filteredLookup(fieldName: string, camlFilter: string, listname?: string, lookupField?: string): ICSR {
 
 
             return this.fieldEdit(fieldName, SPFieldCascadedLookup_Edit)
@@ -427,7 +425,7 @@ module CSR {
                 }
 
                 function stripBraces(input: string): string {
-                    return input.substring(1, input.length - 1);                    
+                    return input.substring(1, input.length - 1);
                 }
 
                 function getDependencyValue(expr: string, value: string, listId: string, expressionParts: string[], callback: () => void) {
@@ -488,14 +486,14 @@ module CSR {
                 }
 
 
-                function loadOptions(isFirstLoad?:boolean) {
+                function loadOptions(isFirstLoad?: boolean) {
                     _optionsLoaded = false;
 
                     var ctx = SP.ClientContext.get_current();
                     //TODO: Handle lookup to another web
                     var web = ctx.get_web();
                     var listId = _schema.LookupListId;
-                    var list = !listname ? web.get_lists().getById(listId) : web.get_lists().getByTitle(listname) ;
+                    var list = !listname ? web.get_lists().getById(listId) : web.get_lists().getByTitle(listname);
                     var query = new SP.CamlQuery();
 
                     var predicate = camlFilter.replace(parseRegex, (v, a) => {
@@ -528,7 +526,7 @@ module CSR {
                             _dropdownElt.options.add(defaultOpt);
                         }
 
-                        
+
                         var enumerator = results.getEnumerator();
                         while (enumerator.moveNext()) {
                             var c = enumerator.get_current();
@@ -547,7 +545,7 @@ module CSR {
                             if (isSelected) {
                                 selected = true;
                             }
-                            var opt = new Option(text, id.toString(), isSelected, isSelected);                                
+                            var opt = new Option(text, id.toString(), isSelected, isSelected);
                             _dropdownElt.options.add(opt);
 
                         }
@@ -573,36 +571,26 @@ module CSR {
         computedValue(targetField: string, transform: (...values: string[]) => string, ...sourceField: string[]): ICSR {
             var dependentValues: { [field: string]: string } = {};
 
-            return this.onPostRender((ctx: SPClientTemplates.RenderContext_FieldInForm) => {
+            return this.onPostRenderField(targetField, (schema, ctx: SPClientTemplates.RenderContext_FieldInForm) => {
                 if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
                     || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
-                    var schema = ctx.ListSchema.Field[0];
+                    var targetControl = CSR.getControl(schema);
+                    sourceField.forEach((field) => {
+                        CSR.addUpdatedValueCallback(ctx, field, v => {
+                            dependentValues[field] = v;
+                            targetControl.value = transform.apply(this,
+                                sourceField.map(n => dependentValues[n] || ''));
 
-                    if (schema.Name == targetField) {
-
-                        var targetControl = CSR.getControl(schema);
-                        sourceField.forEach((field) => {
-                            CSR.addUpdatedValueCallback(ctx, field, v => {
-                                dependentValues[field] = v;
-                                targetControl.value = transform.apply(this,
-                                    sourceField.map(n => dependentValues[n] || ''));
-
-                            });
                         });
-                    }
-
+                    });
                 }
             });
         }
 
         setInitialValue(fieldName: string, value: any, ignoreNull?: boolean): ICSR {
             if (value || !ignoreNull) {
-                return this.onPreRender((ctx: SPClientTemplates.RenderContext_FieldInForm) => {
-                    var fieldSchemaInForm = ctx.ListSchema.Field[0];
-
-                    if (fieldSchemaInForm.Name === fieldName) {
-                        ctx.ListData.Items[0][fieldName] = value;
-                    }
+                return this.onPreRenderField(fieldName, (schema, ctx: SPClientTemplates.RenderContext_FieldInForm) => {
+                    ctx.ListData.Items[0][fieldName] = value;
                 });
             } else {
                 return this;
@@ -760,7 +748,7 @@ module CSR {
                             },
                             (sender, args) => {
                                 _autoFillControl.PopulateAutoFill([AutoFillOptionBuilder.buildFooterItem("Error executing query/ See log for details.")], onSelectItem);
-                                 console.log(args.get_message());
+                                console.log(args.get_message());
                             });
                     });
                 }
@@ -777,7 +765,7 @@ module CSR {
             });
         }
 
-        lookupAddNew(fieldName: string, prompt: string, showDialog?:boolean, contentTypeId?: string): ICSR {
+        lookupAddNew(fieldName: string, prompt: string, showDialog?: boolean, contentTypeId?: string): ICSR {
             return this.onPostRenderField(fieldName,
                 (schema: SPClientTemplates.FieldSchema_InForm_Lookup, ctx: SPClientTemplates.RenderContext_FieldInForm) => {
                     if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
@@ -796,7 +784,7 @@ module CSR {
                         }
 
                         var link = document.createElement('a');
-                        link.href = "javascript:NewItem2(event, \'" + newFormUrl + "&Source="+encodeURIComponent(document.location.href)+"')";
+                        link.href = "javascript:NewItem2(event, \'" + newFormUrl + "&Source=" + encodeURIComponent(document.location.href) + "')";
                         link.textContent = prompt;
                         if (control.nextElementSibling) {
                             control.parentElement.insertBefore(link, control.nextElementSibling);
@@ -1063,7 +1051,7 @@ module CSR {
             @param prompt Text to display as a link to add new value.
             @param contentTypeID Default content type for new item.
         */
-        lookupAddNew(fieldName: string, prompt: string, showDialog?:boolean, contentTypeId?:string): ICSR;
+        lookupAddNew(fieldName: string, prompt: string, showDialog?: boolean, contentTypeId?: string): ICSR;
 
 
 
