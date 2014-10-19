@@ -228,6 +228,7 @@ declare module SPClientTemplates {
         FormUniqueId: string;
         ListData: ListData_InForm;
         ListSchema: ListSchema_InForm;
+        CSRCustomLayout?:boolean;
     }
 
 
@@ -715,3 +716,11 @@ declare module SPClientForms {
     }
 }
 
+declare class SPMgr {
+    NewGroup(listItem:Object, fieldName:string):boolean;
+    RenderHeader(renderCtx: SPClientTemplates.RenderContext, field: SPClientTemplates.FieldSchema): string;
+    RenderField(renderCtx: SPClientTemplates.RenderContext, field: SPClientTemplates.FieldSchema, listItem:Object, listSchema:SPClientTemplates.ListSchema):string;
+    RenderFieldByName(renderCtx: SPClientTemplates.RenderContext, fieldName: string, listItem: Object, listSchema: SPClientTemplates.ListSchema): string;
+}
+
+declare var spMgr: SPMgr;

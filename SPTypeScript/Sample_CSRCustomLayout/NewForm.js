@@ -14,6 +14,9 @@
                     attachmentsField = field;
                     continue;
                 }
+                if (field.ReadOnlyField) {
+                    continue;
+                }
                 addField(field);
             }
             if (attachmentsField) {
@@ -64,13 +67,6 @@
                     r.push('<script type="text/javascript">if (typeof ShowAttachmentRows == "function") ShowAttachmentRows();</script>');
                 }
                 r.push('</tr>');
-            }
-        }).onPostRender(function (ctx) {
-            //var wpq = ctx.FormUniqueId;
-            var forms = document.getElementsByClassName('ms-formtable');
-            if (forms.length == 2) {
-                var p = forms.item(0).parentNode;
-                p.replaceChild(forms.item(1), forms.item(0));
             }
         }).register();
     }

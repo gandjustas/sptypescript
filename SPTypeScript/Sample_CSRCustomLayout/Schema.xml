@@ -77,8 +77,37 @@
       </View>
     </Views>
     <Forms>
-      <Form Type="DisplayForm" Url="DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
-      <Form Type="EditForm" Url="EditForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="DisplayForm" Url="DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" UseDefaultListFormWebPart="FALSE" JSLink="~site/Sample_CSRCustomLayout/NewForm.js|~site/Extensions/typescripttemplates.js">
+        <WebParts>
+          <AllUsersWebPart WebPartZoneID="Main" WebPartOrder="2">
+            <![CDATA[
+<WebPart xmlns="http://schemas.microsoft.com/WebPart/v2">
+  <Assembly>Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, 
+         PublicKeyToken=71e9bce111e9429c</Assembly>                         
+  <TypeName>Microsoft.SharePoint.WebPartPages.ListFormWebPart</TypeName>
+  <PageType>PAGE_DISPLAYFORM</PageType>
+  <CSRRenderMode xmlns="http://schemas.microsoft.com/WebPart/v2/ListForm">CSRCustomLayout</CSRRenderMode>
+  <JSLink xmlns="http://schemas.microsoft.com/WebPart/v2/ListForm">~site/Sample_CSRCustomLayout/NewForm.js|~site/Extensions/typescripttemplates.js</JSLink>
+</WebPart>]]>
+          </AllUsersWebPart>
+        </WebParts>
+      </Form>
+      <Form Type="EditForm" Url="EditForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main"
+            UseDefaultListFormWebPart="FALSE" JSLink="~site/Sample_CSRCustomLayout/NewForm.js|~site/Extensions/typescripttemplates.js">
+        <WebParts>
+          <AllUsersWebPart WebPartZoneID="Main" WebPartOrder="2">
+            <![CDATA[
+<WebPart xmlns="http://schemas.microsoft.com/WebPart/v2">
+  <Assembly>Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, 
+         PublicKeyToken=71e9bce111e9429c</Assembly>                         
+  <TypeName>Microsoft.SharePoint.WebPartPages.ListFormWebPart</TypeName>
+  <PageType>PAGE_EDITFORM</PageType>
+  <CSRRenderMode xmlns="http://schemas.microsoft.com/WebPart/v2/ListForm">CSRCustomLayout</CSRRenderMode>
+  <JSLink xmlns="http://schemas.microsoft.com/WebPart/v2/ListForm">~site/Sample_CSRCustomLayout/NewForm.js|~site/Extensions/typescripttemplates.js</JSLink>
+</WebPart>]]>
+          </AllUsersWebPart>
+        </WebParts>
+      </Form>
       <Form Type="NewForm" Url="NewForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main"  UseDefaultListFormWebPart="FALSE" JSLink="~site/Sample_CSRCustomLayout/NewForm.js|~site/Extensions/typescripttemplates.js">
         <WebParts>
           <AllUsersWebPart WebPartZoneID="Main" WebPartOrder="2">

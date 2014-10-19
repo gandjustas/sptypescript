@@ -14,6 +14,9 @@
                         attachmentsField = field;
                         continue;
                     }
+                    if (field.ReadOnlyField) {
+                        continue;
+                    }
                     addField(field);
 
 
@@ -71,14 +74,6 @@
 
                 }
 
-            })
-            .onPostRender((ctx:SPClientTemplates.RenderContext_Form) => {
-                //var wpq = ctx.FormUniqueId;
-                var forms = document.getElementsByClassName('ms-formtable');
-                if (forms.length == 2) {
-                    var p = forms.item(0).parentNode;
-                    p.replaceChild(forms.item(1), forms.item(0));
-                }
             })
             .register();
     }

@@ -13,7 +13,8 @@ module CSR {
 
     export function override(listTemplateType?: number, baseViewId?: any): ICSR {
         return new csr(listTemplateType, baseViewId)
-            .onPreRender(hookFormContext);
+            .onPreRender(hookFormContext)
+            .onPostRender(fixCsrCustomLayout);
 
         function hookFormContext(ctx: IFormRenderContexWithHook) {
             if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
@@ -49,6 +50,46 @@ module CSR {
                 }
             }
         }
+
+        function fixCsrCustomLayout(ctx:SPClientTemplates.RenderContext_Form) {
+            if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid
+                || ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
+                return;
+            }
+
+            if (ctx.ListSchema.Field.length > 1) {
+                var wpq = ctx.FormUniqueId;
+                var webpart = $get('WebPart' + wpq);
+                var forms = webpart.getElementsByClassName('ms-formtable');
+
+                if (forms.length > 0) {
+                    var placeholder = $get(wpq + 'ClientFormTopContainer');
+                    var fragment = document.createDocumentFragment();
+                    for (var i = 0; i < placeholder.children.length; i++) {
+                        fragment.appendChild(placeholder.children.item(i));
+                    }
+                    
+                    var form = forms.item(0);
+                    form.parentNode.replaceChild(fragment, form);
+                }
+
+
+                ctx.CurrentItem = ctx.ListData.Items[0];
+                var fields = ctx.ListSchema.Field;
+                for (var j = 0; j < fields.length; j++) {
+                    var field = fields[j];
+                    var pHolderId = wpq + ctx.FormContext.listAttributes.Id + field.Name;
+                    var span = $get(pHolderId);
+                    if (span) {
+                        span.outerHTML = ctx.RenderFieldByName(ctx, field.Name);
+                    }
+                }
+                ctx.CurrentItem = null;
+            }
+
+        }
+
+
     }
 
     export function getFieldValue(ctx: SPClientTemplates.RenderContext_Form, fieldName: string): any {

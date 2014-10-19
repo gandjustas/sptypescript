@@ -5,7 +5,7 @@ var CSR;
     
 
     function override(listTemplateType, baseViewId) {
-        return new csr(listTemplateType, baseViewId).onPreRender(hookFormContext);
+        return new csr(listTemplateType, baseViewId).onPreRender(hookFormContext).onPostRender(fixCsrCustomLayout);
 
         function hookFormContext(ctx) {
             if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
@@ -36,6 +36,41 @@ var CSR;
                     }
                     ensureFormContextHookField(ctx.FormContextHook, fieldSchemaInForm.Name).fieldSchema = fieldSchemaInForm;
                 }
+            }
+        }
+
+        function fixCsrCustomLayout(ctx) {
+            if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid || ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
+                return;
+            }
+
+            if (ctx.ListSchema.Field.length > 1) {
+                var wpq = ctx.FormUniqueId;
+                var webpart = $get('WebPart' + wpq);
+                var forms = webpart.getElementsByClassName('ms-formtable');
+
+                if (forms.length > 0) {
+                    var placeholder = $get(wpq + 'ClientFormTopContainer');
+                    var fragment = document.createDocumentFragment();
+                    for (var i = 0; i < placeholder.children.length; i++) {
+                        fragment.appendChild(placeholder.children.item(i));
+                    }
+
+                    var form = forms.item(0);
+                    form.parentNode.replaceChild(fragment, form);
+                }
+
+                ctx.CurrentItem = ctx.ListData.Items[0];
+                var fields = ctx.ListSchema.Field;
+                for (var j = 0; j < fields.length; j++) {
+                    var field = fields[j];
+                    var pHolderId = wpq + ctx.FormContext.listAttributes.Id + field.Name;
+                    var span = $get(pHolderId);
+                    if (span) {
+                        span.outerHTML = ctx.RenderFieldByName(ctx, field.Name);
+                    }
+                }
+                ctx.CurrentItem = null;
             }
         }
     }
