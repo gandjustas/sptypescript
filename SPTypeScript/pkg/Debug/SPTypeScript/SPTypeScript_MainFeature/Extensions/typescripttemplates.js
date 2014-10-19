@@ -259,11 +259,24 @@ var CSR;
                     }
                 }
             }).onPostRenderField(fieldName, function (schema, ctx) {
-                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
                     if (schema.Type == 'User' || schema.Type == 'UserMulti') {
-                        var topSpanId = schema.Name + '_' + schema.Id + '_$ClientPeoplePicker';
-                        var pp = SPClientPeoplePicker.SPClientPeoplePickerDict[topSpanId];
-                        pp.SetEnabledState(false);
+                        SP.SOD.executeFunc('clientpeoplepicker.js', 'SPClientPeoplePicker', function () {
+                            var topSpanId = schema.Name + '_' + schema.Id + '_$ClientPeoplePicker';
+                            var retryCount = 10;
+                            var callback = function () {
+                                var pp = SPClientPeoplePicker.SPClientPeoplePickerDict[topSpanId];
+                                if (!pp) {
+                                    if (retryCount--)
+                                        setTimeout(callback, 1);
+                                } else {
+                                    pp.SetEnabledState(false);
+                                    pp.DeleteProcessedUser = function () {
+                                    };
+                                }
+                            };
+                            callback();
+                        });
                     }
                 }
             });

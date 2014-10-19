@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <!-- Не изменяйте значение атрибута Name, указанное ниже. Если оно не совпадает с именем папки элемента проекта "Список", при выполнении проекта возникнет ошибка. -->
+    <ListTemplate
+        Name="Sample_CSRCustomLayout"
+        Type="105"
+        BaseType="0"
+        OnQuickLaunch="TRUE"
+        SecurityBits="11"
+        Sequence="330"
+        DisplayName="Sample_CSRCustomLayout"
+        Description="Мое определение списка"
+        Image="/_layouts/15/images/itcontct.png"/>
+
+  <Module Name="Sample_CSRCustomLayout" Path="Sample_CSRCustomLayout" Url="Sample_CSRCustomLayout">
+    <File Url="NewForm.ts" ReplaceContent="TRUE" />
+    <File Url="NewForm.js" ReplaceContent="TRUE" />
+    <File Url="NewForm.js.map" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

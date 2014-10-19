@@ -101,8 +101,20 @@
     <None Include="Sample_CSRCustomForm\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{61bc6fe2-2093-4560-8f39-acacadbdba8d}</SharePointProjectItemId>
     </None>
+    <None Include="Sample_CSRCustomLayout\NewForm.js.map">
+      <DependentUpon>NewForm.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CSRCustomLayout\Sample_CSRCustomLayoutInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e04d06f9-0df8-4774-b9ce-6be518058f26}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRCustomLayout\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{c71340bd-4212-4813-aea1-5fb6b7708801}</SharePointProjectItemId>
+    </None>
     <None Include="Sample_CSRTabs\CSRTabs.js.map">
       <DependentUpon>CSRTabs.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CSRTabs\CSRTabs.min.js.map">
+      <DependentUpon>CSRTabs.min.js</DependentUpon>
     </None>
     <None Include="Sample_CSRTabs\ListWithTabsForm\ListWithTabsFormInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4a84f489-2b42-42e5-ad91-3dae9196b4b2}</SharePointProjectItemId>
@@ -195,6 +207,7 @@
     </None>
     <TypeScriptCompile Include="Sample_CascadedDropdown\FieldCascadedLookup.ts" />
     <TypeScriptCompile Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.ts" />
+    <TypeScriptCompile Include="Sample_CSRCustomLayout\NewForm.ts" />
     <TypeScriptCompile Include="Sample_CSRTabs\CSRTabs.ts" />
     <Content Include="Definitions\SharePoint.d.ts">
       <AutoGen>True</AutoGen>
@@ -234,6 +247,12 @@
     <Content Include="Sample_CSRCustomForm\Elements.xml" />
     <Content Include="Sample_CSRCustomForm\Sample_CSRCustomFormInstance\Elements.xml" />
     <Content Include="Sample_CSRCustomForm\Schema.xml" />
+    <Content Include="Sample_CSRCustomLayout\Elements.xml" />
+    <Content Include="Sample_CSRCustomLayout\NewForm.js">
+      <DependentUpon>NewForm.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRCustomLayout\Sample_CSRCustomLayoutInstance\Elements.xml" />
+    <Content Include="Sample_CSRCustomLayout\Schema.xml" />
     <Content Include="Sample_CSRTabs\CSRTabs.js">
       <DependentUpon>CSRTabs.ts</DependentUpon>
     </Content>

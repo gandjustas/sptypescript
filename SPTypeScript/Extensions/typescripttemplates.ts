@@ -915,6 +915,7 @@ module CSR {
             @param template New view template.
         */
         view(template: (ctx: SPClientTemplates.RenderContext_InView) => string): ICSR;
+        view(template: (ctx: SPClientTemplates.RenderContext_Form) => string): ICSR;
 
         /** Override Item rendering template.
             @param template New item template.
@@ -925,6 +926,7 @@ module CSR {
             @param template New item template.
         */
         item(template: (ctx: SPClientTemplates.RenderContext_ItemInView) => string): ICSR;
+        item(template: (ctx: SPClientTemplates.RenderContext_Form) => string): ICSR;
 
         /** Override Header rendering template.
             @param template New header template.

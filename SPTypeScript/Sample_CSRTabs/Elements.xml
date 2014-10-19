@@ -4,5 +4,6 @@
     <File Path="Sample_CSRTabs\CSRTabs.js" Url="Sample_CSRTabs/CSRTabs.js" ReplaceContent="TRUE" />
     <File Path="Sample_CSRTabs\CSRTabs.min.js" Url="Sample_CSRTabs/CSRTabs.min.js" />
     <File Path="Sample_CSRTabs\CSRTabs.js.map" Url="Sample_CSRTabs/CSRTabs.js.map" />
+    <File Path="Sample_CSRTabs\CSRTabs.min.js.map" Url="Sample_CSRTabs/CSRTabs.min.js.map" ReplaceContent="TRUE" />
   </Module>
 </Elements>
