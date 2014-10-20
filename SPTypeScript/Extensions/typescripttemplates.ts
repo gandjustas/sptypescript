@@ -51,7 +51,7 @@ module CSR {
             }
         }
 
-        function fixCsrCustomLayout(ctx:SPClientTemplates.RenderContext_Form) {
+        function fixCsrCustomLayout(ctx: SPClientTemplates.RenderContext_Form) {
             if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid
                 || ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
                 return;
@@ -68,7 +68,7 @@ module CSR {
                     for (var i = 0; i < placeholder.children.length; i++) {
                         fragment.appendChild(placeholder.children.item(i));
                     }
-                    
+
                     var form = forms.item(0);
                     form.parentNode.replaceChild(fragment, form);
                 }
@@ -324,10 +324,10 @@ module CSR {
                                 var callback = () => {
                                     var pp = SPClientPeoplePicker.SPClientPeoplePickerDict[topSpanId];
                                     if (!pp) {
-                                         if(retryCount--) setTimeout(callback, 1);
+                                        if (retryCount--) setTimeout(callback, 1);
                                     } else {
                                         pp.SetEnabledState(false);
-                                        pp.DeleteProcessedUser = function() {};
+                                        pp.DeleteProcessedUser = function () { };
                                     }
                                 };
                                 callback();
@@ -412,6 +412,7 @@ module CSR {
                 var _selectedValue = SPClientTemplates.Utility.ParseLookupValue(_valueStr).LookupId;
                 var _noValueSelected = _selectedValue == 0;
                 var _optionsLoaded = false;
+                var pendingLoads = 0;
 
                 if (_noValueSelected)
                     _valueStr = '';
@@ -529,6 +530,7 @@ module CSR {
 
                 function loadOptions(isFirstLoad?: boolean) {
                     _optionsLoaded = false;
+                    pendingLoads++;
 
                     var ctx = SP.ClientContext.get_current();
                     //TODO: Handle lookup to another web
@@ -556,7 +558,7 @@ module CSR {
 
 
                     ctx.executeQueryAsync((o, e) => {
-                        var selected = _selectedValue == 0;
+                        var selected = false; 
 
                         while (_dropdownElt.options.length) {
                             _dropdownElt.options.remove(0);
@@ -565,8 +567,9 @@ module CSR {
                         if (!_schema.Required) {
                             var defaultOpt = new Option(Strings.STS.L_LookupFieldNoneOption, '0', selected, selected);
                             _dropdownElt.options.add(defaultOpt);
+                            selected = _selectedValue == 0;
                         }
-
+                        var isEmptyList = true;
 
                         var enumerator = results.getEnumerator();
                         while (enumerator.moveNext()) {
@@ -588,15 +591,20 @@ module CSR {
                             }
                             var opt = new Option(text, id.toString(), isSelected, isSelected);
                             _dropdownElt.options.add(opt);
-
+                            isEmptyList = false;
                         }
-
+                        pendingLoads--;
                         _optionsLoaded = true;
-                        if (!isFirstLoad) {
-                            OnLookupValueChanged();
-                        } else {
-                            if (_selectedValue == 0) {
-                                _dropdownElt.selectedIndex = 0;
+                        if (!pendingLoads) {
+                            if (isFirstLoad) {
+                                if (_selectedValue == 0 && !selected) {
+                                    _dropdownElt.selectedIndex = 0;
+                                    OnLookupValueChanged();
+                                }
+                            } else {
+                                if (_selectedValue != 0 && !selected) {
+                                    _dropdownElt.selectedIndex = 0;
+                                }
                                 OnLookupValueChanged();
                             }
                         }

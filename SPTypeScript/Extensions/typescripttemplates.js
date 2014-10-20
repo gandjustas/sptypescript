@@ -385,6 +385,7 @@ var CSR;
                 var _selectedValue = SPClientTemplates.Utility.ParseLookupValue(_valueStr).LookupId;
                 var _noValueSelected = _selectedValue == 0;
                 var _optionsLoaded = false;
+                var pendingLoads = 0;
 
                 if (_noValueSelected)
                     _valueStr = '';
@@ -496,6 +497,7 @@ var CSR;
 
                 function loadOptions(isFirstLoad) {
                     _optionsLoaded = false;
+                    pendingLoads++;
 
                     var ctx = SP.ClientContext.get_current();
 
@@ -520,7 +522,7 @@ var CSR;
                     ctx.load(results);
 
                     ctx.executeQueryAsync(function (o, e) {
-                        var selected = _selectedValue == 0;
+                        var selected = false;
 
                         while (_dropdownElt.options.length) {
                             _dropdownElt.options.remove(0);
@@ -529,7 +531,9 @@ var CSR;
                         if (!_schema.Required) {
                             var defaultOpt = new Option(Strings.STS.L_LookupFieldNoneOption, '0', selected, selected);
                             _dropdownElt.options.add(defaultOpt);
+                            selected = _selectedValue == 0;
                         }
+                        var isEmptyList = true;
 
                         var enumerator = results.getEnumerator();
                         while (enumerator.moveNext()) {
@@ -551,14 +555,20 @@ var CSR;
                             }
                             var opt = new Option(text, id.toString(), isSelected, isSelected);
                             _dropdownElt.options.add(opt);
+                            isEmptyList = false;
                         }
-
+                        pendingLoads--;
                         _optionsLoaded = true;
-                        if (!isFirstLoad) {
-                            OnLookupValueChanged();
-                        } else {
-                            if (_selectedValue == 0) {
-                                _dropdownElt.selectedIndex = 0;
+                        if (!pendingLoads) {
+                            if (isFirstLoad) {
+                                if (_selectedValue == 0 && !selected) {
+                                    _dropdownElt.selectedIndex = 0;
+                                    OnLookupValueChanged();
+                                }
+                            } else {
+                                if (_selectedValue != 0 && !selected) {
+                                    _dropdownElt.selectedIndex = 0;
+                                }
                                 OnLookupValueChanged();
                             }
                         }
