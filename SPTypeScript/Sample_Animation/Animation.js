@@ -4,7 +4,6 @@ SP.SOD.execute("mquery.js", "m$.ready", function () {
     m$("#cmdHidePhoto").click(function (e) {
         SPAnimationUtility.BasicAnimator.FadeOut(photo1);
     });
-
     m$("#cmdShowPhoto").click(function (e) {
         SPAnimationUtility.BasicAnimator.FadeIn(photo1);
     });
@@ -15,7 +14,6 @@ SP.SOD.execute("mquery.js", "m$.ready", function () {
         var state = new SPAnimation.State();
         state.SetAttribute(SPAnimation.Attribute.Opacity, 0.2);
         var animation = new SPAnimation.Object(SPAnimation.ID.Basic_Opacity, 500, photo1, state);
-
         animation.RunAnimation();
     });
 });

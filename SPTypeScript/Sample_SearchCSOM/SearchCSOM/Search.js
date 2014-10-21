@@ -11,7 +11,6 @@ $(function () {
             e.preventDefault();
         }
     });
-
     function executeQuery(queryTerms) {
         var Results = {
             element: $(''),
@@ -33,7 +32,6 @@ $(function () {
                         //TODO: Discover proper way to load collection
                         var tableCollection = new Search.ResultTableCollection();
                         tableCollection.initPropertiesFromJson(result.get_value());
-
                         var rows = tableCollection.get_item(0).get_resultRows();
                         Results.element.html(_this.createHtml(rows));
                     }, function (sender, args) {
@@ -43,7 +41,6 @@ $(function () {
             },
             createHtml: function (rows) {
                 var html = "<table>";
-
                 for (var i = 0; i < rows.length; i++) {
                     html += "<tr><td>";
                     html += rows[i]['Title'];
@@ -51,12 +48,10 @@ $(function () {
                     html += rows[i]['Path'];
                     html += "</td></tr>";
                 }
-
                 html += "</table>";
                 return html;
             }
         };
-
         Results.init($('#resultsDiv'));
         Results.load();
     }

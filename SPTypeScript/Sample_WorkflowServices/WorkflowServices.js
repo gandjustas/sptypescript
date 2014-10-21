@@ -1,14 +1,11 @@
 ///<reference path="../Definitions/SharePoint.d.ts" />
 SP.SOD.executeOrDelayUntilScriptLoaded(function () {
     var context = SP.ClientContext.get_current();
-
     var web = context.get_web();
     context.load(web);
-
     context.executeQueryAsync(function (sender, args) {
         var servicesManager = SP.WorkflowServices.WorkflowServicesManager.newObject(context, web);
         context.load(servicesManager);
-
         context.executeQueryAsync(function (sender, args) {
             var deploymentService = servicesManager.getWorkflowDeploymentService();
             context.load(deploymentService);
@@ -16,10 +13,8 @@ SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             context.load(instanceService);
             var subscriptionService = servicesManager.getWorkflowSubscriptionService();
             context.load(subscriptionService);
-
             context.executeQueryAsync(function (sender, args) {
                 var designerActions = deploymentService.getDesignerActions(web);
-
                 // perform other actions with services here
                 // for example, get all workflow definitions:
                 //var workflowDefinitions = deploymentService.enumerateDefinitions(false);

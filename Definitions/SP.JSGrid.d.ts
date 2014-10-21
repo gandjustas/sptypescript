@@ -1,3 +1,4 @@
+///<reference path="MicrosoftAjax.d.ts" />
 declare module SP {
     export module JsGrid {
 
@@ -470,29 +471,7 @@ declare module SP {
             Gantt,
             Other
         }
-        export enum RowHeaderStatePriorities {
-            Dirty,
-            Transfer,
-            CellError,
-            Conflict,
-            RowError,
-            NewRow
-        }
-        export enum ValidationState {
-            Valid,
-            Pending,
-            Invalid
-        }
 
-        export class RowHeaderStyleId {
-            static Transfer: string;
-            static Conflict: string;
-        }
-        export class RowHeaderAutoStyleId {
-            static Dirty: string;
-            static Error: string;
-            static NewRow: string;
-        }
         export class RowHeaderState {
             constructor(id: string, img: SP.JsGrid.Image, priority: SP.JsGrid.RowHeaderStatePriorities, tooltip: string, fnOnClick: { (eventInfo:Sys.UI.DomEvent, recordKey: number): void });
             GetId(): string;
@@ -921,13 +900,6 @@ declare module SP {
             fnGetSingleValueTooltip: { (record: IRecord, fieldKey: string, dataValue: any, localizedValue: any): string };
         }
 
-        export enum EditMode {
-            ReadOnly,
-            ReadWrite,
-            ReadOnlyDefer,
-            ReadWriteDefer,
-            Defer
-        }
 
         export interface IRecord {
             /** True if this is an entry row */

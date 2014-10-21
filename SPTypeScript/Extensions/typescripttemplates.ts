@@ -842,7 +842,7 @@ module CSR {
                         }
 
                         if (showDialog) {
-                            $addHandler(link, "click", (e: Event) => {
+                            $addHandler(link, "click", (e: Sys.UI.DomEvent) => {
                                 SP.SOD.executeFunc('sp.ui.dialog.js', 'SP.UI.ModalDialog.ShowPopupDialog', () => {
                                     SP.UI.ModalDialog.ShowPopupDialog(newFormUrl);
                                 });
