@@ -5,5 +5,6 @@
     <File Path="CustomFieldRenderingModule\fieldsamples.visafield.js" Url="CustomFieldRenderingModule/fieldsamples.visafield.js" ReplaceContent="TRUE" />
     <File Path="CustomFieldRenderingModule\fieldsamples.visafield.min.js" Url="CustomFieldRenderingModule/fieldsamples.visafield.min.js" ReplaceContent="TRUE" />
     <File Path="CustomFieldRenderingModule\fieldsamples.visafield.js.map" Url="CustomFieldRenderingModule/fieldsamples.visafield.js.map" />
+    <File Path="CustomFieldRenderingModule\fieldsamples.visafield.min.js.map" Url="CustomFieldRenderingModule/fieldsamples.visafield.min.js.map" ReplaceContent="TRUE" />
   </Module>
 </Elements>

@@ -1,6 +1,134 @@
 declare module SP {
     export module JsGrid {
 
+        export enum TextDirection  {
+            Default, //0,
+            RightToLeft, //1,
+            LeftToRight //2
+        }
+
+        export enum PaneId  {
+            MainGrid, //0,
+            PivotedGrid, //1,
+            Gantt //2
+        }
+
+        export enum PaneLayout  {
+            GridOnly, //0,
+            GridAndGantt, //1,
+            GridAndPivotedGrid //2
+
+        }
+        export enum EditMode  {
+            ReadOnly, //0,
+            ReadWrite, //1,
+            ReadOnlyDefer, //2,
+            ReadWriteDefer, //3,
+            Defer //4
+        }
+
+        export enum GanttDrawBarFlags  {
+            LeftLink, //0x01,
+            RightLink //0x02
+
+        }
+        export enum GanttBarDateType  {
+            Start, //0,
+            End //1
+        }
+
+        export enum ValidationState  {
+            Valid, //0,
+            Pending, //1,
+            Invalid //2
+        }
+
+        export enum HierarchyMode  {
+            None, //0,
+            Standard, //1,
+            Grouping //2
+        }
+
+        export enum EditActorWriteType  {
+            Both, //1,
+            LocalizedOnly, //2,
+            DataOnly, //3,
+            Either //4
+        }
+
+        export enum EditActorReadType  {
+            Both, //1,
+            LocalizedOnly, //2,
+            DataOnly //3
+        }
+
+        export enum EditActorUpdateType  {
+            Committed, //0,
+            Uncommitted, //1
+        }
+
+        export enum SortMode  {
+            Ascending, //1,
+            Descending, //-1,
+            None //0
+        }
+
+        export module RowHeaderStyleId {
+            export var Transfer: string; //'Transfer',
+            export var Conflict: string; //'Conflict'
+
+        }
+
+        export module  RowHeaderAutoStyleId {
+            export var Dirty:string; //'Dirty',
+            export var Error: string; //'Error',
+            export var NewRow: string; //'NewRow'
+        }
+
+        export enum RowHeaderStatePriorities  {
+            Dirty, //10,
+            Transfer, //30,
+            CellError, //40,
+            Conflict, //50,
+            RowError, //60,
+            NewRow //90
+        }
+
+        export enum UpdateSerializeMode  {
+            Cancel, //0,
+            Default, //1,
+            PropDataOnly, //2,
+            PropLocalizedOnly, //3,
+            PropBoth //4
+        }
+
+        export enum UpdateTrackingMode  {
+            PropData, //2,
+            PropLocalized, //3,
+            PropBoth //4
+        }
+
+        export module  UserAction  {
+            export var UserEdit:string; //'User Edit':string;
+            export var DeleteRecord:string; //'Delete Record':string;
+            export var InsertRecord:string; //'Insert Record':string;
+            export var Indent:string; //'Indent':string;
+            export var Outdent:string; //'Outdent':string;
+            export var Fill:string; //'Fill':string;
+            export var Paste:string; //'Paste':string;
+            export var CutPaste: string; //'Cut/Paste'
+        }
+
+        export enum ReadOnlyActiveState  {
+            ReadOnlyActive, //0,
+            ReadOnlyDisabled, //1
+        }
+
+        export interface IValue {
+            data?: any;
+            localized?:string;
+        }
+
 
         export class JsGridControl {
             constructor(parentNode: HTMLElement, bShowLoadingBanner: boolean);
@@ -212,7 +340,7 @@ declare module SP {
             ScrollToAndExpandNextErrorOnRecord(minId?: number, recordKey?: number, fnFilter?: { (recordKey: number, fieldKey: string, id: number): boolean }, bDontExpand?: boolean): any;
 
             GetFocusedItem(): any;
-            SendKeyDownEvent(eventInfo): any;
+            SendKeyDownEvent(eventInfo:Sys.UI.DomEvent): any;
             /** Moves cursor to entry record (the row that is used to add new records) */
             JumpToEntryRecord(): void;
 
@@ -366,11 +494,11 @@ declare module SP {
             static NewRow: string;
         }
         export class RowHeaderState {
-            constructor(id: string, img: SP.JsGrid.Image, priority: SP.JsGrid.RowHeaderStatePriorities, tooltip: string, fnOnClick: { (eventInfo, recordKey: number): void });
+            constructor(id: string, img: SP.JsGrid.Image, priority: SP.JsGrid.RowHeaderStatePriorities, tooltip: string, fnOnClick: { (eventInfo:Sys.UI.DomEvent, recordKey: number): void });
             GetId(): string;
             GetImg(): SP.JsGrid.Image;
             GetPriority(): SP.JsGrid.RowHeaderStatePriorities;
-            GetOnClick(): { (eventInfo, recordKey: number): void };
+            GetOnClick(): { (eventInfo:Sys.UI.DomEvent, recordKey: number): void };
             GetTooltip(): string;
             toString(): string;
         }
@@ -387,7 +515,7 @@ declare module SP {
             bIsAnimated: boolean;
             /** Renders the image with specified alternative text and on-click handler.
                 If bHideTooltip == false, then alternative text is also shown as the tooltip (title attribute). */
-            Render(altText: string, clickFn: { (eventInfo: any): void }, bHideTooltip: boolean): HTMLElement;
+            Render(altText: string, clickFn: { (eventInfo:Sys.UI.DomEvent): void }, bHideTooltip: boolean): HTMLElement;
         }
 
         export interface IEventArgs { }
@@ -422,8 +550,8 @@ declare module SP {
                 bCancelled: boolean;
             }
             export class Click implements IEventArgs {
-                constructor(eventInfo, context: JsGrid.ClickContext, recordKey: number, fieldKey: string);
-                eventInfo: any;
+                constructor(eventInfo:Sys.UI.DomEvent, context: JsGrid.ClickContext, recordKey: number, fieldKey: string);
+                eventInfo:Sys.UI.DomEvent;
                 context: JsGrid.ClickContext;
                 recordKey: number;
                 fieldKey: string;
@@ -481,8 +609,8 @@ declare module SP {
                 changeKey: JsGrid.IChangeKey
             }
             export class SingleCellClick implements IEventArgs {
-                constructor(eventInfo, recordKey: number, fieldKey: string);
-                eventInfo: any;
+                constructor(eventInfo:Sys.UI.DomEvent, recordKey: number, fieldKey: string);
+                eventInfo:Sys.UI.DomEvent;
                 recordKey: number;
                 fieldKey: string;
             }
@@ -499,8 +627,8 @@ declare module SP {
                 bAnyErrors: boolean;
             }
             export class SingleCellKeyDown implements IEventArgs {
-                constructor(eventInfo, recordKey: number, fieldKey: string);
-                eventInfo: any;
+                constructor(eventInfo:Sys.UI.DomEvent, recordKey: number, fieldKey: string);
+                eventInfo:Sys.UI.DomEvent;
                 recordKey: number;
                 fieldKey: string;
             }
@@ -879,7 +1007,12 @@ declare module SP {
             RTL: any;
             emptyValue: any;
             bLightFocus: boolean;
-            OnKeyDown: { (domEvent: any): void; };
+            OnKeyDown: { (domEvent: Sys.UI.DomEvent): void; };
+        }
+
+        export interface IEditControlGridContext extends IEditActorGridContext {
+            OnActivateActor(): void;
+            OnDeactivateActor():void;
         }
 
         export interface IPropertyType {
@@ -981,8 +1114,8 @@ declare module SP {
 
             export class Utils {
                 static RegisterDisplayControl(name: string, singleton, requiredFunctionNames: string[]);
-                static RegisterEditControl(name: string, factory: { (gridContext): IPropertyType; }, requiredFunctionNames: string[]);
-                static RegisterWidgetControl(name: string, factory: { (gridContext): IPropertyType; }, requiredFunctionNames: string[]);
+                static RegisterEditControl(name: string, factory: (gridContext: IEditControlGridContext, gridTextInputElement:HTMLElement) => IEditControl, requiredFunctionNames: string[]);
+                static RegisterWidgetControl(name: string, factory: { (ddContext): IPropertyType; }, requiredFunctionNames: string[]);
 
                 static UpdateDisplayControlForPropType(propTypeName: string, displayControlType: string);
             }
@@ -1017,11 +1150,57 @@ declare module SP {
                 NotifyVacateChange(changeKey: IChangeKey): void;
             }
 
-            export class PropertyUpdate {
+            export class PropertyUpdate implements IValue {
                 constructor(data: any, localized: string);
                 data: any;
                 localized: string;
             }
+        }
+
+        export interface IEditActorCellContext {
+            propType:IPropertyType;
+            originalValue:IValue;
+            record:IRecord;
+            column:ColumnInfo;
+            field:GridField;
+            fieldKey:string;
+            cellExpandSpace:{ left:number; top:number; fight:number; bottom:number; };
+            SetCurrentValue(value): void;
+        }
+
+        export interface IEditControlCellContext extends IEditActorCellContext{
+            cellWidth: number;
+            cellHeight: number;
+            cellStyle: any; //TODO: Determine correct type
+            cellRect:any;
+            NotifyExpandControl(): void;
+            NotifyEditComplete(): void;
+            Show(element: HTMLElement): void;
+            Hide(element: HTMLElement): void;
+        }
+
+
+        export module EditControl {
+            
+        }
+
+        export interface IEditControl {
+            SupportedWriteMode?: SP.JsGrid.EditActorWriteType;
+            SupportedReadMode?: SP.JsGrid.EditActorReadType;
+            GetCellContext? (): IEditControlCellContext;
+            GetOriginalValue?():IValue;
+            SetValue?(value:IValue):void;
+            Dispose():void;
+            GetInputElement?():HTMLElement;
+            Focus?(eventInfo:Sys.UI.DomEvent):void;
+            BindToCell (cellContext: IEditControlCellContext):void;
+            OnBeginEdit (eventInfo: Sys.UI.DomEvent):void;
+            Unbind():void;
+            OnEndEdit():void;
+            OnCellMove?():void;
+            OnValueChanged?(newValue: IValue):void;
+            IsCurrentlyUsingGridTextInputElement?(): boolean;
+            SetSize?(width:number, height:number):void;
         }
 
     }

@@ -134,6 +134,9 @@
     <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js.map">
       <DependentUpon>fieldsamples.visafield.ts</DependentUpon>
     </None>
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js.map">
+      <DependentUpon>fieldsamples.visafield.min.js</DependentUpon>
+    </None>
     <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{75124c56-69cb-479f-896e-b00d60008b41}</SharePointProjectItemId>
     </None>
@@ -270,8 +273,12 @@
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\Elements.xml" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\Schema.xml" />
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\Elements.xml" />
-    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js" />
-    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js">
+      <DependentUpon>fieldsamples.visafield.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js">
+      <DependentUpon>fieldsamples.visafield.ts</DependentUpon>
+    </Content>
     <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.ts" />
     <Content Include="Sample_FieldLookupBySearch\DetailsList\DetailsListInstance\Elements.xml" />
     <Content Include="Sample_FieldLookupBySearch\DetailsList\Elements.xml" />

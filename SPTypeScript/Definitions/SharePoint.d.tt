@@ -35,6 +35,7 @@
 <#= GetFileContents(@"reputation.d.ts") #>
 <#= GetFileContents(@"SPO.d.ts") #>
 <#= GetFileContents(@"SP.JSGrid.d.ts") #>
+<#= GetFileContents(@"SPGantt.d.ts") #>
 
 <#+
 

@@ -48,12 +48,55 @@ declare module Sys {
     module UI {
         export class Control extends Component { }
         export class DomEvent {
-            static addHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void);
-            static removeHandler(element: HTMLElement, eventName: string, handler: (e: Event) => void);
+            static addHandler(element: HTMLElement, eventName: string, handler: (e: DomEvent) => void);
+            static removeHandler(element: HTMLElement, eventName: string, handler: (e: DomEvent) => void);
+            static clearHandlers(element: HTMLElement);
+
+            constructor(element: HTMLElement)
+            rawEvent: Event;
+            altKey: boolean;
+            button: MouseButton;
+            keyCode: number;
+            clientX: number;
+            clientY: number;
+            ctrlKey: boolean;
+            offsetX: number;
+            offsetY: number;
+            screenX: number;
+            screenY: number;
+            shiftKey: boolean;
+            target: HTMLElement;
+            type: string;
+            preventDefault(): void;
+            stopPropagation(): void;
+
         }
 
         export class DomElement {
             static getBounds(element: HTMLElement): { x: number; y: number; width: number; height: number; };
+        }
+
+        export enum MouseButton {
+            leftButton,
+            middleButto,
+            rightButton
+        }
+
+        export enum Key {
+            backspace,
+            tab,
+            enter,
+            esc,
+            space,
+            pageUp,
+            pageDown,
+            end,
+            home,
+            left,
+            up,
+            right,
+            down,
+            del
         }
     }
     module Net {
@@ -145,5 +188,5 @@ declare module Sys {
 }
 
 declare var $get: { (id: string): HTMLElement; };
-declare var $addHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void): void; };
-declare var $removeHandler: { (element: HTMLElement, eventName: string, handler: (e: Event) => void): void; };
+declare var $addHandler: { (element: HTMLElement, eventName: string, handler: (e: Sys.UI.DomEvent) => void): void; };
+declare var $removeHandler: { (element: HTMLElement, eventName: string, handler: (e: Sys.UI.DomEvent) => void): void; };
