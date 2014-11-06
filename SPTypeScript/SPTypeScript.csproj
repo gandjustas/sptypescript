@@ -46,6 +46,10 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\Elements.xml" />
     <None Include="Definitions\SharePoint.d.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SharePoint.d.ts</LastGenOutput>
@@ -58,6 +62,18 @@
     </None>
     <None Include="Extensions\typescripttemplates.min.js.map">
       <DependentUpon>typescripttemplates.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_AngularForm\AngularFormFiles\AngularForm.js.map">
+      <DependentUpon>AngularForm.ts</DependentUpon>
+    </None>
+    <None Include="Sample_AngularForm\AngularFormFiles\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{211cdec9-ad33-4c81-a275-7ac985081746}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_AngularForm\Sample_AngularFormInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{f3c4fc7f-2d0c-4d98-8602-8e3438f99118}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_AngularForm\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2516633c-a1dd-4b9a-b932-2b3a3a22f5cb}</SharePointProjectItemId>
     </None>
     <None Include="Sample_Animation\Animation.js.map">
       <DependentUpon>Animation.ts</DependentUpon>
@@ -190,6 +206,9 @@
     <None Include="Sample_Social\Social.js.map">
       <DependentUpon>Social.ts</DependentUpon>
     </None>
+    <None Include="Sample_Taxonomy\Taxonomy\App.min.js.map">
+      <DependentUpon>App.min.js</DependentUpon>
+    </None>
     <None Include="Sample_WhoIsWebPart\Part.js.map">
       <DependentUpon>Part.ts</DependentUpon>
     </None>
@@ -208,6 +227,7 @@
     <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
     </None>
+    <TypeScriptCompile Include="Sample_AngularForm\AngularFormFiles\AngularForm.ts" />
     <TypeScriptCompile Include="Sample_CascadedDropdown\FieldCascadedLookup.ts" />
     <TypeScriptCompile Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.ts" />
     <TypeScriptCompile Include="Sample_CSRCustomLayout\NewForm.ts" />
@@ -219,6 +239,14 @@
     </Content>
     <TypeScriptCompile Include="Sample_AutoFill\autofill.ts" />
     <TypeScriptCompile Include="Sample_Animation\Animation.ts" />
+    <Content Include="Sample_AngularForm\AngularFormFiles\AngularForm.html" />
+    <Content Include="Sample_AngularForm\AngularFormFiles\AngularForm.js">
+      <DependentUpon>AngularForm.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_AngularForm\AngularFormFiles\Elements.xml" />
+    <Content Include="Sample_AngularForm\Elements.xml" />
+    <Content Include="Sample_AngularForm\Sample_AngularFormInstance\Elements.xml" />
+    <Content Include="Sample_AngularForm\Schema.xml" />
     <Content Include="Sample_Animation\Animation.js">
       <DependentUpon>Animation.ts</DependentUpon>
     </Content>
@@ -349,6 +377,10 @@
     <None Include="Sample_WorkflowServices\WorkflowServices.js.map">
       <DependentUpon>WorkflowServices.ts</DependentUpon>
     </None>
+    <None Include="Scripts\angular.min.js.map" />
+    <None Include="Scripts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8b3df834-5a92-4741-9bdf-e6ed7d09dbdc}</SharePointProjectItemId>
+    </None>
     <None Include="SharePointProjectItem.spdata">
       <SharePointProjectItemId>{bdc98434-f9b7-46f7-ba2b-3af15e495ee4}</SharePointProjectItemId>
     </None>
@@ -421,7 +453,6 @@
       <SharePointProjectItemId>{fbba0cef-9361-4eb5-8a07-5f8da3fa32e1}</SharePointProjectItemId>
     </None>
     <Content Include="Sample_BasicCSOMActions\Announcements\Elements.xml" />
-    <Content Include="Definitions\jquery.d.ts" />
     <Content Include="Extensions\Elements.xml" />
     <Content Include="Extensions\typescripttemplates.js">
       <DependentUpon>typescripttemplates.ts</DependentUpon>
@@ -441,6 +472,17 @@
     <TypeScriptCompile Include="Extensions\typescripttemplates.ts" />
     <Content Include="Pages\Elements.xml" />
     <Content Include="Pages\Default.aspx" />
+    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-animate.d.ts" />
+    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-cookies.d.ts" />
+    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-mocks.d.ts" />
+    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-resource.d.ts" />
+    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-route.d.ts" />
+    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-sanitize.d.ts" />
+    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-scenario.d.ts" />
+    <TypeScriptCompile Include="Definitions\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Definitions\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Definitions\typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" />
+    <TypeScriptCompile Include="Definitions\typings\jqueryui\jqueryui.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Sample_CSRConditionalFormatting\ConditionalFormattingTasksList\SharePointProjectItem.spdata">

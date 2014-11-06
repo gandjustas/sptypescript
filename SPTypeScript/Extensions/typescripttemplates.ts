@@ -73,7 +73,7 @@ module CSR {
                     form.parentNode.replaceChild(fragment, form);
                 }
 
-
+                var old = ctx.CurrentItem;
                 ctx.CurrentItem = ctx.ListData.Items[0];
                 var fields = ctx.ListSchema.Field;
                 for (var j = 0; j < fields.length; j++) {
@@ -84,7 +84,7 @@ module CSR {
                         span.outerHTML = ctx.RenderFieldByName(ctx, field.Name);
                     }
                 }
-                ctx.CurrentItem = null;
+                ctx.CurrentItem = old;
             }
 
         }

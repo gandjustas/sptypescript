@@ -24,6 +24,7 @@
             <li><a href="../Lists/DetailsList">Client Side Rendering: Lookup field with search</a></li>
             <li><a href="../Lists/CSRCustomForm">Client Side Rendering: Make fields hidden and readonly in views and froms</a></li>
             <li><a href="../Lists/CSRCustomLayout">Client Side Rendering: CSRCustomLayout forms</a></li>
+            <li><a href="../Lists/AngularForm">Client Side Rendering: AngularJS forms</a></li>
             <li><a href="../Sample_WorkflowServices">Workflow Services: Retrieve list of available workflow actions</a></li>
             <li><a href="javascript:document.location = '../SearchCSOM/Search.aspx?'+document.URL.split('?')[1]">Search: Using search CSOM  with TypeScript</a></li>
             <li><a href="../Sample_UserProfiles">User Profiles: Retrieve properties for current user</a></li>

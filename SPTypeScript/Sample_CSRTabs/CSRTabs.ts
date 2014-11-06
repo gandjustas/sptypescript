@@ -1,7 +1,3 @@
-///<reference path="../Definitions/jquery.d.ts" />
-///<reference path="../Definitions/SharePoint.d.ts" />
-///<reference path="../Definitions/jquery.d.ts" />
-///<reference path="../Definitions/jqueryui.d.ts" />
 
 declare var Strings: any;
 declare module SP {

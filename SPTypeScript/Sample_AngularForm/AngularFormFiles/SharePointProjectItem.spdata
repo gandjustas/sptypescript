@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="AngularFormFiles\" Type="ElementManifest" />
+    <ProjectItemFile Source="AngularForm.ts" Target="AngularFormFiles\" Type="ElementFile" />
+    <ProjectItemFile Source="AngularForm.js" Target="AngularFormFiles\" Type="ElementFile" />
+    <ProjectItemFile Source="AngularForm.js.map" Target="AngularFormFiles\" Type="ElementFile" />
+    <ProjectItemFile Source="AngularForm.html" Target="AngularFormFiles\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

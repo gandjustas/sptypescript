@@ -1,0 +1,13 @@
+﻿<table width="100%" class="ms-formtable" style="margin-top: 8px;" border="0" cellspacing="0" cellpadding="0">
+    <tbody >
+        <tr ng-repeat="fld in Fields" ng-sp-form-row="fld">
+            <td width="113" class="ms-formlabel" nowrap="true" valign="top">
+                <h3 class="ms-standardheader">
+                    <nobr>{{fld.Title}}<span ng-show="fld.Required" title="This field is required." class="ms-accentText">*</span></nobr>
+                </h3>
+            </td>
+            <td width="350" class="ms-formbody" valign="top" ng-sp-field="fld"></td>
+        </tr>
+
+</tbody>
+</table>

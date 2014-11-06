@@ -6,17 +6,22 @@ var _;
         CSR.override(10057, 2).onPreRender(function (ctx) {
             // Override the default title with user input
             ctx.ListTitle = prompt("Type a title", ctx.ListTitle);
-        }).header("<b><#=ctx.ListTitle#></b>" + "<hr><ul id='unorderedlist'>").item(function (ctx) { return "<li>" + ctx.CurrentItem['Title'] + "</li>"; }).footer('</ul>').onPostRender(postRenderHandler).register();
+        }).header("<b><#=ctx.ListTitle#></b>" + "<hr><ul id='unorderedlist'>").item(function (ctx) {
+            return "<li>" + ctx.CurrentItem['Title'] + "</li>";
+        }).footer('</ul>').onPostRender(postRenderHandler).register();
     }
     ;
-    // The postRenderHandler handles the 
+
+    // The postRenderHandler handles the
     // OnPostRender event
     function postRenderHandler(ctx) {
         // You can manipulate the DOM
         // in the postRender event
         var ulObj;
         var i, j;
+
         ulObj = document.getElementById("unorderedlist");
+
         for (i = 1; i < ulObj.children.length; i++) {
             var x = ulObj.children[i];
             for (j = 1; j < ulObj.children.length; j++) {
@@ -27,8 +32,10 @@ var _;
             }
         }
     }
+
     SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
+
         //Enable script with MDS
         SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_CSRListView/CSRListView.js"), init);

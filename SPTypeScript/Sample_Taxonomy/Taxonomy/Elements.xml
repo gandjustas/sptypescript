@@ -6,5 +6,6 @@
     <File Path="Taxonomy\App.js" Url="Taxonomy/App.js" ReplaceContent="TRUE" />
     <File Path="Taxonomy\App.js.map" Url="Taxonomy/App.js.map" ReplaceContent="TRUE" />
     <File Path="Taxonomy\App.min.js" Url="Taxonomy/App.min.js" ReplaceContent="TRUE" />
+    <File Path="Taxonomy\App.min.js.map" Url="Taxonomy/App.min.js.map" ReplaceContent="TRUE" />
   </Module>
 </Elements>

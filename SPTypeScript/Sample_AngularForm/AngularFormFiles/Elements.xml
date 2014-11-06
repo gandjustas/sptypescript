@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="AngularFormFiles">
+    <File Path="AngularFormFiles\AngularForm.ts" Url="AngularFormFiles/AngularForm.ts" ReplaceContent="TRUE" />
+    <File Path="AngularFormFiles\AngularForm.js" Url="AngularFormFiles/AngularForm.js" ReplaceContent="TRUE" />
+    <File Path="AngularFormFiles\AngularForm.js.map" Url="AngularFormFiles/AngularForm.js.map" ReplaceContent="TRUE" />
+    <File Path="AngularFormFiles\AngularForm.html" Url="AngularFormFiles/AngularForm.html" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

@@ -1,6 +1,6 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
+﻿///<reference path="../Definitions/SharePoint.d.ts" />
 // Prepare the options and render the control
-// The Help, Account and Contact pages receive the 
+// The Help, Account and Contact pages receive the
 //   same query string parameters as the main page
 (function () {
     var options = {
@@ -22,6 +22,7 @@
             }
         ]
     };
+
     var nav = new SP.UI.Controls.Navigation("chrome_ctrl_placeholder", options);
     nav.setVisible(true);
 })();

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="Sample_AngularForm"
+                OnQuickLaunch="TRUE"
+                TemplateType="105001"
+                Url="Lists/AngularForm"
+                Description="Мой экземпляр списка">
+  </ListInstance>
+</Elements>

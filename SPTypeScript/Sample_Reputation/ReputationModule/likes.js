@@ -1,4 +1,4 @@
-/// <reference path="../../Definitions/SharePoint.d.ts"/>
+﻿/// <reference path="../../Definitions/SharePoint.d.ts"/>
 var SampleReputation;
 (function (SampleReputation) {
     var MyItem = (function () {
@@ -21,6 +21,7 @@ var SampleReputation;
         };
         return MyItem;
     })();
+
     function init() {
         SP.SOD.registerSod('reputation.js', '/_layouts/15/reputation.js');
         SP.SOD.registerSod('typescripttemplates.ts', '/SPTypeScript/Extensions/typescripttemplates.js');
@@ -29,11 +30,14 @@ var SampleReputation;
                 ctx.listId = ctx.listName.substring(1, 37);
             }).header('<ul>').body(renderTemplate).footer('</ul>').register();
         });
+
         SP.SOD.execute('mQuery.js', 'm$.ready', function () {
             RegisterModuleInit('/SPTypeScript/ReputationModule/likes.js', init);
         });
+
         SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs('likes.js');
     }
+
     function renderTemplate(ctx) {
         var rows = ctx.ListData.Row;
         var result = '';
@@ -48,9 +52,11 @@ var SampleReputation;
         }
         return result;
     }
+
     function getLikeText(isLikedByCurrentUser) {
         return isLikedByCurrentUser ? '\u2665' : '\u2661';
     }
+
     function setLike(itemId, listId) {
         var context = SP.ClientContext.get_current();
         var isLiked = m$('#likesCountText' + itemId)[0].textContent == '\u2661';
@@ -66,6 +72,7 @@ var SampleReputation;
         });
     }
     SampleReputation.setLike = setLike;
+
     init();
 })(SampleReputation || (SampleReputation = {}));
 //# sourceMappingURL=likes.js.map

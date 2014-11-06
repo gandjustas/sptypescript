@@ -1,5 +1,4 @@
-﻿/// <reference path="../Definitions/jquery.d.ts" />
-$(function () {
+﻿$(function () {
     $(":button.code-exec").click(function () {
         $("#" + this.parentElement.id + " .result-panel").toggle();
 

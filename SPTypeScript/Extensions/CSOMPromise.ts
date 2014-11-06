@@ -1,6 +1,3 @@
-/// <reference path="../Definitions/jQuery.d.ts" />
-/// <reference path="../Definitions/SharePoint.d.ts" />
-
 module SP {
 
     // Class

@@ -1,6 +1,3 @@
-///<reference path="../../Definitions/SharePoint.d.ts" />
-///<reference path="../../definitions/jquery.d.ts" />
-///<reference path="../../extensions/CSOMPromise.ts" />
 module _ {
     var context: SP.ClientContextPromise;
     var web: SP.Web;

@@ -11,8 +11,7 @@ var _;
                 if (row) {
                     if (percentComplete > 0.8) {
                         row.style.backgroundColor = '#f8502a';
-                    }
-                    else if (percentComplete > 0.4) {
+                    } else if (percentComplete > 0.4) {
                         row.style.backgroundColor = '#52f82a';
                     }
                 }
@@ -20,9 +19,11 @@ var _;
         }).register();
     }
     ;
+
     if (document.location.href.indexOf('/Lists/ConditionalFormattingTasksList') > 0) {
         SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             SP.SOD.executeOrDelayUntilScriptLoaded(init, "typescripttemplates.ts");
+
             SP.SOD.executeOrDelayUntilScriptLoaded(function () {
                 //Enable script with MDS
                 RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Scripts_ConditionalFormattingList/ConditionalFormatting.js"), init);

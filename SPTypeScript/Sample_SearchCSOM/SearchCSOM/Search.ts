@@ -1,8 +1,3 @@
-///<reference path="../../definitions/jquery.d.ts" />
-///<reference path="../../Definitions/SharePoint.d.ts" />
-
-
-
 $(() => {
     $("#toolbarDiv").show();
     $("#toolbarDiv input[type=button]").click(e => {

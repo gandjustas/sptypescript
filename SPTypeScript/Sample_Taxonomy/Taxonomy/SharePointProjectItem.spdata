@@ -7,5 +7,6 @@
     <ProjectItemFile Source="App.js" Target="Taxonomy\" Type="ElementFile" />
     <ProjectItemFile Source="App.js.map" Target="Taxonomy\" Type="ElementFile" />
     <ProjectItemFile Source="App.min.js" Target="Taxonomy\" Type="ElementFile" />
+    <ProjectItemFile Source="App.min.js.map" Target="Taxonomy\" Type="ElementFile" />
   </Files>
 </ProjectItem>
