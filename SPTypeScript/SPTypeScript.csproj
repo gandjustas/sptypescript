@@ -25,6 +25,7 @@
     <SccProvider>Mercurial Source Control Package</SccProvider>
     <ActivePublishProfile />
     <TypeScriptModuleKind>none</TypeScriptModuleKind>
+    <FileUpgradeFlags />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

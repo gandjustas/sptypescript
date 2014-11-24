@@ -1,7 +1,6 @@
 var CSRTabs;
 (function (CSRTabs) {
     var author, editor, created, modified;
-
     function init() {
         var options;
         options = { Templates: {} };
@@ -10,7 +9,6 @@ var CSRTabs;
         SPClientTemplates.TemplateManager.RegisterTemplateOverrides(options);
     }
     CSRTabs.init = init;
-
     var TabCollection = (function () {
         function TabCollection(fields) {
             this.tabs = [];
@@ -41,7 +39,6 @@ var CSRTabs;
         };
         return TabCollection;
     })();
-
     var Tab = (function () {
         function Tab(name, title, fields) {
             this.name = name;
@@ -63,25 +60,20 @@ var CSRTabs;
         };
         return Tab;
     })();
-
     function RenderFields(context) {
         var tabs = new TabCollection(context.ListSchema.Field);
-
         var resultHtml = '';
         resultHtml += '<div id="tabbedForm">';
         resultHtml += tabs.renderHeaders();
         resultHtml += tabs.renderContents(context);
         resultHtml += '</div>';
-
         // Fix for proper displaying CreatedModifiedInfo control
         author = context.RenderFieldByName(context, "Author");
         created = context.RenderFieldByName(context, "Created");
         editor = context.RenderFieldByName(context, "Editor");
         modified = context.RenderFieldByName(context, "Modified");
-
         return resultHtml;
     }
-
     function RenderFieldRow(context, field) {
         var resultHtml = '<tr>';
         resultHtml += '<td width="113" class="ms-formlabel" nowrap="true" valign="top"><h3 class="ms-standardheader"><nobr>';
@@ -94,10 +86,8 @@ var CSRTabs;
         resultHtml += '</tr>';
         return resultHtml;
     }
-
     function OnPostRender(context) {
         $("#tabbedForm").tabs();
-
         var prefix = context.FormUniqueId + context.FormContext.listAttributes.Id;
         $get(prefix + 'Author').innerHTML = author;
         $get(prefix + 'Created').innerHTML = created;
@@ -106,11 +96,9 @@ var CSRTabs;
     }
 })(CSRTabs || (CSRTabs = {}));
 ;
-
 (function () {
     SP.SOD.executeOrDelayUntilScriptLoaded(function () {
         CSRTabs.init();
-
         //Enable script with MDS
         SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             RegisterModuleInit(SPClientTemplates.Utility.ReplaceUrlTokens("~site/Sample_CSRTabs/CSRTabs.js"), CSRTabs.init);

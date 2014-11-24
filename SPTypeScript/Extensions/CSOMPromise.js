@@ -22,7 +22,6 @@ var SP;
             });
             return deferred.promise();
         };
-
         ClientContextPromise.get_current = function () {
             return new ClientContextPromise(_spPageContextInfo.siteServerRelativeUrl);
         };
