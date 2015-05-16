@@ -119,7 +119,7 @@ module _ {
                             termSetName.setAttribute("style", "float:none;cursor:pointer;");
                             var termSetID = currentTermSet.get_id();
                             termSetName.setAttribute("id", termSetID.toString());
-                            $(termSetName).click(() => showTerms(event, groupID, termSetID));
+                            $(termSetName).click(e => showTerms(e, groupID, termSetID));
                             parentDiv.appendChild(termSetName);
                         })();
                     }
@@ -135,7 +135,7 @@ module _ {
     // do is retrieve a reference to the term set with the same ID as the div, and
     // then add the term  that belong to that term set under the div that was clicked.
 
-    function showTerms(event: MSEventObj, groupID: SP.Guid, termSetID: SP.Guid) {
+    function showTerms(event: JQueryEventObject, groupID: SP.Guid, termSetID: SP.Guid) {
 
         // First, cancel the bubble so that the group div click handler does not also fire
         // because that removes all term set divs and we don't want that here.

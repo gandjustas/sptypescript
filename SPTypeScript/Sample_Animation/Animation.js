@@ -1,4 +1,3 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
 SP.SOD.execute("mquery.js", "m$.ready", function () {
     var photo1 = document.getElementById("photo1");
     m$("#cmdHidePhoto").click(function (e) {

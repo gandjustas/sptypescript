@@ -7,5 +7,7 @@
     <ProjectItemFile Source="Part.js" Target="Sample_WhoIsWebPart\" Type="ElementFile" />
     <ProjectItemFile Source="Part.aspx" Target="Sample_WhoIsWebPart\" Type="ElementFile" />
     <ProjectItemFile Source="Part.css" Target="Sample_WhoIsWebPart\" Type="ElementFile" />
+    <ProjectItemFile Source="Part.min.js" Target="Sample_WhoIsWebPart\" Type="ElementFile" />
+    <ProjectItemFile Source="Part.min.js.map" Target="Sample_WhoIsWebPart\" Type="ElementFile" />
   </Files>
 </ProjectItem>

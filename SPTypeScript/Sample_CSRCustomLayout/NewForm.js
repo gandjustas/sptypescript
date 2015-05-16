@@ -1,7 +1,8 @@
 var _;
 (function (_) {
     function init() {
-        CSR.override(105).item(function (ctx) {
+        CSR.override(105)
+            .item(function (ctx) {
             var r = [];
             r.push('<table width="100%" class="ms-formtable" style="margin-top: 8px;" border="0" cellspacing="0" cellpadding="0">');
             r.push('<tbody>');
@@ -59,7 +60,8 @@ var _;
                 }
                 r.push('</tr>');
             }
-        }).register();
+        })
+            .register();
     }
     SP.SOD.executeFunc("typescripttemplates.ts", 'CSR', init);
     SP.SOD.executeOrDelayUntilScriptLoaded(function () {

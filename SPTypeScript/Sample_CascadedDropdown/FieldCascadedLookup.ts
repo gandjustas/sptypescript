@@ -1,7 +1,4 @@
-﻿///<reference path="../Definitions/SharePoint.d.ts" />
-///<reference path="../extensions/typescripttemplates.ts" />
-
-module _ {
+﻿module _ {
     function init() {
         CSR.override(10009)
             .filteredLookup("Master", '<BeginsWith><FieldRef Name ="Title" /><Value Type = "Text" >{Title}</Value></BeginsWith>')

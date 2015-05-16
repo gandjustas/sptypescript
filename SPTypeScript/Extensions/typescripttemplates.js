@@ -1,11 +1,13 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
 /** Lightweight client-side rendering template overrides.*/
 var CSR;
 (function (CSR) {
     function override(listTemplateType, baseViewId) {
-        return new csr(listTemplateType, baseViewId).onPreRender(hookFormContext).onPostRender(fixCsrCustomLayout);
+        return new csr(listTemplateType, baseViewId)
+            .onPreRender(hookFormContext)
+            .onPostRender(fixCsrCustomLayout);
         function hookFormContext(ctx) {
-            if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+            if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
+                || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
                 for (var i = 0; i < ctx.ListSchema.Field.length; i++) {
                     var fieldSchemaInForm = ctx.ListSchema.Field[i];
                     if (!ctx.FormContextHook) {
@@ -31,7 +33,8 @@ var CSR;
             }
         }
         function fixCsrCustomLayout(ctx) {
-            if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid || ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
+            if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid
+                || ctx.ControlMode == SPClientTemplates.ClientControlMode.View) {
                 return;
             }
             if (ctx.ListSchema.Field.length > 1) {
@@ -64,9 +67,12 @@ var CSR;
     }
     CSR.override = override;
     function getFieldValue(ctx, fieldName) {
-        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
+            || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
             var contextWithHook = ctx;
-            if (contextWithHook.FormContextHook && contextWithHook.FormContextHook[fieldName] && contextWithHook.FormContextHook[fieldName].getValue) {
+            if (contextWithHook.FormContextHook
+                && contextWithHook.FormContextHook[fieldName]
+                && contextWithHook.FormContextHook[fieldName].getValue) {
                 return contextWithHook.FormContextHook[fieldName].getValue();
             }
         }
@@ -74,9 +80,11 @@ var CSR;
     }
     CSR.getFieldValue = getFieldValue;
     function getFieldSchema(ctx, fieldName) {
-        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
+            || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
             var contextWithHook = ctx;
-            if (contextWithHook.FormContextHook && contextWithHook.FormContextHook[fieldName]) {
+            if (contextWithHook.FormContextHook
+                && contextWithHook.FormContextHook[fieldName]) {
                 return contextWithHook.FormContextHook[fieldName].fieldSchema;
             }
         }
@@ -84,7 +92,8 @@ var CSR;
     }
     CSR.getFieldSchema = getFieldSchema;
     function addUpdatedValueCallback(ctx, fieldName, callback) {
-        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
+            || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
             var contextWithHook = ctx;
             if (contextWithHook.FormContextHook) {
                 var f = ensureFormContextHookField(contextWithHook.FormContextHook, fieldName);
@@ -100,7 +109,8 @@ var CSR;
     }
     CSR.addUpdatedValueCallback = addUpdatedValueCallback;
     function removeUpdatedValueCallback(ctx, fieldName, callback) {
-        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+        if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
+            || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
             var contextWithHook = ctx;
             if (contextWithHook.FormContextHook) {
                 var callbacks = ensureFormContextHookField(contextWithHook.FormContextHook, fieldName).updatedValueCallbacks;
@@ -235,8 +245,10 @@ var CSR;
             });
         };
         csr.prototype.makeReadOnly = function (fieldName) {
-            return this.onPreRenderField(fieldName, function (schema, ctx) {
-                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid || ctx.ControlMode == SPClientTemplates.ClientControlMode.DisplayForm)
+            return this
+                .onPreRenderField(fieldName, function (schema, ctx) {
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.Invalid
+                    || ctx.ControlMode == SPClientTemplates.ClientControlMode.DisplayForm)
                     return;
                 schema.ReadOnlyField = true;
                 schema.ReadOnly = "TRUE";
@@ -253,8 +265,10 @@ var CSR;
                         ctxInForm.FormContext.registerGetValueCallback(fieldName, function () { return ctxInForm.ListData.Items[0][fieldName]; });
                     }
                 }
-            }).onPostRenderField(fieldName, function (schema, ctx) {
-                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+            })
+                .onPostRenderField(fieldName, function (schema, ctx) {
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
+                    || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
                     if (schema.Type == 'User' || schema.Type == 'UserMulti') {
                         SP.SOD.executeFunc('clientpeoplepicker.js', 'SPClientPeoplePicker', function () {
                             var topSpanId = schema.Name + '_' + schema.Id + '_$ClientPeoplePicker';
@@ -267,8 +281,7 @@ var CSR;
                                 }
                                 else {
                                     pp.SetEnabledState(false);
-                                    pp.DeleteProcessedUser = function () {
-                                    };
+                                    pp.DeleteProcessedUser = function () { };
                                 }
                             };
                             callback();
@@ -304,7 +317,8 @@ var CSR;
             });
         };
         csr.prototype.filteredLookup = function (fieldName, camlFilter, listname, lookupField) {
-            return this.fieldEdit(fieldName, SPFieldCascadedLookup_Edit).fieldNew(fieldName, SPFieldCascadedLookup_Edit);
+            return this.fieldEdit(fieldName, SPFieldCascadedLookup_Edit)
+                .fieldNew(fieldName, SPFieldCascadedLookup_Edit);
             function SPFieldCascadedLookup_Edit(rCtx) {
                 var parseRegex = /\{[^\}]+\}/g;
                 var dependencyExpressions = [];
@@ -411,9 +425,7 @@ var CSR;
                                 listId = field.get_lookupList();
                             }
                             getDependencyValue(expr, value, listId, expressionParts, callback);
-                        }, function (o, args) {
-                            console.log(args.get_message());
-                        });
+                        }, function (o, args) { console.log(args.get_message()); });
                     }
                 }
                 function bindDependentControls(dependencyExpressions) {
@@ -443,7 +455,10 @@ var CSR;
                         query.set_viewXml(predicate);
                     }
                     else {
-                        query.set_viewXml('<View Scope="RecursiveAll"><Query><Where>' + predicate + '</Where></Query> ' + '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
+                        query.set_viewXml('<View Scope="RecursiveAll"><Query><Where>' +
+                            predicate +
+                            '</Where></Query> ' +
+                            '<ViewFields><FieldRef Name="ID" /><FieldRef Name="Title"/></ViewFields></View>');
                     }
                     var results = list.getItems(query);
                     ctx.load(results);
@@ -496,10 +511,40 @@ var CSR;
                                 OnLookupValueChanged();
                             }
                         }
-                    }, function (o, args) {
-                        console.log(args.get_message());
+                    }, function (o, args) { console.log(args.get_message()); });
+                }
+            }
+        };
+        csr.prototype.koEditField = function (fieldName, template, vm, dependencyFields) {
+            return this.fieldEdit(fieldName, koEditField_Edit)
+                .fieldNew(fieldName, koEditField_Edit);
+            function koEditField_Edit(rCtx) {
+                if (rCtx == null)
+                    return '';
+                var _myData = SPClientTemplates.Utility.GetFormContextForCurrentField(rCtx);
+                if (_myData == null || _myData.fieldSchema == null)
+                    return '';
+                var elementId = _myData.fieldName + '_' + _myData.fieldSchema.Id + '_$' + _myData.fieldSchema.Type;
+                vm.renderingContext = rCtx;
+                if (dependencyFields) {
+                    dependencyFields.forEach(function (dependencyField) {
+                        if (!vm[dependencyField]) {
+                            vm[dependencyField] = ko.observable(CSR.getFieldValue(rCtx, dependencyField));
+                        }
+                        CSR.addUpdatedValueCallback(rCtx, dependencyField, function (v) {
+                            vm[dependencyField](v);
+                        });
                     });
                 }
+                if (!vm.value) {
+                    vm.value = ko.observable();
+                }
+                vm.value.subscribe(function (v) { _myData.updateControlValue(fieldName, v); });
+                _myData.registerGetValueCallback(fieldName, function () { return vm.value(); });
+                _myData.registerInitCallback(fieldName, function () {
+                    ko.applyBindings(vm, $get(elementId));
+                });
+                return '<div id="' + STSHtmlEncode(elementId) + '">' + template + '</div>';
             }
         };
         csr.prototype.computedValue = function (targetField, transform) {
@@ -510,7 +555,8 @@ var CSR;
             }
             var dependentValues = {};
             return this.onPostRenderField(targetField, function (schema, ctx) {
-                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
+                    || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm) {
                     var targetControl = CSR.getControl(schema);
                     sourceField.forEach(function (field) {
                         CSR.addUpdatedValueCallback(ctx, field, function (v) {
@@ -532,7 +578,9 @@ var CSR;
             }
         };
         csr.prototype.autofill = function (fieldName, init) {
-            return this.fieldNew(fieldName, SPFieldLookup_Autofill_Edit).fieldEdit(fieldName, SPFieldLookup_Autofill_Edit);
+            return this
+                .fieldNew(fieldName, SPFieldLookup_Autofill_Edit)
+                .fieldEdit(fieldName, SPFieldLookup_Autofill_Edit);
             function SPFieldLookup_Autofill_Edit(rCtx) {
                 if (rCtx == null)
                     return '';
@@ -665,14 +713,16 @@ var CSR;
         };
         csr.prototype.lookupAddNew = function (fieldName, prompt, showDialog, contentTypeId) {
             return this.onPostRenderField(fieldName, function (schema, ctx) {
-                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm)
+                if (ctx.ControlMode == SPClientTemplates.ClientControlMode.EditForm
+                    || ctx.ControlMode == SPClientTemplates.ClientControlMode.NewForm)
                     var control = CSR.getControl(schema);
                 if (control) {
                     var weburl = _spPageContextInfo.webServerRelativeUrl;
                     if (weburl[weburl.length - 1] == '/') {
                         weburl = weburl.substring(0, weburl.length - 1);
                     }
-                    var newFormUrl = weburl + '/_layouts/listform.aspx/listform.aspx?PageType=8' + "&ListId=" + encodeURIComponent('{' + schema.LookupListId + '}');
+                    var newFormUrl = weburl + '/_layouts/listform.aspx/listform.aspx?PageType=8'
+                        + "&ListId=" + encodeURIComponent('{' + schema.LookupListId + '}');
                     if (contentTypeId) {
                         newFormUrl += '&ContentTypeId=' + contentTypeId;
                     }

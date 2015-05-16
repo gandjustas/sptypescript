@@ -32,9 +32,7 @@ $(function () {
                         tableCollection.initPropertiesFromJson(result.get_value());
                         var rows = tableCollection.get_item(0).get_resultRows();
                         Results.element.html(_this.createHtml(rows));
-                    }, function (sender, args) {
-                        alert(args.get_message());
-                    });
+                    }, function (sender, args) { alert(args.get_message()); });
                 }, "sp.search.js");
             },
             createHtml: function (rows) {

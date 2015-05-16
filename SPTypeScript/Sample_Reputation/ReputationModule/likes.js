@@ -1,4 +1,3 @@
-/// <reference path="../../Definitions/SharePoint.d.ts"/>
 var SampleReputation;
 (function (SampleReputation) {
     var MyItem = (function () {
@@ -25,9 +24,14 @@ var SampleReputation;
         SP.SOD.registerSod('reputation.js', '/_layouts/15/reputation.js');
         SP.SOD.registerSod('typescripttemplates.ts', '/SPTypeScript/Extensions/typescripttemplates.js');
         SP.SOD.executeFunc('typescripttemplates.ts', 'CSR', function () {
-            CSR.override(10004, 1).onPreRender(function (ctx) {
+            CSR.override(10004, 1)
+                .onPreRender(function (ctx) {
                 ctx.listId = ctx.listName.substring(1, 37);
-            }).header('<ul>').body(renderTemplate).footer('</ul>').register();
+            })
+                .header('<ul>')
+                .body(renderTemplate)
+                .footer('</ul>')
+                .register();
         });
         SP.SOD.execute('mQuery.js', 'm$.ready', function () {
             RegisterModuleInit('/SPTypeScript/ReputationModule/likes.js', init);

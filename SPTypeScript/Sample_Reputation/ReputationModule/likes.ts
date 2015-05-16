@@ -1,6 +1,4 @@
-﻿/// <reference path="../../Definitions/SharePoint.d.ts"/>
-
-module SampleReputation {
+﻿module SampleReputation {
 
     interface MyList extends SPClientTemplates.RenderContext_InView {
         listId: string;

@@ -6,5 +6,6 @@
     <ProjectItemFile Source="CSRListView.js" Target="Scripts_CSRListView\" Type="ElementFile" />
     <ProjectItemFile Source="CSRListView.js.map" Target="Scripts_CSRListView\" Type="ElementFile" />
     <ProjectItemFile Source="CSRListView.min.js" Target="Scripts_CSRListView\" Type="ElementFile" />
+    <ProjectItemFile Source="CSRListView.min.js.map" Target="Scripts_CSRListView\" Type="ElementFile" />
   </Files>
 </ProjectItem>

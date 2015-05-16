@@ -47,11 +47,23 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Sample_WhoIsWebPart\Part.min.js">
+      <DependentUpon>Part.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\Elements.xml" />
-    <None Include="Definitions\SharePoint.d.tt">
+    <None Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.min.js.map">
+      <DependentUpon>ConditionalFormatting.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.min.js.map">
+      <DependentUpon>CSRListView.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_WorkflowServices\WorkflowServices.min.js.map">
+      <DependentUpon>WorkflowServices.min.js</DependentUpon>
+    </None>
+    <None Include="Scripts\typings\sharepoint\SharePoint.d.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SharePoint.d.ts</LastGenOutput>
     </None>
@@ -210,6 +222,9 @@
     <None Include="Sample_Taxonomy\Taxonomy\App.min.js.map">
       <DependentUpon>App.min.js</DependentUpon>
     </None>
+    <None Include="Sample_UserProfiles\UserProfiles.min.js.map">
+      <DependentUpon>UserProfiles.min.js</DependentUpon>
+    </None>
     <None Include="Sample_WhoIsWebPart\Part.js.map">
       <DependentUpon>Part.ts</DependentUpon>
     </None>
@@ -218,6 +233,9 @@
     </None>
     <None Include="Sample_UserProfiles\UserProfiles.js.map">
       <DependentUpon>UserProfiles.ts</DependentUpon>
+    </None>
+    <None Include="Sample_WhoIsWebPart\Part.min.js.map">
+      <DependentUpon>Part.min.js</DependentUpon>
     </None>
     <None Include="Sample_WhoIsWebPart\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2df0d68d-2b83-4a6e-8945-d3bdbd202738}</SharePointProjectItemId>
@@ -228,16 +246,17 @@
     <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
     </None>
+    <TypeScriptCompile Include="Scripts\typings\microsoft-ajax\microsoft.ajax.d.ts" />
     <TypeScriptCompile Include="Sample_AngularForm\AngularFormFiles\AngularForm.ts" />
     <TypeScriptCompile Include="Sample_CascadedDropdown\FieldCascadedLookup.ts" />
     <TypeScriptCompile Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.ts" />
     <TypeScriptCompile Include="Sample_CSRCustomLayout\NewForm.ts" />
     <TypeScriptCompile Include="Sample_CSRTabs\CSRTabs.ts" />
-    <Content Include="Definitions\SharePoint.d.ts">
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SharePoint.d.ts">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SharePoint.d.tt</DependentUpon>
-    </Content>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Sample_AutoFill\autofill.ts" />
     <TypeScriptCompile Include="Sample_Animation\Animation.ts" />
     <Content Include="Sample_AngularForm\AngularFormFiles\AngularForm.html" />
@@ -473,17 +492,18 @@
     <TypeScriptCompile Include="Extensions\typescripttemplates.ts" />
     <Content Include="Pages\Elements.xml" />
     <Content Include="Pages\Default.aspx" />
-    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-animate.d.ts" />
-    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-cookies.d.ts" />
-    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-mocks.d.ts" />
-    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-resource.d.ts" />
-    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-route.d.ts" />
-    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-sanitize.d.ts" />
-    <TypeScriptCompile Include="Definitions\typings\angularjs\angular-scenario.d.ts" />
-    <TypeScriptCompile Include="Definitions\typings\angularjs\angular.d.ts" />
-    <TypeScriptCompile Include="Definitions\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Definitions\typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" />
-    <TypeScriptCompile Include="Definitions\typings\jqueryui\jqueryui.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-resource.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-route.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-scenario.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Sample_CSRConditionalFormatting\ConditionalFormattingTasksList\SharePointProjectItem.spdata">
@@ -521,7 +541,9 @@
     <Content Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.min.js">
       <DependentUpon>ConditionalFormatting.ts</DependentUpon>
     </Content>
-    <Content Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\Elements.xml" />
+    <Content Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Sample_CSRComplexityField\CustomFieldList\CustomFieldListInstance\Elements.xml" />
     <Content Include="Sample_CSRComplexityField\CustomFieldList\Elements.xml" />
     <Content Include="Sample_CSRComplexityField\CustomFieldList\Schema.xml" />
@@ -584,6 +606,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Definitions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0'">11.0</VisualStudioVersion>
@@ -594,6 +619,9 @@
     <TypeScriptTarget>ES3</TypeScriptTarget>
     <TypeScriptIncludeComments>false</TypeScriptIncludeComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" />
 </Project>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPTypeScript", "SPTypeScript.csproj", "{47065B66-1DF4-4E5D-9D05-A9C4FBE84B65}"
 EndProject
@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Definitions", "Definitions"
 		..\Definitions\callout.d.ts = ..\Definitions\callout.d.ts
 		..\Definitions\clientpeoplepicker.d.ts = ..\Definitions\clientpeoplepicker.d.ts
 		..\Definitions\clienttemplates.d.ts = ..\Definitions\clienttemplates.d.ts
-		..\Definitions\MicrosoftAjax.d.ts = ..\Definitions\MicrosoftAjax.d.ts
+		..\Definitions\microsoft.ajax.d.ts = ..\Definitions\microsoft.ajax.d.ts
 		..\Definitions\mQuery.d.ts = ..\Definitions\mQuery.d.ts
 		..\Definitions\reputation.d.ts = ..\Definitions\reputation.d.ts
 		..\Definitions\SP.BusinessData.d.ts = ..\Definitions\SP.BusinessData.d.ts
@@ -54,6 +54,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(CodealikeProperties) = postSolution
+		SolutionGuid = 147d80d7-1ec9-4489-b752-59d282321cdf
 	EndGlobalSection
 	GlobalSection(MercurialSourceControlSolutionProperties) = preSolution
 		SolutionIsControlled = True

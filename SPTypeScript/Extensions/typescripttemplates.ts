@@ -1,4 +1,4 @@
-﻿///<reference path="../Definitions/SharePoint.d.ts" />
+﻿
 
 /** Lightweight client-side rendering template overrides.*/
 module CSR {
@@ -616,6 +616,50 @@ module CSR {
 
         }
 
+        koEditField(fieldName: string, template: string, vm: IKoFieldInForm, dependencyFields?: string[]): ICSR {
+            return this.fieldEdit(fieldName, koEditField_Edit)
+                       .fieldNew(fieldName, koEditField_Edit);
+
+
+            function koEditField_Edit(rCtx: SPClientTemplates.RenderContext_FieldInForm) {
+                if (rCtx == null)
+                    return '';
+                var _myData = SPClientTemplates.Utility.GetFormContextForCurrentField(rCtx);
+
+                if (_myData == null || _myData.fieldSchema == null)
+                    return '';
+                var elementId = _myData.fieldName + '_' + _myData.fieldSchema.Id + '_$' + _myData.fieldSchema.Type;
+
+                vm.renderingContext = rCtx;
+
+
+                if (dependencyFields) {
+                    dependencyFields.forEach(dependencyField => { 
+                            if (!vm[dependencyField]) {
+                                vm[dependencyField] = ko.observable(CSR.getFieldValue(rCtx, dependencyField));
+                            }
+                            CSR.addUpdatedValueCallback(rCtx, dependencyField, v => {
+                                vm[dependencyField](v);
+                            });
+                    });
+                }
+                
+
+                if (!vm.value) {
+                    vm.value = ko.observable<any>();
+                }
+
+                vm.value.subscribe(v => { _myData.updateControlValue(fieldName, v); });
+                _myData.registerGetValueCallback(fieldName, () => vm.value());
+
+
+                _myData.registerInitCallback(fieldName, () => {
+                    ko.applyBindings(vm, $get(elementId));
+                });
+
+                return '<div id="'+STSHtmlEncode(elementId)+'">'+template+'</div>';
+            }
+        }
 
         computedValue(targetField: string, transform: (...values: string[]) => string, ...sourceField: string[]): ICSR {
             var dependentValues: { [field: string]: string } = {};
@@ -1104,6 +1148,7 @@ module CSR {
         */
         lookupAddNew(fieldName: string, prompt: string, showDialog?: boolean, contentTypeId?: string): ICSR;
 
+        koEditField(fieldName: string, template: string, vm: IKoFieldInForm, dependencyFields?: string[]): ICSR;
 
 
     }
@@ -1113,6 +1158,11 @@ module CSR {
         fieldContext: SPClientTemplates.ClientFormContext;
         autofill: SPClientAutoFill;
         control: HTMLInputElement;
+    }
+
+    export interface IKoFieldInForm {
+        renderingContext?:SPClientTemplates.RenderContext_FieldInForm;
+        value?:KnockoutObservable<any>;
     }
 
 

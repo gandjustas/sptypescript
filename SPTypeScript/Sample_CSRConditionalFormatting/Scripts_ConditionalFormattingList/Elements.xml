@@ -5,6 +5,7 @@
     <File Path="Scripts_ConditionalFormattingList\ConditionalFormatting.js" Url="Scripts_ConditionalFormattingList/ConditionalFormatting.js" ReplaceContent="TRUE" />
     <File Path="Scripts_ConditionalFormattingList\ConditionalFormatting.js.map" Url="Scripts_ConditionalFormattingList/ConditionalFormatting.js.map" ReplaceContent="TRUE" />
     <File Path="Scripts_ConditionalFormattingList\ConditionalFormatting.min.js" Url="Scripts_ConditionalFormattingList/ConditionalFormatting.min.js" ReplaceContent="TRUE" />
+    <File Path="Scripts_ConditionalFormattingList\ConditionalFormatting.min.js.map" Url="Scripts_ConditionalFormattingList/ConditionalFormatting.min.js.map" ReplaceContent="TRUE" />
   </Module>
 
 </Elements>

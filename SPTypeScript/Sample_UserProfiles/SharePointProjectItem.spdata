@@ -7,5 +7,6 @@
     <ProjectItemFile Source="UserProfiles.js" Target="Sample_UserProfiles\" Type="ElementFile" />
     <ProjectItemFile Source="UserProfiles.min.js" Target="Sample_UserProfiles\" Type="ElementFile" />
     <ProjectItemFile Source="UserProfiles.js.map" Target="Sample_UserProfiles\" Type="ElementFile" />
+    <ProjectItemFile Source="UserProfiles.min.js.map" Target="Sample_UserProfiles\" Type="ElementFile" />
   </Files>
 </ProjectItem>

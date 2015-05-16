@@ -1,6 +1,4 @@
-﻿///<reference path="../Definitions/SharePoint.d.ts" />
-
-// Website tasks
+﻿// Website tasks
 function retrieveWebsite(resultpanel:HTMLElement) {
     var clientContext = SP.ClientContext.get_current();
     var oWebsite = clientContext.get_web();
@@ -377,6 +375,28 @@ function deleteFolder(resultpanel: HTMLElement) {
     function errorHandler() {
         resultpanel.innerHTML = "Request failed: " + arguments[1].get_message();
     }
+}
+
+function readListItems(ctx: SP.ClientContext, name: string, viewXml: string,
+    success: (items: SP.ListItem[]) => void,
+    failure?: (sender: any, args: SP.ClientRequestFailedEventArgs) => void): void {
+    var oWebsite = ctx.get_web();
+    var oList = oWebsite.get_lists().getByTitle(name);
+    var camlQuery = new SP.CamlQuery();
+    camlQuery.set_viewXml(viewXml);
+
+    var collListItem = oList.getItems(camlQuery);
+    ctx.load(collListItem);
+    ctx.executeQueryAsync(() => {
+        var results: SP.ListItem[] = [];
+        for (var e = collListItem.getEnumerator(); e.moveNext();) {
+            results.push(e.get_current());
+        }
+        if (success) {
+            success(results);
+        }
+    }, failure);
+
 }
 
 // List item tasks

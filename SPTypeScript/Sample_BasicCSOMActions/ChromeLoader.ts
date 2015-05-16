@@ -1,6 +1,4 @@
-﻿///<reference path="../Definitions/SharePoint.d.ts" />
-
-// Prepare the options and render the control
+﻿// Prepare the options and render the control
 // The Help, Account and Contact pages receive the 
 //   same query string parameters as the main page
 

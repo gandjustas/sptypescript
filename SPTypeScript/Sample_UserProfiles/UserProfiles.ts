@@ -1,4 +1,4 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
+
 
 SP.SOD.executeOrDelayUntilScriptLoaded(() => {
     var context = SP.ClientContext.get_current();

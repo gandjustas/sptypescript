@@ -1,4 +1,7 @@
 ///<reference path="clienttemplates.d.ts" />
+declare var _spBodyOnLoadFunctions: Function[];
+declare var _spBodyOnLoadFunctionNames: string[];
+declare var _spBodyOnLoadCalled: boolean;
 
 declare module SP {
     export class SOD {

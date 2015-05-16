@@ -1,4 +1,3 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
 var _;
 (function (_) {
     var queryString = parseQueryString();
@@ -50,9 +49,7 @@ var _;
                 if (isIframe) {
                     partResize();
                 }
-            }, function (sender, args) {
-                alert('Error: ' + args.get_message());
-            });
+            }, function (sender, args) { alert('Error: ' + args.get_message()); });
         }
     }
     function partProperties() {

@@ -1,4 +1,3 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
 // Website tasks
 function retrieveWebsite(resultpanel) {
     var clientContext = SP.ClientContext.get_current();
@@ -18,7 +17,8 @@ function retrieveWebsiteProps(resultpanel) {
     clientContext.load(oWebsite, "Description", "Created");
     clientContext.executeQueryAsync(successHandler, errorHandler);
     function successHandler() {
-        resultpanel.innerHTML = "Description: " + oWebsite.get_description() + "<br/>Date created: " + oWebsite.get_created();
+        resultpanel.innerHTML = "Description: " + oWebsite.get_description() +
+            "<br/>Date created: " + oWebsite.get_created();
     }
     function errorHandler() {
         resultpanel.innerHTML = "Request failed: " + arguments[1].get_message();
@@ -50,7 +50,8 @@ function readAllProps(resultpanel) {
         var listInfo = "";
         while (listEnumerator.moveNext()) {
             var oList = listEnumerator.get_current();
-            listInfo += "Title: " + oList.get_title() + " Created: " + oList.get_created().toString() + "<br/>";
+            listInfo += "Title: " + oList.get_title() + " Created: " +
+                oList.get_created().toString() + "<br/>";
         }
         resultpanel.innerHTML = listInfo;
     }
@@ -69,7 +70,8 @@ function readSpecificProps(resultpanel) {
         var listInfo = "";
         while (listEnumerator.moveNext()) {
             var oList = listEnumerator.get_current();
-            listInfo += "Title: " + oList.get_title() + " ID: " + oList.get_id().toString() + "<br/>";
+            listInfo += "Title: " + oList.get_title() +
+                " ID: " + oList.get_id().toString() + "<br/>";
         }
         resultpanel.innerHTML = listInfo;
     }
@@ -87,7 +89,8 @@ function readColl(resultpanel) {
         var listInfo = "";
         for (var i = 0; i < listInfoCollection.length; i++) {
             var oList = listInfoCollection[i];
-            listInfo += "Title: " + oList.get_title() + " ID: " + oList.get_id().toString() + "<br/>";
+            listInfo += "Title: " + oList.get_title() +
+                " ID: " + oList.get_id().toString() + "<br/>";
         }
         resultpanel.innerHTML = listInfo;
     }
@@ -111,7 +114,9 @@ function readFilter(resultpanel) {
                 var oField = fieldEnumerator.get_current();
                 var regEx = new RegExp("name", "ig");
                 if (regEx.test(oField.get_internalName())) {
-                    listInfo += "List: " + oList.get_title() + "<br/>&nbsp;&nbsp;&nbsp;&nbsp;Field Title: " + oField.get_title() + "<br/>&nbsp;&nbsp;&nbsp;&nbsp;Field Internal name: " + oField.get_internalName();
+                    listInfo += "List: " + oList.get_title() +
+                        "<br/>&nbsp;&nbsp;&nbsp;&nbsp;Field Title: " + oField.get_title() +
+                        "<br/>&nbsp;&nbsp;&nbsp;&nbsp;Field Internal name: " + oField.get_internalName();
                 }
             }
         }
@@ -234,13 +239,32 @@ function deleteFolder(resultpanel) {
         resultpanel.innerHTML = "Request failed: " + arguments[1].get_message();
     }
 }
+function readListItems(ctx, name, viewXml, success, failure) {
+    var oWebsite = ctx.get_web();
+    var oList = oWebsite.get_lists().getByTitle(name);
+    var camlQuery = new SP.CamlQuery();
+    camlQuery.set_viewXml(viewXml);
+    var collListItem = oList.getItems(camlQuery);
+    ctx.load(collListItem);
+    ctx.executeQueryAsync(function () {
+        var results = [];
+        for (var e = collListItem.getEnumerator(); e.moveNext();) {
+            results.push(e.get_current());
+        }
+        if (success) {
+            success(results);
+        }
+    }, failure);
+}
 // List item tasks
 function readItems(resultpanel) {
     var clientContext = SP.ClientContext.get_current();
     var oWebsite = clientContext.get_web();
     var oList = oWebsite.get_lists().getByTitle("Announcements");
     var camlQuery = new SP.CamlQuery();
-    camlQuery.set_viewXml('<View><Query><Where><Geq><FieldRef Name=\'ID\'/>' + '<Value Type=\'Number\'>1</Value></Geq></Where></Query>' + '<RowLimit>10</RowLimit></View>');
+    camlQuery.set_viewXml('<View><Query><Where><Geq><FieldRef Name=\'ID\'/>' +
+        '<Value Type=\'Number\'>1</Value></Geq></Where></Query>' +
+        '<RowLimit>10</RowLimit></View>');
     var collListItem = oList.getItems(camlQuery);
     clientContext.load(collListItem);
     clientContext.executeQueryAsync(successHandler, errorHandler);
@@ -249,7 +273,9 @@ function readItems(resultpanel) {
         var listItemInfo = "";
         while (listItemEnumerator.moveNext()) {
             var oListItem = listItemEnumerator.get_current();
-            listItemInfo += "ID: " + oListItem.get_id() + "<br/>" + "Title: " + oListItem.get_item("Title") + "<br/>" + "Body: " + oListItem.get_item("Body") + "<br/>";
+            listItemInfo += "ID: " + oListItem.get_id() + "<br/>" +
+                "Title: " + oListItem.get_item("Title") + "<br/>" +
+                "Body: " + oListItem.get_item("Body") + "<br/>";
         }
         resultpanel.innerHTML = listItemInfo;
     }
@@ -271,7 +297,9 @@ function readInclude(resultpanel) {
         var listItemInfo = "";
         while (listItemEnumerator.moveNext()) {
             var oListItem = listItemEnumerator.get_current();
-            listItemInfo += "ID: " + oListItem.get_id() + "<br/>" + "Display name: " + oListItem.get_displayName() + "<br/>" + "Unique role assignments: " + oListItem.get_hasUniqueRoleAssignments() + "<br/>";
+            listItemInfo += "ID: " + oListItem.get_id() + "<br/>" +
+                "Display name: " + oListItem.get_displayName() + "<br/>" +
+                "Unique role assignments: " + oListItem.get_hasUniqueRoleAssignments() + "<br/>";
         }
         resultpanel.innerHTML = listItemInfo;
     }

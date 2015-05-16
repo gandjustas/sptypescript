@@ -1,4 +1,3 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
 SP.SOD.executeOrDelayUntilScriptLoaded(function () {
     var context = SP.ClientContext.get_current();
     var peopleManager = new SP.UserProfiles.PeopleManager(context);
@@ -11,8 +10,6 @@ SP.SOD.executeOrDelayUntilScriptLoaded(function () {
             messageText += "<br />[" + key + "]: \"" + properties[key] + "\"";
         }
         $get("results").innerHTML = messageText;
-    }, function (sender, args) {
-        alert('Error: ' + args.get_message());
-    });
+    }, function (sender, args) { alert('Error: ' + args.get_message()); });
 }, 'sp.userprofiles.js');
 //# sourceMappingURL=UserProfiles.js.map

@@ -1,10 +1,14 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
 ///<reference path="../extensions/typescripttemplates.ts" />
 var _;
 (function (_) {
     function init() {
         var complexityFieldName = "ComplexityField";
-        return CSR.override().fieldView(complexityFieldName, SPFieldComplexity_View).fieldDisplay(complexityFieldName, SPFieldComplexity_Display).fieldEdit(complexityFieldName, SPFieldComplexity_Edit).fieldNew(complexityFieldName, SPFieldComplexity_Edit).register();
+        return CSR.override()
+            .fieldView(complexityFieldName, SPFieldComplexity_View)
+            .fieldDisplay(complexityFieldName, SPFieldComplexity_Display)
+            .fieldEdit(complexityFieldName, SPFieldComplexity_Edit)
+            .fieldNew(complexityFieldName, SPFieldComplexity_Edit)
+            .register();
     }
     var map = {
         "Default": { color: "White", days: 0 },

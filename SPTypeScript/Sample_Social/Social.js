@@ -1,4 +1,3 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
 // App permissions required for this example to work: Tenant Write
 SP.SOD.executeOrDelayUntilScriptLoaded(function () {
     var context = SP.ClientContext.get_current();
@@ -17,12 +16,8 @@ SP.SOD.executeOrDelayUntilScriptLoaded(function () {
                     $get("results").innerHTML = "Now you're following the app host site! Check it on your profile page.";
                 else
                     $get("results").innerHTML = "You failed to follow the app host site due to some mysterious error.";
-            }, function (sender, args) {
-                alert('Error trying to follow the app host site: ' + args.get_message());
-            });
+            }, function (sender, args) { alert('Error trying to follow the app host site: ' + args.get_message()); });
         }
-    }, function (sender, args) {
-        alert('Error: ' + args.get_message());
-    });
+    }, function (sender, args) { alert('Error: ' + args.get_message()); });
 }, 'sp.userprofiles.js');
 //# sourceMappingURL=Social.js.map

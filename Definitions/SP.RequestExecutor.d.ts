@@ -1,4 +1,3 @@
-/// <reference path="MicrosoftAjax.d.ts"/>
 /// <reference path="SP.d.ts"/>
 declare module SP {
     export enum RequestExecutorErrors {
@@ -26,7 +25,7 @@ declare module SP {
         method?: string;
         headers?: { [key: string]: string; };
         /** Can be string or bytearray depending on binaryStringRequestBody field */
-        body?: any;
+        body?: string|Uint8Array;
         binaryStringRequestBody?: boolean;
 
         /** Currently need fix to get ginary response. Details: http://techmikael.blogspot.ru/2013/07/how-to-copy-files-between-sites-using.html */
@@ -45,7 +44,7 @@ declare module SP {
         headers?: { [key: string]: string; };
         contentType?: string;
         /** Can be string or bytearray depending on request.binaryStringResponseBody field */
-        body?: any;
+        body?: string|Uint8Array;
         state?: any;
     }
 

@@ -1,4 +1,4 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
+
 ///<reference path="../extensions/typescripttemplates.ts" />
 
 module _ {

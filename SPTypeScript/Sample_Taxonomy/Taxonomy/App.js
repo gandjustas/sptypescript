@@ -13,12 +13,8 @@ var _;
         context = SP.ClientContextPromise.get_current();
         site = context.get_site();
         web = context.get_web();
-        $('#listExisting').click(function () {
-            listGroups();
-        });
-        $('#createTerms').click(function () {
-            createTerms();
-        });
+        $('#listExisting').click(function () { listGroups(); });
+        $('#createTerms').click(function () { createTerms(); });
     });
     // When the listExisting button is clicked, start by loading
     // a TaxonomySession for the current context. Also get and load
@@ -48,6 +44,7 @@ var _;
     function onRetrieveGroups() {
         $('#report').children().remove();
         var groupEnum = groups.getEnumerator();
+        // For each group, we'll build a clickable div.
         while (groupEnum.moveNext()) {
             (function () {
                 var currentGroup = groupEnum.get_current();
@@ -81,7 +78,8 @@ var _;
         // term sets that it contains will be inaccessible to our code.
         context.load(currentGroup);
         var termSets;
-        context.executeQueryPromise().then(function () {
+        context.executeQueryPromise()
+            .then(function () {
             // The group is now available becuase this is the 
             // success callback. So now we'll load and populate the
             // term set collection. We have to do this before we can 
@@ -90,7 +88,8 @@ var _;
             termSets = currentGroup.get_termSets();
             context.load(termSets);
             return context.executeQueryPromise();
-        }).then(function () {
+        })
+            .then(function () {
             // The term sets are now available becuase this is the 
             // success callback. So now we'll iterate through the collection
             // and create the clickable div. Also note how we create a 
@@ -110,11 +109,12 @@ var _;
                     termSetName.setAttribute("style", "float:none;cursor:pointer;");
                     var termSetID = currentTermSet.get_id();
                     termSetName.setAttribute("id", termSetID.toString());
-                    $(termSetName).click(function () { return showTerms(event, groupID, termSetID); });
+                    $(termSetName).click(function (e) { return showTerms(e, groupID, termSetID); });
                     parentDiv.appendChild(termSetName);
                 })();
             }
-        }).fail(function () { return parentDiv.appendChild(document.createTextNode("An error occurred in loading the term sets for this group")); });
+        })
+            .fail(function () { return parentDiv.appendChild(document.createTextNode("An error occurred in loading the term sets for this group")); });
     }
     // This is the function that runs when the user clicks one of the divs
     // that we created in the showTermSets function. We can know which
@@ -139,7 +139,9 @@ var _;
         var currentTermSet;
         var terms;
         context.load(currentGroup);
-        context.executeQueryPromise().then(function () {
+        context
+            .executeQueryPromise()
+            .then(function () {
             // The group is now available becuase this is the 
             // success callback. So now we'll load and populate the
             // term set collection. We have to do this before we can 
@@ -148,15 +150,18 @@ var _;
             termSets = currentGroup.get_termSets();
             context.load(termSets);
             return context.executeQueryPromise();
-        }).then(function () {
+        })
+            .then(function () {
             currentTermSet = termSets.getById(termSetID);
             context.load(currentTermSet);
             return context.executeQueryPromise();
-        }).then(function () {
+        })
+            .then(function () {
             terms = currentTermSet.get_terms();
             context.load(terms);
             return context.executeQueryPromise();
-        }).then(function () {
+        })
+            .then(function () {
             var termsEnum = terms.getEnumerator();
             while (termsEnum.moveNext()) {
                 var currentTerm = termsEnum.get_current();
@@ -165,7 +170,8 @@ var _;
                 term.setAttribute("style", "float:none;margin-left:10px;");
                 parentDiv.appendChild(term);
             }
-        }).fail(function () { return parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set")); });
+        })
+            .fail(function () { return parentDiv.appendChild(document.createTextNode("An error occurred when trying to retrieve terms in this term set")); });
     }
     // Runs when the executeQueryAsync method in the onListTaxonomySession function has failed.
     // In this case, clear the report area in the page and tell the user what went wrong.

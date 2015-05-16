@@ -1,12 +1,17 @@
-///<reference path="../../Definitions/SharePoint.d.ts" />
-///<reference path="../../extensions/typescripttemplates.ts" />
 var _;
 (function (_) {
     function init() {
-        CSR.override(10057, 2).onPreRender(function (ctx) {
+        CSR.override(10057, 2)
+            .onPreRender(function (ctx) {
             // Override the default title with user input
             ctx.ListTitle = prompt("Type a title", ctx.ListTitle);
-        }).header("<b><#=ctx.ListTitle#></b>" + "<hr><ul id='unorderedlist'>").item(function (ctx) { return "<li>" + ctx.CurrentItem['Title'] + "</li>"; }).footer('</ul>').onPostRender(postRenderHandler).register();
+        })
+            .header("<b><#=ctx.ListTitle#></b>"
+            + "<hr><ul id='unorderedlist'>")
+            .item(function (ctx) { return "<li>" + ctx.CurrentItem['Title'] + "</li>"; })
+            .footer('</ul>')
+            .onPostRender(postRenderHandler)
+            .register();
     }
     ;
     // The postRenderHandler handles the 
@@ -17,6 +22,7 @@ var _;
         var ulObj;
         var i, j;
         ulObj = document.getElementById("unorderedlist");
+        // Reverse order the list
         for (i = 1; i < ulObj.children.length; i++) {
             var x = ulObj.children[i];
             for (j = 1; j < ulObj.children.length; j++) {

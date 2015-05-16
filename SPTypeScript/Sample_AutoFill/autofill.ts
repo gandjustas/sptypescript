@@ -1,5 +1,3 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
-
 module spdevlab {
     export module demo {
         export module autofill {

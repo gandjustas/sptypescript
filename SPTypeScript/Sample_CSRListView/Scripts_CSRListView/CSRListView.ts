@@ -1,6 +1,3 @@
-///<reference path="../../Definitions/SharePoint.d.ts" />
-///<reference path="../../extensions/typescripttemplates.ts" />
-
 module _ {
     function init() {
         CSR.override(10057, 2)

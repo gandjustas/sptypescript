@@ -1,0 +1,53 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ output extension=".ts" #>
+// Type definitions for sptypescript
+// Project: http://sptypescript.codeplex.com
+// Definitions by: Stanislav Vyshchepan <http://gandjustas.blogspot.ru> and Andrey Markeev <http://markeev.com>
+// Definitions: https://github.com/borisyankov/DefinitelyTyped
+
+/// <reference path="../microsoft-ajax/microsoft.ajax.d.ts" />
+
+<#= GetFileContents(@"SP.Init.d.ts") #>
+<#= GetFileContents(@"SP.RequestExecutor.d.ts") #>
+<#= GetFileContents(@"mQuery.d.ts") #>
+<#= GetFileContents(@"callout.d.ts") #>
+<#= GetFileContents(@"clienttemplates.d.ts") #>
+<#= GetFileContents(@"SPAnimation.d.ts") #>
+<#= GetFileContents(@"SP.d.ts") #>
+<#= GetFileContents(@"SP.Search.d.ts") #>
+<#= GetFileContents(@"SP.BusinessData.d.ts") #>
+<#= GetFileContents(@"SP.Sharing.d.ts") #>
+<#= GetFileContents(@"SP.Social.d.ts") #>
+<#= GetFileContents(@"SP.Taxonomy.d.ts") #>
+<#= GetFileContents(@"SP.DocumentManagement.d.ts") #>
+<#= GetFileContents(@"SP.UI.ApplicationPages.d.ts") #>
+<#= GetFileContents(@"SP.UI.d.ts") #>
+<#= GetFileContents(@"SP.UI.Controls.d.ts") #>
+<#= GetFileContents(@"SP.UserProfiles.d.ts") #>
+<#= GetFileContents(@"SP.Utilities.d.ts") #>
+<#= GetFileContents(@"SP.WebParts.d.ts") #>
+<#= GetFileContents(@"SP.Workflow.d.ts") #>
+<#= GetFileContents(@"SP.WorkflowServices.d.ts") #>
+<#= GetFileContents(@"SP.Publishing.d.ts") #>
+<#= GetFileContents(@"SP.Policy.d.ts") #>
+<#= GetFileContents(@"autofill.d.ts") #>
+<#= GetFileContents(@"clientpeoplepicker.d.ts") #>
+<#= GetFileContents(@"reputation.d.ts") #>
+<#= GetFileContents(@"SPO.d.ts") #>
+<#= GetFileContents(@"SP.JSGrid.d.ts") #>
+<#= GetFileContents(@"SPGantt.d.ts") #>
+<#+
+
+    private string GetFileContents(string filename)
+    {
+		var solutionsPath = Host.ResolveAssemblyReference("$(SolutionDir)");
+        var path = solutionsPath + "..\\Definitions\\";
+        return String.Join("\n", File.ReadAllText(Path.Combine(path, filename)).Split('\n').Where(s => !s.StartsWith("/// <reference") && !s.StartsWith("///<reference")).ToArray());
+    }
+
+#>

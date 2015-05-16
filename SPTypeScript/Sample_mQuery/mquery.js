@@ -1,4 +1,3 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
 var spdevlab;
 (function (spdevlab) {
     var mQuery;

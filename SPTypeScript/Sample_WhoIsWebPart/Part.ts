@@ -1,4 +1,4 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
+
 
 module _ {
     var queryString = parseQueryString();

@@ -1,4 +1,4 @@
-///<reference path="../Definitions/SharePoint.d.ts" />
+
 
 // App permissions required for this example to work: Tenant Write
 

@@ -14,7 +14,8 @@ var CSRTabs;
             this.tabs = [];
             var fieldsForTabs = [];
             for (var i = 0; i < fields.length; i++) {
-                if (fields[i].Name != "Modified" && fields[i].Name != "Editor" && fields[i].Name != "Created" && fields[i].Name != "Author") {
+                if (fields[i].Name != "Modified" && fields[i].Name != "Editor"
+                    && fields[i].Name != "Created" && fields[i].Name != "Author") {
                     fieldsForTabs.push(fields[i]);
                 }
             }

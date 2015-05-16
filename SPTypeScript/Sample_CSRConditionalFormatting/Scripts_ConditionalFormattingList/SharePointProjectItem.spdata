@@ -6,5 +6,6 @@
     <ProjectItemFile Source="ConditionalFormatting.js" Target="Scripts_ConditionalFormattingList\" Type="ElementFile" />
     <ProjectItemFile Source="ConditionalFormatting.js.map" Target="Scripts_ConditionalFormattingList\" Type="ElementFile" />
     <ProjectItemFile Source="ConditionalFormatting.min.js" Target="Scripts_ConditionalFormattingList\" Type="ElementFile" />
+    <ProjectItemFile Source="ConditionalFormatting.min.js.map" Target="Scripts_ConditionalFormattingList\" Type="ElementFile" />
   </Files>
 </ProjectItem>

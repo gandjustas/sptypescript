@@ -1,9 +1,8 @@
-///<reference path="../../Definitions/SharePoint.d.ts" />
-///<reference path="../../extensions/typescripttemplates.ts" />
 var _;
 (function (_) {
     function init() {
-        CSR.override(171, 1).onPostRender(function (ctx) {
+        CSR.override(171, 1)
+            .onPostRender(function (ctx) {
             for (var i = 0; i < ctx.ListData.Row.length; i++) {
                 var listItem = ctx.ListData.Row[i];
                 var percentComplete = parseFloat(listItem['PercentComplete.']);
@@ -17,7 +16,8 @@ var _;
                     }
                 }
             }
-        }).register();
+        })
+            .register();
     }
     ;
     if (document.location.href.indexOf('/Lists/ConditionalFormattingTasksList') > 0) {
