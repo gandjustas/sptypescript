@@ -1,4 +1,4 @@
-///<reference path="MicrosoftAjax.d.ts" />
+///<reference path="Microsoft.Ajax.d.ts" />
 declare module SP {
     export module JsGrid {
 

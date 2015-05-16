@@ -8,7 +8,6 @@ module _ {
     var includeDetails = queryString['boolProp'] == 'true';
 
     prepareVisual();
-
     m$.ready(() => {
         loadPeoplePicker('peoplePicker');
         partProperties();

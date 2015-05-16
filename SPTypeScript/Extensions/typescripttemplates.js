@@ -1,6 +1,7 @@
 /** Lightweight client-side rendering template overrides.*/
 var CSR;
 (function (CSR) {
+    /** Creates new overrides. Call .register() at the end.*/
     function override(listTemplateType, baseViewId) {
         return new csr(listTemplateType, baseViewId)
             .onPreRender(hookFormContext)
@@ -219,7 +220,7 @@ var CSR;
         csr.prototype.onPreRenderField = function (field, callback) {
             return this.onPreRender(function (ctx) {
                 var ctxInView = ctx;
-                //ListSchema schma exists in Form and in View rener context
+                //ListSchema schma exists in Form and in View render context
                 var fields = ctxInView.ListSchema.Field;
                 if (fields) {
                     for (var i = 0; i < fields.length; i++) {
@@ -233,7 +234,7 @@ var CSR;
         csr.prototype.onPostRenderField = function (field, callback) {
             return this.onPostRender(function (ctx) {
                 var ctxInView = ctx;
-                //ListSchema schma exists in Form and in View rener context
+                //ListSchema schma exists in Form and in View render context
                 var fields = ctxInView.ListSchema.Field;
                 if (fields) {
                     for (var i = 0; i < fields.length; i++) {

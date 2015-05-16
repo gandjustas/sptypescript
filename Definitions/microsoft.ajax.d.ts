@@ -18,7 +18,7 @@
 * Object Type Extensions
 * @see {@link http://msdn.microsoft.com/en-us/library/bb397554(v=vs.100).aspx}
 */
-interface Object {
+interface ObjectConstructor {
     /**
     * Formats a number by using the invariant culture.
     */
@@ -34,173 +34,9 @@ interface Object {
 * Array Type Extensions
 * @see {@link http://msdn.microsoft.com/en-us/library/bb383786(v=vs.100).aspx}
 */
-interface Array<T> {
+interface ArrayConstructor {
 
-    //#region lib.d.ts
-
-    new (arrayLength?: number): any[];
-    new <T>(arrayLength: number): T[];
-    new <T>(...items: T[]): T[];
-    (arrayLength?: number): any[];
-    <T>(arrayLength: number): T[];
-    <T>(...items: T[]): T[];
-    isArray(arg: any): boolean;
-    prototype: Array<any>;
-
-    ///**
-    //  * Returns a string representation of an array.
-    //  */
-    //toString(): string;
-    //toLocaleString(): string;
-    ///**
-    //  * Combines two or more arrays.
-    //  * @param items Additional items to add to the end of array1.
-    //  */
-    //concat<U extends T[]>(...items: U[]): T[];
-    ///**
-    //  * Combines two or more arrays.
-    //  * @param items Additional items to add to the end of array1.
-    //  */
-    //concat(...items: T[]): T[];
-    ///**
-    //  * Adds all the elements of an array separated by the specified separator string.
-    //  * @param separator A string used to separate one element of an array from the next in the resulting String. If omitted, the array elements are separated with a comma.
-    //  */
-    //join(separator?: string): string;
-    ///**
-    //  * Removes the last element from an array and returns it.
-    //  */
-    //pop(): T;
-    ///**
-    //  * Appends new elements to an array, and returns the new length of the array.
-    //  * @param items New elements of the Array.
-    //  */
-    //push(...items: T[]): number;
-    ///**
-    //  * Reverses the elements in an Array. 
-    //  */
-    //reverse(): T[];
-    ///**
-    //  * Removes the first element from an array and returns it.
-    //  */
-    //shift(): T;
-    ///** 
-    //  * Returns a section of an array.
-    //  * @param start The beginning of the specified portion of the array.
-    //  * @param end The end of the specified portion of the array.
-    //  */
-    //slice(start?: number, end?: number): T[];
-
-    ///**
-    //  * Sorts an array.
-    //  * @param compareFn The name of the function used to determine the order of the elements. If omitted, the elements are sorted in ascending, ASCII character order.
-    //  */
-    //sort(compareFn?: (a: T, b: T) => number): T[];
-
-    ///**
-    //  * Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted elements.
-    //  * @param start The zero-based location in the array from which to start removing elements.
-    //  */
-    //splice(start: number): T[];
-
-    ///**
-    //  * Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted elements.
-    //  * @param start The zero-based location in the array from which to start removing elements.
-    //  * @param deleteCount The number of elements to remove.
-    //  * @param items Elements to insert into the array in place of the deleted elements.
-    //  */
-    //splice(start: number, deleteCount: number, ...items: T[]): T[];
-
-    ///**
-    //  * Inserts new elements at the start of an array.
-    //  * @param items  Elements to insert at the start of the Array.
-    //  */
-    //unshift(...items: T[]): number;
-
-    ///**
-    //  * Returns the index of the first occurrence of a value in an array.
-    //  * @param searchElement The value to locate in the array.
-    //  * @param fromIndex The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
-    //  */
-    //indexOf(searchElement: T, fromIndex?: number): number;
-
-    ///**
-    //  * Returns the index of the last occurrence of a specified value in an array.
-    //  * @param searchElement The value to locate in the array.
-    //  * @param fromIndex The array index at which to begin the search. If fromIndex is omitted, the search starts at the last index in the array.
-    //  */
-    //lastIndexOf(searchElement: T, fromIndex?: number): number;
-
-    ///**
-    //  * Determines whether all the members of an array satisfy the specified test.
-    //  * @param callbackfn A function that accepts up to three arguments. The every method calls the callbackfn function for each element in array1 until the callbackfn returns false, or until the end of the array.
-    //  * @param thisArg An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
-    //  */
-    //every(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg?: any): boolean;
-
-    ///**
-    //  * Determines whether the specified callback function returns true for any element of an array.
-    //  * @param callbackfn A function that accepts up to three arguments. The some method calls the callbackfn function for each element in array1 until the callbackfn returns true, or until the end of the array.
-    //  * @param thisArg An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
-    //  */
-    //some(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg?: any): boolean;
-
-    ///**
-    //  * Performs the specified action for each element in an array.
-    //  * @param callbackfn  A function that accepts up to three arguments. forEach calls the callbackfn function one time for each element in the array. 
-    //  * @param thisArg  An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
-    //  */
-    //forEach(callbackfn: (value: T, index: number, array: T[]) => void, thisArg?: any): void;
-
-    ///**
-    //  * Calls a defined callback function on each element of an array, and returns an array that contains the results.
-    //  * @param callbackfn A function that accepts up to three arguments. The map method calls the callbackfn function one time for each element in the array. 
-    //  * @param thisArg An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
-    //  */
-    //map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[];
-
-    ///**
-    //  * Returns the elements of an array that meet the condition specified in a callback function. 
-    //  * @param callbackfn A function that accepts up to three arguments. The filter method calls the callbackfn function one time for each element in the array. 
-    //  * @param thisArg An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
-    //  */
-    //filter(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg?: any): T[];
-
-    ///**
-    //  * Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
-    //  * @param callbackfn A function that accepts up to four arguments. The reduce method calls the callbackfn function one time for each element in the array.
-    //  * @param initialValue If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
-    //  */
-    //reduce(callbackfn: (previousValue: T, currentValue: T, currentIndex: number, array: T[]) => T, initialValue?: T): T;
-    ///**
-    //  * Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
-    //  * @param callbackfn A function that accepts up to four arguments. The reduce method calls the callbackfn function one time for each element in the array.
-    //  * @param initialValue If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
-    //  */
-    //reduce<U>(callbackfn: (previousValue: U, currentValue: T, currentIndex: number, array: T[]) => U, initialValue: U): U;
-
-    ///** 
-    //  * Calls the specified callback function for all the elements in an array, in descending order. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
-    //  * @param callbackfn A function that accepts up to four arguments. The reduceRight method calls the callbackfn function one time for each element in the array. 
-    //  * @param initialValue If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
-    //  */
-    //reduceRight(callbackfn: (previousValue: T, currentValue: T, currentIndex: number, array: T[]) => T, initialValue?: T): T;
-    ///** 
-    //  * Calls the specified callback function for all the elements in an array, in descending order. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.
-    //  * @param callbackfn A function that accepts up to four arguments. The reduceRight method calls the callbackfn function one time for each element in the array. 
-    //  * @param initialValue If initialValue is specified, it is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
-    //  */
-    //reduceRight<U>(callbackfn: (previousValue: U, currentValue: T, currentIndex: number, array: T[]) => U, initialValue: U): U;
-
-    ///**
-    //  * Gets or sets the length of the array. This is a number one higher than the highest element defined in an array.
-    //  */
-    //length: number;
-
-    //[n: number]: T;
-
-    //#endregion
-
+    
     //#region Extensions
 
     /**
@@ -210,55 +46,55 @@ interface Array<T> {
     * @param item
     *       
     */
-    add(array: any[], element: any): void;
+    add<T>(array: T[], element: T): void;
     /**
     * Copies all the elements of the specified array to the end of an Array object.
     */
-    addRange(array: any, items: any): void;
+    addRange<T>(array: T[], items: T[]): void;
     /**
     * Removes all elements from an Array object.
     */
-    clear(): void;
+    clear<T>(array: T[]): void;
     /**
     * Creates a shallow copy of an Array object.
     */
-    clone(): any[];
+    clone<T>(array: T[]): T[];
     /**
     * Determines whether an element is in an Array object.
     */
-    contains(element: any): boolean;
+    contains<T>(array: T[], element: T): boolean;
     /**
     * Removes the first element from an Array object.
     */
-    dequeue(): any;
+    dequeue<T>(array: T[]): T;
     /**
     * Adds an element to the end of an Array object. Use the add function instead of the Array.enqueue function.
     */
-    enqueue(element: any): void;
+    enqueue<T>(array: T[], element: T): void;
     /**
     * Performs a specified action on each element of an Array object.
     */
-    forEach(array: any[], method: Function, instance: any[]): void;
+    forEach<T>(array: T[], method: (element: T, index: number, array: T[]) => void, instance: any): void;
     /**
     * Searches for the specified element of an Array object and returns its index.
     */
-    indexOf(array: any[], item: any, startIndex?: number): number;
+    indexOf<T>(array: T[], item: T, startIndex?: number): number;
     /**
     * Inserts a value at the specified location in an Array object.
     */
-    insert(array: any[], index: number, item: any): any;
+    insert<T>(array: T[], index: number, item: T): void;
     /**
     * Creates an Array object from a string representation.
     */
-    parse(value: string): any[];
+    parse<T>(value: string): T[];
     /**
     * Removes the first occurrence of an element in an Array object.
     */
-    remove(array: any[], item: any): boolean;
+    remove<T>(array: T[], item: T): boolean;
     /**
     * Removes an element at the specified location in an Array object.
     */
-    removeAt(array: any[], index: number): void;
+    removeAt<T>(array: T[], index: number): void;
 
     //#endregion
 }
@@ -277,6 +113,10 @@ interface Number {
     * Formats a number by using the current culture.
     */
     localeFormat(format: string): string;
+}
+
+interface NumberConstructor {
+
     /**
     * Returns a numeric value from a string representation of a number. This function is static and can be called without creating an instance of the object.
     */
@@ -297,11 +137,14 @@ interface Date {
     /**
     * Formats a date by using the invariant (culture-independent) culture.
     */
-    format(value: string): string;
+    format(format: string): string;
     /**
     * Formats a date by using the current culture. This function is static and can be invoked without creating an instance of the object.
     */
-    localeFormat(value: string): string;
+    localeFormat(format: string): string;
+}
+
+interface DateConstructor {
     /**
     * Creates a date from a locale-specific string by using the current culture. This function is static and can be invoked without creating an instance of the object.
     * @exception (Debug) formats contains an invalid format.
@@ -310,9 +153,8 @@ interface Date {
     * @param formats
     *           (Optional) An array of custom formats.
     */
-    parseLocale(value: string): string;
-    parseLocale(value: string, formats?: string[]): string;
-    parseLocale(value: string, ...formats: string[]): string;
+    parseLocale(value: string, formats?: string[]): Date;
+    parseLocale(value: string, ...formats: string[]): Date;
     /**
     * Creates a date from a string by using the invariant culture. This function is static and can be invoked without creating an instance of the object.
     * @return If value is a valid string representation of a date in the invariant format, an object of type Date; otherwise, null.
@@ -321,352 +163,172 @@ interface Date {
     * @param formats
     *           (Optional) An array of custom formats.
     */
-    parseInvariant(value: string): string;
     parseInvariant(value: string, formats?: string[]): string;
     parseInvariant(value: string, ...formats: string[]): string;
 }
 
-declare module MicrosoftAjaxBaseTypeExtensions {
+
+/**
+* Provides static functions that extend the built-in ECMAScript (JavaScript) Function type by including exception
+* details and support for application-compilation modes (debug or release).
+* @see {@link http://msdn.microsoft.com/en-us/library/dd409270(v=vs.100).aspx}
+*/
+interface FunctionConstructor {        
+
+    //#region Extensions
 
     /**
-    * Provides static functions that extend the built-in ECMAScript (JavaScript) Function type by including exception
-    * details and support for application-compilation modes (debug or release).
-    * @see {@link http://msdn.microsoft.com/en-us/library/dd409270(v=vs.100).aspx}
-    */
-    interface Function {
-
-        //#region lib.d.ts
-
-        /** 
-          * Creates a new function.
-          * @param args A list of arguments the function accepts.
-          */
-        new (...args: string[]): Function;
-        (...args: string[]): Function;
-        prototype: Function;
-
-        //#endregion
-
-        //#region Extensions
-
-        /**
-          * Creates a delegate function that retains the context first used during an objects creation.
-          * @see {@link http://msdn.microsoft.com/en-us/library/dd393582(v=vs.100).aspx }
-          */
-        createCallback(method: Function, ...context: any[]): Function;
-        /**
-          * Creates a callback function that retains the parameter initially used during an object's creation.
-          * @see {@link http://msdn.microsoft.com/en-us/library/dd409287(v=vs.100).aspx }
-          */
-        createDelegate(instance: any, method: Function): Function;
-
-        /**
-          * A function that does nothing.
-          * @see {@link http://msdn.microsoft.com/en-us/library/dd393667(v=vs.100).aspx }
-          */
-        emptyMethod(): Function;
-
-        /**
-          * Validates the parameters to a method are as expected.
-          * @see {@link http://msdn.microsoft.com/en-us/library/dd393712(v=vs.100).aspx }
-          */
-        validateParameters(parameters: any, expectedParameters: Object[], validateParameterCount?: boolean): any;
-
-        //#endregion
-    }
+      * Creates a delegate function that retains the context first used during an objects creation.
+      * @see {@link http://msdn.microsoft.com/en-us/library/dd393582(v=vs.100).aspx }
+      */
+    createCallback(method: Function, ...context: any[]): Function;
+    /**
+      * Creates a callback function that retains the parameter initially used during an object's creation.
+      * @see {@link http://msdn.microsoft.com/en-us/library/dd409287(v=vs.100).aspx }
+      */
+    createDelegate(instance: any, method: Function): Function;
 
     /**
-    * Provides static functions that extend the built-in ECMAScript (JavaScript) Error type by including exception details and support for application-compilation modes (debug or release).
-    * Error Type Extensions
-    * @see {@link http://msdn.microsoft.com/en-us/library/bb310947(v=vs.100).aspx}
-    */
-    interface Error {
-
-        //#region lib.d.ts
-
-        name: string;
-        message: string;
-
-        new (message?: string): Error;
-        (message?: string): Error;
-        prototype: Error;
-
-        //#endregion
-
-        //#region Extensions
-
-        /**
-        * Creates an Error object that represents the Sys.ParameterCountException exception.
-        */
-        parameterCount(message?: string): Error;
-        /**
-        * Creates an Error object that represents the Sys.NotImplementedException exception.
-        */
-        notImplemented(message?: string): Error;
-        /**
-        * Creates an Error object that represents the Sys.ArgumentException exception.
-        */
-        argument(paramName?: any, message?: string): Error;
-        /**
-        * Creates an Error object that represents the Sys.ArgumentNullException exception.
-        */
-        argumentNull(paramName?: any, message?: string): Error;
-        /**
-        * Creates an Error object that represents the Sys.ArgumentOutOfRangeException exception.
-        */
-        argumentOutOfRange(paramName?: string, actualValue?: any, message?: string): Error;
-        /**
-        * Creates an Error object that represents the Sys.ArgumentTypeException exception.
-        */
-        argumentType(paramName?: string, actualType?: any, expectedType?: any, message?: string): Error;
-        /**
-        * Creates an Error object that represents the Sys.ArgumentUndefinedException exception.
-        */
-        argumentUndefined(paramName?: string, message?: string): Error;
-        /**
-        * Creates an Error object that can contain additional error information.
-        */
-        create(message?: string, errorInfo?: Object): Error;
-        /**
-        * Creates an Error object that represents the Sys.FormatException exception.
-        */
-        format(message?: string): Error;
-        /**
-        * Creates an Error object that represents the Sys.InvalidOperationException exception.
-        */
-        invalidOperation(message?: string): Error;
-        /**
-        * Updates the fileName and lineNumber properties of an Error instance to indicate where the error was thrown instead of where the error was created. Use this function if you are creating custom error types.
-        */
-        popStackFrame(): void;
-
-        //#endregion
-    }
+      * A function that does nothing.
+      * @see {@link http://msdn.microsoft.com/en-us/library/dd393667(v=vs.100).aspx }
+      */
+    emptyMethod(): Function;
 
     /**
-    * Provides extensions to the base ECMAScript (JavaScript) String object by including static and instance methods.
-    * String Type Extensions
-    * @see {@link http://msdn.microsoft.com/en-us/library/bb397472(v=vs.100).aspx}
-    */
-    interface String {
+      * Validates the parameters to a method are as expected.
+      * @see {@link http://msdn.microsoft.com/en-us/library/dd393712(v=vs.100).aspx }
+      */
+    validateParameters(parameters: any, expectedParameters: Object[], validateParameterCount?: boolean): any;
 
-        //#region lib.d.ts
+    //#endregion
+}
 
-        new (value?: any): String;
-        (value?: any): string;
-        prototype: String;
-        fromCharCode(...codes: number[]): string;
+/**
+* Provides static functions that extend the built-in ECMAScript (JavaScript) Error type by including exception details and support for application-compilation modes (debug or release).
+* Error Type Extensions
+* @see {@link http://msdn.microsoft.com/en-us/library/bb310947(v=vs.100).aspx}
+*/
+interface ErrorConstructor {       
 
-        /** Returns a string representation of a string. */
-        toString(): string;
-
-        /**
-          * Returns the character at the specified index.
-          * @param pos The zero-based index of the desired character.
-          */
-        charAt(pos: number): string;
-
-        /** 
-          * Returns the Unicode value of the character at the specified location.
-          * @param index The zero-based index of the desired character. If there is no character at the specified index, NaN is returned.
-          */
-        charCodeAt(index: number): number;
-
-        /**
-          * Returns a string that contains the concatenation of two or more strings.
-          * @param strings The strings to append to the end of the string.  
-          */
-        concat(...strings: string[]): string;
-
-        /**
-          * Returns the position of the first occurrence of a substring. 
-          * @param searchString The substring to search for in the string
-          * @param position The index at which to begin searching the String object. If omitted, search starts at the beginning of the string.
-          */
-        indexOf(searchString: string, position?: number): number;
-
-        /**
-          * Returns the last occurrence of a substring in the string.
-          * @param searchString The substring to search for.
-          * @param position The index at which to begin searching. If omitted, the search begins at the end of the string.
-          */
-        lastIndexOf(searchString: string, position?: number): number;
-
-        /**
-          * Determines whether two strings are equivalent in the current locale.
-          * @param that String to compare to target string
-          */
-        localeCompare(that: string): number;
-
-        /** 
-          * Matches a string with a regular expression, and returns an array containing the results of that search.
-          * @param regexp A variable name or string literal containing the regular expression pattern and flags.
-          */
-        match(regexp: string): string[];
-
-        /** 
-          * Matches a string with a regular expression, and returns an array containing the results of that search.
-          * @param regexp A regular expression object that contains the regular expression pattern and applicable flags. 
-          */
-        match(regexp: RegExp): string[];
-
-        /**
-          * Replaces text in a string, using a regular expression or search string.
-          * @param searchValue A String object or string literal that represents the regular expression
-          * @param replaceValue A String object or string literal containing the text to replace for every successful match of rgExp in stringObj.
-          */
-        replace(searchValue: string, replaceValue: string): string;
-
-        /**
-          * Replaces text in a string, using a regular expression or search string.
-          * @param searchValue A String object or string literal that represents the regular expression
-          * @param replaceValue A function that returns the replacement text.
-          */
-        replace(searchValue: string, replaceValue: (substring: string, ...args: any[]) => string): string;
-
-        /**
-          * Replaces text in a string, using a regular expression or search string.
-          * @param searchValue A Regular Expression object containing the regular expression pattern and applicable flags
-          * @param replaceValue A String object or string literal containing the text to replace for every successful match of rgExp in stringObj.
-          */
-        replace(searchValue: RegExp, replaceValue: string): string;
-
-        /**
-          * Replaces text in a string, using a regular expression or search string.
-          * @param searchValue A Regular Expression object containing the regular expression pattern and applicable flags
-          * @param replaceValue A function that returns the replacement text.
-          */
-        replace(searchValue: RegExp, replaceValue: (substring: string, ...args: any[]) => string): string;
-
-        /**
-          * Finds the first substring match in a regular expression search.
-          * @param regexp The regular expression pattern and applicable flags. 
-          */
-        search(regexp: string): number;
-
-        /**
-          * Finds the first substring match in a regular expression search.
-          * @param regexp The regular expression pattern and applicable flags. 
-          */
-        search(regexp: RegExp): number;
-
-        /**
-          * Returns a section of a string.
-          * @param start The index to the beginning of the specified portion of stringObj. 
-          * @param end The index to the end of the specified portion of stringObj. The substring includes the characters up to, but not including, the character indicated by end. 
-          * If this value is not specified, the substring continues to the end of stringObj.
-          */
-        slice(start?: number, end?: number): string;
-
-        /**
-          * Split a string into substrings using the specified separator and return them as an array.
-          * @param separator A string that identifies character or characters to use in separating the string. If omitted, a single-element array containing the entire string is returned. 
-          * @param limit A value used to limit the number of elements returned in the array.
-          */
-        split(separator: string, limit?: number): string[];
-
-        /**
-          * Split a string into substrings using the specified separator and return them as an array.
-          * @param separator A Regular Express that identifies character or characters to use in separating the string. If omitted, a single-element array containing the entire string is returned. 
-          * @param limit A value used to limit the number of elements returned in the array.
-          */
-        split(separator: RegExp, limit?: number): string[];
-
-        /**
-          * Returns the substring at the specified location within a String object. 
-          * @param start The zero-based index number indicating the beginning of the substring.
-          * @param end Zero-based index number indicating the end of the substring. The substring includes the characters up to, but not including, the character indicated by end.
-          * If end is omitted, the characters from start through the end of the original string are returned.
-          */
-        substring(start: number, end?: number): string;
-
-        /** Converts all the alphabetic characters in a string to lowercase. */
-        toLowerCase(): string;
-
-        /** Converts all alphabetic characters to lowercase, taking into account the host environment's current locale. */
-        toLocaleLowerCase(): string;
-
-        /** Converts all the alphabetic characters in a string to uppercase. */
-        toUpperCase(): string;
-
-        /** Returns a string where all alphabetic characters have been converted to uppercase, taking into account the host environment's current locale. */
-        toLocaleUpperCase(): string;
-
-        /** Returns the length of a String object. */
-        length: number;
-
-        // IE extensions
-        /**
-          * Gets a substring beginning at the specified location and having the specified length.
-          * @param from The starting position of the desired substring. The index of the first character in the string is zero.
-          * @param length The number of characters to include in the returned substring.
-          */
-        substr(from: number, length?: number): string;
-
-        [index: number]: string;
-
-        //#endregion
-
-        //#region Extensions
-
-        /**
-        * Formats a number by using the invariant culture.
-        * @returns true if the end of the String object matches suffix; otherwise, false.
-        */
-        endsWith(suffix: string): boolean;
-        /**
-        * Replaces each format item in a String object with the text equivalent of a corresponding object's value.
-        * @returns A copy of the string with the formatting applied.
-        */
-        format(format: string, ...args: any[]): string;
-        /**
-        * Replaces the format items in a String object with the text equivalent of a corresponding object's value. The current culture is used to format dates and numbers.
-        * @returns A copy of the string with the formatting applied.
-        */
-        localeFormat(format: string, ...args: any[]): string;
-        /**
-        * Removes leading and trailing white-space characters from a String object.
-        * @returns A copy of the string with all white-space characters removed from the start and end of the string.
-        */
-        trim(): string;
-        /**
-        * Removes trailing white-space characters from a String object.
-        * @returns A copy of the string with all white-space characters removed from the end of the string.
-        */
-        trimEnd(): string;
-        /**
-        * Removes leading white-space characters from a String object.
-        * @returns A copy of the string with all white-space characters removed from the start of the string.
-        */
-        trimStart(): string;
-
-        //#endregion
-    }
+    //#region Extensions
 
     /**
-    * Provides extensions to the base ECMAScript (JavaScript) Boolean object. 
-    * Boolean Type Extensions
-    * @see {@link http://msdn.microsoft.com/en-us/library/bb397557(v=vs.100).aspx}
+    * Creates an Error object that represents the Sys.ParameterCountException exception.
     */
-    interface Boolean {
+    parameterCount(message?: string): Error;
+    /**
+    * Creates an Error object that represents the Sys.NotImplementedException exception.
+    */
+    notImplemented(message?: string): Error;
+    /**
+    * Creates an Error object that represents the Sys.ArgumentException exception.
+    */
+    argument(paramName?: any, message?: string): Error;
+    /**
+    * Creates an Error object that represents the Sys.ArgumentNullException exception.
+    */
+    argumentNull(paramName?: any, message?: string): Error;
+    /**
+    * Creates an Error object that represents the Sys.ArgumentOutOfRangeException exception.
+    */
+    argumentOutOfRange(paramName?: string, actualValue?: any, message?: string): Error;
+    /**
+    * Creates an Error object that represents the Sys.ArgumentTypeException exception.
+    */
+    argumentType(paramName?: string, actualType?: any, expectedType?: any, message?: string): Error;
+    /**
+    * Creates an Error object that represents the Sys.ArgumentUndefinedException exception.
+    */
+    argumentUndefined(paramName?: string, message?: string): Error;
+    /**
+    * Creates an Error object that can contain additional error information.
+    */
+    create(message?: string, errorInfo?: Object): Error;
+    /**
+    * Creates an Error object that represents the Sys.FormatException exception.
+    */
+    format(message?: string): Error;
+    /**
+    * Creates an Error object that represents the Sys.InvalidOperationException exception.
+    */
+    invalidOperation(message?: string): Error;
 
-        //#region lib.d.ts
 
-        new (value?: any): Boolean;
-        (value?: any): boolean;
-        prototype: Boolean;
+    //#endregion
+}
 
-        //#endregion
+interface Error {
+    /**
+    * Updates the fileName and lineNumber properties of an Error instance to indicate where the error was thrown instead of where the error was created. Use this function if you are creating custom error types.
+    */
+    popStackFrame(): void;
+}
 
-        //#region Extensions
 
-        /**
-        * Converts a string representation of a logical value to its Boolean object equivalent.
-        */
-        parse(value: string): Boolean;
 
-        //#endregion
-    }
+interface String {
+        
+    //#region Extensions
+
+    /**
+    * Formats a number by using the invariant culture.
+    * @returns true if the end of the String object matches suffix; otherwise, false.
+    */
+    endsWith(suffix: string): boolean;
+
+    /**
+    * Removes leading and trailing white-space characters from a String object.
+    * @returns A copy of the string with all white-space characters removed from the start and end of the string.
+    */
+    trim(): string;
+    /**
+    * Removes trailing white-space characters from a String object.
+    * @returns A copy of the string with all white-space characters removed from the end of the string.
+    */
+    trimEnd(): string;
+    /**
+    * Removes leading white-space characters from a String object.
+    * @returns A copy of the string with all white-space characters removed from the start of the string.
+    */
+    trimStart(): string;
+
+    //#endregion
+}
+
+/**
+* Provides extensions to the base ECMAScript (JavaScript) String object by including static and instance methods.
+* String Type Extensions
+* @see {@link http://msdn.microsoft.com/en-us/library/bb397472(v=vs.100).aspx}
+*/
+interface StringConstructor {
+    /**
+* Replaces each format item in a String object with the text equivalent of a corresponding object's value.
+* @returns A copy of the string with the formatting applied.
+*/
+    format(format: string, ...args: any[]): string;
+    /**
+    * Replaces the format items in a String object with the text equivalent of a corresponding object's value. The current culture is used to format dates and numbers.
+    * @returns A copy of the string with the formatting applied.
+    */
+    localeFormat(format: string, ...args: any[]): string;
+}
+
+
+/**
+* Provides extensions to the base ECMAScript (JavaScript) Boolean object. 
+* Boolean Type Extensions
+* @see {@link http://msdn.microsoft.com/en-us/library/bb397557(v=vs.100).aspx}
+*/
+interface BooleanConstructor {        
+
+    //#region Extensions
+
+    /**
+    * Converts a string representation of a logical value to its Boolean object equivalent.
+    */
+    parse(value: string): Boolean;
+
+    //#endregion
 }
 
 //#endregion
@@ -2171,67 +1833,67 @@ declare module Sys {
     //#endregion
 
     //#region Exception Types
+    // Really not a types
+    ///**
+    //* Raised when a function or method is invoked and at least one of the passed arguments does not meet the parameter specification of the called function or method.
+    //*/
+    //class ArgumentException {
 
-    /**
-    * Raised when a function or method is invoked and at least one of the passed arguments does not meet the parameter specification of the called function or method.
-    */
-    class ArgumentException {
+    //}
+    ///**
+    //* Raised when an argument has an invalid value of null.
+    //*/
+    //class ArgumentNullException {
 
-    }
-    /**
-    * Raised when an argument has an invalid value of null.
-    */
-    class ArgumentNullException {
+    //}
+    ///**
+    //* Raised when an argument value is outside an acceptable range.
+    //*/
+    //class ArgumentOutOfRangeException {
 
-    }
-    /**
-    * Raised when an argument value is outside an acceptable range.
-    */
-    class ArgumentOutOfRangeException {
+    //}
+    ///**
+    //* Raised when a parameter is not an allowed type.
+    //*/
+    //class ArgumentTypeException {
 
-    }
-    /**
-    * Raised when a parameter is not an allowed type.
-    */
-    class ArgumentTypeException {
+    //}
+    ///**
+    //* Raised when an argument for a required method parameter is undefined.
+    //*/
+    //class ArgumentUndefinedException {
 
-    }
-    /**
-    * Raised when an argument for a required method parameter is undefined.
-    */
-    class ArgumentUndefinedException {
+    //}
+    ///**
+    //* 
+    //*/
+    //class FormatException {
 
-    }
-    /**
-    * 
-    */
-    class FormatException {
+    //}
+    ///**
+    //* Raised when a call to a method has failed, but the reason was not invalid arguments.
+    //*/
+    //class InvalidOperationException {
 
-    }
-    /**
-    * Raised when a call to a method has failed, but the reason was not invalid arguments.
-    */
-    class InvalidOperationException {
+    //}
+    ///**
+    //* Raised when a requested method is not supported by an object.
+    //*/
+    //class NotImplementedException {
 
-    }
-    /**
-    * Raised when a requested method is not supported by an object.
-    */
-    class NotImplementedException {
+    //}
+    ///**
+    //* Raised when an invalid number of arguments have been passed to a function.
+    //*/
+    //class ParameterCountException {
 
-    }
-    /**
-    * Raised when an invalid number of arguments have been passed to a function.
-    */
-    class ParameterCountException {
+    //}
+    ///**
+    //* Raised by the Microsoft Ajax Library framework when a script does not load successfully. This exception should not be thrown by the developer.
+    //*/
+    //class ScriptLoadFailedException {
 
-    }
-    /**
-    * Raised by the Microsoft Ajax Library framework when a script does not load successfully. This exception should not be thrown by the developer.
-    */
-    class ScriptLoadFailedException {
-
-    }
+    //}
 
     //#endregion
 
@@ -3153,7 +2815,7 @@ declare module Sys {
 
             //#endregion
 			
-			 //#region Properties
+            //#region Properties
 
             /**
             * Gets the HTML Document Object Model (DOM) element that the current Sys.UI.Control object is associated with.
@@ -3184,7 +2846,7 @@ declare module Sys {
         * Defines static methods and properties that provide helper APIs for manipulating and inspecting DOM elements.
         * @see {@link http://msdn.microsoft.com/en-us/library/bb383788(v=vs.100).aspx}
         */
-        interface DomElement  {
+        interface DomElement {
 
             //#region Constructors
 
@@ -3400,7 +3062,7 @@ declare module Sys {
              * @throws Error.invalidOperation - (Debug) One of the handlers specified in events is not a function.
              *  
              */
-            static addHandlers(element: HTMLElement, events: { [event: string]:(e: DomEvent) => void} , handlerOwner?: any, autoRemove?: boolean): void;
+            static addHandlers(element: HTMLElement, events: { [event: string]: (e: DomEvent) => void }, handlerOwner?: any, autoRemove?: boolean): void;
             /**
              * Removes all DOM event handlers from a DOM element that were added through the Sys.UI.DomEvent addHandler or the Sys.UI.DomEvent addHandlers methods.
              * This member is static and can be invoked without creating an instance of the class.
@@ -3585,17 +3247,17 @@ declare module Sys {
         * Describes mouse button locations.
         */
         enum MouseButton {
-             /**
-             * Represents the left mouse button.
-             */
+            /**
+            * Represents the left mouse button.
+            */
             leftButton,
-             /**
-             * Represents the middle mouse button.
-             */
+            /**
+            * Represents the middle mouse button.
+            */
             middleButton,
-             /**
-             * Represents the right mouse button.
-             */
+            /**
+            * Represents the right mouse button.
+            */
             rightButton
         }
         /**

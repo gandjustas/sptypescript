@@ -1,3 +1,4 @@
+/// <reference path="SP.Init.d.ts"/>
 /// <reference path="SP.d.ts"/>
 
 declare module SP {
@@ -181,19 +182,19 @@ declare module SP {
                 @param url overrides options.url
                 @param callback overrides options.dialogResultValueCallback
                 @param args overrides options.args */
-            static commonModalDialogOpen(url: string, options: SP.UI.IDialogOptions, callback: SP.UI.DialogReturnValueCallback, args: any): void;
+            static commonModalDialogOpen(url: string, options: SP.UI.IDialogOptions, callback?: SP.UI.DialogReturnValueCallback, args?: any): void;
             /** Refresh the page if specified dialogResult equals to SP.UI.DialogResult.OK */
             static RefreshPage(dialogResult: SP.UI.DialogResult): void;
             /** Show page specified by the url in a modal dialog. If the dialog returns SP.UI.DialogResult.OK, the page is refreshed. */
             static ShowPopupDialog(url: string): void;
             /** Show modal dialog specified by url, callback, height and width. */
-            static OpenPopUpPage(url: string, callback: SP.UI.DialogReturnValueCallback, width: number, height: number): void;
+            static OpenPopUpPage(url: string, callback: SP.UI.DialogReturnValueCallback, width?: number, height?: number): void;
             /** Displays a wait/loading modal dialog with the specified title, message, height and width. Height and width are defined in pixels. Cancel/close button is not shown. */
-            static showWaitScreenWithNoClose(title: string, message: string, height: number, width: number): SP.UI.ModalDialog;
+            static showWaitScreenWithNoClose(title: string, message?: string, height?: number, width?: number): SP.UI.ModalDialog;
             /** Displays a wait/loading modal dialog with the specified title, message, height and width. Height and width are defined in pixels. Cancel button is shown. If user clicks it, the callbackFunc is called. */
-            static showWaitScreenSize(title: string, message: string, callbackFunc: SP.UI.DialogReturnValueCallback, height: number, width: number): SP.UI.ModalDialog;
+            static showWaitScreenSize(title: string, message?: string, callbackFunc?: SP.UI.DialogReturnValueCallback, height?: number, width?: number): SP.UI.ModalDialog;
             static showPlatformFirstRunDialog(url: string, callbackFunc: SP.UI.DialogReturnValueCallback): SP.UI.ModalDialog;
-            static get_childDialog: any;
+            static get_childDialog: ModalDialog;
             /** Closes the dialog using the specified dialog result. */
             close(dialogResult: SP.UI.DialogResult): void;
         }
@@ -270,6 +271,11 @@ declare module SP {
                 disabled: number;
                 enabled: number;
             }
+        }
+
+        export module Workplace {
+            export function add_resized(handler: Function);
+            export function remove_resized(handler:Function);
         }
 
         export module UIUtility {

@@ -1,5 +1,3 @@
-///<reference path="../../Definitions/SharePoint.d.ts" />
-
 module _ {
     module fieldSamples {
         // visa field validator impl
@@ -40,7 +38,7 @@ module _ {
 
                 this._fieldIds[index] = inputContainerId;
 
-                return "<input type='text' id='" + inputContainerId + "' value='" + val + "' maxlength='4' size='4' />";
+                return `<input type="text" id="${inputContainerId}" value="${val}" maxlength="4" size="4" />`;
             }
 
             private _wrapErrorArea(renderCtx) {
@@ -50,7 +48,7 @@ module _ {
 
                 this._errorContainerId = errorContainerId;
 
-                return "<span id='" + errorContainerId + "' class='ms-formvalidation ms-csrformvalidation'></span>";
+                return `<span id="${errorContainerId}" class="ms-formvalidation ms-csrformvalidation"></span>`;
             }
 
             private _onGetValue() {

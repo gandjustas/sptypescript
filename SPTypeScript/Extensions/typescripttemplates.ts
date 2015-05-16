@@ -8,10 +8,7 @@ module CSR {
     }
 
     /** Creates new overrides. Call .register() at the end.*/
-    export function override(listTemplateType?: number, baseViewId?: string): ICSR;
-    export function override(listTemplateType?: number, baseViewId?: number): ICSR;
-
-    export function override(listTemplateType?: number, baseViewId?: any): ICSR {
+    export function override(listTemplateType?: number, baseViewId?: number|string): ICSR {
         return new csr(listTemplateType, baseViewId)
             .onPreRender(hookFormContext)
             .onPostRender(fixCsrCustomLayout);
@@ -166,14 +163,14 @@ module CSR {
     class csr implements ICSR, SPClientTemplates.TemplateOverridesOptions {
 
         public Templates: SPClientTemplates.TemplateOverrides;
-        public OnPreRender: { (ctx: SPClientTemplates.RenderContext): void; }[];
-        public OnPostRender: { (ctx: SPClientTemplates.RenderContext): void; }[];
+        public OnPreRender: SPClientTemplates.RenderCallback[];
+        public OnPostRender: SPClientTemplates.RenderCallback[];
         private IsRegistered: boolean;
 
 
         constructor(public ListTemplateType?: number, public BaseViewID?: any) {
             this.Templates = { Fields: {} };
-            this.OnPreRender = [];
+            this.OnPreRender = [] ;
             this.OnPostRender = [];
             this.IsRegistered = false;
         }
@@ -259,7 +256,7 @@ module CSR {
             return this.onPreRender((ctx: SPClientTemplates.RenderContext) => {
                 var ctxInView = <SPClientTemplates.RenderContext_InView>ctx;
 
-                //ListSchema schma exists in Form and in View rener context
+                //ListSchema schma exists in Form and in View render context
                 var fields = ctxInView.ListSchema.Field;
                 if (fields) {
                     for (var i = 0; i < fields.length; i++) {
@@ -275,7 +272,7 @@ module CSR {
             return this.onPostRender((ctx: SPClientTemplates.RenderContext) => {
                 var ctxInView = <SPClientTemplates.RenderContext_InView>ctx;
 
-                //ListSchema schma exists in Form and in View rener context
+                //ListSchema schma exists in Form and in View render context
                 var fields = ctxInView.ListSchema.Field;
                 if (fields) {
                     for (var i = 0; i < fields.length; i++) {

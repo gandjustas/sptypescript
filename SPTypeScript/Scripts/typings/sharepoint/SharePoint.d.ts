@@ -319,7 +319,8 @@ interface ContextInfo extends SPClientTemplates.RenderContext {
 
 }
 
-declare function GetCurrentCtx():ContextInfo;
+declare function GetCurrentCtx(): ContextInfo;
+declare function SetFullScreenMode(fullscreen: boolean);
 declare module SP {
     export enum RequestExecutorErrors {
         requestAbortedOrTimedout,
@@ -972,8 +973,8 @@ declare module SPClientTemplates {
         Type: string;
     }
 
-/** Represents field schema in Grid mode and on list forms.
-        Consider casting objects of this type to more specific field types, e.g. FieldSchemaInForm_Lookup */
+    /** Represents field schema in Grid mode and on list forms.
+            Consider casting objects of this type to more specific field types, e.g. FieldSchemaInForm_Lookup */
     export interface FieldSchema_InForm extends FieldSchema {
         /** Description for this field. */
         Description: string;
@@ -1022,7 +1023,7 @@ declare module SPClientTemplates {
         FormUniqueId: string;
         ListData: ListData_InForm;
         ListSchema: ListSchema_InForm;
-        CSRCustomLayout?:boolean;
+        CSRCustomLayout?: boolean;
     }
 
 
@@ -1246,7 +1247,7 @@ declare module SPClientTemplates {
         StateInitDone: boolean;
         TableCbxFocusHandler: any;
         TableMouseOverHandler: any;
-        TotalListItems: any;
+        TotalListItems: number;
         verEnabled: number;
         /** Guid of the view. */
         view: string;
@@ -1261,10 +1262,10 @@ declare module SPClientTemplates {
     }
     export interface RenderContext_FieldInView extends RenderContext_ItemInView {
         /** If in grid mode (context.inGridMode == true), cast to FieldSchema_InForm, otherwise cast to FieldSchema_InView */
-        CurrentFieldSchema: any;
+        CurrentFieldSchema: FieldSchema_InForm | FieldSchema_InView;
         CurrentFieldValue: any;
         FieldControlsModes: { [fieldInternalName: string]: ClientControlMode; };
-        FormContext: any;
+        FormContext: ClientFormContext;
         FormUniqueId: string;
     }
 
@@ -1274,6 +1275,7 @@ declare module SPClientTemplates {
     export interface Group {
         Items: Item[];
     }
+    type RenderCallback = (ctx: RenderContext) => void;
 
     export interface RenderContext {
         BaseViewID?: number;
@@ -1283,8 +1285,8 @@ declare module SPClientTemplates {
         CurrentSelectedItems?: any;
         CurrentUICultureName?: string;
         ListTemplateType?: number;
-        OnPostRender?: any;
-        OnPreRender?: any;
+        OnPostRender?: RenderCallback | RenderCallback[];
+        OnPreRender?: RenderCallback | RenderCallback[];
         onRefreshFailed?: any;
         RenderBody?: (renderContext: RenderContext) => string;
         RenderFieldByName?: (renderContext: RenderContext, fieldName: string) => string;
@@ -1341,18 +1343,18 @@ declare module SPClientTemplates {
     }
 
     export interface Templates {
-        View?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template
-        Body?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template 
+        View?: RenderCallback | string; // TODO: determine appropriate context type and purpose of this template
+        Body?: RenderCallback | string; // TODO: determine appropriate context type and purpose of this template 
         /** Defines templates for rendering groups (aggregations). */
-        Group?: GroupCallback;
+        Group?: GroupCallback| string;
         /** Defines templates for list items rendering. */
-        Item?: ItemCallback;
+        Item?: ItemCallback| string;
         /** Defines template for rendering list view header.
             Can be either string or SingleTemplateCallback */
-        Header?: SingleTemplateCallback;
+        Header?: SingleTemplateCallback| string;
         /** Defines template for rendering list view footer.
             Can be either string or SingleTemplateCallback */
-        Footer?: SingleTemplateCallback;
+        Footer?: SingleTemplateCallback| string;
         /** Defines templates for fields rendering. The field is specified by it's internal name. */
         Fields?: FieldTemplates;
     }
@@ -1362,18 +1364,18 @@ declare module SPClientTemplates {
     }
 
     export interface TemplateOverrides {
-        View?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template
-        Body?: (renderContext: any) => string; // TODO: determine appropriate context type and purpose of this template 
+        View?: RenderCallback | string; // TODO: determine appropriate context type and purpose of this template
+        Body?: RenderCallback | string; // TODO: determine appropriate context type and purpose of this template 
         /** Defines templates for rendering groups (aggregations). */
-        Group?: GroupCallback;
+        Group?: GroupCallback| string;
         /** Defines templates for list items rendering. */
-        Item?: ItemCallback;
+        Item?: ItemCallback| string;
         /** Defines template for rendering list view header.
             Can be either string or SingleTemplateCallback */
-        Header?: SingleTemplateCallback;
+        Header?: SingleTemplateCallback| string;
         /** Defines template for rendering list view footer.
             Can be either string or SingleTemplateCallback */
-        Footer?: SingleTemplateCallback;
+        Footer?: SingleTemplateCallback| string;
         /** Defines templates for fields rendering. The field is specified by it's internal name. */
         Fields?: FieldTemplateMap;
     }
@@ -1382,10 +1384,10 @@ declare module SPClientTemplates {
         Templates?: TemplateOverrides;
 
         /** �allbacks called before rendering starts. Can be function (ctx: RenderContext) => void or array of functions.*/
-        OnPreRender?: any;
+        OnPreRender?: RenderCallback | RenderCallback[];
 
         /** �allbacks called after rendered html inserted into DOM. Can be function (ctx: RenderContext) => void or array of functions.*/
-        OnPostRender?: any;
+        OnPostRender?: RenderCallback | RenderCallback[];
 
         /** View style (SPView.StyleID) for which the templates should be applied. 
             If not defined, the templates will be applied only to default view style. */
@@ -1395,11 +1397,11 @@ declare module SPClientTemplates {
         ListTemplateType?: number;
         /** Base view ID (SPView.BaseViewID) for which the template should be applied.
             If not defined, the templates will be applied to all views. */
-        BaseViewID?: any;
+        BaseViewID?: number|string;
     }
     export class TemplateManager {
         static RegisterTemplateOverrides(renderCtx: TemplateOverridesOptions): void;
-        static GetTemplates(renderCtx: any): Templates;
+        static GetTemplates(renderCtx: RenderContext): Templates;
     }
 
     export interface ClientUserValue {
@@ -1473,13 +1475,13 @@ declare module SPClientTemplates {
             EnableVesioning: boolean;
             Id: string;
         };
-        registerInitCallback(fieldname: string, callback: () => void ): void;
-        registerFocusCallback(fieldname: string, callback: () => void ): void;
-        registerValidationErrorCallback(fieldname: string, callback: (error: any) => void ): void;
+        registerInitCallback(fieldname: string, callback: () => void): void;
+        registerFocusCallback(fieldname: string, callback: () => void): void;
+        registerValidationErrorCallback(fieldname: string, callback: (error: any) => void): void;
         registerGetValueCallback(fieldname: string, callback: () => any): void;
         updateControlValue(fieldname: string, value: any): void;
         registerClientValidator(fieldname: string, validator: SPClientForms.ClientValidation.ValidatorSet): void;
-        registerHasValueChangedCallback(fieldname: string, callback: (eventArg?: any) => void );
+        registerHasValueChangedCallback(fieldname: string, callback: (eventArg?: any) => void);
     }
 
 }
@@ -1511,9 +1513,9 @@ declare module SPClientForms {
 }
 
 declare class SPMgr {
-    NewGroup(listItem:Object, fieldName:string):boolean;
+    NewGroup(listItem: Object, fieldName: string): boolean;
     RenderHeader(renderCtx: SPClientTemplates.RenderContext, field: SPClientTemplates.FieldSchema): string;
-    RenderField(renderCtx: SPClientTemplates.RenderContext, field: SPClientTemplates.FieldSchema, listItem:Object, listSchema:SPClientTemplates.ListSchema):string;
+    RenderField(renderCtx: SPClientTemplates.RenderContext, field: SPClientTemplates.FieldSchema, listItem: Object, listSchema: SPClientTemplates.ListSchema): string;
     RenderFieldByName(renderCtx: SPClientTemplates.RenderContext, fieldName: string, listItem: Object, listSchema: SPClientTemplates.ListSchema): string;
 }
 
@@ -7243,19 +7245,19 @@ declare module SP {
                 @param url overrides options.url
                 @param callback overrides options.dialogResultValueCallback
                 @param args overrides options.args */
-            static commonModalDialogOpen(url: string, options: SP.UI.IDialogOptions, callback: SP.UI.DialogReturnValueCallback, args: any): void;
+            static commonModalDialogOpen(url: string, options: SP.UI.IDialogOptions, callback?: SP.UI.DialogReturnValueCallback, args?: any): void;
             /** Refresh the page if specified dialogResult equals to SP.UI.DialogResult.OK */
             static RefreshPage(dialogResult: SP.UI.DialogResult): void;
             /** Show page specified by the url in a modal dialog. If the dialog returns SP.UI.DialogResult.OK, the page is refreshed. */
             static ShowPopupDialog(url: string): void;
             /** Show modal dialog specified by url, callback, height and width. */
-            static OpenPopUpPage(url: string, callback: SP.UI.DialogReturnValueCallback, width: number, height: number): void;
+            static OpenPopUpPage(url: string, callback: SP.UI.DialogReturnValueCallback, width?: number, height?: number): void;
             /** Displays a wait/loading modal dialog with the specified title, message, height and width. Height and width are defined in pixels. Cancel/close button is not shown. */
-            static showWaitScreenWithNoClose(title: string, message: string, height: number, width: number): SP.UI.ModalDialog;
+            static showWaitScreenWithNoClose(title: string, message?: string, height?: number, width?: number): SP.UI.ModalDialog;
             /** Displays a wait/loading modal dialog with the specified title, message, height and width. Height and width are defined in pixels. Cancel button is shown. If user clicks it, the callbackFunc is called. */
-            static showWaitScreenSize(title: string, message: string, callbackFunc: SP.UI.DialogReturnValueCallback, height: number, width: number): SP.UI.ModalDialog;
+            static showWaitScreenSize(title: string, message?: string, callbackFunc?: SP.UI.DialogReturnValueCallback, height?: number, width?: number): SP.UI.ModalDialog;
             static showPlatformFirstRunDialog(url: string, callbackFunc: SP.UI.DialogReturnValueCallback): SP.UI.ModalDialog;
-            static get_childDialog: any;
+            static get_childDialog: ModalDialog;
             /** Closes the dialog using the specified dialog result. */
             close(dialogResult: SP.UI.DialogResult): void;
         }
@@ -7332,6 +7334,11 @@ declare module SP {
                 disabled: number;
                 enabled: number;
             }
+        }
+
+        export module Workplace {
+            export function add_resized(handler: Function);
+            export function remove_resized(handler:Function);
         }
 
         export module UIUtility {

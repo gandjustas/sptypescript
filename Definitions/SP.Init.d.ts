@@ -313,4 +313,5 @@ interface ContextInfo extends SPClientTemplates.RenderContext {
 
 }
 
-declare function GetCurrentCtx():ContextInfo;
+declare function GetCurrentCtx(): ContextInfo;
+declare function SetFullScreenMode(fullscreen: boolean);

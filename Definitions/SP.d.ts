@@ -2,7 +2,7 @@
 /// <reference path="SP.Workflow.d.ts"/>
 /// <reference path="SP.Utilities.d.ts"/>
 /// <reference path="SP.WebParts.d.ts"/>
-/// <reference path="MicrosoftAjax.d.ts"/>
+/// <reference path="Microsoft.Ajax.d.ts"/>
 
 interface IEnumerator<T> {
     get_current(): T;
