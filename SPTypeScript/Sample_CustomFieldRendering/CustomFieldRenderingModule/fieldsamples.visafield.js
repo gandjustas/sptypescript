@@ -39,7 +39,7 @@ var _;
                 var formCtx = SPClientTemplates.Utility.GetFormContextForCurrentField(renderCtx);
                 var errorContainerId = formCtx.fieldName + '_' + formCtx.fieldSchema.Id + '_VisaField_Error';
                 this._errorContainerId = errorContainerId;
-                return "<span id=\"" + errorContainerId + "\" class=@ms-formvalidation ms-csrformvalidation\"></span>";
+                return "<span id=\"" + errorContainerId + "\" class=\"ms-formvalidation ms-csrformvalidation\"></span>";
             };
             VisaField.prototype._onGetValue = function () {
                 var result = '';

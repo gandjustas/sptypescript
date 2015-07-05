@@ -153,6 +153,7 @@ declare class _spPageContextInfo {
     static currentUICultureName: string; //"ru-RU"
     static layoutsUrl: string;  //"_layouts/15"
     static pageListId: string;  //"{06ee6d96-f27f-4160-b6bb-c18f187b18a7}"
+    static pageItemId: number;
     static pagePersonalizationScope: string; //1
     static serverRequestPath: string; //"/SPTypeScript/Lists/ConditionalFormattingTasksList/AllItems.aspx"
     static siteAbsoluteUrl: string; // "https://gandjustas-7b20d3715e8ed4.sharepoint.com"

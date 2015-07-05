@@ -846,7 +846,7 @@ declare module SP {
         get_webId(): SP.Guid;
         getErrorDetails(): SP.ClientObjectList<SP.AppInstanceErrorDetails>;
         uninstall(): SP.GuidResult;
-        upgrade(appPackageStream: any[]): void;
+        upgrade(appPackageStream: SP.Base64EncodedByteArray): void;
         cancelAllJobs(): SP.BooleanResult;
         install(): SP.GuidResult;
         getPreviousAppVersion(): SP.App;
@@ -921,8 +921,8 @@ declare module SP {
         getByFileName(fileName: string): SP.Attachment;
     }
     export class AttachmentCreationInformation extends SP.ClientValueObject {
-        get_contentStream(): any[];
-        set_contentStream(value: any[]): void;
+        get_contentStream(): SP.Base64EncodedByteArray;
+        set_contentStream(value: SP.Base64EncodedByteArray): void;
         get_fileName(): string;
         set_fileName(value: string): void;
         get_typeId(): string;
@@ -1649,7 +1649,7 @@ declare module SP {
         boolean,
         number,
         currency,
-        uRL,
+        URL,
         computed,
         threading,
         guid,
@@ -3218,9 +3218,9 @@ declare module SP {
         getSubwebsForCurrentUser(query: SP.SubwebQuery): SP.WebCollection;
         getAppInstanceById(appInstanceId: SP.Guid): SP.AppInstance;
         getAppInstancesByProductId(productId: SP.Guid): SP.ClientObjectList<SP.AppInstance>;
-        loadAndInstallAppInSpecifiedLocale(appPackageStream: any[], installationLocaleLCID: number): SP.AppInstance;
-        loadApp(appPackageStream: any[], installationLocaleLCID: number): SP.AppInstance;
-        loadAndInstallApp(appPackageStream: any[]): SP.AppInstance;
+        loadAndInstallAppInSpecifiedLocale(appPackageStream: SP.Base64EncodedByteArray, installationLocaleLCID: number): SP.AppInstance;
+        loadApp(appPackageStream: SP.Base64EncodedByteArray, installationLocaleLCID: number): SP.AppInstance;
+        loadAndInstallApp(appPackageStream: SP.Base64EncodedByteArray): SP.AppInstance;
         ensureUser(logonName: string): SP.User;
         applyTheme(colorPaletteUrl: string, fontSchemeUrl: string, backgroundImageUrl: string, shareGenerated: boolean): void;
     }
