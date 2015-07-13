@@ -1,6 +1,6 @@
 ﻿// Type definitions for sptypescript
 // Project: http://sptypescript.codeplex.com
-// Definitions by: Stanislav Vyshchepan <http://gandjustas.blogspot.ru> and Andrey Markeev <http://markeev.com>
+// Definitions by: Stanislav Vyshchepan <http://blog.gandjustas.ru> and Andrey Markeev <http://markeev.com>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
 /// <reference path="../microsoft-ajax/microsoft.ajax.d.ts" />
