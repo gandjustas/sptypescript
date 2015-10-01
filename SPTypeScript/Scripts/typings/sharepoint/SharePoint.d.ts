@@ -1558,6 +1558,31 @@ declare class SPMgr {
 
 declare var spMgr: SPMgr;
 
+declare function SPField_FormDisplay_Default(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPField_FormDisplay_DefaultNoEncode(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPField_FormDisplay_Empty(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldText_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldNumber_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldBoolean_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldNote_Display(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldNote_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldFile_Display(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldFile_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldChoice_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldChoice_Dropdown_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldChoice_Radio_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldMultiChoice_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldDateTime_Display(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldDateTime_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldUrl_Display(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldUrl_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldUserMulti_Display(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPClientPeoplePickerCSRTemplate(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldLookup_Display(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldLookup_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldLookupMulti_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldAttachments_Default(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+
 declare module SPAnimation {
     export enum Attribute {
         PositionX,
