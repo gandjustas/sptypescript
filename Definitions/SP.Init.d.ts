@@ -66,7 +66,7 @@ declare module SP {
         static isUndefined(obj: any): boolean;
         static replaceOrAddQueryString(url: string, key: string, value: string): string;
         static removeHtml(str: string): string;
-        static removeStyleChildren(element: HTMLElement);
+        static removeStyleChildren(element: HTMLElement): void;
         static removeHtmlAndTrimStringWithEllipsis(str: string, maxLength: number): string;
         static setTextAreaElementValue(textAreaElement: HTMLTextAreaElement, newValue: string): void;
         static truncateToInt(n: number): number;
@@ -110,15 +110,15 @@ declare module SP {
             export function refreshView(viewId: string): void;
         }
         export module Selection {
-            export function selectListItem(iid: string, bSelect: boolean);
+            export function selectListItem(iid: string, bSelect: boolean): void;
             export function getSelectedItems(): { id: number; fsObjType: FileSystemObjectType; }[];
             export function getSelectedList(): string;
             export function getSelectedView(): string;
             export function navigateUp(viewId: string): void;
-            export function deselectAllListItems(iid: string);
+            export function deselectAllListItems(iid: string): void;
         }
         export module Overrides {
-            export function overrideDeleteConfirmation(listId: string, overrideText:string):void;
+            export function overrideDeleteConfirmation(listId: string, overrideText: string): void;
         }
     }
 
@@ -180,16 +180,16 @@ declare function AddEvtHandler(element: HTMLElement, event: string, func: EventL
 declare function GetUrlKeyValue(key: string): string;
 
 declare class AjaxNavigate {
-    update(url:string, updateParts:Object, fullNavigate:boolean, anchorName:string):void;
+    update(url: string, updateParts: Object, fullNavigate: boolean, anchorName: string): void;
     add_navigate(handler: Function): void;
-    remove_navigate(handler:Function):void;
-    submit(formToSubmit:HTMLFormElement):void;
-    getParam(paramName:string):string;
-    getSavedFormAction():string;
+    remove_navigate(handler: Function): void;
+    submit(formToSubmit: HTMLFormElement): void;
+    getParam(paramName: string): string;
+    getSavedFormAction(): string;
     get_href(): string;
     get_hash(): string;
-    get_search():string;
-    convertMDSURLtoRegularURL(mdsPath:string):string;
+    get_search(): string;
+    convertMDSURLtoRegularURL(mdsPath: string): string;
 }
 
 declare var ajaxNavigate: AjaxNavigate;
@@ -315,4 +315,4 @@ interface ContextInfo extends SPClientTemplates.RenderContext {
 }
 
 declare function GetCurrentCtx(): ContextInfo;
-declare function SetFullScreenMode(fullscreen: boolean);
+declare function SetFullScreenMode(fullscreen: boolean): void;

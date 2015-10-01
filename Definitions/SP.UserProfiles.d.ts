@@ -50,7 +50,7 @@ declare module SP {
 
         /** Provides methods for operations related to people.
             Note: The SocialFollowingManager object is the recommended object for performing Following People and Following Content tasks.
-            However, PeopleManager provides some methods that SocialFollowingManager doesn’t. */
+            However, PeopleManager provides some methods that SocialFollowingManager doesnï¿½t. */
         export class PeopleManager extends SP.ClientObject {
             constructor(context: SP.ClientRuntimeContext);
             static getTrendingTags(context: SP.ClientRuntimeContext): HashTagCollection;
@@ -93,7 +93,7 @@ declare module SP {
                 Pictures in bmp, jpg and png formats and up to 5,000,000 bytes are supported.
                 A user can upload a picture only to the user's own profile.
                 @param data Binary content of an image file */
-            setMyProfilePicture(data): void;
+            setMyProfilePicture(data: SP.Base64EncodedByteArray): void;
         }
 
         /** Specifies the capabilities of a personal site. */
@@ -334,17 +334,17 @@ declare module SP {
             /** Specifies the item of this item */
             set_title(value: string): string;
             /** Specifies the GUID for this item in the Content database. */
-            get_uniqueId(): any;
+            get_uniqueId(): SP.Guid;
             /** Specifies the GUID for this item in the Content database. */
-            set_uniqueId(value): any;
+            set_uniqueId(value: SP.Guid): SP.Guid;
             /** Specifies the URL of this item. */
             get_url(): string;
             /** Specifies the URL of this item. */
             set_url(value: string): string;
             /** Specifies the site identification (GUID) in the Content database for this item if it is a site, or the identification of its parent site if this item is a document. */
-            get_webId(): string;
+            get_webId(): SP.Guid;
             /** Specifies the site identification (GUID) in the Content database for this item if it is a site, or the identification of its parent site if this item is a document. */
-            set_webId(value: any): any;
+            set_webId(value: SP.Guid): any;
         }
 
         export enum FollowedItemType {

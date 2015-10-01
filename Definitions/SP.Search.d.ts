@@ -56,7 +56,7 @@ declare module Microsoft.SharePoint.Client.Search {
             set_maxSnippetLength: (value: number) => void;
 
             get_personalizationData: () => QueryPersonalizationData;
-            set_personalizationData: (QueryPersonalizationData) => void;
+            set_personalizationData: (value: QueryPersonalizationData) => void;
 
             get_processBestBets: () => boolean;
             set_processBestBets: (value: boolean) => void;
@@ -100,7 +100,7 @@ declare module Microsoft.SharePoint.Client.Search {
             set_startRow: (value: number) => void;
 
             get_summaryLength: () => number;
-            set_summaryLength: (number) => void;
+            set_summaryLength: (value: number) => void;
 
             get_timeout: () => number;
             set_timeout: (value: number) => void;

@@ -1,6 +1,10 @@
+/// <reference path="SP.d.ts"/>
+/// <reference path="SP.Init.d.ts"/>
+/// <reference path="clienttemplates.d.ts"/>
+
 /** Available only in SharePoint Online*/
 declare module Define {
-    export function loadScript(url: string, successCallback: () => void, errCallback: () => void);
+    export function loadScript(url: string, successCallback: () => void, errCallback: () => void): void;
     /** Loads script from _layouts/15/[req].js */
     export function require(req: string, callback: Function): void;
     /** Loads script from _layouts/15/[req].js */
@@ -10,7 +14,7 @@ declare module Define {
 
 /** Available only in SharePoint Online*/
 declare module Verify {
-    export function ArgumentType(arg: string, expected: any);
+    export function ArgumentType(arg: string, expected: any): void;
 }
 
 
@@ -22,7 +26,7 @@ declare module BrowserStorage {
     /** Available only in SharePoint Online*/
     interface CachedStorage {
         getItem(key: string): string;
-        setItem(key: string, value: string);
+        setItem(key: string, value: string): void;
         removeItem(key: string): void;
         clead(): void;
         length: number;
@@ -61,7 +65,7 @@ declare module DOM {
     export function GetEventSrcElement(evt: Event): HTMLElement;
     export function GetInnerText(el: HTMLElement): string;
     export function PreventDefaultNavigation(evt: Event): void;
-    export function SetEvent(eventName: string, eventFunc: Function, el: HTMLElement);
+    export function SetEvent(eventName: string, eventFunc: Function, el: HTMLElement): void;
 }
 
 /** Available only in SharePoint Online*/
@@ -85,8 +89,8 @@ declare module IE8Support {
 
 /** Available only in SharePoint Online*/
 declare module StringUtil {
-    export function BuildParam(stPattern: string, ...params: any[]);
-    export function ApplyStringTemplate(str: string, ...params: any[]);
+    export function BuildParam(stPattern: string, ...params: any[]): string;
+    export function ApplyStringTemplate(str: string, ...params: any[]): string;
 }
 
 /** Available only in SharePoint Online*/

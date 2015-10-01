@@ -551,15 +551,15 @@ declare module SPClientTemplates {
         View?: RenderCallback | string; // TODO: determine appropriate context type and purpose of this template
         Body?: RenderCallback | string; // TODO: determine appropriate context type and purpose of this template 
         /** Defines templates for rendering groups (aggregations). */
-        Group?: GroupCallback| string;
+        Group?: GroupCallback | string;
         /** Defines templates for list items rendering. */
-        Item?: ItemCallback| string;
+        Item?: ItemCallback | string;
         /** Defines template for rendering list view header.
             Can be either string or SingleTemplateCallback */
-        Header?: SingleTemplateCallback| string;
+        Header?: SingleTemplateCallback | string;
         /** Defines template for rendering list view footer.
             Can be either string or SingleTemplateCallback */
-        Footer?: SingleTemplateCallback| string;
+        Footer?: SingleTemplateCallback | string;
         /** Defines templates for fields rendering. The field is specified by it's internal name. */
         Fields?: FieldTemplates;
     }
@@ -572,15 +572,15 @@ declare module SPClientTemplates {
         View?: RenderCallback | string; // TODO: determine appropriate context type and purpose of this template
         Body?: RenderCallback | string; // TODO: determine appropriate context type and purpose of this template 
         /** Defines templates for rendering groups (aggregations). */
-        Group?: GroupCallback| string;
+        Group?: GroupCallback | string;
         /** Defines templates for list items rendering. */
-        Item?: ItemCallback| string;
+        Item?: ItemCallback | string;
         /** Defines template for rendering list view header.
             Can be either string or SingleTemplateCallback */
-        Header?: SingleTemplateCallback| string;
+        Header?: SingleTemplateCallback | string;
         /** Defines template for rendering list view footer.
             Can be either string or SingleTemplateCallback */
-        Footer?: SingleTemplateCallback| string;
+        Footer?: SingleTemplateCallback | string;
         /** Defines templates for fields rendering. The field is specified by it's internal name. */
         Fields?: FieldTemplateMap;
     }
@@ -602,7 +602,7 @@ declare module SPClientTemplates {
         ListTemplateType?: number;
         /** Base view ID (SPView.BaseViewID) for which the template should be applied.
             If not defined, the templates will be applied to all views. */
-        BaseViewID?: number|string;
+        BaseViewID?: number | string;
     }
     export class TemplateManager {
         static RegisterTemplateOverrides(renderCtx: TemplateOverridesOptions): void;
@@ -686,7 +686,7 @@ declare module SPClientTemplates {
         registerGetValueCallback(fieldname: string, callback: () => any): void;
         updateControlValue(fieldname: string, value: any): void;
         registerClientValidator(fieldname: string, validator: SPClientForms.ClientValidation.ValidatorSet): void;
-        registerHasValueChangedCallback(fieldname: string, callback: (eventArg?: any) => void);
+        registerHasValueChangedCallback(fieldname: string, callback: (eventArg?: any) => void): void;
     }
 
 }
@@ -704,7 +704,7 @@ declare module SPClientForms {
         }
 
         export class ValidatorSet {
-            public RegisterValidator(validator: IValidator);
+            public RegisterValidator(validator: IValidator): void;
         }
 
         export interface IValidator {
@@ -714,6 +714,43 @@ declare module SPClientForms {
         export class RequiredValidator implements IValidator {
             Validate(value: any): ValidationResult;
         }
+
+        export class RequiredFileValidator implements IValidator {
+            Validate(value: any): ValidationResult;
+        }
+
+        export class RequiredRichTextValidator implements IValidator {
+            Validate(value: any): ValidationResult;
+        }
+
+        export class MaxLengthUrlValidator implements IValidator {
+            Validate(value: any): ValidationResult;
+        }
+
+
+    }
+
+    export enum FormManagerEvents {
+        Event_OnControlValueChanged,//: 1,
+        Event_OnControlInitializedCallback,//: 2,
+        Event_OnControlFocusSetCallback,//: 3,
+        Event_GetControlValueCallback,//: 4,
+        Event_OnControlValidationError,//: 5,
+        Event_RegisterControlValidator,//: 6,
+        Event_GetHasValueChangedCallback//: 7
+    }
+
+    export class ClientForm {
+        constructor(qualifier: string);
+        RenderClientForm(): void;
+        SubmitClientForm(): boolean;
+        NotifyControlEvent(eventName: FormManagerEvents, fldName: string, eventArg: any): void;
+    }
+
+    export class ClientFormManager {
+        static GetClientForm(qualifier: string): ClientForm;
+        static RegisterClientForm(qualifier: string): void;
+        static SubmitClientForm(qualifier: string): boolean;
     }
 }
 

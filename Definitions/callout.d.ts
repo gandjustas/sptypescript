@@ -35,8 +35,8 @@ declare class CalloutActionMenuEntry {
 
 
 declare class CalloutActionMenu {
-    constructor(actionsId);
-    addAction(action: CalloutAction);
+    constructor(actionsId: any);
+    addAction(action: CalloutAction): void;
     getActions(): CalloutAction[];
     render(): void;
     refreshActions(): void;
@@ -49,23 +49,23 @@ declare class CalloutAction {
     getText(): string;
     getToolTop(): string;
     getDisabledToolTip(): string;
-    getOnClickCallback(): (event, action: CalloutAction) => any;
-    getIsDisabledCallback(): (action: CalloutAction) => boolean;
-    getIsVisibleCallback(): (action: CalloutAction) => boolean;
+    getOnClickCallback(event: any, action: CalloutAction): any;
+    getIsDisabledCallback(action: CalloutAction): boolean;
+    getIsVisibleCallback(action: CalloutAction): boolean;
     getIsMenu(): boolean;
     getMenuEntries(): CalloutActionMenuEntry[];
     render(): void;
     isEnabled(): boolean;
     isVisible(): boolean;
-    set (options: CalloutActionOptions): void;
+    set(options: CalloutActionOptions): void;
 }
 
 declare class Callout {
     /** Sets options for the callout. Not all options can be changed for the callout after its creation. */
-    set (options: CalloutOptions);
+    set(options: CalloutOptions): any;
     /** Adds event handler to the callout.
         @param eventName one of the following: "opened", "opening", "closing", "closed" */
-    addEventCallback(eventName: string, callback: (callout: Callout) => void);
+    addEventCallback(eventName: string, callback: (callout: Callout) => void): void;
     /** Returns the launch point element of the callout. */
     getLaunchPoint(): HTMLElement;
     /** Returns the ID of the callout. */
@@ -99,13 +99,13 @@ declare class Callout {
     /** Returns the callout actions menu */
     getActionMenu(): CalloutActionMenu;
     /** Adds a link to the actions panel in the bottom part of the callout window */
-    addAction(action: CalloutAction);
+    addAction(action: CalloutAction): void;
     /** Re-renders the actions menu. Call after the actions menu is changed. */
     refreshActions(): void;
     /** Display the callout. Animation can be used only for IE9+ */
-    open(useAnimation: boolean);
+    open(useAnimation: boolean): void;
     /** Hide the callout. Animation can be used only for IE9+ */
-    close(useAnimation: boolean);
+    close(useAnimation: boolean): void;
     /** Display if hidden, hide if shown. */
     toggle(): void;
     /** Do not call this directly. Instead, use CalloutManager.remove */
@@ -159,7 +159,7 @@ declare class CalloutManager {
     /** Checks if callout with specified ID already exists. If it doesn't, creates it, otherwise returns the existing one. */
     static createNewIfNecessary(options: CalloutOptions): Callout;
     /** Detaches callout from the launch point and destroys it. */
-    static remove(callout: Callout);
+    static remove(callout: Callout): void;
     /** Searches for a callout associated with the specified launch point. Throws error if not found. */
     static getFromLaunchPoint(launchPoint: HTMLElement): Callout;
     /** Searches for a callout associated with the specified launch point. Returns null if not found. */
@@ -170,7 +170,7 @@ declare class CalloutManager {
     /** Finds the closest launch point based on the specified descendant element, and returns callout associated with the launch point. */
     static getFromCalloutDescendant(descendant: HTMLElement): Callout;
     /** Perform some action for each callout on the page. */
-    static forEach(callback: (callout: Callout) => void);
+    static forEach(callback: (callout: Callout) => void): void;
     /** Closes all callouts on the page */
     static closeAll(): boolean;
     /** Returns true if at least one of the defined on page callouts is opened. */

@@ -84,7 +84,7 @@ declare class SPClientPeoplePicker {
 
     public SetInitialValue(entities: ISPClientPeoplePickerEntity[], initialErrorMsg?: string): void
     public AddUserKeys(userKeys: string, bSearch: boolean): void;
-    public BatchAddUserKeysOperation(allKeys: string[], numProcessed: number);
+    public BatchAddUserKeysOperation(allKeys: string[], numProcessed: number): void;
     public ResolveAllUsers(fnContinuation: () => void): void;
     public ExecutePickerQuery(queryIds: string, onSuccess: (queryId: string, result: SP.StringResult) => void, onFailure: (queryId: string, result: SP.StringResult) => void, fnContinuation: () => void): void;
     public AddUnresolvedUserFromEditor(bRunQuery?: boolean): void;
@@ -127,7 +127,7 @@ declare class SPClientPeoplePicker {
     public AddLoadingSuggestionMenuOption(): void;
     public ShowingLocalSuggestions(): boolean;
     public ShouldUsePPMRU(): boolean;
-    public AddResolvedUserToLocalCache(resolvedEntity: ISPClientPeoplePickerEntity, resolveText: string);
+    public AddResolvedUserToLocalCache(resolvedEntity: ISPClientPeoplePickerEntity, resolveText: string): void;
 }
 
 interface ISPClientPeoplePickerSchema {
@@ -222,7 +222,7 @@ declare class SPClientPeoplePickerProcessedUser {
     ErrorDescription: string;// '',
     ResolveText: string;// '',
     public UpdateResolvedUser(newUserInfo: ISPClientPeoplePickerEntity, strNewElementId: string): void;
-    public UpdateSuggestions(entity: ISPClientPeoplePickerEntity);
+    public UpdateSuggestions(entity: ISPClientPeoplePickerEntity): void;
     public BuildUserHTML(): string;
     public UpdateUserMaxWidth(): void;
     public ResolvedAsUnverifiedEmail(): string;

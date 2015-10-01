@@ -97,7 +97,7 @@ declare module SP {
             /** Y coordinate of the dialog box. */
             y?: number;
             /** The dialog will be maximized when shown. */
-            showMaximized?: number;
+            showMaximized?: boolean;
             /** url of the page which is shown in the modal dialog. You should use either html or url attribute, but not both. */
             url?: string;
             /** specifies if close button should be shown on the dialog */
@@ -129,7 +129,7 @@ declare module SP {
             /** Y coordinate of the dialog box. */
             y: number;
             /** The dialog will be maximized when shown. */
-            showMaximized: number;
+            showMaximized: boolean;
             /** url of the page which is shown in the modal dialog. You should use either html or url attribute, but not both. */
             url: string;
             /** specifies if close button should be shown on the dialog */
@@ -216,7 +216,7 @@ declare module SP {
             get_elementIDPrefix(): string;
             set_elementIDPrefix(value: string): string;
 
-            get_linkElement():HTMLAnchorElement;
+            get_linkElement(): HTMLAnchorElement;
 
             get_isDropDownCommand(): boolean;
             set_isDropDownCommand(value: boolean): boolean;
@@ -233,27 +233,27 @@ declare module SP {
 
         export class CommandBar {
             constructor();
-            get_commands():Command[];
+            get_commands(): Command[];
             get_dropDownThreshold(): number;
             set_dropDownThreshold(value: number): number;
             get_elementID(): string;
             get_overrideClass(): string;
             set_overrideClass(value: string): string;
-            addCommand(action:Command):void;
-            insertCommand(action: Command, position:number): void;
+            addCommand(action: Command): void;
+            insertCommand(action: Command, position: number): void;
             render(builder: HtmlBuilder): void;
             attachEvents(): void;
-            findCommandByName(name:string):Command;
+            findCommandByName(name: string): Command;
         }
 
 
         export class PagingControl {
             constructor(id: string);
-            render(innerContent:string): string;
-            postRender():void;
-            get_innerContent():HTMLSpanElement;
-            get_innerContentClass():string;
-            setButtonState(buttonId:number, state:number):void;
+            render(innerContent: string): string;
+            postRender(): void;
+            get_innerContent(): HTMLSpanElement;
+            get_innerContentClass(): string;
+            setButtonState(buttonId: number, state: number): void;
             getButtonState(buttonId: number): number;
             onWindowResized(): void;
 
@@ -274,8 +274,8 @@ declare module SP {
         }
 
         export module Workplace {
-            export function add_resized(handler: Function);
-            export function remove_resized(handler:Function);
+            export function add_resized(handler: Function): void;
+            export function remove_resized(handler: Function): void;
         }
 
         export module UIUtility {
@@ -316,6 +316,6 @@ declare module SPNotifications {
     }
 }
 
-declare class  SPStatusNotificationData {
+declare class SPStatusNotificationData {
     constructor(text: string, subText: string, imageUrl: string, sip: string);
 }

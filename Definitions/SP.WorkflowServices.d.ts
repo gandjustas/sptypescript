@@ -18,10 +18,10 @@ declare module SP.WorkflowServices {
     export class InteropService extends SP.ClientObject {
         constructor(context: SP.ClientRuntimeContext, objectPath: SP.ObjectPathStaticProperty);
         static getCurrent(context: SP.ClientRuntimeContext): InteropService;
-        enableEvents(listId, itemGuid): void;
-        disableEvents(listId, itemGuid): void;
-        startWorkflow(associationName, correlationId, listId, itemGuid, workflowParameters): SP.GuidResult;
-        cancelWorkflow(instanceId): void;
+        enableEvents(listId: SP.Guid, itemGuid: SP.Guid): void;
+        disableEvents(listId: SP.Guid, itemGuid: SP.Guid): void;
+        startWorkflow(associationName: string, correlationId: SP.Guid, listId: SP.Guid, itemGuid: SP.Guid, workflowParameters: any): SP.GuidResult;
+        cancelWorkflow(instanceId: SP.Guid): void;
     }
 
     /** Represents a workflow definition and associated properties. */
@@ -81,7 +81,7 @@ declare module SP.WorkflowServices {
         get_xaml(): string;
         /** XAML definition of the workflow */
         set_xaml(value: string): string;
-        /** This method adds a key-value pair (propertyName, value) to the workflow definition object’s property bag.  */
+        /** This method adds a key-value pair (propertyName, value) to the workflow definition objectï¿½s property bag.  */
         setProperty(propertyName: string, value: string): void;
         /** This method is internal and is not intended to be used in your code. */
         initPropertiesFromJson(parentNode: any): void;
@@ -97,7 +97,6 @@ declare module SP.WorkflowServices {
 
     /** Manages workflow definitions and workflow activity authoring. */
     export class WorkflowDeploymentService extends SP.ClientObject {
-        constructor(context: SP.ClientRuntimeContext, objectPath: SP.ObjectPathStaticProperty);
         /** Returns an XML representation of a list of valid Workflow Manager Client 1.0 actions for the specified web (WorkflowInfo element). */
         getDesignerActions(web: SP.Web): SP.StringResult;
         /** Returns an XML representation of a collection of XAML class signatures for workflow definitions.
@@ -121,7 +120,7 @@ declare module SP.WorkflowServices {
         getDefinition(definitionId: string): WorkflowDefinition;
         /** Saves the collateral file of a workflow definition.
             @param workflowDefinitionId The guid identifier of the workflow definition.*/
-        saveCollateral(workflowDefinitionId: string, leafFileName: string, fileContent): void;
+        saveCollateral(workflowDefinitionId: string, leafFileName: string, fileContent: Base64EncodedByteArray): void;
         /** Deletes the URL of a workflow definition's collateral file.
             @param workflowDefinitionId The guid identifier of the workflow definition.  */
         deleteCollateral(workflowDefinitionId: string, leafFileName: string): void;
@@ -138,7 +137,7 @@ declare module SP.WorkflowServices {
             @param packageDefaultFilename The default filename to choose for the new package.
             @param packageTitle The title of the package.
             @param packageDescription The description of the package. */
-        packageDefinition(definitionId, packageDefaultFilename, packageTitle, packageDescription): SP.StringResult;
+        packageDefinition(definitionId: SP.Guid, packageDefaultFilename: string, packageTitle: string, packageDescription: string): SP.StringResult;
     }
 
     /** Represents an instance of a workflow association that performs on a list item the process that is defined in a workflow template */
@@ -236,9 +235,9 @@ declare module SP.WorkflowServices {
     /** Base class representing subscriptions for the external workflow host. */
     export class WorkflowSubscription extends SP.ClientObject {
         /** Gets the unique ID of the workflow definition to activate. */
-        get_definitionId();
+        get_definitionId(): SP.Guid;
         /** Sets the unique ID of the workflow definition to activate. */
-        set_definitionId(value);
+        set_definitionId(value: SP.Guid): SP.Guid;
         /** Gets a boolean value that specifies if the workflow subscription is enabled.
             When disabled, new instances of the subscription cannot be started, but existing instances will continue to run.  */
         get_enabled(): boolean;
@@ -264,11 +263,11 @@ declare module SP.WorkflowServices {
         /** Boolean value that specifies whether multiple workflow instances can be started manually on the same list item at the same time. This property can be used for list workflows only.  */
         set_manualStartBypassesActivationLimit(value: boolean): boolean;
         /** Gets the name of the workflow subscription for the specified event source.  */
-        get_name();
+        get_name(): string;
         /** Sets the name of the workflow subscription for the specified event source.  */
-        set_name(value);
+        set_name(value: string): string;
         /** Gets the properties and values to pass to the workflow definition when the subscription is matched. */
-        get_propertyDefinitions();
+        get_propertyDefinitions(): any;
         /** Gets the name of the workflow status field on the specified list.  */
         get_statusFieldName(): string;
         /** Gets or sets the name of the workflow status field on the specified list.  */
@@ -305,8 +304,8 @@ declare module SP.WorkflowServices {
             @param listId GUID of the list containing the event receiver to be unregistered.
             @eventName eventName The name of the event to be removed. */
         unregisterInterestInList(listId: string, eventName: string): void;
-        getSubscription(subscriptionId): WorkflowSubscription;
-        deleteSubscription(subscriptionId): WorkflowSubscription;
+        getSubscription(subscriptionId: SP.Guid): WorkflowSubscription;
+        deleteSubscription(subscriptionId: SP.Guid): WorkflowSubscription;
         /** Retrieves workflow subscriptions that contains all of the workflow subscriptions on the Web  */
         enumerateSubscriptions(): WorkflowSubscriptionCollection;
         /** Retrieves workflow subscriptions based on workflow definition */

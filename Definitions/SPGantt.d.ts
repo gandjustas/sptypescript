@@ -6,6 +6,6 @@ declare module SP {
         static Instances: GanttControl[];
         static FnGanttCreationCallback: { (control: GanttControl): void }[];
 
-        get_Columns():SP.JsGrid.ColumnInfo[];
+        get_Columns(): SP.JsGrid.ColumnInfo[];
     }
 }

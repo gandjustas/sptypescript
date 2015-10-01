@@ -148,21 +148,21 @@ declare module SP {
         }
 
         export class LocUtility {
-            static getLocalizedCountValue(locText:string, intervals:string, count:number):string;
+            static getLocalizedCountValue(locText: string, intervals: string, count: number): string;
         }
 
         export class VersionUtility {
-            static get_layoutsLatestVersionRelativeUrl():string;
+            static get_layoutsLatestVersionRelativeUrl(): string;
             static get_layoutsLatestVersionUrl(): string;
-            static getLayoutsPageUrl(pageName:string): string;
-            static getImageUrl(imageName:string): string;
+            static getLayoutsPageUrl(pageName: string): string;
+            static getImageUrl(imageName: string): string;
         }
 
     }
-    
+
     export module DateTimeUtil {
         export class SimpleDate {
-            construction(year: number, month: number, day: number, era: number);
+            constructor(year: number, month: number, day: number, era: number);
             get_year(): number;
             set_year(value: number): void;
             get_month(): number;

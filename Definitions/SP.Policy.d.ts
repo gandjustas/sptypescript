@@ -9,11 +9,10 @@ declare module SP {
         }
 
         export class SPContainerId extends ClientObject {
-            constructor(context: ClientRuntimeContext, objectPath: ObjectPath);
             static createFromList(context: ClientRuntimeContext, list: List): SPContainerId;
             static createFromWeb(context: ClientRuntimeContext, web: Web): SPContainerId;
             static createFromSite(context: ClientRuntimeContext, site: Site): SPContainerId;
-            static create(context: ClientRuntimeContext, containerId): SPContainerId;
+            static create(context: ClientRuntimeContext, containerId: any): SPContainerId;
 
             get_containerType(): ContentType;
             set_containerType(value: ContentType): ContentType;
@@ -43,7 +42,6 @@ declare module SP {
         }
 
         export class SPPolicyAssociation extends ClientObject {
-            constructor(context: ClientRuntimeContext, objectPath: ObjectPath);
 
             get_allowOverride(): boolean;
             set_allowOverride(value: boolean): boolean;
@@ -89,7 +87,6 @@ declare module SP {
         }
 
         export class SPPolicyBinding extends ClientObject {
-            constructor(context: ClientRuntimeContext, objectPath: ObjectPath);
 
             get_identity(): any;
             set_identity(value: any): any;
@@ -135,7 +132,6 @@ declare module SP {
         }
 
         export class SPPolicyDefinition extends ClientObject {
-            constructor(context: ClientRuntimeContext, objectPath: ObjectPath);
 
             get_comment(): string;
             set_comment(value: string): string;
@@ -143,8 +139,8 @@ declare module SP {
             get_createdBy(): any;
             set_createdBy(value: any): any;
 
-            get_defaultPolicyRuleConfigId
-            set_defaultPolicyRuleConfigId
+            get_defaultPolicyRuleConfigId(): any;
+            set_defaultPolicyRuleConfigId(value: any): any;
 
             get_description(): string;
             set_description(value: string): string;
@@ -183,7 +179,6 @@ declare module SP {
         }
 
         export class SPPolicyRule extends ClientObject {
-            constructor(context: ClientRuntimeContext, objectPath: ObjectPath);
 
             get_comment(): string;
             set_comment(value: string): string;
@@ -228,40 +223,40 @@ declare module SP {
             constructor(context: ClientRuntimeContext, web: Web);
 
             static createPolicyDefinition(context: ClientRuntimeContext): SPPolicyDefinition;
-            static createPolicyBinding(context: ClientRuntimeContext):SPPolicyBinding;
-            static createPolicyAssociation(context: ClientRuntimeContext):SPPolicyAssociation;
+            static createPolicyBinding(context: ClientRuntimeContext): SPPolicyBinding;
+            static createPolicyAssociation(context: ClientRuntimeContext): SPPolicyAssociation;
             static createPolicyRule(context: ClientRuntimeContext): SPPolicyRule;
 
 
-            updatePolicyRule(policyRule:SPPolicyRule):void;
+            updatePolicyRule(policyRule: SPPolicyRule): void;
 
-            getPolicyRule(policyRuleId:any, throwIfNull:boolean):SPPolicyRule;
+            getPolicyRule(policyRuleId: any, throwIfNull: boolean): SPPolicyRule;
 
-            deletePolicyRule(policyRuleId: any);void;
+            deletePolicyRule(policyRuleId: any): void;
 
-            notifyUnifiedPolicySync(notificationId, syncSvcUrl:string, changeInfos, syncNow:boolean, fullSyncForTenant):void;
+            notifyUnifiedPolicySync(notificationId: any, syncSvcUrl: string, changeInfos: any, syncNow: boolean, fullSyncForTenant: boolean): void;
 
-            updatePolicyDefinition(policyDefinition:SPPolicyDefinition):void;
-            
-            getPolicyDefinition(policyDefinitionId):SPPolicyDefinition;
+            updatePolicyDefinition(policyDefinition: SPPolicyDefinition): void;
 
-            deletePolicyDefinition(policyDefinitionId):void; 
-            
-            getPolicyDefinitions(scenario): ClientObjectList<SPPolicyDefinition>; 
+            getPolicyDefinition(policyDefinitionId: any): SPPolicyDefinition;
 
-            updatePolicyBinding(policyBinding:SPPolicyBinding):void;
+            deletePolicyDefinition(policyDefinitionId: any): void;
 
-            getPolicyBinding(policyBindingId): SPPolicyBinding;
+            getPolicyDefinitions(scenario: any): ClientObjectList<SPPolicyDefinition>;
 
-            deletePolicyBinding(policyBindingId): void;
+            updatePolicyBinding(policyBinding: SPPolicyBinding): void;
+
+            getPolicyBinding(policyBindingId: any): SPPolicyBinding;
+
+            deletePolicyBinding(policyBindingId: any): void;
 
             updatePolicyAssociation(policyAssociation: SPPolicyAssociation): void;
-            
-            getPolicyAssociation(policyAssociationId): SPPolicyAssociation;
+
+            getPolicyAssociation(policyAssociationId: any): SPPolicyAssociation;
 
             getPolicyAssociationForContainer(containerId: SPContainerId): SPPolicyAssociation;
 
-            deletePolicyAssociation(policyAssociationId): void;
+            deletePolicyAssociation(policyAssociationId: any): void;
         }
 
         export class SPPolicyStoreProxy extends ClientObject {

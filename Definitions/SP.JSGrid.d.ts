@@ -2,25 +2,25 @@
 declare module SP {
     export module JsGrid {
 
-        export enum TextDirection  {
+        export enum TextDirection {
             Default, //0,
             RightToLeft, //1,
             LeftToRight //2
         }
 
-        export enum PaneId  {
+        export enum PaneId {
             MainGrid, //0,
             PivotedGrid, //1,
             Gantt //2
         }
 
-        export enum PaneLayout  {
+        export enum PaneLayout {
             GridOnly, //0,
             GridAndGantt, //1,
             GridAndPivotedGrid //2
 
         }
-        export enum EditMode  {
+        export enum EditMode {
             ReadOnly, //0,
             ReadWrite, //1,
             ReadOnlyDefer, //2,
@@ -28,47 +28,47 @@ declare module SP {
             Defer //4
         }
 
-        export enum GanttDrawBarFlags  {
+        export enum GanttDrawBarFlags {
             LeftLink, //0x01,
             RightLink //0x02
 
         }
-        export enum GanttBarDateType  {
+        export enum GanttBarDateType {
             Start, //0,
             End //1
         }
 
-        export enum ValidationState  {
+        export enum ValidationState {
             Valid, //0,
             Pending, //1,
             Invalid //2
         }
 
-        export enum HierarchyMode  {
+        export enum HierarchyMode {
             None, //0,
             Standard, //1,
             Grouping //2
         }
 
-        export enum EditActorWriteType  {
+        export enum EditActorWriteType {
             Both, //1,
             LocalizedOnly, //2,
             DataOnly, //3,
             Either //4
         }
 
-        export enum EditActorReadType  {
+        export enum EditActorReadType {
             Both, //1,
             LocalizedOnly, //2,
             DataOnly //3
         }
 
-        export enum EditActorUpdateType  {
+        export enum EditActorUpdateType {
             Committed, //0,
             Uncommitted, //1
         }
 
-        export enum SortMode  {
+        export enum SortMode {
             Ascending, //1,
             Descending, //-1,
             None //0
@@ -80,13 +80,13 @@ declare module SP {
 
         }
 
-        export module  RowHeaderAutoStyleId {
-            export var Dirty:string; //'Dirty',
+        export module RowHeaderAutoStyleId {
+            export var Dirty: string; //'Dirty',
             export var Error: string; //'Error',
             export var NewRow: string; //'NewRow'
         }
 
-        export enum RowHeaderStatePriorities  {
+        export enum RowHeaderStatePriorities {
             Dirty, //10,
             Transfer, //30,
             CellError, //40,
@@ -95,7 +95,7 @@ declare module SP {
             NewRow //90
         }
 
-        export enum UpdateSerializeMode  {
+        export enum UpdateSerializeMode {
             Cancel, //0,
             Default, //1,
             PropDataOnly, //2,
@@ -103,31 +103,31 @@ declare module SP {
             PropBoth //4
         }
 
-        export enum UpdateTrackingMode  {
+        export enum UpdateTrackingMode {
             PropData, //2,
             PropLocalized, //3,
             PropBoth //4
         }
 
-        export module  UserAction  {
-            export var UserEdit:string; //'User Edit':string;
-            export var DeleteRecord:string; //'Delete Record':string;
-            export var InsertRecord:string; //'Insert Record':string;
-            export var Indent:string; //'Indent':string;
-            export var Outdent:string; //'Outdent':string;
-            export var Fill:string; //'Fill':string;
-            export var Paste:string; //'Paste':string;
+        export module UserAction {
+            export var UserEdit: string; //'User Edit':string;
+            export var DeleteRecord: string; //'Delete Record':string;
+            export var InsertRecord: string; //'Insert Record':string;
+            export var Indent: string; //'Indent':string;
+            export var Outdent: string; //'Outdent':string;
+            export var Fill: string; //'Fill':string;
+            export var Paste: string; //'Paste':string;
             export var CutPaste: string; //'Cut/Paste'
         }
 
-        export enum ReadOnlyActiveState  {
+        export enum ReadOnlyActiveState {
             ReadOnlyActive, //0,
             ReadOnlyDisabled, //1
         }
 
         export interface IValue {
             data?: any;
-            localized?:string;
+            localized?: string;
         }
 
 
@@ -152,10 +152,20 @@ declare module SP {
             HideInitialLoadingBanner(): void;
             ShowInitialGridErrorMsg(errorMsg: string): void;
             ShowGridErrorMsg(errorMsg: string): void;
-            LaunchPrintView(additionalScriptFiles, beforeInitFnName, beforeInitFnArgsObj, title, bEnableGantt, optGanttDelegateNames, optInitTableViewParamsFnName, optInitTableViewParamsFnArgsObj, optInitGanttStylesFnName, optInitGanttStylesFnArgsObj): void;
-            GetAllDataJson(fnOnFinished, optFnGetCellStyleID?): void;
-            SetTableView(tableViewParams): void;
-            SetRowView(rowViewParams): void;
+            LaunchPrintView(
+                additionalScriptFiles: any,
+                beforeInitFnName: any,
+                beforeInitFnArgsObj: any,
+                title: string,
+                bEnableGantt: boolean,
+                optGanttDelegateNames?: any,
+                optInitTableViewParamsFnName?: any,
+                optInitTableViewParamsFnArgsObj?: any,
+                optInitGanttStylesFnName?: any,
+                optInitGanttStylesFnArgsObj?: any): void;
+            GetAllDataJson(fnOnFinished: any, optFnGetCellStyleID?: any): void;
+            SetTableView(tableViewParams: any): void;
+            SetRowView(rowViewParam: any): void;
 
             /** Enable grid after Disable. */
             Enable(): void;
@@ -170,7 +180,7 @@ declare module SP {
             /** Switches the currently selected cell into edit mode: displays edit control and sets focus into it.
                 Returns true if success. */
             TryBeginEdit(): boolean;
-            FinalizeEditing(fnContinue, fnError): void;
+            FinalizeEditing(fnContinue: Function, fnError: Function): void;
             /** Get diff tracker object that tracks changes to the grid data. */
             GetDiffTracker(): SP.JsGrid.Internal.DiffTracker;
             /** Moves focus to the JsGrid control */
@@ -193,11 +203,11 @@ declare module SP {
             GetRecord(recordKey: number): IRecord;
             /** Get entry record with the specified key.
                 Entry record is a special type of record because it represents a new record that doesn't exist yet. */
-            GetEntryRecord(key): any;
+            GetEntryRecord(key: any): any;
             /** Determine if the specified record key identifies valid entry row. */
             IsEntryRecord(recordKey: number): boolean;
             /** Determine whether the specified cell is editable. */
-            IsCellEditable(record: IRecord, fieldKey: string, optPaneId?): boolean;
+            IsCellEditable(record: IRecord, fieldKey: string, optPaneId?: any): boolean;
             /** Adds one of builtin row state indicator icons into the row header.
                 Please pass one of the values of SP.JsGrid.RowHeaderStyleId
                 Row header is the leftmost gray column of the table. */
@@ -210,34 +220,34 @@ declare module SP {
             RemoveRowHeaderState(recordKey: number, rowHeaderStateId: string): void;
 
             GetCheckSelectionManager(): any;
-            UpdateProperties(propertyUpdates, changeName, optChangeKey?): any;
+            UpdateProperties(propertyUpdates: any, changeName: any, optChangeKey?: any): any;
             GetLastRecordKey(): string;
-            InsertProvisionalRecordBefore(beforeRecordKey: number, newRecord, initialValues): any;
-            InsertProvisionalRecordAfter(afterRecordKey: number, newRecord, initialValues): any;
+            InsertProvisionalRecordBefore(beforeRecordKey: number, newRecord: any, initialValues: any): any;
+            InsertProvisionalRecordAfter(afterRecordKey: number, newRecord: any, initialValues: any): any;
             IsProvisionalRecordKey(recordKey: number): boolean;
-            InsertRecordBefore(beforeRecordKey: number, newRecord, optChangeKey?): any;
-            InsertRecordAfter(afterRecordKey: number, newRecord, optChangeKey?): any;
-            InsertHiddenRecord(recordKey: number, changeKey, optAfterRecordKey?): any;
-            DeleteRecords(recordKeys, optChangeKey?): any;
-            IndentRecords(recordKeys, optChangeKey?): any;
-            OutdentRecords(recordKeys, optChangeKey?): any;
+            InsertRecordBefore(beforeRecordKey: number, newRecord: any, optChangeKey?: any): any;
+            InsertRecordAfter(afterRecordKey: number, newRecord: any, optChangeKey?: any): any;
+            InsertHiddenRecord(recordKey: number, changeKey: any, optAfterRecordKey?: any): any;
+            DeleteRecords(recordKeys: any, optChangeKey?: any): any;
+            IndentRecords(recordKeys: any, optChangeKey?: any): any;
+            OutdentRecords(recordKeys: any, optChangeKey?: any): any;
             ReorderRecords(beginRecordKey: number, endRecordKey: number, afterRecordKey: number, bSelectAfterwards: boolean): any;
-            GetContiguousRowSelectionWithoutEntryRecords(): { begin; end; keys };
-            CanMoveRecordsUpByOne(recordKeys): boolean;
-            CanMoveRecordsDownByOne(recordKeys): boolean;
-            MoveRecordsUpByOne(recordKeys): any;
-            MoveRecordsDownByOne(recordKeys): any;
-            GetReorderRange(recordKeys): any;
-            GetNodeExpandCollapseState(recordKey): any;
+            GetContiguousRowSelectionWithoutEntryRecords(): { begin: any; end: any; keys: any };
+            CanMoveRecordsUpByOne(recordKeys: any): boolean;
+            CanMoveRecordsDownByOne(recordKeys: any): boolean;
+            MoveRecordsUpByOne(recordKeys: any): any;
+            MoveRecordsDownByOne(recordKeys: any): any;
+            GetReorderRange(recordKeys: any): any;
+            GetNodeExpandCollapseState(recordKey: number): any;
             ToggleExpandCollapse(recordKey: number): void;
 
             /** Attach event handler to a particular event type */
             AttachEvent(eventType: JsGrid.EventType, fnOnEvent: { (args: IEventArgs): void }): void;
             /** Detach a previously set event handler */
-            DetachEvent(eventType: JsGrid.EventType, fnOnEvent): void;
+            DetachEvent(eventType: JsGrid.EventType, fnOnEvent: any): void;
 
             /** Set a delegate. Delegates are way to replace default functionality with custom one. */
-            SetDelegate(delegateKey: JsGrid.DelegateType, fn): void;
+            SetDelegate(delegateKey: JsGrid.DelegateType, fn: any): void;
             /** Get current delegate. */
             GetDelegate(delegateKey: JsGrid.DelegateType): any;
 
@@ -252,7 +262,7 @@ declare module SP {
 
             GetGanttZoomLevel(): any;
             SetGanttZoomLevel(level: any): void;
-            ScrollGanttToDate(date): void;
+            ScrollGanttToDate(date: any): void;
 
             /** Get top record view index.
                 You can then use GetRecordKeyByViewIndex to convert this value into the recordKey. */
@@ -274,10 +284,10 @@ declare module SP {
                 You can then use GetRecordKeyByViewIndex to convert this value into the recordKey. */
             GetTopRowIndex(): number;
 
-            GetOutlineLevel(record): any;
+            GetOutlineLevel(record: any): any;
             GetSplitterPosition(): any;
-            SetSplitterPosition(pos): void;
-            GetLeftColumnIndex(optPaneId?): any;
+            SetSplitterPosition(pos: any): void;
+            GetLeftColumnIndex(optPaneId?: any): any;
             EnsurePaneWidth(): void;
 
             /** Show a previously hidden column at a specified position.
@@ -287,10 +297,10 @@ declare module SP {
             HideColumn(columnKey: string): void;
             /** Update column descriptions */
             UpdateColumns(columnInfoCollection: ColumnInfoCollection): void;
-            GetColumns(optPaneId?): ColumnInfo[];
+            GetColumns(optPaneId?: string): ColumnInfo[];
             /** Get ColumnInfo object by fieldKey
                 @fieldKey when working with SharePoint data sources, fieldKey corresponds to field internal name */
-            GetColumnByFieldKey(fieldKey: string, optPaneId?): ColumnInfo;
+            GetColumnByFieldKey(fieldKey: string, optPaneId?: any): ColumnInfo;
             /** Adds a column, based on the specified grid field */
             AddColumn(columnInfo: ColumnInfo, gridField: GridField): void;
 
@@ -341,28 +351,28 @@ declare module SP {
             ScrollToAndExpandNextErrorOnRecord(minId?: number, recordKey?: number, fnFilter?: { (recordKey: number, fieldKey: string, id: number): boolean }, bDontExpand?: boolean): any;
 
             GetFocusedItem(): any;
-            SendKeyDownEvent(eventInfo:Sys.UI.DomEvent): any;
+            SendKeyDownEvent(eventInfo: Sys.UI.DomEvent): any;
             /** Moves cursor to entry record (the row that is used to add new records) */
             JumpToEntryRecord(): void;
 
-            SelectRowRange(rowIdx1, rowIdx2, bAppend, optPaneId?): void;
-            SelectColumnRange(colIdx1, colIdx2, bAppend, optPaneId?): void;
-            SelectCellRange(rowIdx1, rowIdx2, colIdx1, colIdx2, bAppend, optPaneId): void;
-            SelectRowRangeByKey(rowKey1, rowKey2, bAppend, optPaneId?): void;
-            SelectColumnRangeByKey(colKey1, colKey2, bAppend, optPaneId?): void;
-            SelectCellRangeByKey(recordKey1: string, recordKey2: string, colKey1, colKey2, bAppend, optPaneId?): void;
+            SelectRowRange(rowIdx1: number, rowIdx2: number, bAppend: boolean, optPaneId?: string): void;
+            SelectColumnRange(colIdx1: number, colIdx2: number, bAppend: boolean, optPaneId?: string): void;
+            SelectCellRange(rowIdx1: number, rowIdx2: number, colIdx1: number, colIdx2: number, bAppend: boolean, optPaneId?: string): void;
+            SelectRowRangeByKey(rowKey1: any, rowKey2: any, bAppend: boolean, optPaneId?: string): void;
+            SelectColumnRangeByKey(colKey1: any, colKey2: any, bAppend: boolean, optPaneId?: string): void;
+            SelectCellRangeByKey(recordKey1: string, recordKey2: string, colKey1: any, colKey2: any, bAppend: boolean, optPaneId?: string): void;
 
-            ChangeKeys(oldKey, newKey): void;
-            GetSelectedRowRanges(optPaneId?): any;
-            GetSelectedColumnRanges(optPaneId?): any;
-            GetSelectedRanges(optPaneId?): any;
-            MarkPropUpdateInvalid(recordKey: number, fieldKey, changeKey, optErrorMsg?): any;
+            ChangeKeys(oldKey: any, newKey: any): void;
+            GetSelectedRowRanges(optPaneId?: any): any;
+            GetSelectedColumnRanges(optPaneId?: any): any;
+            GetSelectedRanges(optPaneId?: any): any;
+            MarkPropUpdateInvalid(recordKey: number, fieldKey: any, changeKey: any, optErrorMsg?: any): any;
             GetCurrentChangeKey(): any;
             CreateAndSynchronizeToNewChangeKey(): any;
             CreateDataUpdateCmd(bUseCustomInitialUpdate: boolean): any;
-            IsChangeKeyApplied(changeKey): any;
-            GetChangeKeyForVersion(version): any;
-            TryReadPropForChangeKey(recordKey: number, fieldKey, changeKey): any;
+            IsChangeKeyApplied(changeKey: any): any;
+            GetChangeKeyForVersion(version: any): any;
+            TryReadPropForChangeKey(recordKey: number, fieldKey: any, changeKey: any): any;
             GetUnfilteredHierarchyMap(): any;
             GetHierarchyState(bDecompressGuidKeys: boolean): any;
             IsGroupingRecordKey(recordKey: number): boolean;
@@ -375,7 +385,7 @@ declare module SP {
             CopyToClipboard(): void;
             /** Paste data from clipboard into currently selected cells. */
             PasteFromClipboard(): void;
-            TryRestoreFocusAfterInsertOrDeleteColumns(origFocus): void;
+            TryRestoreFocusAfterInsertOrDeleteColumns(origFocus: any): void;
             /** Get undo manager for performing undo/redo operations programmatically. */
             GetUndoManager(): SP.JsGrid.CommandManager;
             /** Gets number of records visible in the current view, including the entry row. */
@@ -473,11 +483,11 @@ declare module SP {
         }
 
         export class RowHeaderState {
-            constructor(id: string, img: SP.JsGrid.Image, priority: SP.JsGrid.RowHeaderStatePriorities, tooltip: string, fnOnClick: { (eventInfo:Sys.UI.DomEvent, recordKey: number): void });
+            constructor(id: string, img: SP.JsGrid.Image, priority: SP.JsGrid.RowHeaderStatePriorities, tooltip: string, fnOnClick: { (eventInfo: Sys.UI.DomEvent, recordKey: number): void });
             GetId(): string;
             GetImg(): SP.JsGrid.Image;
             GetPriority(): SP.JsGrid.RowHeaderStatePriorities;
-            GetOnClick(): { (eventInfo:Sys.UI.DomEvent, recordKey: number): void };
+            GetOnClick(): { (eventInfo: Sys.UI.DomEvent, recordKey: number): void };
             GetTooltip(): string;
             toString(): string;
         }
@@ -494,7 +504,7 @@ declare module SP {
             bIsAnimated: boolean;
             /** Renders the image with specified alternative text and on-click handler.
                 If bHideTooltip == false, then alternative text is also shown as the tooltip (title attribute). */
-            Render(altText: string, clickFn: { (eventInfo:Sys.UI.DomEvent): void }, bHideTooltip: boolean): HTMLElement;
+            Render(altText: string, clickFn: { (eventInfo: Sys.UI.DomEvent): void }, bHideTooltip: boolean): HTMLElement;
         }
 
         export interface IEventArgs { }
@@ -529,8 +539,8 @@ declare module SP {
                 bCancelled: boolean;
             }
             export class Click implements IEventArgs {
-                constructor(eventInfo:Sys.UI.DomEvent, context: JsGrid.ClickContext, recordKey: number, fieldKey: string);
-                eventInfo:Sys.UI.DomEvent;
+                constructor(eventInfo: Sys.UI.DomEvent, context: JsGrid.ClickContext, recordKey: number, fieldKey: string);
+                eventInfo: Sys.UI.DomEvent;
                 context: JsGrid.ClickContext;
                 recordKey: number;
                 fieldKey: string;
@@ -546,14 +556,14 @@ declare module SP {
                 validationState: SP.JsGrid.ValidationState;
             }
             export class RecordInserted implements IEventArgs {
-                constructor(recordKey, recordIdx, afterRecordKey, changeKey);
+                constructor(recordKey: number, recordIdx: number, afterRecordKey: number, changeKey: JsGrid.IChangeKey);
                 recordKey: number;
                 recordIdx: number;
                 afterRecordKey: number;
                 changeKey: JsGrid.IChangeKey;
             }
             export class RecordDeleted implements IEventArgs {
-                constructor(recordKey, recordIdx, changeKey);
+                constructor(recordKey: number, recordIdx: number, changeKey: JsGrid.IChangeKey);
                 recordKey: number;
                 recordIdx: number;
                 changeKey: JsGrid.IChangeKey;
@@ -564,7 +574,7 @@ declare module SP {
                 bChecked: boolean;
             }
             export class OnCellErrorStateChanged implements IEventArgs {
-                constructor(recordKey, fieldKey, bAddingError, bCellCurrentlyHasError, bCellHadError, errorId);
+                constructor(recordKey: number, fieldKey: string, bAddingError: boolean, bCellCurrentlyHasError: boolean, bCellHadError: boolean, errorId: number);
                 recordKey: number;
                 fieldKey: string;
                 bAddingError: boolean;
@@ -573,7 +583,7 @@ declare module SP {
                 errorId: number;
             }
             export class OnRowErrorStateChanged implements IEventArgs {
-                constructor(recordKey, bAddingError, bErrorCurrentlyInRow, bRowHadError, errorId, message);
+                constructor(recordKey: number, bAddingError: boolean, bErrorCurrentlyInRow: boolean, bRowHadError: boolean, errorId: number, message: string);
                 recordKey: number;
                 bAddingError: boolean;
                 bErrorCurrentlyInRow: boolean;
@@ -588,8 +598,8 @@ declare module SP {
                 changeKey: JsGrid.IChangeKey
             }
             export class SingleCellClick implements IEventArgs {
-                constructor(eventInfo:Sys.UI.DomEvent, recordKey: number, fieldKey: string);
-                eventInfo:Sys.UI.DomEvent;
+                constructor(eventInfo: Sys.UI.DomEvent, recordKey: number, fieldKey: string);
+                eventInfo: Sys.UI.DomEvent;
                 recordKey: number;
                 fieldKey: string;
             }
@@ -606,8 +616,8 @@ declare module SP {
                 bAnyErrors: boolean;
             }
             export class SingleCellKeyDown implements IEventArgs {
-                constructor(eventInfo:Sys.UI.DomEvent, recordKey: number, fieldKey: string);
-                eventInfo:Sys.UI.DomEvent;
+                constructor(eventInfo: Sys.UI.DomEvent, recordKey: number, fieldKey: string);
+                eventInfo: Sys.UI.DomEvent;
                 recordKey: number;
                 fieldKey: string;
             }
@@ -694,11 +704,11 @@ declare module SP {
             widgetDockPressedStyle: IStyleType.Widget;
             RegisterCellStyle(styleId: string, cellStyle: IStyleType.Cell): void;
             GetCellStyle(styleId: string): IStyleType.Cell;
-            UpdateSplitterStyleFromCss(styleObject: IStyleType.Splitter, splitterStyleNameCollection): void;
-            UpdateHeaderStyleFromCss(styleObject: IStyleType.Header, headerStyleNameCol): void;
-            UpdateGridPaneStyleFromCss(styleObject: IStyleType.GridPane, gridStyleNameCollection): void;
-            UpdateDefaultCellStyleFromCss(styleObject: IStyleType.Cell, cssClass): void;
-            UpdateGroupStylesFromCss(styleObject, prefix): void;
+            UpdateSplitterStyleFromCss(styleObject: IStyleType.Splitter, splitterStyleNameCollection: any): void;
+            UpdateHeaderStyleFromCss(styleObject: IStyleType.Header, headerStyleNameCol: any): void;
+            UpdateGridPaneStyleFromCss(styleObject: IStyleType.GridPane, gridStyleNameCollection: any): void;
+            UpdateDefaultCellStyleFromCss(styleObject: IStyleType.Cell, cssClass: string): void;
+            UpdateGroupStylesFromCss(styleObject: IStyleType.Cell, prefix: string): void;
         }
 
         export interface IStyleType { }
@@ -709,7 +719,7 @@ declare module SP {
                 innerBorderColor: any;
                 backgroundColor: any;
             }
-            export interface SplitterHandle extends IStyleType{
+            export interface SplitterHandle extends IStyleType {
                 outerBorderColor: any;
                 leftInnerBorderColor: any;
                 innerBorderColor: any;
@@ -813,17 +823,17 @@ declare module SP {
                 Widget: IStyleType.Widget;
             };
 
-            static SetRTL: { (rtlObject): void; };
+            static SetRTL: { (rtlObject: any): void; };
             static MakeJsGridStyleManager: { (): IStyleManager };
-            static CreateStyleFromCss: { (styleType: IStyleType, cssStyleName: string, optExistingStyle, optClassId): any; };
+            static CreateStyleFromCss: { (styleType: IStyleType, cssStyleName: string, optExistingStyle?: any, optClassId?: any): any; };
             static CreateStyle: { (styleType: IStyleType, styleProps: any): any; };
-            static MergeCellStyles: { (majorStyle, minorStyle): any; };
-            static ApplyCellStyle: { (td, style): void; };
-            static ApplyRowHeaderStyle: { (domObj, style, fnGetHeaderSibling): void; };
-            static ApplyCornerHeaderBorderStyle: { (domObj, colStyle, rowStyle): void; };
-            static ApplyHeaderInnerBorderStyle: { (domObj, bIsRowHeader, headerObject): void };
-            static ApplyColumnContextMenuStyle: { (domObj, style): void };
-            static ApplySplitterStyle: { (domObj, style): void };
+            static MergeCellStyles: { (majorStyle: any, minorStyle: any): any; };
+            static ApplyCellStyle: { (td: HTMLTableCellElement, style: any): void; };
+            static ApplyRowHeaderStyle: { (domObj: HTMLElement, style: any, fnGetHeaderSibling: Function): void; };
+            static ApplyCornerHeaderBorderStyle: { (domObj: HTMLElement, colStyle: any, rowStyle: any): void; };
+            static ApplyHeaderInnerBorderStyle: { (domObj: HTMLElement, bIsRowHeader: any, headerObject: any): void };
+            static ApplyColumnContextMenuStyle: { (domObj: HTMLElement, style: any): void };
+            static ApplySplitterStyle: { (domObj: HTMLElement, style: any): void };
             static MakeBorderString: { (width: number, style: string, color: string): string };
             static GetCellStyleDefaultBackgroundColor: { (): string };
 
@@ -934,7 +944,7 @@ declare module SP {
             constructor(gridFieldMap: any, keyColumnName: string, fnGetPropType: any);
             gridFieldMap: any;
             /** Create a new record */
-            MakeRecord(dataPropMap, localizedPropMap, bKeepRawData): IRecord;
+            MakeRecord(dataPropMap: any, localizedPropMap: any, bKeepRawData: boolean): IRecord;
         }
 
         export interface IPropertyBase {
@@ -948,12 +958,12 @@ declare module SP {
         }
 
         export class Property {
-            static MakeProperty(dataValue: any, localizedValue: string, bHasDataValue: boolean, bHasLocalizedValue: boolean, propType): IPropertyBase;
-            static MakePropertyFromGridField(gridField: any, dataValue: any, localizedVal: string, optPropType?): IPropertyBase;
+            static MakeProperty(dataValue: any, localizedValue: string, bHasDataValue: boolean, bHasLocalizedValue: boolean, propType: any): IPropertyBase;
+            static MakePropertyFromGridField(gridField: any, dataValue: any, localizedVal: string, optPropType?: any): IPropertyBase;
         }
 
         export class GridField {
-            constructor(key: string, hasDataValue: boolean, hasLocalizedValue: boolean, textDirection, defaultCellStyleId, editMode, dateOnly, csrInfo);
+            constructor(key: string, hasDataValue: boolean, hasLocalizedValue: boolean, textDirection: any, defaultCellStyleId: any, editMode: any, dateOnly: any, csrInfo: any);
             key: string;
             hasDataValue: boolean;
             hasLocalizedValue: boolean;
@@ -963,7 +973,7 @@ declare module SP {
             GetEditMode(): any;
             SetEditMode(mode: any): void;
             GetDefaultCellStyleId(): any;
-            CompareSingleDataEqual(dataValue1, dataValue2): boolean;
+            CompareSingleDataEqual(dataValue1: any, dataValue2: any): boolean;
             GetPropType(): any;
             GetSingleValuePropType(): any;
             GetMultiValuePropType(): any;
@@ -984,7 +994,7 @@ declare module SP {
 
         export interface IEditControlGridContext extends IEditActorGridContext {
             OnActivateActor(): void;
-            OnDeactivateActor():void;
+            OnDeactivateActor(): void;
         }
 
         export interface IPropertyType {
@@ -1085,11 +1095,11 @@ declare module SP {
 
 
             export class Utils {
-                static RegisterDisplayControl(name: string, singleton, requiredFunctionNames: string[]);
-                static RegisterEditControl(name: string, factory: (gridContext: IEditControlGridContext, gridTextInputElement:HTMLElement) => IEditControl, requiredFunctionNames: string[]);
-                static RegisterWidgetControl(name: string, factory: { (ddContext): IPropertyType; }, requiredFunctionNames: string[]);
+                static RegisterDisplayControl(name: string, singleton: any, requiredFunctionNames: string[]): void;
+                static RegisterEditControl(name: string, factory: (gridContext: IEditControlGridContext, gridTextInputElement: HTMLElement) => IEditControl, requiredFunctionNames: string[]): void;
+                static RegisterWidgetControl(name: string, factory: { (ddContext: any): IPropertyType; }, requiredFunctionNames: string[]): void;
 
-                static UpdateDisplayControlForPropType(propTypeName: string, displayControlType: string);
+                static UpdateDisplayControlForPropType(propTypeName: string, displayControlType: string): void;
             }
         }
 
@@ -1104,17 +1114,17 @@ declare module SP {
 
         export module Internal {
             export class DiffTracker {
-                constructor(objBag, fnGetChange);
+                constructor(objBag: any, fnGetChange: Function);
                 ExternalAPI: {
                     AnyChanges(): boolean;
                     ChangeKeySliceInfo(): any;
                     ChangeQuery(): any;
                     EventSliceInfo(): any;
-                    GetChanges(optStartEvent, optEndEvent, optRecordKeys, bFirstStartEvent: boolean, bStartInclusive: boolean, bEndInclusive: boolean, bIncludeInvalidPropUpdates: boolean, bLastEndEvent: boolean): any;
-                    GetChangesAsJson(changeQuery, optfnPreProcessUpdateForSerialize?): string;
-                    GetUniquePropertyChanges(changeQuery, optfnFilter): any;
-                    RegisterEvent(changeKey: IChangeKey, eventObject): void;
-                    UnregisterEvent(changeKey: IChangeKey, eventObject): void;
+                    GetChanges(optStartEvent: any, optEndEvent: any, optRecordKeys: any, bFirstStartEvent: boolean, bStartInclusive: boolean, bEndInclusive: boolean, bIncludeInvalidPropUpdates: boolean, bLastEndEvent: boolean): any;
+                    GetChangesAsJson(changeQuery: any, optfnPreProcessUpdateForSerialize?: any): string;
+                    GetUniquePropertyChanges(changeQuery: any, optfnFilter?: any): any;
+                    RegisterEvent(changeKey: IChangeKey, eventObject: any): void;
+                    UnregisterEvent(changeKey: IChangeKey, eventObject: any): void;
                 };
                 Clear(): void;
                 NotifySynchronizeToChange(changeKey: IChangeKey): void;
@@ -1130,21 +1140,21 @@ declare module SP {
         }
 
         export interface IEditActorCellContext {
-            propType:IPropertyType;
-            originalValue:IValue;
-            record:IRecord;
-            column:ColumnInfo;
-            field:GridField;
-            fieldKey:string;
-            cellExpandSpace:{ left:number; top:number; fight:number; bottom:number; };
-            SetCurrentValue(value): void;
+            propType: IPropertyType;
+            originalValue: IValue;
+            record: IRecord;
+            column: ColumnInfo;
+            field: GridField;
+            fieldKey: string;
+            cellExpandSpace: { left: number; top: number; fight: number; bottom: number; };
+            SetCurrentValue(value: any): void;
         }
 
-        export interface IEditControlCellContext extends IEditActorCellContext{
+        export interface IEditControlCellContext extends IEditActorCellContext {
             cellWidth: number;
             cellHeight: number;
             cellStyle: any; //TODO: Determine correct type
-            cellRect:any;
+            cellRect: any;
             NotifyExpandControl(): void;
             NotifyEditComplete(): void;
             Show(element: HTMLElement): void;
@@ -1153,26 +1163,26 @@ declare module SP {
 
 
         export module EditControl {
-            
+
         }
 
         export interface IEditControl {
             SupportedWriteMode?: SP.JsGrid.EditActorWriteType;
             SupportedReadMode?: SP.JsGrid.EditActorReadType;
-            GetCellContext? (): IEditControlCellContext;
-            GetOriginalValue?():IValue;
-            SetValue?(value:IValue):void;
-            Dispose():void;
-            GetInputElement?():HTMLElement;
-            Focus?(eventInfo:Sys.UI.DomEvent):void;
-            BindToCell (cellContext: IEditControlCellContext):void;
-            OnBeginEdit (eventInfo: Sys.UI.DomEvent):void;
-            Unbind():void;
-            OnEndEdit():void;
-            OnCellMove?():void;
-            OnValueChanged?(newValue: IValue):void;
+            GetCellContext?(): IEditControlCellContext;
+            GetOriginalValue?(): IValue;
+            SetValue?(value: IValue): void;
+            Dispose(): void;
+            GetInputElement?(): HTMLElement;
+            Focus?(eventInfo: Sys.UI.DomEvent): void;
+            BindToCell(cellContext: IEditControlCellContext): void;
+            OnBeginEdit(eventInfo: Sys.UI.DomEvent): void;
+            Unbind(): void;
+            OnEndEdit(): void;
+            OnCellMove?(): void;
+            OnValueChanged?(newValue: IValue): void;
             IsCurrentlyUsingGridTextInputElement?(): boolean;
-            SetSize?(width:number, height:number):void;
+            SetSize?(width: number, height: number): void;
         }
 
     }
