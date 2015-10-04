@@ -105,7 +105,11 @@ Currently we have the following samples:
 
 Samples project is made as a SharePoint-hosted app. Download project, open .sln file and run.
 
+<<<<<<< HEAD
 ##Authors
+=======
+#Authors
+>>>>>>> origin/master
 Stanislav Vyshchepan is SharePoint Server MVP, author, speaker, trainer, CEO and founder of own consulting company in Russia.
 
 * Blog: http://gandjustas.blogspot.ru (in Russian)
