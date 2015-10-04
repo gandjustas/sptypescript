@@ -1,0 +1,28 @@
+{
+  "name": "typescripttemplates",
+  "version": "0.0.0",
+  "homepage": "https://github.com/gandjustas/sptypescript",
+  "authors": [
+    "Stanislav Vyschepan"
+  ],
+  "description": "SharePoint TypeScript Client-Side Rendering (CSR) templates and helpers",
+  "main": "SPTypeScript/Extensions/typescripttemplates.ts",
+  "moduleType": [],
+  "keywords": [
+    "sharepoint",
+    "typescript",
+    "CSR"
+  ],
+  "license": "MS-PL",
+  "ignore": [   
+    "node_modules",
+    "bower_components",
+    "definitions",
+    "*",
+    "!SPTypeScript",
+    "SPTypeScript/*",
+    "SPTypeScript/Entensions",
+    "SPTypeScript/Entensions/*",
+    "SPTypeScript/Entensions/typescripttemplates.ts",
+  ]
+}

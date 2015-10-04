@@ -1,3 +1,4 @@
+SPTypeScript/.vs/*
 SPTypeScript/*.suo
 SPTypeScript/*.csproj.user
 SPTypeScript/Sample_*/*.js.map
@@ -9,3 +10,7 @@ SPTypeScript/bin/*
 SPTypeScript/pkg/*
 SPTypeScript/pkgobj/*
 SPTypeScript/packages/*
+SPTypeScript/*.cache
+node_modules
+release
+*.nupkg

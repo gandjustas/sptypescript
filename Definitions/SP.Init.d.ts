@@ -2,6 +2,7 @@
 declare var _spBodyOnLoadFunctions: Function[];
 declare var _spBodyOnLoadFunctionNames: string[];
 declare var _spBodyOnLoadCalled: boolean;
+declare var Strings:any;
 
 declare module SP {
     export class SOD {

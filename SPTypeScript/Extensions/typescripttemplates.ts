@@ -1,6 +1,4 @@
-﻿
-
-/** Lightweight client-side rendering template overrides.*/
+﻿/** Lightweight client-side rendering template overrides.*/
 module CSR {
 
     export interface UpdatedValueCallback {

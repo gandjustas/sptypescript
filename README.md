@@ -22,8 +22,16 @@ If you are using Visual Studio SharePoint projects you need to enable TypeScript
 4. Don't forget to set "Deployment Type" to "No Deployment" for **.d.ts** files
 
 ## typescripttemplates.ts 
-TypeScript Templates is a set of Cleint-Side Rendering (CSR) templates and helper functions to change behaviour of standard forms.
-Grab the file [typescripttemplates.ts](SPTypeScript/Extensions/typescripttemplates.ts)
+TypeScript Templates is a set of Client-Side Rendering (CSR) templates and helper functions to change behaviour of standard forms.
+Install using NuGet
+```powershell
+PM> Install-Package typescripttemplates
+```
+
+or using bower
+```bat
+bower install typescripttemplates --save
+```
 
 ##Definitions coverage
 1. JavaScript Side Object Model (JSOM) core classes

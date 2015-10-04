@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"declaration": true
+	},
+	"files": [
+		"SPTypeScript/Extensions/typescripttemplates.ts",
+		"SPTypeScript/Scripts/typings/sharepoint/SharePoint.d.ts",
+		"SPTypeScript/Scripts/typings/angularjs/angular.d.ts",
+		"SPTypeScript/Scripts/typings/knockout/knockout.d.ts"
+	]
+}
