@@ -12,5 +12,6 @@ SPTypeScript/pkgobj/*
 SPTypeScript/packages/*
 SPTypeScript/*.cache
 node_modules
+bower_components
 release
 *.nupkg

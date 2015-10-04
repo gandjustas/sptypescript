@@ -21,8 +21,8 @@
     "*",
     "!SPTypeScript",
     "SPTypeScript/*",
-    "SPTypeScript/Entensions",
+    "!SPTypeScript/Entensions",
     "SPTypeScript/Entensions/*",
-    "SPTypeScript/Entensions/typescripttemplates.ts"
+    "!SPTypeScript/Entensions/typescripttemplates.ts"
   ]
 }
