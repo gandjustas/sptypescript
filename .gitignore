@@ -1,7 +1,8 @@
-*.suo
-*.csproj.user
-*.js.map
-obj/*
-bin/*
-pkg/*
-pkgobj/*
+SPTypeScript/*.suo
+SPTypeScript/*.csproj.user
+SPTypeScript/Sample_*/*.js.map
+SPTypeScript/Sample_*/*.js
+SPTypeScript/obj/*
+SPTypeScript/bin/*
+SPTypeScript/pkg/*
+SPTypeScript/pkgobj/*
