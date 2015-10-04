@@ -2,6 +2,8 @@ SPTypeScript/*.suo
 SPTypeScript/*.csproj.user
 SPTypeScript/Sample_*/*.js.map
 SPTypeScript/Sample_*/*.js
+SPTypeScript/Extensions/*.js.map
+SPTypeScript/Extensions/*.js
 SPTypeScript/obj/*
 SPTypeScript/bin/*
 SPTypeScript/pkg/*
