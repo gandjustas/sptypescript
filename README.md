@@ -107,14 +107,16 @@ Samples project is made as a SharePoint-hosted app. Download project, open .sln 
 
 #Authors
 Stanislav Vyshchepan is SharePoint Server MVP, author, speaker, trainer, CEO and founder of own consulting company in Russia.
-Blog: http://gandjustas.blogspot.ru (in Russian)
-Twitter: @gandjustas
-E-mail: stanislav.v@outlook.com
-Company site: http://vnextsoft.ru
+
+* Blog: http://gandjustas.blogspot.ru (in Russian)
+* Twitter: @gandjustas
+* E-mail: stanislav.v@outlook.com
+* Company site: http://vnextsoft.ru
 
 Andrey Markeev is SharePoint Server MVP, online expert, active blogger, published author, frequent speaker. He works as a Senior SharePoint Consultant at NED Software Consulting Oy (Helsinki, Finland).
-Blog: http://markeev.com
-Twitter: @amarkeev
+
+* Blog: http://markeev.com
+* Twitter: @amarkeev
 
 
 
