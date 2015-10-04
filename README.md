@@ -83,7 +83,8 @@ Grab the file [typescripttemplates.ts](SPTypeScript/Extensions/typescripttemplat
 ##Samples
 Besides the definitions, the project also contains many great samples of SharePoint JSOM usage. No doubt, all of them are made with TypeScript!
 
-Currently we have the following examples:
+Currently we have the following samples:
+
 1. JSOM: Basic tasks in SharePoint using JSOM with TypeScript
 2. JSOM: Working with taxonomy with TypeScript
 3. mQuery: Sample dynamic table
