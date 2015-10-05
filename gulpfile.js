@@ -99,7 +99,6 @@ gulp.task('nuget', ['clean','build'], function() {
     return nuget
         .pack({
             spec: 'typescripttemplates.nuspec',
-            basePath: 'release', // Specify the staging folder as the base path
             version: args.buildVersion
         })
         .then(function() { return nuget.push('*.nupkg'); });
