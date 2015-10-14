@@ -700,6 +700,8 @@ declare function CoreRender(template: any, context: any): string;
 declare module SPClientForms {
     module ClientValidation {
         export class ValidationResult {
+			errorMessage: string;
+			validationError: boolean;
             constructor(hasErrors: boolean, errorMsg: string);
         }
 
