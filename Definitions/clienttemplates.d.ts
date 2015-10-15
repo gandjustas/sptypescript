@@ -480,7 +480,7 @@ declare module SPClientTemplates {
     export interface Group {
         Items: Item[];
     }
-    type RenderCallback = (ctx: RenderContext) => void;
+    type RenderCallback = (ctx: ContextInfo) => void;
 
     export interface RenderContext {
         BaseViewID?: number;
