@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Sample_CustomJsGrid">
+    <File Path="Sample_CustomJsGrid\Default.aspx" Url="Sample_CustomJsGrid/Default.aspx" ReplaceContent="TRUE" />
+    <File Path="Sample_CustomJsGrid\App.ts" Url="Sample_CustomJsGrid/App.ts" ReplaceContent="TRUE" />
+    <File Path="Sample_CustomJsGrid\App.js" Url="Sample_CustomJsGrid/App.js" ReplaceContent="TRUE" />
+    <File Path="Sample_CustomJsGrid\App.js.map" Url="Sample_CustomJsGrid/App.js.map" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

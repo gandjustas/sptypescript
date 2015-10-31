@@ -47,6 +47,9 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Sample_CustomJsGrid\App.js" />
+    <Content Include="Sample_CustomJsGrid\Default.aspx" />
+    <Content Include="Sample_CustomJsGrid\Elements.xml" />
     <Content Include="Sample_WhoIsWebPart\Part.min.js">
       <DependentUpon>Part.js</DependentUpon>
     </Content>
@@ -59,6 +62,10 @@
     </None>
     <None Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.min.js.map">
       <DependentUpon>CSRListView.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_CustomJsGrid\App.js.map" />
+    <None Include="Sample_CustomJsGrid\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{fd445701-c76f-438e-9fd5-88f4c6246d6e}</SharePointProjectItemId>
     </None>
     <None Include="Sample_WorkflowServices\WorkflowServices.min.js.map">
       <DependentUpon>WorkflowServices.min.js</DependentUpon>
@@ -246,6 +253,7 @@
     <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
     </None>
+    <TypeScriptCompile Include="Sample_CustomJsGrid\App.ts" />
     <TypeScriptCompile Include="Scripts\typings\microsoft-ajax\microsoft.ajax.d.ts" />
     <TypeScriptCompile Include="Sample_AngularForm\AngularFormFiles\AngularForm.ts" />
     <TypeScriptCompile Include="Sample_CascadedDropdown\FieldCascadedLookup.ts" />
@@ -621,7 +629,7 @@
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptGeneratesDeclarations>True</TypeScriptGeneratesDeclarations>
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>

@@ -13,6 +13,7 @@ tsd install sharepoint --save
 ```
 
 If you are using Visual Studio SharePoint projects you need to enable TypeScript build actions:
+
 1. Edit csproj source file (right-click on your project in VS -> Unload project, right click again -> Edit YourProject.csproj)
 2. Include the following code: 
 ```xml

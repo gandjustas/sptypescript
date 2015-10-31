@@ -320,7 +320,7 @@ declare module SP {
 
                 public getAllTerms(): NavigationTermCollection;
 
-                public findTermForUrl(usr: string): NavigationTerm;
+                public findTermForUrl(url: string): NavigationTerm;
 
                 static getAsResolvedByWeb(context: ClientContext, termSet: Taxonomy.TermSet, web: Web, siteMapProviderName: string): NavigationTermSet;
                 static getAsResolvedByView(context: ClientContext, termSet: Taxonomy.TermSet, view: NavigationTermSetView): NavigationTermSet;
