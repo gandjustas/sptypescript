@@ -480,7 +480,7 @@ declare module SPClientTemplates {
     export interface Group {
         Items: Item[];
     }
-    type RenderCallback = (ctx: RenderContext) => void;
+    type RenderCallback = (ctx: ContextInfo) => void;
 
     export interface RenderContext {
         BaseViewID?: number;
@@ -700,6 +700,8 @@ declare function CoreRender(template: any, context: any): string;
 declare module SPClientForms {
     module ClientValidation {
         export class ValidationResult {
+			errorMessage: string;
+			validationError: boolean;
             constructor(hasErrors: boolean, errorMsg: string);
         }
 
