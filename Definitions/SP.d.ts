@@ -1210,8 +1210,8 @@ declare module SP {
         get_hidden(): boolean;
         set_hidden(value: boolean): void;
         get_id(): SP.ContentTypeId;
-        get_jSLink(): string;
-        set_jSLink(value: string): void;
+        get_jsLink(): string;
+        set_jsLink(value: string): void;
         get_name(): string;
         set_name(value: string): void;
         get_newFormTemplateName(): string;
@@ -1435,8 +1435,8 @@ declare module SP {
         get_indexed(): boolean;
         set_indexed(value: boolean): void;
         get_internalName(): string;
-        get_jSLink(): string;
-        set_jSLink(value: string): void;
+        get_jsLink(): string;
+        set_jsLink(value: string): void;
         get_readOnlyField(): boolean;
         set_readOnlyField(value: boolean): void;
         get_required(): boolean;
@@ -3027,8 +3027,8 @@ declare module SP {
         set_includeRootFolder(value: boolean): void;
         get_viewJoins(): string;
         set_viewJoins(value: string): void;
-        get_jSLink(): string;
-        set_jSLink(value: string): void;
+        get_jsLink(): string;
+        set_jsLink(value: string): void;
         get_listViewXml(): string;
         set_listViewXml(value: string): void;
         get_method(): string;
