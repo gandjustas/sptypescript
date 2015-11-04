@@ -70,10 +70,6 @@
     <None Include="Sample_WorkflowServices\WorkflowServices.min.js.map">
       <DependentUpon>WorkflowServices.min.js</DependentUpon>
     </None>
-    <None Include="Scripts\typings\sharepoint\SharePoint.d.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SharePoint.d.ts</LastGenOutput>
-    </None>
     <None Include="Extensions\CSOMPromise.js.map">
       <DependentUpon>CSOMPromise.ts</DependentUpon>
     </None>
@@ -260,11 +256,6 @@
     <TypeScriptCompile Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.ts" />
     <TypeScriptCompile Include="Sample_CSRCustomLayout\NewForm.ts" />
     <TypeScriptCompile Include="Sample_CSRTabs\CSRTabs.ts" />
-    <TypeScriptCompile Include="Scripts\typings\sharepoint\SharePoint.d.ts">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SharePoint.d.tt</DependentUpon>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Sample_AutoFill\autofill.ts" />
     <TypeScriptCompile Include="Sample_Animation\Animation.ts" />
     <Content Include="Sample_AngularForm\AngularFormFiles\AngularForm.html" />
@@ -512,6 +503,7 @@
     <TypeScriptCompile Include="Scripts\typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SharePoint.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Sample_CSRConditionalFormatting\ConditionalFormattingTasksList\SharePointProjectItem.spdata">

@@ -1,3 +1,4 @@
+/// <binding BeforeBuild='concat-definitions' />
 var gulp = require('gulp');
 var ts = require('gulp-typescript');
 var removeLines = require('gulp-delete-lines');
@@ -28,6 +29,7 @@ var definitions = [
     "definitions/SP.DocumentManagement.d.ts",
     "definitions/SP.UI.ApplicationPages.d.ts",
     "definitions/SP.UI.d.ts",
+    "definitions/SP.Ribbon.d.ts",
     "definitions/SP.UI.Controls.d.ts",
     "definitions/SP.UserProfiles.d.ts",
     "definitions/SP.Utilities.d.ts",

@@ -1264,8 +1264,8 @@ declare module SP {
 
         export class StaticDataSource {
             constructor(jsGridData: IGridData, optFnGetPropType?: Function);
-            AddColumn(gridField: SP.JsGrid.GridField, values: IValue[]);
-            RemoveColumn(fieldKey: string);
+            AddColumn(gridField: SP.JsGrid.GridField, values: IValue[]):void;
+            RemoveColumn(fieldKey: string):void;
             InitJsGridParams(optGridParams?: JsGridControl.Parameters): JsGridControl.Parameters;
         }
 

@@ -588,10 +588,10 @@ declare module SPClientTemplates {
         /** Template overrides */
         Templates?: TemplateOverrides;
 
-        /** Ñallbacks called before rendering starts. Can be function (ctx: RenderContext) => void or array of functions.*/
+        /** ï¿½allbacks called before rendering starts. Can be function (ctx: RenderContext) => void or array of functions.*/
         OnPreRender?: RenderCallback | RenderCallback[];
 
-        /** Ñallbacks called after rendered html inserted into DOM. Can be function (ctx: RenderContext) => void or array of functions.*/
+        /** ï¿½allbacks called after rendered html inserted into DOM. Can be function (ctx: RenderContext) => void or array of functions.*/
         OnPostRender?: RenderCallback | RenderCallback[];
 
         /** View style (SPView.StyleID) for which the templates should be applied. 
@@ -652,6 +652,10 @@ declare module SPClientTemplates {
         static BuildLookupValuesAsString(choiceArray: ClientLookupValue[], isMultiLookup: boolean, setGroupDesc: boolean): string;
         static ParseURLValue(value: string): ClientUrlValue;
         static GetFormContextForCurrentField(context: RenderContext_Form): ClientFormContext;
+        /** Returns ";#" */
+        static UserLookupDelimitString: string;
+        /** Returns ";#" */
+        static UserMultiValueDelimitString:string;
     }
 
     export class ClientFormContext {
@@ -781,6 +785,7 @@ declare function SPFieldDateTime_Display(ctx: SPClientTemplates.RenderContext_Fi
 declare function SPFieldDateTime_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
 declare function SPFieldUrl_Display(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
 declare function SPFieldUrl_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+declare function SPFieldUser_Display(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
 declare function SPFieldUserMulti_Display(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
 declare function SPClientPeoplePickerCSRTemplate(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
 declare function SPFieldLookup_Display(ctx: SPClientTemplates.RenderContext_FieldInForm): string;

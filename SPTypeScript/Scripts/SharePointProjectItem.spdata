@@ -19,7 +19,5 @@
     <ProjectItemFile Source="typings\jqueryui\jqueryui.d.ts" Target="Scripts\typings\jqueryui\" Type="ElementFile" />
     <ProjectItemFile Source="typings\knockout\knockout.d.ts" Target="Scripts\typings\knockout\" Type="ElementFile" />
     <ProjectItemFile Source="typings\microsoft-ajax\microsoft.ajax.d.ts" Target="Scripts\typings\microsoft-ajax\" Type="ElementFile" />
-    <ProjectItemFile Source="typings\sharepoint\SharePoint.d.tt" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
-    <ProjectItemFile Source="typings\sharepoint\SharePoint.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
   </Files>
 </ProjectItem>
