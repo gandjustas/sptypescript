@@ -552,6 +552,8 @@ declare module SP {
         set_requestTimeout(value: number): void;
         executeQueryAsync(succeededCallback: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void, failedCallback: (sender: any, args: SP.ClientRequestFailedEventArgs) => void): void;
         executeQueryAsync(succeededCallback: (sender: any, args: SP.ClientRequestSucceededEventArgs) => void): void;
+        executeQueryAsync(succeededCallback: Function, failedCallback: Function): void;
+        executeQueryAsync(succeededCallback: Function): void;
         executeQueryAsync(): void;
         get_staticObjects(): any;
         castTo(obj: SP.ClientObject, type: any): SP.ClientObject;
