@@ -1,7 +1,9 @@
 {
+  "name": "sptypescript",
+  "version": "1.0.1",
   "devDependencies": {
     "del": "^2.0.2",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-delete-lines": "0.0.7",
     "gulp-flatten": "^0.2.0",
@@ -10,6 +12,13 @@
     "gulp-uglify": "^1.4.1",
     "merge2": "^0.3.6",
     "nuget-runner": "^0.1.6",
+    "typescript": "^2.0.6",
     "yargs": "^3.26.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gandjustas/sptypescript.git"
+  },
+  "private": true,
+  "license": "MIT"
 }

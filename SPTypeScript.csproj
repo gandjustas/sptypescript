@@ -1,0 +1,664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{47065B66-1DF4-4E5D-9D05-A9C4FBE84B65}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SPTypeScript</RootNamespace>
+    <AssemblyName>SPTypeScript</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetOfficeVersion>15.0</TargetOfficeVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{C1CDDADD-2546-481F-9697-4EA41081F2FC};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <IncludeAssemblyInPackage>False</IncludeAssemblyInPackage>
+    <ProjectMode>SharePointApp</ProjectMode>
+    <AppFeaturePartId>{da37a8e5-420c-43f2-9e56-e2fcae7fad7e}</AppFeaturePartId>
+    <WspPartId>{47e51839-1262-4291-a9d1-19646143f376}</WspPartId>
+    <CspkgPartId>{7a973685-bace-4eff-bcc0-a190effc86bf}</CspkgPartId>
+    <SqlPackagePartId>{8418c6b7-70b4-41bf-883a-6c9471b03877}</SqlPackagePartId>
+    <ActivePublishProfile />
+    <TypeScriptModuleKind>none</TypeScriptModuleKind>
+    <FileUpgradeFlags />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Extensions\sp-ts-csr.js">
+      <DependentUpon>sp-ts-csr.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CustomJsGrid\App.js" />
+    <Content Include="Sample_CustomJsGrid\Default.aspx" />
+    <Content Include="Sample_CustomJsGrid\Elements.xml" />
+    <Content Include="Sample_WhoIsWebPart\Part.min.js">
+      <DependentUpon>Part.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\Elements.xml" />
+    <None Include="Extensions\sp-ts-csr.js.map">
+      <DependentUpon>sp-ts-csr.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.min.js.map">
+      <DependentUpon>ConditionalFormatting.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.min.js.map">
+      <DependentUpon>CSRListView.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_CustomJsGrid\App.js.map" />
+    <None Include="Sample_CustomJsGrid\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{fd445701-c76f-438e-9fd5-88f4c6246d6e}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_WorkflowServices\WorkflowServices.min.js.map">
+      <DependentUpon>WorkflowServices.min.js</DependentUpon>
+    </None>
+    <None Include="Extensions\CSOMPromise.js.map">
+      <DependentUpon>CSOMPromise.ts</DependentUpon>
+    </None>
+    <None Include="Extensions\CSOMPromise.min.js.map">
+      <DependentUpon>CSOMPromise.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_AngularForm\AngularFormFiles\AngularForm.js.map">
+      <DependentUpon>AngularForm.ts</DependentUpon>
+    </None>
+    <None Include="Sample_AngularForm\AngularFormFiles\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{211cdec9-ad33-4c81-a275-7ac985081746}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_AngularForm\Sample_AngularFormInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{f3c4fc7f-2d0c-4d98-8602-8e3438f99118}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_AngularForm\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2516633c-a1dd-4b9a-b932-2b3a3a22f5cb}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_Animation\Animation.js.map">
+      <DependentUpon>Animation.ts</DependentUpon>
+    </None>
+    <None Include="Sample_Animation\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3a32b5d6-a282-447a-9b04-ac34cfd91133}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_AutoFill\autofill.js.map">
+      <DependentUpon>autofill.ts</DependentUpon>
+    </None>
+    <None Include="Sample_AutoFill\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b2bc5648-828d-4dd7-8044-e42f0b79a58f}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_BasicCSOMActions\AppUIEvents.js.map" />
+    <None Include="Sample_BasicCSOMActions\BasicTasksJSOM.min.js.map">
+      <DependentUpon>BasicTasksJSOM.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_BasicCSOMActions\ChromeLoader.js.map" />
+    <None Include="Sample_BasicCSOMActions\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{36cba84f-cd3b-408d-b7a4-fc2b2c8972e5}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CascadedDropdown\Details1\Details1Instance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d35be178-0a20-4d99-9789-c47b9fa255a7}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CascadedDropdown\Details1\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{07e50a69-be9f-48f6-8b7d-ee6e6680c36a}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CascadedDropdown\FieldCascadedLookup.js.map">
+      <DependentUpon>FieldCascadedLookup.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CascadedDropdown\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8a3b571c-5a6e-426b-bebe-f4083e433d01}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.js.map" />
+    <None Include="Sample_CSRCustomForm\CSRFormFields\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4212071f-17dd-4c7d-a8a7-b49e6a7e7f25}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRCustomForm\Sample_CSRCustomFormInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4b084cf1-936e-46ed-8774-1cdcb9532518}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRCustomForm\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{61bc6fe2-2093-4560-8f39-acacadbdba8d}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRCustomLayout\NewForm.js.map">
+      <DependentUpon>NewForm.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CSRCustomLayout\Sample_CSRCustomLayoutInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e04d06f9-0df8-4774-b9ce-6be518058f26}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRCustomLayout\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{c71340bd-4212-4813-aea1-5fb6b7708801}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRTabs\CSRTabs.js.map">
+      <DependentUpon>CSRTabs.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CSRTabs\CSRTabs.min.js.map">
+      <DependentUpon>CSRTabs.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_CSRTabs\ListWithTabsForm\ListWithTabsFormInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4a84f489-2b42-42e5-ad91-3dae9196b4b2}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRTabs\ListWithTabsForm\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e83fcfef-ee4e-4568-9358-6d09aaff0ad5}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRTabs\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{708e4402-b009-46a6-aee0-410c63c9a573}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingList\CustomFieldRenderingListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5b238187-3fc1-4816-a9f0-ed8acd2cae8a}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{230160de-7c37-47c0-885e-641b8b27b019}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js.map">
+      <DependentUpon>fieldsamples.visafield.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js.map">
+      <DependentUpon>fieldsamples.visafield.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{75124c56-69cb-479f-896e-b00d60008b41}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\DetailsList\DetailsListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5f2aa50d-acd4-492d-96a5-5f1f70275403}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\DetailsList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{c75a54fe-47b4-48dc-9735-1298472ef24a}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\FieldLookupSearch.js.map">
+      <DependentUpon>FieldLookupSearch.ts</DependentUpon>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\FieldLookupSearch.min.js.map">
+      <DependentUpon>FieldLookupSearch.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\MasterList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8b7ba033-7866-4904-b4a3-35f82937c0be}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_FieldLookupBySearch\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{89c303b5-fdb9-4de3-b9f2-f7ad6f06c29b}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_mQuery\mquery.js.map">
+      <DependentUpon>mquery.ts</DependentUpon>
+    </None>
+    <None Include="Sample_mQuery\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a700f00d-1afb-4055-bf4f-ff3c44fd3356}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_Publishing\publishing.js.map" />
+    <None Include="Sample_Publishing\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4e22ac66-7bed-4e41-a129-30f392061140}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_Reputation\ReputationModule\likes.js.map" />
+    <None Include="Sample_Reputation\ReputationModule\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d059f466-f807-4d8c-9744-82d2ea2f5786}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_Reputation\ReputationListWithLikes\ReputationListWithLikesInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2bae73bb-2e9d-45d8-8ff5-50a398c90675}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_Reputation\ReputationListWithLikes\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{83d37ff8-af0d-407f-ad40-98b49525e039}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_SearchCSOM\SearchCSOM\Search.js.map">
+      <DependentUpon>Search.ts</DependentUpon>
+    </None>
+    <None Include="Sample_SearchCSOM\SearchCSOM\Search.min.js.map">
+      <DependentUpon>Search.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_Social\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a5e6d115-1d70-4fc2-a237-5e9fa521413f}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_Social\Social.js.map">
+      <DependentUpon>Social.ts</DependentUpon>
+    </None>
+    <None Include="Sample_Taxonomy\Taxonomy\App.min.js.map">
+      <DependentUpon>App.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_UserProfiles\UserProfiles.min.js.map">
+      <DependentUpon>UserProfiles.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_WhoIsWebPart\Part.js.map">
+      <DependentUpon>Part.ts</DependentUpon>
+    </None>
+    <None Include="Sample_UserProfiles\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{11708b77-3db1-4de7-96e5-75df4d64b4c0}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_UserProfiles\UserProfiles.js.map">
+      <DependentUpon>UserProfiles.ts</DependentUpon>
+    </None>
+    <None Include="Sample_WhoIsWebPart\Part.min.js.map">
+      <DependentUpon>Part.min.js</DependentUpon>
+    </None>
+    <None Include="Sample_WhoIsWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2df0d68d-2b83-4a6e-8945-d3bdbd202738}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_WhoIsWebPart\WhoIsWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9ca75564-e101-4387-b7ef-89712504b7c0}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
+    </None>
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\autofill.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\callout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\clientpeoplepicker.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\clienttemplates.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\mQuery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\reputation.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\Search.ClientControl.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.BusinessData.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.DocumentManagement.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Init.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.JSGrid.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Policy.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Publishing.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.RequestExecutor.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Search.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Sharing.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Social.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Taxonomy.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.ApplicationPages.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.Controls.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UserProfiles.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Utilities.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.WebParts.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Workflow.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.WorkflowServices.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SPAnimation.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SPGantt.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SPO.d.ts" />
+    <TypeScriptCompile Include="Sample_CustomJsGrid\App.ts" />
+    <TypeScriptCompile Include="Scripts\typings\microsoft-ajax\microsoft.ajax.d.ts" />
+    <TypeScriptCompile Include="Sample_AngularForm\AngularFormFiles\AngularForm.ts" />
+    <TypeScriptCompile Include="Sample_CascadedDropdown\FieldCascadedLookup.ts" />
+    <TypeScriptCompile Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.ts" />
+    <TypeScriptCompile Include="Sample_CSRCustomLayout\NewForm.ts" />
+    <TypeScriptCompile Include="Sample_CSRTabs\CSRTabs.ts" />
+    <TypeScriptCompile Include="Sample_AutoFill\autofill.ts" />
+    <TypeScriptCompile Include="Sample_Animation\Animation.ts" />
+    <Content Include="Sample_AngularForm\AngularFormFiles\AngularForm.html" />
+    <Content Include="Sample_AngularForm\AngularFormFiles\AngularForm.js">
+      <DependentUpon>AngularForm.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_AngularForm\AngularFormFiles\Elements.xml" />
+    <Content Include="Sample_AngularForm\Elements.xml" />
+    <Content Include="Sample_AngularForm\Sample_AngularFormInstance\Elements.xml" />
+    <Content Include="Sample_AngularForm\Schema.xml" />
+    <Content Include="Sample_Animation\Animation.js">
+      <DependentUpon>Animation.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_Animation\Animation.min.js">
+      <DependentUpon>Animation.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_Animation\Default.aspx" />
+    <Content Include="Sample_Animation\Elements.xml" />
+    <Content Include="Sample_Animation\photo.jpg" />
+    <Content Include="Sample_AutoFill\autofill.js">
+      <DependentUpon>autofill.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_AutoFill\autofill.min.js">
+      <DependentUpon>autofill.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_AutoFill\Elements.xml" />
+    <Content Include="Sample_AutoFill\Page.aspx" />
+    <Content Include="Sample_BasicCSOMActions\AppUIEvents.js" />
+    <Content Include="Sample_BasicCSOMActions\ChromeLoader.js" />
+    <Content Include="Sample_CascadedDropdown\Details1\Details1Instance\Elements.xml" />
+    <Content Include="Sample_CascadedDropdown\Details1\Elements.xml" />
+    <Content Include="Sample_CascadedDropdown\Details1\Schema.xml" />
+    <Content Include="Sample_CascadedDropdown\Elements.xml" />
+    <Content Include="Sample_CascadedDropdown\FieldCascadedLookup.js">
+      <DependentUpon>FieldCascadedLookup.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRCustomForm\CSRFormFields\CSRFormField.js" />
+    <Content Include="Sample_CSRCustomForm\CSRFormFields\Elements.xml" />
+    <Content Include="Sample_CSRCustomForm\Elements.xml" />
+    <Content Include="Sample_CSRCustomForm\Sample_CSRCustomFormInstance\Elements.xml" />
+    <Content Include="Sample_CSRCustomForm\Schema.xml" />
+    <Content Include="Sample_CSRCustomLayout\Elements.xml" />
+    <Content Include="Sample_CSRCustomLayout\NewForm.js">
+      <DependentUpon>NewForm.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRCustomLayout\Sample_CSRCustomLayoutInstance\Elements.xml" />
+    <Content Include="Sample_CSRCustomLayout\Schema.xml" />
+    <Content Include="Sample_CSRTabs\CSRTabs.js">
+      <DependentUpon>CSRTabs.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRTabs\CSRTabs.min.js">
+      <DependentUpon>CSRTabs.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRTabs\Elements.xml" />
+    <Content Include="Sample_CSRTabs\ListWithTabsForm\Elements.xml" />
+    <Content Include="Sample_CSRTabs\ListWithTabsForm\Form.aspx" />
+    <Content Include="Sample_CSRTabs\ListWithTabsForm\ListWithTabsFormInstance\Elements.xml" />
+    <Content Include="Sample_CSRTabs\ListWithTabsForm\Schema.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\CustomFieldRenderingListInstance\Elements.xml" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\Elements.xml" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingList\Schema.xml" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\Elements.xml" />
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.js">
+      <DependentUpon>fieldsamples.visafield.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.min.js">
+      <DependentUpon>fieldsamples.visafield.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CustomFieldRendering\CustomFieldRenderingModule\fieldsamples.visafield.ts" />
+    <Content Include="Sample_FieldLookupBySearch\DetailsList\DetailsListInstance\Elements.xml" />
+    <Content Include="Sample_FieldLookupBySearch\DetailsList\Elements.xml" />
+    <Content Include="Sample_FieldLookupBySearch\DetailsList\Schema.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Sample_FieldLookupBySearch\Elements.xml" />
+    <TypeScriptCompile Include="Sample_FieldLookupBySearch\FieldLookupSearch.ts" />
+    <Content Include="Sample_FieldLookupBySearch\FieldLookupSearch.js">
+      <DependentUpon>FieldLookupSearch.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_FieldLookupBySearch\FieldLookupSearch.min.js">
+      <DependentUpon>FieldLookupSearch.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_FieldLookupBySearch\MasterList\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Sample_mQuery\Elements.xml" />
+    <TypeScriptCompile Include="Sample_mQuery\mquery.ts" />
+    <Content Include="Sample_mQuery\mquery.js">
+      <DependentUpon>mquery.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_mQuery\mquery.min.js">
+      <DependentUpon>mquery.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_mQuery\Page.aspx" />
+    <Content Include="Sample_Publishing\Default.aspx" />
+    <Content Include="Sample_Publishing\Elements.xml" />
+    <Content Include="Sample_Publishing\publishing.js" />
+    <Content Include="Sample_Reputation\ReputationModule\Elements.xml" />
+    <Content Include="Sample_Reputation\ReputationListWithLikes\Elements.xml" />
+    <Content Include="Sample_Reputation\ReputationListWithLikes\ReputationListWithLikesInstance\Elements.xml" />
+    <Content Include="Sample_Reputation\ReputationListWithLikes\Schema.xml" />
+    <Content Include="Sample_Reputation\ReputationModule\likes.js" />
+    <Content Include="Sample_Social\Default.aspx" />
+    <Content Include="Sample_Social\Elements.xml" />
+    <TypeScriptCompile Include="Sample_Publishing\publishing.ts" />
+    <TypeScriptCompile Include="Sample_Reputation\ReputationModule\likes.ts" />
+    <TypeScriptCompile Include="Sample_Social\Social.ts" />
+    <Content Include="Sample_Social\Social.js">
+      <DependentUpon>Social.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_Social\Social.min.js">
+      <DependentUpon>Social.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_WhoIsWebPart\Part.aspx" />
+    <Content Include="Sample_WhoIsWebPart\Part.css" />
+    <Content Include="Sample_WhoIsWebPart\Part.js">
+      <DependentUpon>Part.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_UserProfiles\UserProfiles.min.js">
+      <DependentUpon>UserProfiles.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_WhoIsWebPart\Elements.xml" />
+    <Content Include="Sample_WhoIsWebPart\WhoIsWebPart\Elements.xml">
+      <OpcRelationship>feature-elementmanifest</OpcRelationship>
+    </Content>
+    <Content Include="Sample_WorkflowServices\Default.aspx" />
+    <Content Include="Sample_WorkflowServices\Elements.xml" />
+    <TypeScriptCompile Include="Sample_WhoIsWebPart\Part.ts" />
+    <TypeScriptCompile Include="Sample_WorkflowServices\WorkflowServices.ts" />
+    <Content Include="Sample_WorkflowServices\WorkflowServices.js">
+      <DependentUpon>WorkflowServices.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_WorkflowServices\WorkflowServices.min.js">
+      <DependentUpon>WorkflowServices.ts</DependentUpon>
+    </Content>
+    <None Include="Sample_WorkflowServices\WorkflowServices.js.map">
+      <DependentUpon>WorkflowServices.ts</DependentUpon>
+    </None>
+    <None Include="Scripts\angular.min.js.map" />
+    <None Include="Scripts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8b3df834-5a92-4741-9bdf-e6ed7d09dbdc}</SharePointProjectItemId>
+    </None>
+    <None Include="SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{bdc98434-f9b7-46f7-ba2b-3af15e495ee4}</SharePointProjectItemId>
+    </None>
+    <TypeScriptCompile Include="Extensions\CSOMPromise.ts" />
+    <Content Include="Sample_BasicCSOMActions\BasicTasksJSOM.css" />
+    <Content Include="Extensions\CSOMPromise.js">
+      <DependentUpon>CSOMPromise.ts</DependentUpon>
+    </Content>
+    <Content Include="Extensions\CSOMPromise.min.js">
+      <DependentUpon>CSOMPromise.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_BasicCSOMActions\Account.html" />
+    <Content Include="Sample_BasicCSOMActions\BasicTasksJSOM.html" />
+    <Content Include="Sample_BasicCSOMActions\Contact.html" />
+    <Content Include="Sample_BasicCSOMActions\Help.html" />
+    <Content Include="Sample_BasicCSOMActions\Elements.xml" />
+    <None Include="Sample_Taxonomy\Taxonomy\App.js.map">
+      <DependentUpon>App.ts</DependentUpon>
+    </None>
+    <None Include="Sample_Taxonomy\Taxonomy\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{48120791-7cb1-4731-838f-0d0f92d35498}</SharePointProjectItemId>
+    </None>
+    <Content Include="Sample_SearchCSOM\SearchCSOM\Elements.xml" />
+    <Content Include="Sample_SearchCSOM\SearchCSOM\Search.aspx" />
+    <TypeScriptCompile Include="Sample_SearchCSOM\SearchCSOM\Search.ts" />
+    <Content Include="Sample_SearchCSOM\SearchCSOM\Search.js">
+      <DependentUpon>Search.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_SearchCSOM\SearchCSOM\Search.min.js">
+      <DependentUpon>Search.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_UserProfiles\Default.aspx" />
+    <Content Include="Sample_UserProfiles\Elements.xml" />
+    <TypeScriptCompile Include="Sample_UserProfiles\UserProfiles.ts" />
+    <Content Include="Sample_UserProfiles\UserProfiles.js">
+      <DependentUpon>UserProfiles.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="Sample_BasicCSOMActions\AppUIEvents.ts" />
+    <Content Include="Sample_BasicCSOMActions\BasicTasksJSOM.js">
+      <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="Sample_Taxonomy\Taxonomy\App.ts" />
+    <Content Include="Sample_Taxonomy\Taxonomy\App.js">
+      <DependentUpon>App.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_Taxonomy\Taxonomy\App.min.js">
+      <DependentUpon>App.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_Taxonomy\Taxonomy\Default.aspx" />
+    <Content Include="Sample_Taxonomy\Taxonomy\Elements.xml" />
+    <Content Include="Sample_BasicCSOMActions\BasicTasksJSOM.min.js">
+      <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="Sample_BasicCSOMActions\ChromeLoader.ts" />
+    <TypeScriptCompile Include="Sample_BasicCSOMActions\BasicTasksJSOM.ts" />
+    <Content Include="Sample_BasicCSOMActions\Shared Documents\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Sample_BasicCSOMActions\Announcements\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{cf975992-f191-4bab-a103-ee84b785dad5}</SharePointProjectItemId>
+    </None>
+    <None Include="Extensions\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{739dd4d6-6694-4f26-8ed0-833a61ddff80}</SharePointProjectItemId>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Pages\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{fbba0cef-9361-4eb5-8a07-5f8da3fa32e1}</SharePointProjectItemId>
+    </None>
+    <Content Include="Sample_BasicCSOMActions\Announcements\Elements.xml" />
+    <Content Include="Extensions\Elements.xml" />
+    <None Include="Sample_SearchCSOM\SearchCSOM\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{87e47fe2-7d8d-43ad-a94c-536d900afc6a}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_BasicCSOMActions\BasicTasksJSOM.js.map">
+      <DependentUpon>BasicTasksJSOM.ts</DependentUpon>
+    </None>
+    <None Include="Sample_BasicCSOMActions\Shared Documents\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e9d51327-79bf-406c-b4e7-3817e23781c6}</SharePointProjectItemId>
+    </None>
+    <TypeScriptCompile Include="Extensions\sp-ts-csr.ts" />
+    <Content Include="Pages\Elements.xml" />
+    <Content Include="Pages\Default.aspx" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-resource.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-route.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-scenario.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Sample_CSRConditionalFormatting\ConditionalFormattingTasksList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3d7caf3c-c8fc-49a7-b77f-77df4042be9c}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.js.map">
+      <DependentUpon>ConditionalFormatting.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{a0bc9222-7a6f-4ac4-851f-dd4b731d3228}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRComplexityField\CustomFieldList\CustomFieldListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{32bfcecd-b8ac-4de0-8191-36befc4a6465}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRComplexityField\CustomFieldList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{082e378d-45ce-472d-99cd-080d1d7797ec}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRComplexityField\CSRField.js.map">
+      <DependentUpon>CSRField.ts</DependentUpon>
+    </None>
+    <None Include="Sample_CSRComplexityField\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{01cf65cc-a0b9-4386-933a-8984f447152e}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRListView\CustomList\CustomListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{f53232d3-911f-479d-8797-1449555f22c4}</SharePointProjectItemId>
+    </None>
+    <None Include="Sample_CSRListView\CustomList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b4f9c375-20e1-480f-a262-38e1c764b7e0}</SharePointProjectItemId>
+    </None>
+    <Content Include="Sample_CSRConditionalFormatting\ConditionalFormattingTasksList\Elements.xml" />
+    <TypeScriptCompile Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.ts" />
+    <Content Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.js">
+      <DependentUpon>ConditionalFormatting.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\ConditionalFormatting.min.js">
+      <DependentUpon>ConditionalFormatting.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRConditionalFormatting\Scripts_ConditionalFormattingList\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Sample_CSRComplexityField\CustomFieldList\CustomFieldListInstance\Elements.xml" />
+    <Content Include="Sample_CSRComplexityField\CustomFieldList\Elements.xml" />
+    <Content Include="Sample_CSRComplexityField\CustomFieldList\Schema.xml" />
+    <TypeScriptCompile Include="Sample_CSRComplexityField\CSRField.ts" />
+    <Content Include="Sample_CSRComplexityField\CSRField.js">
+      <DependentUpon>CSRField.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRComplexityField\CSRField.min.js">
+      <DependentUpon>CSRField.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRComplexityField\Elements.xml" />
+    <Content Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.js.map">
+      <DependentUpon>CSRListView.ts</DependentUpon>
+    </Content>
+    <None Include="Sample_CSRListView\Scripts_CSRListView\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{bec1997c-5abd-4824-8eb8-0a3b1226c8c1}</SharePointProjectItemId>
+    </None>
+    <Content Include="Sample_CSRListView\CustomList\CustomListInstance\Elements.xml" />
+    <Content Include="Sample_CSRListView\CustomList\Elements.xml" />
+    <Content Include="Sample_CSRListView\CustomList\Schema.xml" />
+    <TypeScriptCompile Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.ts" />
+    <Content Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.js">
+      <DependentUpon>CSRListView.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRListView\Scripts_CSRListView\CSRListView.min.js">
+      <DependentUpon>CSRListView.ts</DependentUpon>
+    </Content>
+    <Content Include="Sample_CSRListView\Scripts_CSRListView\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\AppIcon.png">
+      <OpcRelationship>manifest-icon</OpcRelationship>
+    </Content>
+    <Content Include="Images\Elements.xml" />
+    <None Include="Images\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{7747bf56-edb7-44c5-897c-69efd63fcc12}</SharePointProjectItemId>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Package\Package.package">
+      <PackageId>{9a96e1a0-f5a4-4dc4-9c7a-72f59479eca6}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="Features\MainFeature\MainFeature.feature">
+      <FeatureId>{fc901982-e06d-46b9-8def-8f59642464ec}</FeatureId>
+    </None>
+    <None Include="Features\MainFeature\MainFeature.Template.xml">
+      <DependentUpon>MainFeature.feature</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <AppManifestFile Include="AppManifest.xml">
+      <SubType>Designer</SubType>
+    </AppManifestFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0'">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+  <PropertyGroup>
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+    <TypeScriptIncludeComments>false</TypeScriptIncludeComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
+    <TypeScriptSuppressImplicitAnyIndexErrors>true</TypeScriptSuppressImplicitAnyIndexErrors>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" />
+</Project>

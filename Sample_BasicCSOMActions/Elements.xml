@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Sample_BasicCSOMActions">
+    <File Path="Sample_BasicCSOMActions\BasicTasksJSOM.css" Url="Sample_BasicCSOMActions/BasicTasksJSOM.css" />
+    <File Path="Sample_BasicCSOMActions\BasicTasksJSOM.html" Url="Sample_BasicCSOMActions/BasicTasksJSOM.html" />
+    <File Path="Sample_BasicCSOMActions\ChromeLoader.ts" Url="Sample_BasicCSOMActions/ChromeLoader.ts" />
+    <File Path="Sample_BasicCSOMActions\BasicTasksJSOM.ts" Url="Sample_BasicCSOMActions/BasicTasksJSOM.ts" />
+    <File Path="Sample_BasicCSOMActions\BasicTasksJSOM.min.js" Url="Sample_BasicCSOMActions/BasicTasksJSOM.min.js" />
+    <File Path="Sample_BasicCSOMActions\BasicTasksJSOM.js.map" Url="Sample_BasicCSOMActions/BasicTasksJSOM.js.map" />
+    <File Path="Sample_BasicCSOMActions\BasicTasksJSOM.js" Url="Sample_BasicCSOMActions/BasicTasksJSOM.js" />
+    <File Path="Sample_BasicCSOMActions\AppUIEvents.ts" Url="Sample_BasicCSOMActions/AppUIEvents.ts" />
+    <File Path="Sample_BasicCSOMActions\Help.html" Url="Sample_BasicCSOMActions/Help.html" />
+    <File Path="Sample_BasicCSOMActions\Contact.html" Url="Sample_BasicCSOMActions/Contact.html" />
+    <File Path="Sample_BasicCSOMActions\Account.html" Url="Sample_BasicCSOMActions/Account.html" />
+    <File Path="Sample_BasicCSOMActions\ChromeLoader.js" Url="Sample_BasicCSOMActions/ChromeLoader.js" ReplaceContent="TRUE" />
+    <File Path="Sample_BasicCSOMActions\ChromeLoader.js.map" Url="Sample_BasicCSOMActions/ChromeLoader.js.map" ReplaceContent="TRUE" />
+    <File Path="Sample_BasicCSOMActions\AppUIEvents.js" Url="Sample_BasicCSOMActions/AppUIEvents.js" ReplaceContent="TRUE" />
+    <File Path="Sample_BasicCSOMActions\AppUIEvents.js.map" Url="Sample_BasicCSOMActions/AppUIEvents.js.map" ReplaceContent="TRUE" />
+    <File Path="Sample_BasicCSOMActions\BasicTasksJSOM.min.js.map" Url="Sample_BasicCSOMActions/BasicTasksJSOM.min.js.map" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

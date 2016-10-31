@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Scripts\" Type="ElementManifest" />
+    <ProjectItemFile Source="angular-mocks.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="angular.min.js.map" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="angular.min.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="angular.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\angularjs\angular-animate.d.ts" Target="Scripts\typings\angularjs\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\angularjs\angular-cookies.d.ts" Target="Scripts\typings\angularjs\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\angularjs\angular-mocks.d.ts" Target="Scripts\typings\angularjs\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\angularjs\angular-resource.d.ts" Target="Scripts\typings\angularjs\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\angularjs\angular-route.d.ts" Target="Scripts\typings\angularjs\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\angularjs\angular-sanitize.d.ts" Target="Scripts\typings\angularjs\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\angularjs\angular-scenario.d.ts" Target="Scripts\typings\angularjs\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\angularjs\angular.d.ts" Target="Scripts\typings\angularjs\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\jquery\jquery.d.ts" Target="Scripts\typings\jquery\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" Target="Scripts\typings\jquery.ui.datetimepicker\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\jqueryui\jqueryui.d.ts" Target="Scripts\typings\jqueryui\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\knockout\knockout.d.ts" Target="Scripts\typings\knockout\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\microsoft-ajax\microsoft.ajax.d.ts" Target="Scripts\typings\microsoft-ajax\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SPO.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SPGantt.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SPAnimation.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.WorkflowServices.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.Workflow.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.WebParts.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.Utilities.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.UserProfiles.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.UI.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.UI.Controls.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.UI.ApplicationPages.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.Taxonomy.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.Social.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.Sharing.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.Search.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.RequestExecutor.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.Publishing.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.Policy.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.JSGrid.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.Init.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.DocumentManagement.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\SP.BusinessData.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\reputation.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\mQuery.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\clienttemplates.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\clientpeoplepicker.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\callout.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\autofill.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\Search.ClientControl.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

@@ -6,7 +6,7 @@
     "Stanislav Vyschepan"
   ],
   "description": "SharePoint TypeScript Client-Side Rendering (CSR) templates and helpers",
-  "main": "SPTypeScript/Extensions/typescripttemplates.ts",
+  "main": "Extensions/sp-ts-csr.ts",
   "moduleType": [],
   "keywords": [
     "sharepoint",
@@ -14,15 +14,10 @@
     "CSR"
   ],
   "license": "MS-PL",
-  "ignore": [   
-    "node_modules",
-    "bower_components",
-    "definitions",
+  "ignore": [
     "*",
-    "!SPTypeScript",
-    "SPTypeScript/*",
-    "!SPTypeScript/Extensions",
-    "SPTypeScript/Extensions/*",
-    "!SPTypeScript/Extensions/typescripttemplates.ts"
+    "!Extensions",
+    "Extensions/*",
+    "!Extensions/sp-ts-csr.ts"
   ]
 }

@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <Module Name="Sample_Publishing">
-    <File Path="Sample_Publishing\Default.aspx" Url="Sample_Publishing/Default.aspx" ReplaceContent="TRUE" />
-    <File Path="Sample_Publishing\publishing.ts" Url="Sample_Publishing/publishing.ts" ReplaceContent="TRUE" />
-    <File Path="Sample_Publishing\publishing.js" Url="Sample_Publishing/publishing.js" ReplaceContent="TRUE" />
-    <File Path="Sample_Publishing\publishing.js.map" Url="Sample_Publishing/publishing.js.map" ReplaceContent="TRUE" />
-  </Module>
-</Elements>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ClientWebPart Name="ClientWebPart" Title="Who is?" Description="Who is?" DefaultWidth="330" DefaultHeight="200">
+    <Content Type="html" Src="~appWebUrl/Sample_WhoIsWebPart/Part.aspx?{StandardTokens}&amp;DisplayMode=iframe&amp;boolProp=_boolProp_&amp;editmode=_editMode_"/>
+    <Properties>
+      <Property
+          Name="boolProp"
+          Type="boolean"
+          RequiresDesignerPermission="true"
+          DefaultValue="true"
+          WebCategory="Who is? properties"
+          WebDisplayName="Include detail information">
+      </Property>
+    </Properties>
+  </ClientWebPart>
+</Elements>

@@ -7,9 +7,9 @@ Install NuGet package using package manager
 PM> Install-Package sharepoint.TypeScript.DefinitelyTyped
 ```
 
-or directly from [DefinitelyTyped](../../borisyankov/DefinitelyTyped) repository using [tsd](http://definitelytyped.org/tsd/) tool
+or from npm @types 
 ```bat
-tsd install sharepoint --save
+npm install @types/sharepoint --save
 ```
 
 If you are using Visual Studio SharePoint projects you need to enable TypeScript build actions:
@@ -22,7 +22,7 @@ If you are using Visual Studio SharePoint projects you need to enable TypeScript
 3. Reload project
 4. Don't forget to set "Deployment Type" to "No Deployment" for **.d.ts** files
 
-## typescripttemplates.ts 
+## sp-ts-csr.ts 
 TypeScript Templates is a set of Client-Side Rendering (CSR) templates and helper functions to change behaviour of standard forms.
 Install using NuGet
 ```powershell
@@ -117,7 +117,7 @@ Samples project is made as a SharePoint-hosted app. Download project, open .sln 
 ##Authors
 Stanislav Vyshchepan is SharePoint Server MVP, author, speaker, trainer, CEO and founder of own consulting company in Russia.
 
-* Blog: http://gandjustas.blogspot.ru (in Russian)
+* Blog: http://blog.gandjustas.ru (in Russian)
 * Twitter: @gandjustas
 * E-mail: stanislav.v@outlook.com
 * Company site: http://vnextsoft.ru

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Sample_Animation">
+    <File Path="Sample_Animation\Default.aspx" Url="Sample_Animation/Default.aspx" ReplaceContent="TRUE" />
+    <File Path="Sample_Animation\photo.jpg" Url="Sample_Animation/photo.jpg" ReplaceContent="TRUE" />
+    <File Path="Sample_Animation\Animation.ts" Url="Sample_Animation/Animation.ts" ReplaceContent="TRUE" />
+    <File Path="Sample_Animation\Animation.js" Url="Sample_Animation/Animation.js" ReplaceContent="TRUE" />
+    <File Path="Sample_Animation\Animation.js.map" Url="Sample_Animation/Animation.js.map" ReplaceContent="TRUE" />
+    <File Path="Sample_Animation\Animation.min.js" Url="Sample_Animation/Animation.min.js" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

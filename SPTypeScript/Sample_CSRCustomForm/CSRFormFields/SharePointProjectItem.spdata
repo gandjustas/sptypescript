@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
-  <Files>
-    <ProjectItemFile Source="Elements.xml" Target="CSRFormFields\" Type="ElementManifest" />
-    <ProjectItemFile Source="CSRFormField.ts" Target="CSRFormFields\" Type="ElementFile" />
-    <ProjectItemFile Source="CSRFormField.js" Target="CSRFormFields\" Type="ElementFile" />
-    <ProjectItemFile Source="CSRFormField.js.map" Target="CSRFormFields\" Type="ElementFile" />
-  </Files>
-</ProjectItem>

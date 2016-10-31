@@ -1,0 +1,12 @@
+﻿body
+{
+    /*Mandatory styles for apppart*/
+    background-color: transparent;
+
+    min-height:120px;
+}
+
+body.ms-backgroundImage {
+    /*Mandatory styles for apppart*/
+    background-image: none;
+}

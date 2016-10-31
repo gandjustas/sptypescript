@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Scripts">
+    <File Path="Scripts\angular-mocks.js" Url="Scripts/angular-mocks.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\angular.min.js.map" Url="Scripts/angular.min.js.map" ReplaceContent="TRUE" />
+    <File Path="Scripts\angular.min.js" Url="Scripts/angular.min.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\angular.js" Url="Scripts/angular.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\angularjs\angular-animate.d.ts" Url="Scripts/typings/angularjs/angular-animate.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\angularjs\angular-cookies.d.ts" Url="Scripts/typings/angularjs/angular-cookies.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\angularjs\angular-mocks.d.ts" Url="Scripts/typings/angularjs/angular-mocks.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\angularjs\angular-resource.d.ts" Url="Scripts/typings/angularjs/angular-resource.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\angularjs\angular-route.d.ts" Url="Scripts/typings/angularjs/angular-route.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\angularjs\angular-sanitize.d.ts" Url="Scripts/typings/angularjs/angular-sanitize.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\angularjs\angular-scenario.d.ts" Url="Scripts/typings/angularjs/angular-scenario.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\angularjs\angular.d.ts" Url="Scripts/typings/angularjs/angular.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\jquery\jquery.d.ts" Url="Scripts/typings/jquery/jquery.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" Url="Scripts/typings/jquery.ui.datetimepicker/jquery.ui.datetimepicker.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\jqueryui\jqueryui.d.ts" Url="Scripts/typings/jqueryui/jqueryui.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\knockout\knockout.d.ts" Url="Scripts/typings/knockout/knockout.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\microsoft-ajax\microsoft.ajax.d.ts" Url="Scripts/typings/microsoft-ajax/microsoft.ajax.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SPO.d.ts" Url="Scripts/typings/sharepoint/SPO.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SPGantt.d.ts" Url="Scripts/typings/sharepoint/SPGantt.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SPAnimation.d.ts" Url="Scripts/typings/sharepoint/SPAnimation.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.WorkflowServices.d.ts" Url="Scripts/typings/sharepoint/SP.WorkflowServices.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.Workflow.d.ts" Url="Scripts/typings/sharepoint/SP.Workflow.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.WebParts.d.ts" Url="Scripts/typings/sharepoint/SP.WebParts.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.Utilities.d.ts" Url="Scripts/typings/sharepoint/SP.Utilities.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.UserProfiles.d.ts" Url="Scripts/typings/sharepoint/SP.UserProfiles.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.UI.d.ts" Url="Scripts/typings/sharepoint/SP.UI.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.UI.Controls.d.ts" Url="Scripts/typings/sharepoint/SP.UI.Controls.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.UI.ApplicationPages.d.ts" Url="Scripts/typings/sharepoint/SP.UI.ApplicationPages.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.Taxonomy.d.ts" Url="Scripts/typings/sharepoint/SP.Taxonomy.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.Social.d.ts" Url="Scripts/typings/sharepoint/SP.Social.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.Sharing.d.ts" Url="Scripts/typings/sharepoint/SP.Sharing.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.Search.d.ts" Url="Scripts/typings/sharepoint/SP.Search.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.RequestExecutor.d.ts" Url="Scripts/typings/sharepoint/SP.RequestExecutor.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.Publishing.d.ts" Url="Scripts/typings/sharepoint/SP.Publishing.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.Policy.d.ts" Url="Scripts/typings/sharepoint/SP.Policy.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.JSGrid.d.ts" Url="Scripts/typings/sharepoint/SP.JSGrid.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.Init.d.ts" Url="Scripts/typings/sharepoint/SP.Init.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.DocumentManagement.d.ts" Url="Scripts/typings/sharepoint/SP.DocumentManagement.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.d.ts" Url="Scripts/typings/sharepoint/SP.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.BusinessData.d.ts" Url="Scripts/typings/sharepoint/SP.BusinessData.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\reputation.d.ts" Url="Scripts/typings/sharepoint/reputation.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\mQuery.d.ts" Url="Scripts/typings/sharepoint/mQuery.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\clienttemplates.d.ts" Url="Scripts/typings/sharepoint/clienttemplates.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\clientpeoplepicker.d.ts" Url="Scripts/typings/sharepoint/clientpeoplepicker.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\callout.d.ts" Url="Scripts/typings/sharepoint/callout.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\autofill.d.ts" Url="Scripts/typings/sharepoint/autofill.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\Search.ClientControl.d.ts" Url="Scripts/typings/sharepoint/Search.ClientControl.d.ts" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

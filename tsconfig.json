@@ -1,11 +1,12 @@
 {
 	"compilerOptions": {
-		"declaration": true
+		"module": "none",
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"sourceMap": true		
 	},
-	"files": [
-		"SPTypeScript/Extensions/typescripttemplates.ts",
-		"SPTypeScript/Scripts/typings/sharepoint/SharePoint.d.ts",
-		"SPTypeScript/Scripts/typings/angularjs/angular.d.ts",
-		"SPTypeScript/Scripts/typings/knockout/knockout.d.ts"
+	"exclude": [
+		"node_modules", "distr", "packages", "pkg", "obj", "bin", "pkgobj"
 	]
 }

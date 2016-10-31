@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="CustomFieldRenderingModule">
+    <File Path="CustomFieldRenderingModule\fieldsamples.visafield.ts" Url="CustomFieldRenderingModule/fieldsamples.visafield.ts" ReplaceContent="TRUE" />
+    <File Path="CustomFieldRenderingModule\fieldsamples.visafield.js" Url="CustomFieldRenderingModule/fieldsamples.visafield.js" ReplaceContent="TRUE" />
+    <File Path="CustomFieldRenderingModule\fieldsamples.visafield.min.js" Url="CustomFieldRenderingModule/fieldsamples.visafield.min.js" ReplaceContent="TRUE" />
+    <File Path="CustomFieldRenderingModule\fieldsamples.visafield.js.map" Url="CustomFieldRenderingModule/fieldsamples.visafield.js.map" />
+    <File Path="CustomFieldRenderingModule\fieldsamples.visafield.min.js.map" Url="CustomFieldRenderingModule/fieldsamples.visafield.min.js.map" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

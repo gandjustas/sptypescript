@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Extensions\" Type="ElementManifest" />
+    <ProjectItemFile Source="sp-ts-csr.ts" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="CSOMPromise.ts" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="CSOMPromise.js" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="CSOMPromise.min.js" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="CSOMPromise.js.map" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="CSOMPromise.min.js.map" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="sp-ts-csr.js" Target="Extensions\" Type="ElementFile" />
+    <ProjectItemFile Source="sp-ts-csr.js.map" Target="Extensions\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

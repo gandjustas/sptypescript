@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Sample_mQuery">
+    <File Path="Sample_mQuery\Page.aspx" Url="Sample_mQuery/Page.aspx" />
+    <File Path="Sample_mQuery\mquery.ts" Url="Sample_mQuery/mquery.ts" />
+    <File Path="Sample_mQuery\mquery.js" Url="Sample_mQuery/mquery.js" />
+    <File Path="Sample_mQuery\mquery.js.map" Url="Sample_mQuery/mquery.js.map" />
+    <File Path="Sample_mQuery\mquery.min.js" Url="Sample_mQuery/mquery.min.js" />
+  </Module>
+</Elements>

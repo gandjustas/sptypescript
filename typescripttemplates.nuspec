@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
     <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
         <metadata>
-            <id>typescripttemplates</id>
+            <id>typescripttemplates </id>
             <version>1.0.0</version>
             <title>SharePoint TypeScript CSR templates and helpers</title>
             <authors>Stanislav Vyschepan</authors>
@@ -11,13 +11,10 @@
             <projectUrl>https://github.com/gandjustas/sptypescript</projectUrl>
             <dependencies>
                 <dependency id="sharepoint.TypeScript.DefinitelyTyped" version="0.2.2" />
-                <dependency id="angularjs.TypeScript.DefinitelyTyped" version="4.2.2"/>
-                <dependency id="knockout.TypeScript.DefinitelyTyped" version="0.8.3"/>
             </dependencies>
         </metadata>
         <files>
-            <file src="release\typescripttemplates.js" target="Content\Scripts" />
-            <file src="release\typescripttemplates.d.ts" target="Content\Scripts\typings\typescripttemplates" />
+            <file src="Extensions\sp-ts-csr.ts" target="Content\Scripts" />
         </files>
 
     </package>

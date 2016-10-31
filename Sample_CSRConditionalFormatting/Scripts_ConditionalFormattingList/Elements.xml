@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Scripts_ConditionalFormattingList">
+    <File Path="Scripts_ConditionalFormattingList\ConditionalFormatting.ts" Url="Scripts_ConditionalFormattingList/ConditionalFormatting.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts_ConditionalFormattingList\ConditionalFormatting.js" Url="Scripts_ConditionalFormattingList/ConditionalFormatting.js" ReplaceContent="TRUE" />
+    <File Path="Scripts_ConditionalFormattingList\ConditionalFormatting.js.map" Url="Scripts_ConditionalFormattingList/ConditionalFormatting.js.map" ReplaceContent="TRUE" />
+    <File Path="Scripts_ConditionalFormattingList\ConditionalFormatting.min.js" Url="Scripts_ConditionalFormattingList/ConditionalFormatting.min.js" ReplaceContent="TRUE" />
+    <File Path="Scripts_ConditionalFormattingList\ConditionalFormatting.min.js.map" Url="Scripts_ConditionalFormattingList/ConditionalFormatting.min.js.map" ReplaceContent="TRUE" />
+  </Module>
+
+</Elements>

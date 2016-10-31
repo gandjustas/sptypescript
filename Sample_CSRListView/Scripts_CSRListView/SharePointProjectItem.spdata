@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="Scripts_CSRListView\" Type="ElementManifest" />
+    <ProjectItemFile Source="CSRListView.ts" Target="Scripts_CSRListView\" Type="ElementFile" />
+    <ProjectItemFile Source="CSRListView.js" Target="Scripts_CSRListView\" Type="ElementFile" />
+    <ProjectItemFile Source="CSRListView.js.map" Target="Scripts_CSRListView\" Type="ElementFile" />
+    <ProjectItemFile Source="CSRListView.min.js" Target="Scripts_CSRListView\" Type="ElementFile" />
+    <ProjectItemFile Source="CSRListView.min.js.map" Target="Scripts_CSRListView\" Type="ElementFile" />
+  </Files>
+</ProjectItem>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Extensions">
+    <File Path="Extensions\CSOMPromise.ts" Url="Extensions/CSOMPromise.ts" />
+    <File Path="Extensions\CSOMPromise.js" Url="Extensions/CSOMPromise.js" />
+    <File Path="Extensions\CSOMPromise.min.js" Url="Extensions/CSOMPromise.min.js" ReplaceContent="TRUE" />
+    <File Path="Extensions\CSOMPromise.js.map" Url="Extensions/CSOMPromise.js.map" ReplaceContent="TRUE" />
+    <File Path="Extensions\CSOMPromise.min.js.map" Url="Extensions/CSOMPromise.min.js.map" ReplaceContent="TRUE" />
+    <File Path="Extensions\sp-ts-csr.js" Url="Extensions/sp-ts-csr.js" ReplaceContent="TRUE" />
+    <File Path="Extensions\sp-ts-csr.js.map" Url="Extensions/sp-ts-csr.js.map" ReplaceContent="TRUE" />
+  </Module>
+</Elements>
