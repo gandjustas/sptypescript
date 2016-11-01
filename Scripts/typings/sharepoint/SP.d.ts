@@ -459,6 +459,7 @@ declare namespace SP {
         isObjectPropertyInstantiated(propertyName: string): boolean;
         get_serverObjectIsNull(): boolean;
         get_typedObject(): SP.ClientObject;
+        [key: string] : any;
     }
     export class ClientObjectData {
         get_properties(): any;
