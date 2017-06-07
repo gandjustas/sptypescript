@@ -51,5 +51,6 @@
     <ProjectItemFile Source="typings\sharepoint\Search.ClientControl.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
     <ProjectItemFile Source="typings\sharepoint\strings.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
     <ProjectItemFile Source="typings\sharepoint\AssetPickers.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\dragdrop.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
   </Files>
 </ProjectItem>
