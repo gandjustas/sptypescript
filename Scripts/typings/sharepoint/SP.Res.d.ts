@@ -3,9 +3,10 @@
 // Definitions by: Stanislav Vyshchepan <http://blog.gandjustas.ru>, Andrey Markeev <http://markeev.com>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-///<reference path="clienttemplates.d.ts" />
+/// <reference path="SP.Init.d.ts" />
 
-declare var inplview: {
-    RefreshInplViewUrlByContext: (ctxParam: SPClientTemplates.RenderContext) => void;
-    HandleRefreshViewByContext: (ctxParam: SPClientTemplates.RenderContext, bClearPagingParam: boolean) => void;
-};
+declare namespace SP {
+    export var Res: {
+        dialogLoading15: string;
+    }
+}

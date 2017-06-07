@@ -276,6 +276,7 @@
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Policy.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Publishing.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.RequestExecutor.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Res.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Search.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Sharing.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Social.d.ts" />
