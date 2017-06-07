@@ -733,6 +733,7 @@ declare namespace SPClientForms {
         }
 
         export class MaxLengthUrlValidator implements IValidator {
+            constructor(maxLength: number);
             Validate(value: any): ValidationResult;
         }
 
