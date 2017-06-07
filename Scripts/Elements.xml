@@ -49,5 +49,6 @@
     <File Path="Scripts\typings\sharepoint\autofill.d.ts" Url="Scripts/typings/sharepoint/autofill.d.ts" ReplaceContent="TRUE" />
     <File Path="Scripts\typings\sharepoint\Search.ClientControl.d.ts" Url="Scripts/typings/sharepoint/Search.ClientControl.d.ts" ReplaceContent="TRUE" />
     <File Path="Scripts\typings\sharepoint\strings.d.ts" Url="Scripts/typings/sharepoint/strings.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\AssetPickers.d.ts" Url="Scripts/typings/sharepoint/AssetPickers.d.ts" ReplaceContent="TRUE" />
   </Module>
 </Elements>

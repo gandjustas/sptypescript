@@ -258,6 +258,7 @@
     <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
     </None>
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\AssetPickers.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\autofill.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\callout.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\clientpeoplepicker.d.ts" />
