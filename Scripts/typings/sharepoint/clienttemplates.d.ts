@@ -803,3 +803,9 @@ declare function SPFieldLookup_Display(ctx: SPClientTemplates.RenderContext_Fiel
 declare function SPFieldLookup_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
 declare function SPFieldLookupMulti_Edit(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
 declare function SPFieldAttachments_Default(ctx: SPClientTemplates.RenderContext_FieldInForm): string;
+
+declare function RenderEmptyText(ret: string[], renderCtx: SPClientTemplates.RenderContext_InView): void;
+declare function RenderPaging(ret: string[], renderCtx: SPClientTemplates.RenderContext_InView): void;
+declare function RenderSearchStatus(ret: string[], renderCtx: SPClientTemplates.RenderContext_InView): void;
+declare function RenderTableHeader(renderCtx: SPClientTemplates.RenderContext_InView): string;
+declare function RenderHeaderTemplate(renderCtx: SPClientTemplates.RenderContext_InView, fRenderHeaderColumnNames: boolean): string;

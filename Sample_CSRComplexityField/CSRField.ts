@@ -69,7 +69,7 @@ module _ {
 
         for (var choice in map) {
             var encodedVal = STSHtmlEncode(choice);
-            var selectedStr = !valueSet && ctx.CurrentFieldValue == choice ? 'selected="selected" ' : '';
+            var selectedStr: string = !valueSet && ctx.CurrentFieldValue == choice ? 'selected="selected" ' : '';
 
             valueSet = valueSet ? true : selectedStr != '';
             select += '<option value="' + encodedVal + '" ' + selectedStr + '>' + encodedVal + '</option>';
