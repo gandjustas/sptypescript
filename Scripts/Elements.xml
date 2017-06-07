@@ -48,5 +48,6 @@
     <File Path="Scripts\typings\sharepoint\callout.d.ts" Url="Scripts/typings/sharepoint/callout.d.ts" ReplaceContent="TRUE" />
     <File Path="Scripts\typings\sharepoint\autofill.d.ts" Url="Scripts/typings/sharepoint/autofill.d.ts" ReplaceContent="TRUE" />
     <File Path="Scripts\typings\sharepoint\Search.ClientControl.d.ts" Url="Scripts/typings/sharepoint/Search.ClientControl.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\strings.d.ts" Url="Scripts/typings/sharepoint/strings.d.ts" ReplaceContent="TRUE" />
   </Module>
 </Elements>

@@ -13,8 +13,6 @@ declare var _spBodyOnLoadCalled: boolean;
 declare function ExecuteOrDelayUntilBodyLoaded(initFunc: () => void): void;
 declare function ExecuteOrDelayUntilScriptLoaded(func: () => void, depScriptFileName: string): boolean;
 declare function ExecuteOrDelayUntilEventNotified(func: Function, eventName: string): boolean;
-declare var Strings: any;
-
 
 declare namespace SP {
     export var Ribbon: any;

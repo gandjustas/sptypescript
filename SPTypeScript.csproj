@@ -533,6 +533,7 @@
     <TypeScriptCompile Include="Scripts\typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\strings.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Sample_CSRConditionalFormatting\ConditionalFormattingTasksList\SharePointProjectItem.spdata">
