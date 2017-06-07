@@ -264,6 +264,7 @@
     <TypeScriptCompile Include="Scripts\typings\sharepoint\clientpeoplepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\clienttemplates.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\dragdrop.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\inplview.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\mQuery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\reputation.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\Search.ClientControl.d.ts" />
