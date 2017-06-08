@@ -263,6 +263,7 @@
     <TypeScriptCompile Include="Scripts\typings\sharepoint\callout.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\clientpeoplepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\clienttemplates.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\core.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\CUI.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\dragdrop.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\inplview.d.ts" />

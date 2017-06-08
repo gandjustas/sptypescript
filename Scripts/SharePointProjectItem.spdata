@@ -57,5 +57,6 @@
     <ProjectItemFile Source="typings\sharepoint\SP.Ribbon.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
     <ProjectItemFile Source="typings\sharepoint\SP.UI.RTE.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
     <ProjectItemFile Source="typings\sharepoint\CUI.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
+    <ProjectItemFile Source="typings\sharepoint\core.d.ts" Target="Scripts\typings\sharepoint\" Type="ElementFile" />
   </Files>
 </ProjectItem>
