@@ -53,5 +53,8 @@
     <File Path="Scripts\typings\sharepoint\dragdrop.d.ts" Url="Scripts/typings/sharepoint/dragdrop.d.ts" ReplaceContent="TRUE" />
     <File Path="Scripts\typings\sharepoint\inplview.d.ts" Url="Scripts/typings/sharepoint/inplview.d.ts" ReplaceContent="TRUE" />
     <File Path="Scripts\typings\sharepoint\SP.Res.d.ts" Url="Scripts/typings/sharepoint/SP.Res.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.Ribbon.d.ts" Url="Scripts/typings/sharepoint/SP.Ribbon.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\SP.UI.RTE.d.ts" Url="Scripts/typings/sharepoint/SP.UI.RTE.d.ts" ReplaceContent="TRUE" />
+    <File Path="Scripts\typings\sharepoint\CUI.d.ts" Url="Scripts/typings/sharepoint/CUI.d.ts" ReplaceContent="TRUE" />
   </Module>
 </Elements>

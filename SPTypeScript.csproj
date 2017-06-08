@@ -263,6 +263,7 @@
     <TypeScriptCompile Include="Scripts\typings\sharepoint\callout.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\clientpeoplepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\clienttemplates.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\CUI.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\dragdrop.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\inplview.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\mQuery.d.ts" />
@@ -277,6 +278,7 @@
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Publishing.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.RequestExecutor.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Res.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Ribbon.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Search.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Sharing.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Social.d.ts" />
@@ -284,6 +286,7 @@
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.ApplicationPages.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.Controls.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.RTE.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UserProfiles.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Utilities.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.WebParts.d.ts" />

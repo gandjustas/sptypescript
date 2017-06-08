@@ -705,6 +705,7 @@ declare function GenerateIIDForListItem(renderCtx: SPClientTemplates.RenderConte
 
 declare function SPFormControl_AppendValidationErrorMessage(nodeId: string, errorResult: any): void;
 declare function CoreRender(template: any, context: any): string;
+declare function GetRelativeDateTimeString(relativeDateTimeJSString: string): string;
 
 declare namespace SPClientForms {
     namespace ClientValidation {

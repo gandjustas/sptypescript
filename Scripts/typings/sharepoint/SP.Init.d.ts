@@ -44,8 +44,6 @@ declare function EnsureScriptFunc(key: string, typ: string, fn: () => void, erro
 declare function GetThemedImageUrl(FileName: string): string;
 
 declare namespace SP {
-    export var Ribbon: any;
-
     export class SOD {
         static execute(fileName: string, functionName: string, ...args: any[]): void;
         static executeFunc(fileName: string, typeName: string, fn: () => void): void;
