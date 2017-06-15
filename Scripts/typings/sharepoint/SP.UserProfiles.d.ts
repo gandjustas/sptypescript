@@ -99,6 +99,21 @@ declare namespace SP {
                 A user can upload a picture only to the user's own profile.
                 @param data Binary content of an image file */
             setMyProfilePicture(data: SP.Base64EncodedByteArray): void;
+            /**
+             *  Sets the given profile property for a user
+             * @param accountName
+             * @param propertyName
+             * @param propertyValues
+             */
+            setMultiValuedProfileProperty(accountName: string, propertyName: string, propertyValues: string[]): void;
+            /**
+             * Sets the given profile properties for a user
+             * @param accountName
+             * @param propertyName
+             * @param propertyValue
+             */
+            setSingleValueProfileProperty(accountName: string, propertyName: string, propertyValue: string): void;
+
         }
 
         /** Specifies the capabilities of a personal site. */
