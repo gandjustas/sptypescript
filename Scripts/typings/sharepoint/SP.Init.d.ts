@@ -1,4 +1,4 @@
-// Type definitions for SharePoint JSOM 
+﻿// Type definitions for SharePoint JSOM 
 // Project: https://github.com/gandjustas/sptypescript
 // Definitions by: Stanislav Vyshchepan <http://blog.gandjustas.ru>, Andrey Markeev <http://markeev.com>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -170,13 +170,18 @@ declare class _spPageContextInfo {
     static pageListId: string;  //"{06ee6d96-f27f-4160-b6bb-c18f187b18a7}"
     static pageItemId: number;
     static pagePersonalizationScope: string; //1
+    static ProfileUrl: string; // "https://tenantname-my.sharepoint.com/person.aspx"
     static serverRequestPath: string; //"/SPTypeScript/Lists/ConditionalFormattingTasksList/AllItems.aspx"
     static siteAbsoluteUrl: string; // "https://gandjustas-7b20d3715e8ed4.sharepoint.com"
     static siteClientTag: string; //"0$$15.0.4454.1021"
+    static siteId: string; // "{249e1d4e-c970-4d1b-8c69-8a6fdb7b3cbc}"
     static siteServerRelativeUrl: string; // "/"
     static systemUserKey: string; //"i:0h.f|membership|10033fff84e7cb2b@live.com"
     static tenantAppVersion: string; //"0"
     static userId: number; //12
+    static userDisplayName: string; //Tobias West
+    static userEmail: string; //tobias@sharepointdiary.co.uk
+    static userLoginName: string //10033fff84e7cb2b@live.com
     static webAbsoluteUrl: string; //"https://gandjustas-7b20d3715e8ed4.sharepoint.com/SPTypeScript"
     static webLanguage: number; //1049
     static webLogoUrl: string; //"/_layouts/15/images/siteIcon.png?rev=23"
