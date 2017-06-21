@@ -7,18 +7,43 @@
 /// <reference path="SP.d.ts" />
 /// <reference path="clienttemplates.d.ts" />
 
+declare function __doPostBack(eventTarget?: string, eventArgument?: string): void;
+
+declare var g_frl: boolean;
+declare var g_setScrollPos: boolean;
+declare var g_setWidth: boolean;
+declare var g_setWidthInited: boolean;
+declare var g_viewportHeight: number;
+declare var g_wpadderHeight: number;
+declare var g_viewportHeight: number;
+declare var g_viewportWidth: number;
+declare function FixRibbonAndWorkspaceDimensions(): void;
+declare function AbsTop(el: HTMLElement): number;
+declare function CallWorkspaceResizedEventHandlers(): void;
+declare function GetCachedElement(id: string): HTMLElement;
+declare function GetCurrentEltStyle(element: HTMLElement, cssStyle: string): string;
+declare function GetViewportHeight(): number;
+declare function RibbonIsMinimized(): boolean;
+
 declare var _spBodyOnLoadFunctions: Function[];
 declare var _spBodyOnLoadFunctionNames: string[];
 declare var _spBodyOnLoadCalled: boolean;
 declare function ExecuteOrDelayUntilBodyLoaded(initFunc: () => void): void;
 declare function ExecuteOrDelayUntilScriptLoaded(func: () => void, depScriptFileName: string): boolean;
 declare function ExecuteOrDelayUntilEventNotified(func: Function, eventName: string): boolean;
-declare var Strings: any;
 
+declare function addStatus(strTitle: string, strHtml?: string, atBegining?: boolean, isVanilla?: boolean): string;
+declare function appendStatus(sid: string, strTitle: string, strHtml: string): string;
+declare function updateStatus(sid: string, strHtml: string): void;
+declare function setStatusPriColor(sid: string, strColor: string): void;
+declare function removeStatus(sid: string): void;
+declare function removeAllStatus(hide: boolean): void;
+
+declare function ShowPopupDialogWithCallback(dlgUrl: string, dialogCallback: SP.UI.DialogReturnValueCallback): void;
+declare function EnsureScriptFunc(key: string, typ: string, fn: () => void, errorFn?: () => void): void;
+declare function GetThemedImageUrl(FileName: string): string;
 
 declare namespace SP {
-    export var Ribbon: any;
-
     export class SOD {
         static execute(fileName: string, functionName: string, ...args: any[]): void;
         static executeFunc(fileName: string, typeName: string, fn: () => void): void;

@@ -258,10 +258,15 @@
     <None Include="Sample_WorkflowServices\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e808bae7-7bd9-4f93-bf9d-71e2d7a14b2e}</SharePointProjectItemId>
     </None>
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\AssetPickers.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\autofill.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\callout.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\clientpeoplepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\clienttemplates.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\core.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\CUI.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\dragdrop.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\inplview.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\mQuery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\reputation.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\Search.ClientControl.d.ts" />
@@ -273,6 +278,8 @@
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Policy.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Publishing.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.RequestExecutor.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Res.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Ribbon.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Search.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Sharing.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Social.d.ts" />
@@ -280,6 +287,7 @@
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.ApplicationPages.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.Controls.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UI.RTE.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.UserProfiles.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.Utilities.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\sharepoint\SP.WebParts.d.ts" />
@@ -533,6 +541,7 @@
     <TypeScriptCompile Include="Scripts\typings\jquery.ui.datetimepicker\jquery.ui.datetimepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\sharepoint\strings.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Sample_CSRConditionalFormatting\ConditionalFormattingTasksList\SharePointProjectItem.spdata">
